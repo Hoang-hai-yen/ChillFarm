@@ -10,12 +10,15 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+    private float lastMoveX;
+    private float lastMoveY;
     public void Awake()
     {
         playerControls = new PlayerControls();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        lastMoveY=-1f;
     }
     private void OnEnable()
     {
@@ -35,6 +38,13 @@ public class PlayerController : MonoBehaviour
         movement = playerControls.Movement.Move.ReadValue<Vector2>();
         animator.SetFloat("moveX", movement.x);
         animator.SetFloat("moveY", movement.y);
+        if (movement != Vector2.zero)
+        {
+            lastMoveX = movement.x;
+            lastMoveY = movement.y;
+        }
+        animator.SetFloat("lastMoveX", lastMoveX);
+        animator.SetFloat("lastMoveY", lastMoveY);
     }
     private void Move()
     {
