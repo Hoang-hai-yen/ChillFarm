@@ -1,0 +1,6 @@
+﻿{
+  "ApiKey": "AIzaSyCiqU0IE6v3HR45Wr-O_r7BtXZ1gllWMCc",
+  "Register": "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=",
+  "Login": "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=",
+  "Refresh": "https://securetoken.googleapis.com/v1/token?key="
+}
