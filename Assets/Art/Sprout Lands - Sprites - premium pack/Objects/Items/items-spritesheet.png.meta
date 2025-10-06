@@ -253,7 +253,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -267,7 +267,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -291,7 +291,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -314,19 +314,6 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
     buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: iOS
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -367,10 +354,10 @@ TextureImporter:
       name: items-spritesheet_1
       rect:
         serializedVersion: 2
-        x: 32
-        y: 224
+        x: 0
+        y: 208
         width: 16
-        height: 16
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -389,8 +376,8 @@ TextureImporter:
       name: items-spritesheet_2
       rect:
         serializedVersion: 2
-        x: 48
-        y: 224
+        x: 16
+        y: 209
         width: 16
         height: 16
       alignment: 0
@@ -411,10 +398,10 @@ TextureImporter:
       name: items-spritesheet_3
       rect:
         serializedVersion: 2
-        x: 64
-        y: 224
-        width: 16
-        height: 16
+        x: 31
+        y: 208
+        width: 34
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -433,10 +420,10 @@ TextureImporter:
       name: items-spritesheet_4
       rect:
         serializedVersion: 2
-        x: 96
-        y: 224
-        width: 16
-        height: 16
+        x: 33
+        y: 223
+        width: 15
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -455,9 +442,9 @@ TextureImporter:
       name: items-spritesheet_5
       rect:
         serializedVersion: 2
-        x: 0
-        y: 208
-        width: 16
+        x: 49
+        y: 224
+        width: 15
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -477,10 +464,10 @@ TextureImporter:
       name: items-spritesheet_6
       rect:
         serializedVersion: 2
-        x: 16
-        y: 208
-        width: 16
-        height: 16
+        x: 65
+        y: 223
+        width: 14
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -499,10 +486,10 @@ TextureImporter:
       name: items-spritesheet_7
       rect:
         serializedVersion: 2
-        x: 32
-        y: 208
-        width: 16
-        height: 16
+        x: 65
+        y: 207
+        width: 14
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -521,10 +508,10 @@ TextureImporter:
       name: items-spritesheet_8
       rect:
         serializedVersion: 2
-        x: 48
-        y: 208
-        width: 16
-        height: 16
+        x: 81
+        y: 207
+        width: 14
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -543,10 +530,10 @@ TextureImporter:
       name: items-spritesheet_9
       rect:
         serializedVersion: 2
-        x: 64
-        y: 208
+        x: 96
+        y: 63
         width: 16
-        height: 16
+        height: 177
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -565,10 +552,10 @@ TextureImporter:
       name: items-spritesheet_10
       rect:
         serializedVersion: 2
-        x: 80
-        y: 208
+        x: 112
+        y: 63
         width: 16
-        height: 16
+        height: 162
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -587,10 +574,10 @@ TextureImporter:
       name: items-spritesheet_11
       rect:
         serializedVersion: 2
-        x: 96
-        y: 208
+        x: 0
+        y: 192
         width: 16
-        height: 16
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -609,10 +596,10 @@ TextureImporter:
       name: items-spritesheet_12
       rect:
         serializedVersion: 2
-        x: 112
-        y: 208
+        x: 0
+        y: 176
         width: 16
-        height: 16
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -631,10 +618,10 @@ TextureImporter:
       name: items-spritesheet_13
       rect:
         serializedVersion: 2
-        x: 0
-        y: 192
-        width: 16
-        height: 16
+        x: 15
+        y: 177
+        width: 18
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -655,8 +642,8 @@ TextureImporter:
         serializedVersion: 2
         x: 16
         y: 192
-        width: 16
-        height: 16
+        width: 17
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -677,7 +664,7 @@ TextureImporter:
         serializedVersion: 2
         x: 32
         y: 192
-        width: 16
+        width: 17
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -697,8 +684,8 @@ TextureImporter:
       name: items-spritesheet_16
       rect:
         serializedVersion: 2
-        x: 48
-        y: 192
+        x: 32
+        y: 176
         width: 16
         height: 16
       alignment: 0
@@ -719,9 +706,9 @@ TextureImporter:
       name: items-spritesheet_17
       rect:
         serializedVersion: 2
-        x: 64
+        x: 48
         y: 192
-        width: 16
+        width: 15
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -741,10 +728,10 @@ TextureImporter:
       name: items-spritesheet_18
       rect:
         serializedVersion: 2
-        x: 80
-        y: 192
-        width: 16
-        height: 16
+        x: 65
+        y: 191
+        width: 14
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -763,10 +750,10 @@ TextureImporter:
       name: items-spritesheet_19
       rect:
         serializedVersion: 2
-        x: 96
-        y: 192
-        width: 16
-        height: 16
+        x: 65
+        y: 175
+        width: 14
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -785,10 +772,10 @@ TextureImporter:
       name: items-spritesheet_20
       rect:
         serializedVersion: 2
-        x: 112
-        y: 192
-        width: 16
-        height: 16
+        x: 81
+        y: 191
+        width: 14
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -807,10 +794,10 @@ TextureImporter:
       name: items-spritesheet_21
       rect:
         serializedVersion: 2
-        x: 0
-        y: 176
-        width: 16
-        height: 16
+        x: 81
+        y: 175
+        width: 14
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -829,10 +816,10 @@ TextureImporter:
       name: items-spritesheet_22
       rect:
         serializedVersion: 2
-        x: 16
-        y: 176
+        x: 0
+        y: 160
         width: 16
-        height: 16
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -851,8 +838,8 @@ TextureImporter:
       name: items-spritesheet_23
       rect:
         serializedVersion: 2
-        x: 32
-        y: 176
+        x: 16
+        y: 161
         width: 16
         height: 16
       alignment: 0
@@ -873,10 +860,10 @@ TextureImporter:
       name: items-spritesheet_24
       rect:
         serializedVersion: 2
-        x: 48
-        y: 176
-        width: 16
-        height: 16
+        x: 49
+        y: 177
+        width: 14
+        height: 14
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -895,10 +882,10 @@ TextureImporter:
       name: items-spritesheet_25
       rect:
         serializedVersion: 2
-        x: 64
-        y: 176
+        x: 0
+        y: 144
         width: 16
-        height: 16
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -917,9 +904,9 @@ TextureImporter:
       name: items-spritesheet_26
       rect:
         serializedVersion: 2
-        x: 80
-        y: 176
-        width: 16
+        x: 15
+        y: 145
+        width: 18
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -939,9 +926,9 @@ TextureImporter:
       name: items-spritesheet_27
       rect:
         serializedVersion: 2
-        x: 96
-        y: 176
-        width: 16
+        x: 31
+        y: 160
+        width: 34
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -961,10 +948,10 @@ TextureImporter:
       name: items-spritesheet_28
       rect:
         serializedVersion: 2
-        x: 112
-        y: 176
-        width: 16
-        height: 16
+        x: 65
+        y: 159
+        width: 14
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -983,10 +970,10 @@ TextureImporter:
       name: items-spritesheet_29
       rect:
         serializedVersion: 2
-        x: 0
-        y: 160
-        width: 16
-        height: 16
+        x: 65
+        y: 143
+        width: 14
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1005,10 +992,10 @@ TextureImporter:
       name: items-spritesheet_30
       rect:
         serializedVersion: 2
-        x: 16
-        y: 160
-        width: 16
-        height: 16
+        x: 81
+        y: 159
+        width: 14
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1027,10 +1014,10 @@ TextureImporter:
       name: items-spritesheet_31
       rect:
         serializedVersion: 2
-        x: 32
-        y: 160
-        width: 16
-        height: 16
+        x: 81
+        y: 143
+        width: 14
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1049,10 +1036,10 @@ TextureImporter:
       name: items-spritesheet_32
       rect:
         serializedVersion: 2
-        x: 48
-        y: 160
+        x: 0
+        y: 128
         width: 16
-        height: 16
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1071,10 +1058,10 @@ TextureImporter:
       name: items-spritesheet_33
       rect:
         serializedVersion: 2
-        x: 64
-        y: 160
-        width: 16
-        height: 16
+        x: 33
+        y: 145
+        width: 14
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1093,10 +1080,10 @@ TextureImporter:
       name: items-spritesheet_34
       rect:
         serializedVersion: 2
-        x: 80
-        y: 160
+        x: 48
+        y: 144
         width: 16
-        height: 16
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1115,10 +1102,10 @@ TextureImporter:
       name: items-spritesheet_35
       rect:
         serializedVersion: 2
-        x: 96
-        y: 160
+        x: 0
+        y: 112
         width: 16
-        height: 16
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1137,10 +1124,10 @@ TextureImporter:
       name: items-spritesheet_36
       rect:
         serializedVersion: 2
-        x: 112
-        y: 160
+        x: 16
+        y: 128
         width: 16
-        height: 16
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1159,9 +1146,9 @@ TextureImporter:
       name: items-spritesheet_37
       rect:
         serializedVersion: 2
-        x: 0
-        y: 144
-        width: 16
+        x: 32
+        y: 128
+        width: 15
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1181,10 +1168,10 @@ TextureImporter:
       name: items-spritesheet_38
       rect:
         serializedVersion: 2
-        x: 16
-        y: 144
+        x: 32
+        y: 112
         width: 16
-        height: 16
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1203,10 +1190,10 @@ TextureImporter:
       name: items-spritesheet_39
       rect:
         serializedVersion: 2
-        x: 32
-        y: 144
-        width: 16
-        height: 16
+        x: 65
+        y: 127
+        width: 14
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1225,10 +1212,10 @@ TextureImporter:
       name: items-spritesheet_40
       rect:
         serializedVersion: 2
-        x: 48
-        y: 144
-        width: 16
-        height: 16
+        x: 65
+        y: 111
+        width: 14
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1247,10 +1234,10 @@ TextureImporter:
       name: items-spritesheet_41
       rect:
         serializedVersion: 2
-        x: 64
-        y: 144
-        width: 16
-        height: 16
+        x: 81
+        y: 127
+        width: 14
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1269,10 +1256,10 @@ TextureImporter:
       name: items-spritesheet_42
       rect:
         serializedVersion: 2
-        x: 80
-        y: 144
-        width: 16
-        height: 16
+        x: 81
+        y: 111
+        width: 14
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1291,10 +1278,10 @@ TextureImporter:
       name: items-spritesheet_43
       rect:
         serializedVersion: 2
-        x: 96
-        y: 144
+        x: 0
+        y: 96
         width: 16
-        height: 16
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1313,10 +1300,10 @@ TextureImporter:
       name: items-spritesheet_44
       rect:
         serializedVersion: 2
-        x: 112
-        y: 144
-        width: 16
-        height: 16
+        x: 15
+        y: 112
+        width: 18
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1335,8 +1322,8 @@ TextureImporter:
       name: items-spritesheet_45
       rect:
         serializedVersion: 2
-        x: 0
-        y: 128
+        x: 16
+        y: 96
         width: 16
         height: 16
       alignment: 0
@@ -1357,10 +1344,10 @@ TextureImporter:
       name: items-spritesheet_46
       rect:
         serializedVersion: 2
-        x: 16
-        y: 128
-        width: 16
-        height: 16
+        x: 31
+        y: 80
+        width: 18
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1379,10 +1366,10 @@ TextureImporter:
       name: items-spritesheet_47
       rect:
         serializedVersion: 2
-        x: 32
-        y: 128
-        width: 16
-        height: 16
+        x: 65
+        y: 95
+        width: 14
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1401,10 +1388,10 @@ TextureImporter:
       name: items-spritesheet_48
       rect:
         serializedVersion: 2
-        x: 64
-        y: 128
-        width: 16
-        height: 16
+        x: 81
+        y: 95
+        width: 14
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1423,10 +1410,10 @@ TextureImporter:
       name: items-spritesheet_49
       rect:
         serializedVersion: 2
-        x: 80
-        y: 128
+        x: 0
+        y: 80
         width: 16
-        height: 16
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1445,10 +1432,10 @@ TextureImporter:
       name: items-spritesheet_50
       rect:
         serializedVersion: 2
-        x: 96
-        y: 128
+        x: 0
+        y: 64
         width: 16
-        height: 16
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1467,10 +1454,10 @@ TextureImporter:
       name: items-spritesheet_51
       rect:
         serializedVersion: 2
-        x: 112
-        y: 128
-        width: 16
-        height: 16
+        x: 15
+        y: 31
+        width: 34
+        height: 66
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1489,10 +1476,10 @@ TextureImporter:
       name: items-spritesheet_52
       rect:
         serializedVersion: 2
-        x: 0
-        y: 112
-        width: 16
-        height: 16
+        x: 65
+        y: 79
+        width: 14
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1511,10 +1498,10 @@ TextureImporter:
       name: items-spritesheet_53
       rect:
         serializedVersion: 2
-        x: 16
-        y: 112
-        width: 16
-        height: 16
+        x: 65
+        y: 63
+        width: 14
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1533,10 +1520,10 @@ TextureImporter:
       name: items-spritesheet_54
       rect:
         serializedVersion: 2
-        x: 32
-        y: 112
-        width: 16
-        height: 16
+        x: 81
+        y: 79
+        width: 14
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1555,10 +1542,10 @@ TextureImporter:
       name: items-spritesheet_55
       rect:
         serializedVersion: 2
-        x: 64
-        y: 112
-        width: 16
-        height: 16
+        x: 81
+        y: 63
+        width: 14
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1577,10 +1564,10 @@ TextureImporter:
       name: items-spritesheet_56
       rect:
         serializedVersion: 2
-        x: 80
-        y: 112
+        x: 0
+        y: 48
         width: 16
-        height: 16
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1599,10 +1586,10 @@ TextureImporter:
       name: items-spritesheet_57
       rect:
         serializedVersion: 2
-        x: 96
-        y: 112
+        x: 0
+        y: 32
         width: 16
-        height: 16
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1621,8 +1608,8 @@ TextureImporter:
       name: items-spritesheet_58
       rect:
         serializedVersion: 2
-        x: 112
-        y: 112
+        x: 48
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -1643,8 +1630,8 @@ TextureImporter:
       name: items-spritesheet_59
       rect:
         serializedVersion: 2
-        x: 0
-        y: 96
+        x: 64
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -1665,8 +1652,8 @@ TextureImporter:
       name: items-spritesheet_60
       rect:
         serializedVersion: 2
-        x: 16
-        y: 96
+        x: 80
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -1687,8 +1674,8 @@ TextureImporter:
       name: items-spritesheet_61
       rect:
         serializedVersion: 2
-        x: 32
-        y: 96
+        x: 96
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -1709,8 +1696,8 @@ TextureImporter:
       name: items-spritesheet_62
       rect:
         serializedVersion: 2
-        x: 64
-        y: 96
+        x: 112
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -1731,10 +1718,10 @@ TextureImporter:
       name: items-spritesheet_63
       rect:
         serializedVersion: 2
-        x: 80
-        y: 96
+        x: 0
+        y: 16
         width: 16
-        height: 16
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1753,10 +1740,10 @@ TextureImporter:
       name: items-spritesheet_64
       rect:
         serializedVersion: 2
-        x: 96
-        y: 96
+        x: 0
+        y: 0
         width: 16
-        height: 16
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1775,10 +1762,10 @@ TextureImporter:
       name: items-spritesheet_65
       rect:
         serializedVersion: 2
-        x: 112
-        y: 96
-        width: 16
-        height: 16
+        x: 16
+        y: 15
+        width: 17
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1797,9 +1784,9 @@ TextureImporter:
       name: items-spritesheet_66
       rect:
         serializedVersion: 2
-        x: 0
-        y: 80
-        width: 16
+        x: 16
+        y: 0
+        width: 17
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1819,10 +1806,10 @@ TextureImporter:
       name: items-spritesheet_67
       rect:
         serializedVersion: 2
-        x: 16
-        y: 80
-        width: 16
-        height: 16
+        x: 31
+        y: 0
+        width: 97
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1842,7 +1829,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 80
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -1863,9 +1850,9 @@ TextureImporter:
       name: items-spritesheet_69
       rect:
         serializedVersion: 2
-        x: 64
-        y: 80
-        width: 16
+        x: 47
+        y: 16
+        width: 18
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1885,8 +1872,8 @@ TextureImporter:
       name: items-spritesheet_70
       rect:
         serializedVersion: 2
-        x: 80
-        y: 80
+        x: 64
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -1907,9 +1894,9 @@ TextureImporter:
       name: items-spritesheet_71
       rect:
         serializedVersion: 2
-        x: 96
-        y: 80
-        width: 16
+        x: 79
+        y: 16
+        width: 34
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1930,7 +1917,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 112
-        y: 80
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -1947,759 +1934,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_73
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 64
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: db659e3c96fd74649aef3ecdbdfb0e4a
-      internalID: 1817943582
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_74
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 64
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3115c50d54523b841916fcc16a2c89c0
-      internalID: 356250745
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_75
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 64
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c607e675c0b0a2441adedc162d130ea1
-      internalID: 373231503
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_76
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 64
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b3ba68faf808b7b47befc4ea0b54fc6d
-      internalID: 876772587
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_77
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 64
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5eddb7cefad1eb4409c9f143ef175e84
-      internalID: -419331184
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_78
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 64
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ee9af7ac3ada17140814497789a5e0da
-      internalID: -95403163
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_79
-      rect:
-        serializedVersion: 2
-        x: 112
-        y: 64
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ee8542f84a5dec84b9222e4621553bb9
-      internalID: -1250054193
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_80
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 48
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 72fe454dc3b78254082b3ad6fece8444
-      internalID: -1730065232
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_81
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 48
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 65ed42269a0454c43ae5209411630d99
-      internalID: 1206461081
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_82
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 48
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a80883ffe52d04e4aa6790035990c0cb
-      internalID: -1872124709
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_83
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 48
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d456165456b591244867d7ba50f5428c
-      internalID: 2038478653
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_84
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 48
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 09b284da6a0269643a65546fe8c00168
-      internalID: 1413618487
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_85
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 48
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a39b5b66dd8c74847838cc469c052cff
-      internalID: -1564619555
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_86
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 48
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 21fc91481a1ef354da397e2428a948ce
-      internalID: -1125852936
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_87
-      rect:
-        serializedVersion: 2
-        x: 112
-        y: 48
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2820d4036495aab42a38ae4afeda0623
-      internalID: 1200356825
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_88
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8329221573fa62944b59e495256412a5
-      internalID: 1488741881
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_89
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 654e64785bea16447a1f943671778ddc
-      internalID: -787270849
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_90
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8845a3e7371652642a93b63559f9716a
-      internalID: 1723235788
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_91
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b1f006bc9e4f1dc489f38cb16e4a4b21
-      internalID: -812746232
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_92
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 62331806d0a0d3140822b58847f52b7f
-      internalID: -2013047505
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_93
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8e64b25fe4d53ce4f82aa417610f1c27
-      internalID: 1311221211
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_94
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e5371f7555c53684a84639951298a859
-      internalID: 1872740856
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_95
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bb278aa9880502c40ac8ba52520881fd
-      internalID: -500219510
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_96
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: afbb393c0a9cc3048a6a21614385c3a8
-      internalID: 1909496430
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_97
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6f4955d7546f6874bbfa4dd0463feef8
-      internalID: -644147312
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_98
-      rect:
-        serializedVersion: 2
-        x: 112
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7585f6c4a2fc7084b9d97ccf2b6e28f0
-      internalID: -2079516052
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_99
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2ed2741b2e59dec4db3834d13773831e
-      internalID: 990065330
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_100
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5d1ec2fc6b9b795479d77361cb4c83f9
-      internalID: -899534080
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_101
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7df6763b9c948ad409e3ddf153c8ed49
-      internalID: -2091368041
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_102
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3eaeff85d4225334984707dcfe91fbf7
-      internalID: 631864224
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_103
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4098f7d00476ad9488d8abe4f0341b66
-      internalID: 1137136243
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_104
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: af2d91075981512468263f974c533cb8
-      internalID: 1785724573
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_105
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4d35cf32e1aafc74f8b35cc94be1d88d
-      internalID: -1045088819
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: items-spritesheet_106
-      rect:
-        serializedVersion: 2
-        x: 112
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2806e6d67b0001c4d9e4ff0e4c87b32c
-      internalID: 57343616
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 0ba9fc8fd06830143b16e40e63ea5f70
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -2712,13 +1951,6 @@ TextureImporter:
       items-spritesheet_0: -6799905437951249656
       items-spritesheet_1: -7945996760867833713
       items-spritesheet_10: -6901467240114112639
-      items-spritesheet_100: -899534080
-      items-spritesheet_101: -2091368041
-      items-spritesheet_102: 631864224
-      items-spritesheet_103: 1137136243
-      items-spritesheet_104: 1785724573
-      items-spritesheet_105: -1045088819
-      items-spritesheet_106: 57343616
       items-spritesheet_11: 1984230019828383887
       items-spritesheet_12: 377818977302016169
       items-spritesheet_13: -5357301973725202776
@@ -2787,35 +2019,8 @@ TextureImporter:
       items-spritesheet_70: 2178405912490208347
       items-spritesheet_71: -2467499693008357513
       items-spritesheet_72: 5869338337996426507
-      items-spritesheet_73: 1817943582
-      items-spritesheet_74: 356250745
-      items-spritesheet_75: 373231503
-      items-spritesheet_76: 876772587
-      items-spritesheet_77: -419331184
-      items-spritesheet_78: -95403163
-      items-spritesheet_79: -1250054193
       items-spritesheet_8: -6442330748202983876
-      items-spritesheet_80: -1730065232
-      items-spritesheet_81: 1206461081
-      items-spritesheet_82: -1872124709
-      items-spritesheet_83: 2038478653
-      items-spritesheet_84: 1413618487
-      items-spritesheet_85: -1564619555
-      items-spritesheet_86: -1125852936
-      items-spritesheet_87: 1200356825
-      items-spritesheet_88: 1488741881
-      items-spritesheet_89: -787270849
       items-spritesheet_9: -7706681687376784294
-      items-spritesheet_90: 1723235788
-      items-spritesheet_91: -812746232
-      items-spritesheet_92: -2013047505
-      items-spritesheet_93: 1311221211
-      items-spritesheet_94: 1872740856
-      items-spritesheet_95: -500219510
-      items-spritesheet_96: 1909496430
-      items-spritesheet_97: -644147312
-      items-spritesheet_98: -2079516052
-      items-spritesheet_99: 990065330
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
