@@ -9,9 +9,14 @@ using UnityEngine;
 public class ApiConfig
 {
     public string ApiKey;
+    public string ProjectId;
     public string Register;
     public string Login;
     public string Refresh;
+    public string SendPassResetEmail;
+    public string VerifyPassResetCode;
+    public string ConfirmPassReset;
+    public string Database;
 
     private static ApiConfig instance;
     public static ApiConfig Instance
