@@ -11,7 +11,7 @@ public class ClockUI : MonoBehaviour
         clockText = GetComponent<TextMeshProUGUI>();
         if (timeController == null)
         {
-            timeController = FindFirstObjectByType<TimeController>();
+            timeController = FindObjectOfType<TimeController>();
         }
     }
 
