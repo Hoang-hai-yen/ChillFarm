@@ -10,9 +10,8 @@ public class FirebaseManager
             if(instance == null)
             {
                 instance = new FirebaseManager();
-                ApiConfig apiConfig = ApiConfig.Instance;
-                instance.Auth = new FirebaseAuthServie(apiConfig);
-                instance.Database = new FirebaseDatabaseService(apiConfig);
+                instance.Auth = new FirebaseAuthServie();
+                instance.Database = new FirebaseDatabaseService();
             }
 
             return instance;
