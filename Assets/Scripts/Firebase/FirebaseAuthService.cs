@@ -4,7 +4,7 @@ using System.Collections;
 using System.Text;
 using Newtonsoft.Json.Linq;
 
-public class FirebaseAuthServie
+public class FirebaseAuthService 
 {
     public string IdToken { get; private set; }
     public string LocalId { get; private set; }
@@ -94,4 +94,26 @@ public class FirebaseAuthServie
         }
     }
 
+    public IEnumerator SendPassResetEmail(string email, System.Action<bool, string> callback)
+    {
+        string url = ApiConfig.Instance.SendOobCode + ApiConfig.Instance.ApiKey;
+        string json = $"{{\"requestType\":\"PASSWORD_RESET\",\"email\":\"{email}\"}}";
+
+        UnityWebRequest request = new UnityWebRequest(url, "POST");
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
+        request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
+        {
+            callback?.Invoke(true, "Password reset email sent successfully!");
+        }
+        else
+        {
+            callback?.Invoke(false, request.downloadHandler.text);
+        }
+    }
 }

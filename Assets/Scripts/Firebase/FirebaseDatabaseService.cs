@@ -2,9 +2,8 @@ using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
 using System.Text;
-using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Linq; 
 using System;
-using System.Text.Json.Nodes;
 
 public class FirebaseDatabaseService
 {
@@ -25,9 +24,9 @@ public class FirebaseDatabaseService
         }
     }
 
-    public class Time()
+    public class Time 
     {
-        public string CurrentTime { get; set; } //hh:mm
+        public string CurrentTime { get; set; }
         public int Day { get; set; }
 
         public Time(string currentTime, int day)
@@ -74,32 +73,44 @@ public class FirebaseDatabaseService
         }
     }
 
-    public static JsonObject CreatePlayerObject(string name, int exp, int gold, int stamina)
+    public static JObject CreatePlayerObject(string name, int exp, int gold, int stamina)
     {
-        return new JsonObject
+        return new JObject
         {
-            ["name"] = new JsonObject { ["stringValue"] = name },
-            ["exp"] = new JsonObject { ["integerValue"] = $"{exp}" },
-            ["gold"] = new JsonObject { ["integerValue"] = $"{gold}" },
-            ["stamina"] = new JsonObject { ["integerValue"] = $"{stamina}" },
+            ["name"] = new JObject { ["stringValue"] = name },
+            ["exp"] = new JObject { ["integerValue"] = $"{exp}" },
+            ["gold"] = new JObject { ["integerValue"] = $"{gold}" },
+            ["stamina"] = new JObject { ["integerValue"] = $"{stamina}" },
         };
     }
     
-    public static JsonObject CreatePlayerDataObject(string playerId, Time time , Position position)
+    public static JObject CreatePlayerDataObject(string playerId, Time time , Position position)
     {
-        return new JsonObject
+        return new JObject
         {
-            ["player_id"] = new JsonObject { ["stringValue"] = playerId },
-            ["time"] = new JsonObject
+            ["player_id"] = new JObject { ["stringValue"] = playerId },
+            ["time"] = new JObject
             {
-                ["current_time"] = new JsonObject { ["stringValue"] = time.CurrentTime },
-                ["day"] = new JsonObject { ["integerValue"] = time.Day },
+                ["mapValue"] = new JObject
+                {
+                    ["fields"] = new JObject
+                    {
+                        ["current_time"] = new JObject { ["stringValue"] = time.CurrentTime },
+                        ["day"] = new JObject { ["integerValue"] = time.Day }
+                    }
+                }
             },
-            ["position"] = new JsonObject
+            ["position"] = new JObject
             {
-                ["position_x"] = new JsonObject { ["doubleValue"] = position.X },
-                ["position_y"] = new JsonObject { ["doubleValue"] = position.Y },
-                ["scene"] = new JsonObject { ["stringValue"] = position.Scene },
+                ["mapValue"] = new JObject
+                {
+                    ["fields"] = new JObject
+                    {
+                        ["position_x"] = new JObject { ["doubleValue"] = position.X },
+                        ["position_y"] = new JObject { ["doubleValue"] = position.Y },
+                        ["scene"] = new JObject { ["stringValue"] = position.Scene }
+                    }
+                }
             },
         };
     }
