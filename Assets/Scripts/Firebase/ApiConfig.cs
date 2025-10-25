@@ -9,9 +9,12 @@ using UnityEngine;
 public class ApiConfig
 {
     public string ApiKey;
+    public string ProjectId; 
     public string Register;
     public string Login;
     public string Refresh;
+    public string SendOobCode; 
+    public string Database;    
 
     private static ApiConfig instance;
     public static ApiConfig Instance
@@ -31,6 +34,4 @@ public class ApiConfig
             instance = value;
         }
     }
-
 }
-

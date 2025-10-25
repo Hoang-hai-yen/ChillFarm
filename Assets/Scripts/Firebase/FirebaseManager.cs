@@ -1,4 +1,3 @@
-
 public class FirebaseManager
 {
     private static FirebaseManager instance;
@@ -10,8 +9,8 @@ public class FirebaseManager
             if(instance == null)
             {
                 instance = new FirebaseManager();
-                instance.Auth = new FirebaseAuthServie();
-                instance.Database = new FirebaseDatabaseService();
+                instance.Auth = new FirebaseAuthService(); // <--- SỬA: Lỗi chính tả
+                instance.Database = new FirebaseDatabaseService(ApiConfig.Instance); // <--- SỬA: Thêm (ApiConfig.Instance)
             }
 
             return instance;
@@ -23,7 +22,7 @@ public class FirebaseManager
         }
     }
 
-    public FirebaseAuthServie Auth { get; private set; }
+    public FirebaseAuthService Auth { get; private set; } // <--- SỬA: Lỗi chính tả
     public FirebaseDatabaseService Database { get; private set; }
 
     public enum FirebaseUrl
