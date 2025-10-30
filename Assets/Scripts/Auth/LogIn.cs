@@ -22,7 +22,7 @@ public class LoginManager : MonoBehaviour
         }
 
         // Gọi đăng nhập Firebase
-        StartCoroutine(FirebaseManager.Instance.Auth.Login(email, password, (success, message) =>
+        StartCoroutine(CloudManager.Instance.Auth.Login(email, password, (success, message) =>
         {
             if (success)
             {

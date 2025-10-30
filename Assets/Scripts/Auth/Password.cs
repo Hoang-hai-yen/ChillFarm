@@ -18,7 +18,7 @@ public class ResetPasswordManager : MonoBehaviour
         }
 
         // Gửi yêu cầu reset password
-        StartCoroutine(FirebaseManager.Instance.Auth.SendPassResetEmail(email, (success, message) =>
+        StartCoroutine(CloudManager.Instance.Auth.SendPassResetEmail(email, (success, message) =>
         {
             if (success)
             {
