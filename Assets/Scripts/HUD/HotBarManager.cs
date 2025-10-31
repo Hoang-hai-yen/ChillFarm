@@ -3,16 +3,35 @@ using UnityEngine.UI;
 
 public class HotbarManager : MonoBehaviour
 {
-    [Header("Hotbar Settings")]
-    public Image[] slotImages; // Gán tất cả các slot ở đây (9 ô)
+    [Header("UI Visuals")]
+    [Tooltip("Gán 9 ô Image NỀN (để đổi màu)")]
+    public Image[] slotBackgroundImages; //
+    
+    [Tooltip("Gán 9 ô Image ICON (để hiện item)")]
+    public Image[] slotItemIcons;      
+    
     public Color normalColor = Color.white;
     public Color selectedColor = Color.yellow;
 
-    private int selectedIndex = 0;
-
     void Start()
     {
-        UpdateSlotVisuals();
+        if (InventoryManager.Instance != null)
+        {
+            InventoryManager.Instance.OnInventoryChanged += UpdateHotbarVisuals;
+            UpdateHotbarVisuals(); 
+        }
+        else
+        {
+            Debug.LogError("HotbarManager: Không tìm thấy InventoryManager!");
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (InventoryManager.Instance != null)
+        {
+            InventoryManager.Instance.OnInventoryChanged -= UpdateHotbarVisuals;
+        }
     }
 
     void Update()
@@ -23,49 +42,55 @@ public class HotbarManager : MonoBehaviour
 
     void HandleKeyboardInput()
     {
-        for (int i = 0; i < slotImages.Length; i++)
+        for (int i = 0; i < slotBackgroundImages.Length; i++)
         {
-            // Nhấn phím số 1–9 để chọn ô tương ứng
             if (Input.GetKeyDown(KeyCode.Alpha1 + i))
             {
-                SelectSlot(i);
+                InventoryManager.Instance.SelectSlot(i);
             }
         }
     }
 
     void HandleMouseScroll()
     {
+        if (InventoryManager.Instance == null) return;
+
         float scroll = Input.GetAxis("Mouse ScrollWheel");
+        int currentIndex = InventoryManager.Instance.SelectedHotbarSlot;
+
         if (scroll > 0f)
         {
-            selectedIndex--;
-            if (selectedIndex < 0) selectedIndex = slotImages.Length - 1;
-            UpdateSlotVisuals();
+            currentIndex--;
+            if (currentIndex < 0) currentIndex = slotBackgroundImages.Length - 1;
         }
         else if (scroll < 0f)
         {
-            selectedIndex++;
-            if (selectedIndex >= slotImages.Length) selectedIndex = 0;
-            UpdateSlotVisuals();
+            currentIndex++;
+            if (currentIndex >= slotBackgroundImages.Length) currentIndex = 0;
         }
+        
+        InventoryManager.Instance.SelectSlot(currentIndex);
     }
 
-    void SelectSlot(int index)
+    void UpdateHotbarVisuals()
     {
-        selectedIndex = index;
-        UpdateSlotVisuals();
-    }
+        int selectedIndex = InventoryManager.Instance.SelectedHotbarSlot;
 
-    void UpdateSlotVisuals()
-    {
-        for (int i = 0; i < slotImages.Length; i++)
+        for (int i = 0; i < slotBackgroundImages.Length; i++)
         {
-            slotImages[i].color = (i == selectedIndex) ? selectedColor : normalColor;
-        }
-    }
+            slotBackgroundImages[i].color = (i == selectedIndex) ? selectedColor : normalColor;
 
-    public int GetSelectedIndex()
-    {
-        return selectedIndex;
+            InventorySlot slot = InventoryManager.Instance.hotbarSlots[i];
+            if (slot.itemData != null)
+            {
+                slotItemIcons[i].sprite = slot.itemData.itemIcon;
+                slotItemIcons[i].color = Color.white;
+            }
+            else
+            {
+                slotItemIcons[i].sprite = null;
+                slotItemIcons[i].color = new Color(1, 1, 1, 0); 
+            }
+        }
     }
 }

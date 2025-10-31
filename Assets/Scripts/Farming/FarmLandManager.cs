@@ -6,15 +6,13 @@ public class FarmlandManager : MonoBehaviour
 {
     public enum PlotState
     {
-        Diggable, 
-        Dug,    
+        None,
         Tilled,   
         Watered  
     }
 
     [Header("Tilemaps & Tiles")]
-    public Tilemap farmlandTilemap; 
-    public Tile dugTile;
+    public Tilemap tillableTilemap; 
     public Tile tilledTile;
     public Tile wateredTile;
 
@@ -68,18 +66,14 @@ public class FarmlandManager : MonoBehaviour
     {
         switch (toolType)
         {
-            case ToolType.Shovel:
-                if (currentState == PlotState.Diggable)
-                {
-                    SetPlotState(plotPosition, PlotState.Dug, dugTile);
-                }
-                break;
             case ToolType.Hoe:
-                if (currentState == PlotState.Dug)
+                if (tillableTilemap.HasTile(plotPosition) && !plotStates.ContainsKey(plotPosition))
                 {
                     SetPlotState(plotPosition, PlotState.Tilled, tilledTile);
+                    Debug.Log("Dùng cuốc cuốc đất!");
                 }
                 break;
+
             case ToolType.WateringCan:
                 if (currentState == PlotState.Tilled && !cropsOnPlots.ContainsKey(plotPosition))
                 {
@@ -101,7 +95,7 @@ public class FarmlandManager : MonoBehaviour
         {
             if (!cropsOnPlots.ContainsKey(plotPosition))
             {
-                GameObject cropObj = Instantiate(cropPrefab, farmlandTilemap.GetCellCenterWorld(plotPosition), Quaternion.identity);
+                GameObject cropObj = Instantiate(cropPrefab, tillableTilemap.GetCellCenterWorld(plotPosition), Quaternion.identity);
                 Crop cropInstance = cropObj.GetComponent<Crop>();
                 
                 cropInstance.Initialize(seed.cropToPlant);
@@ -156,19 +150,18 @@ public class FarmlandManager : MonoBehaviour
         }
     }
 
-    // Các hàm trợ giúp
     public PlotState GetPlotState(Vector3Int position)
     {
         if (plotStates.TryGetValue(position, out PlotState state))
         {
             return state;
         }
-        return PlotState.Diggable; 
+            return PlotState.None; 
     }
 
     public void SetPlotState(Vector3Int position, PlotState state, Tile tile)
     {
-        farmlandTilemap.SetTile(position, tile);
+        tillableTilemap.SetTile(position, tile);
         plotStates[position] = state;
     }
 }
