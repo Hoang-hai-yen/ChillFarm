@@ -1,5 +1,5 @@
 using UnityEngine;
-public enum ToolType { Hoe, Shovel, WateringCan }
+public enum ToolType { Hoe, WateringCan }
 
 [CreateAssetMenu(fileName = "New ToolData", menuName = "Farming/Tool Data")]
 public class ToolData : ItemData
