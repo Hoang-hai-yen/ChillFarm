@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,22 +15,11 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Vị trí nhân vật sẽ xuất hiện khi Ngủ/Ngất xỉu.")]
     public Transform bedSpawnPoint;
 
-    private StaminaController staminaController;
+    private StaminaController staminaController; 
     
     private float lastMoveX;
     private float lastMoveY;
 
-    [Header("Farming")]
-    [SerializeField] private float interactionDistance = 0.5f;
-
-    [Header("UI Panels")]
-    public GameObject backpackPanel;
-    
-    private FarmlandManager farmlandManager;
-    private Grid grid;
-    private bool isBackpackOpen = false;
-
-    private bool isInteracting = false;
     public void Awake()
     {
         playerControls = new PlayerControls();
@@ -39,20 +27,10 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         
-        staminaController = FindFirstObjectByType<StaminaController>();
+        staminaController = FindFirstObjectByType<StaminaController>(); 
         if (staminaController == null)
         {
             Debug.LogError("StaminaController not found in the scene.");
-        }
-        
-        farmlandManager = FindFirstObjectByType<FarmlandManager>();
-        grid = FindFirstObjectByType<Grid>();
-        if (farmlandManager == null) Debug.LogError("Player: Không tìm thấy FarmlandManager");
-        if (grid == null) Debug.LogError("Player: Không tìm thấy Grid");
-
-        if (backpackPanel != null)
-        {
-            backpackPanel.SetActive(false);
         }
         
         lastMoveY = -1f;
@@ -67,12 +45,6 @@ public class PlayerController : MonoBehaviour
             staminaController.OnPlayerFaint += HandlePlayerFaint;
             staminaController.OnPlayerWakeUp += HandlePlayerWakeUp;
         }
-
-        playerControls.Movement.Interact.performed += OnInteract;
-        playerControls.Movement.Interact.Enable();
-        
-        playerControls.Movement.Backpack.performed += ToggleBackpack;
-        playerControls.Movement.Backpack.Enable();
     }
 
     private void OnDisable()
@@ -84,19 +56,11 @@ public class PlayerController : MonoBehaviour
             staminaController.OnPlayerFaint -= HandlePlayerFaint;
             staminaController.OnPlayerWakeUp -= HandlePlayerWakeUp;
         }
-        
-        playerControls.Movement.Interact.performed -= OnInteract;
-        playerControls.Movement.Interact.Disable();
-        
-        playerControls.Movement.Backpack.performed -= ToggleBackpack;
-        playerControls.Movement.Backpack.Disable();
     }
     
     private void Update()
     {
-        // --- SỬA ---
-        // Thêm điều kiện !isInteracting
-        if (staminaController != null && !staminaController.IsFainted() && !isInteracting)
+        if (staminaController != null && !staminaController.IsFainted()) 
         {
             PlayerInput();
         }
@@ -108,21 +72,20 @@ public class PlayerController : MonoBehaviour
     
     private void FixedUpdate()
     {
-        if (staminaController != null && !staminaController.IsFainted() && !isInteracting)
+        if (staminaController != null && !staminaController.IsFainted())
         {
             Move();
         }
         else
         {
-            rb.linearVelocity = Vector2.zero;
+            // Tạm dừng di chuyển (sử dụng velocity thay vì linearVelocity)
+            rb.linearVelocity = Vector2.zero; 
         }
     }
 
     private void PlayerInput()
     {
         movement = playerControls.Movement.Move.ReadValue<Vector2>();
-        
-        animator.SetBool("isMoving", movement != Vector2.zero);
         
         animator.SetFloat("moveX", movement.x);
         animator.SetFloat("moveY", movement.y);
@@ -143,16 +106,10 @@ public class PlayerController : MonoBehaviour
 
     private void HandlePlayerFaint()
     {
-        playerControls.Disable();
-        movement = Vector2.zero; 
-        rb.linearVelocity = Vector2.zero;
-        animator.SetBool("isFainted", true);
-        
-        if (isBackpackOpen)
-        {
-            isBackpackOpen = false;
-            backpackPanel.SetActive(false);
-        }
+        playerControls.Disable(); 
+        movement = Vector2.zero;  
+        rb.linearVelocity = Vector2.zero; 
+        animator.SetBool("isFainted", true); 
         
         Debug.Log("PlayerController: Input disabled, fainted animation playing.");
     }
@@ -171,11 +128,8 @@ public class PlayerController : MonoBehaviour
             Debug.LogError("Bed Spawn Point not assigned in PlayerController! Cannot teleport.");
         }
         
-        animator.SetBool("isFainted", false);
-        playerControls.Enable();
-        
-        playerControls.Movement.Move.Enable();
-        playerControls.Movement.Interact.Enable();
+        animator.SetBool("isFainted", false); 
+        playerControls.Enable(); 
         
         Debug.Log("PlayerController: Input enabled, starting new day.");
     }
@@ -187,87 +141,5 @@ public class PlayerController : MonoBehaviour
             staminaController.ConsumeStamina(staminaCost);
             Debug.Log($"Used tool. Stamina remaining: {staminaController.GetCurrentStamina()}");
         }
-    }
-
-    private void OnInteract(InputAction.CallbackContext context)
-    {
-        if (isInteracting) return; 
-        if (staminaController != null && staminaController.IsFainted()) return;
-
-        StartCoroutine(HandleInteraction());
-    }
-
-    private IEnumerator HandleInteraction()
-    {
-        isInteracting = true;
-
-        ItemData currentItem = GetCurrentHeldItem();
-        Vector3 playerDirection = new Vector3(animator.GetFloat("lastMoveX"), animator.GetFloat("lastMoveY"), 0).normalized;
-        if (playerDirection == Vector3.zero) playerDirection = Vector3.down;
-        Vector3Int targetCellPos = grid.WorldToCell(transform.position + playerDirection * interactionDistance);
-
-        float staminaCost = (currentItem == null) ? 2f : currentItem.staminaCost;
-
-        if (staminaController.GetCurrentStamina() < staminaCost)
-        {
-            Debug.Log("Không đủ Stamina!");
-            isInteracting = false;
-            yield break; 
-        }
-
-        if (currentItem is ToolData tool)
-        {
-            if (tool.toolType == ToolType.Hoe)
-            {
-                animator.SetTrigger("useHoe");
-                yield return new WaitForSeconds(0.5f);
-            }
-            else if (tool.toolType == ToolType.WateringCan)
-            {
-                animator.SetTrigger("useWaterCan");
-                yield return new WaitForSeconds(0.7f); 
-            }
-        }
-
-        if (farmlandManager != null)
-        {
-            farmlandManager.Interact(targetCellPos, currentItem);
-            UseTool(staminaCost);
-        }
-
-        isInteracting = false;
-    }
-    
-    private void ToggleBackpack(InputAction.CallbackContext context)
-    {
-        if (isInteracting) return;
-        if (staminaController != null && staminaController.IsFainted()) return;
-        
-        if (backpackPanel == null) return;
-
-        isBackpackOpen = !isBackpackOpen;
-        backpackPanel.SetActive(isBackpackOpen);
-
-        if (isBackpackOpen)
-        {
-            playerControls.Movement.Move.Disable();
-            playerControls.Movement.Interact.Disable();
-        }
-        else
-        {
-            playerControls.Movement.Move.Enable();
-            playerControls.Movement.Interact.Enable();
-        }
-    }
-    
-    private ItemData GetCurrentHeldItem()
-    {
-        if (InventoryManager.Instance != null)
-        {
-            return InventoryManager.Instance.GetSelectedItem();
-        }
-
-        Debug.LogWarning("Không tìm thấy InventoryManager!");
-        return null; 
     }
 }
