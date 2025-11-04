@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: Watered_Tile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: -1706012554, guid: 7872776a21751bd47b6ce8b0f37c003c, type: 3}
+  m_Sprite: {fileID: -2414158558571914281, guid: 656557e9427289f488045be31296c190, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

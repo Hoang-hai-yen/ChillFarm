@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51a58f95604da654394b52a578ea6423, type: 3}
   m_Name: Carrot_Data
   m_EditorClassIdentifier: Assembly-CSharp::CropData
-  cropName: 
+  cropName: "C\xE0 r\u1ED1t"
   growthSprites:
   - {fileID: -5784410927573482350, guid: 64ba9ecd33a51464f9a61430fcbcdd5a, type: 3}
   - {fileID: 7448935753994061408, guid: 64ba9ecd33a51464f9a61430fcbcdd5a, type: 3}
   - {fileID: 1116706725642825598, guid: 64ba9ecd33a51464f9a61430fcbcdd5a, type: 3}
   - {fileID: 1116706725642825598, guid: 64ba9ecd33a51464f9a61430fcbcdd5a, type: 3}
-  daysToGrow: 0
-  harvestItemPrefab: {fileID: 0}
+  daysToGrow: 4
+  harvestItemPrefab: {fileID: 3411604786338510785, guid: 1a94dca1b4c132e49a34c40db7555b93, type: 3}
   harvestYield: 1

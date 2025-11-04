@@ -26,7 +26,7 @@ public class Crop : MonoBehaviour
     public void Initialize(CropData data)
     {
         cropData = data;
-        isWatered = true;
+        isWatered = false;
         sr.sprite = cropData.growthSprites[0];
         UpdateGrowthUI();
     }

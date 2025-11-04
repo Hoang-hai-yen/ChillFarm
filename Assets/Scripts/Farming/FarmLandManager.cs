@@ -44,25 +44,27 @@ public class FarmlandManager : MonoBehaviour
         }
     }
 
-    public void Interact(Vector3Int plotPosition, ItemData heldItem)
+public bool Interact(Vector3Int plotPosition, ItemData heldItem)
     {
         PlotState currentState = GetPlotState(plotPosition);
 
         if (heldItem is ToolData tool)
         {
-            HandleToolInteraction(plotPosition, currentState, tool.toolType);
+            return HandleToolInteraction(plotPosition, currentState, tool.toolType);
         }
         else if (heldItem is SeedData seed)
         {
-            HandleSeedInteraction(plotPosition, currentState, seed);
+            return HandleSeedInteraction(plotPosition, currentState, seed);
         }
         else if (heldItem == null) 
         {
-            HandleHarvest(plotPosition);
+            return HandleHarvest(plotPosition);
         }
+        
+        return false;
     }
 
-    private void HandleToolInteraction(Vector3Int plotPosition, PlotState currentState, ToolType toolType)
+    private bool HandleToolInteraction(Vector3Int plotPosition, PlotState currentState, ToolType toolType)
     {
         switch (toolType)
         {
@@ -71,25 +73,32 @@ public class FarmlandManager : MonoBehaviour
                 {
                     SetPlotState(plotPosition, PlotState.Tilled, tilledTile);
                     Debug.Log("Dùng cuốc cuốc đất!");
+                    return true; 
                 }
-                break;
+                break; 
 
             case ToolType.WateringCan:
                 if (currentState == PlotState.Tilled && !cropsOnPlots.ContainsKey(plotPosition))
                 {
                     SetPlotState(plotPosition, PlotState.Watered, wateredTile);
+                    return true; 
                 }
                 else if (cropsOnPlots.TryGetValue(plotPosition, out Crop crop))
                 {
-                    crop.Water();
-                    SetPlotState(plotPosition, PlotState.Watered, wateredTile);
-                    Debug.Log("Đã tưới cây!");
+                    if (!crop.IsWatered())
+                    {
+                        crop.Water();
+                        SetPlotState(plotPosition, PlotState.Watered, wateredTile);
+                        Debug.Log("Đã tưới cây!");
+                        return true; 
+                    }
                 }
-                break;
+                break; 
         }
+        
+        return false;
     }
-
-    private void HandleSeedInteraction(Vector3Int plotPosition, PlotState currentState, SeedData seed)
+    private bool HandleSeedInteraction(Vector3Int plotPosition, PlotState currentState, SeedData seed)
     {
         if (currentState == PlotState.Tilled || currentState == PlotState.Watered)
         {
@@ -101,17 +110,14 @@ public class FarmlandManager : MonoBehaviour
                 cropInstance.Initialize(seed.cropToPlant);
                 cropsOnPlots.Add(plotPosition, cropInstance);
                 
-                if(currentState == PlotState.Tilled)
-                {
-                     SetPlotState(plotPosition, PlotState.Watered, wateredTile);
-                }
-
                 Debug.Log($"Gieo hạt {seed.cropToPlant.cropName}!");
+                return true; 
             }
         }
+        return false;
     }
 
-    private void HandleHarvest(Vector3Int plotPosition)
+    private bool HandleHarvest(Vector3Int plotPosition)
     {
         if (cropsOnPlots.TryGetValue(plotPosition, out Crop crop))
         {
@@ -120,8 +126,10 @@ public class FarmlandManager : MonoBehaviour
                 crop.Harvest();
                 SetPlotState(plotPosition, PlotState.Tilled, tilledTile);
                 cropsOnPlots.Remove(plotPosition); 
+                return true; 
             }
         }
+        return false;
     }
 
     private void OnNewDay()
@@ -138,12 +146,8 @@ public class FarmlandManager : MonoBehaviour
         
         foreach(var pos in plotsToReset)
         {
-            if (!cropsOnPlots.ContainsKey(pos))
-            {
-                SetPlotState(pos, PlotState.Tilled, tilledTile);
-            }
+            SetPlotState(pos, PlotState.Tilled, tilledTile);
         }
-
         foreach (var crop in cropsOnPlots.Values)
         {
             crop.Grow();
@@ -163,5 +167,41 @@ public class FarmlandManager : MonoBehaviour
     {
         tillableTilemap.SetTile(position, tile);
         plotStates[position] = state;
+    }
+  
+    public bool CanInteract(Vector3Int plotPosition, ItemData heldItem)
+    {
+        PlotState currentState = GetPlotState(plotPosition);
+
+        if (heldItem is ToolData tool)
+        {
+            switch (tool.toolType)
+            {
+                case ToolType.Hoe:
+                    return tillableTilemap.HasTile(plotPosition) && !plotStates.ContainsKey(plotPosition);
+
+                case ToolType.WateringCan:
+                    if (currentState == PlotState.Tilled && !cropsOnPlots.ContainsKey(plotPosition)) 
+                        return true;
+                    if (cropsOnPlots.TryGetValue(plotPosition, out Crop crop))
+                    {
+                        return !crop.IsWatered();
+                    }
+                    return false; 
+            }
+        }
+        else if (heldItem is SeedData seed)
+        {
+            return (currentState == PlotState.Tilled || currentState == PlotState.Watered) && !cropsOnPlots.ContainsKey(plotPosition);
+        }
+        else if (heldItem == null) 
+        {
+            if (cropsOnPlots.TryGetValue(plotPosition, out Crop crop))
+            {
+                return crop.IsHarvestable();
+            }
+        }
+        
+        return false;
     }
 }

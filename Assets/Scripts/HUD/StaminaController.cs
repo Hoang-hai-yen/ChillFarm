@@ -1,5 +1,7 @@
 using UnityEngine;
 using System;
+using System.Collections;
+using Newtonsoft.Json.Linq;
 
 public class StaminaController : MonoBehaviour
 {
@@ -76,6 +78,8 @@ public class StaminaController : MonoBehaviour
         isFainted = true;
         Debug.Log("Player fainted! Stamina hết.");
         
+        StartCoroutine(SaveStaminaData());
+        
         OnPlayerFaint?.Invoke(); 
         
         EndDayAndRecover();
@@ -104,5 +108,29 @@ public class StaminaController : MonoBehaviour
     public bool IsEvening()
     {
         return timeController != null && timeController.GetCurrentHour() >= eveningHourStart;
+    }
+    private IEnumerator SaveStaminaData()
+    {
+        string userId = FirebaseManager.Instance.Auth.LocalId;
+        if (string.IsNullOrEmpty(userId))
+        {
+            Debug.LogError("Save Stamina: Không thể lưu vì người dùng chưa đăng nhập!");
+            yield break;
+        }
+
+        int staminaToSave = (int)currentStamina;
+
+        JObject staminaField = FirebaseDatabaseService.CreateStaminaUpdateObject(staminaToSave);
+        
+        string collectionName = "players"; 
+        
+        var database = FirebaseManager.Instance.Database;
+        yield return database.UpdateDocument(collectionName, userId, staminaField, (success, error) => {
+            if (success) {
+                Debug.Log("Stamina đã được lưu lên Firebase!");
+            } else {
+                Debug.LogError("Lỗi lưu stamina: " + error);
+            }
+        });
     }
 }

@@ -57,7 +57,8 @@ public class InventoryManager : MonoBehaviour
     {
         ItemData hoe = Resources.Load<ToolData>("Test_Hoe");
         ItemData waterCan = Resources.Load<ToolData>("Test_WaterCan");
-
+        ItemData carrotSeed = Resources.Load<SeedData>("CarrotSeed_Data");
+        if (carrotSeed != null) AddItem(carrotSeed, 2); 
         if (hoe != null) AddItem(hoe, 0); 
         if (waterCan != null) AddItem(waterCan, 1); 
     }

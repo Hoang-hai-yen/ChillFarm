@@ -23,6 +23,11 @@ public class PlayerController : MonoBehaviour
 
     [Header("Farming")]
     [SerializeField] private float interactionDistance = 0.5f;
+    
+    [Header("Farming Highlight")]
+    [Tooltip("Kéo Prefab ô vuông highlight vào đây")]
+    public GameObject tileHighlightPrefab;
+    private GameObject currentHighlight; 
 
     [Header("UI Panels")]
     public GameObject backpackPanel;
@@ -53,6 +58,12 @@ public class PlayerController : MonoBehaviour
         if (backpackPanel != null)
         {
             backpackPanel.SetActive(false);
+        }
+        
+        if (tileHighlightPrefab != null)
+        {
+            currentHighlight = Instantiate(tileHighlightPrefab, Vector3.zero, Quaternion.identity);
+            currentHighlight.SetActive(false);
         }
         
         lastMoveY = -1f;
@@ -94,21 +105,24 @@ public class PlayerController : MonoBehaviour
     
     private void Update()
     {
-        // --- SỬA ---
-        // Thêm điều kiện !isInteracting
-        if (staminaController != null && !staminaController.IsFainted() && !isInteracting)
+        if (staminaController != null && !staminaController.IsFainted())
         {
-            PlayerInput();
+            if (!isInteracting && !isBackpackOpen)
+            {
+                PlayerInput();
+                HandleHighlighting();
+            }
         }
         else
         {
             movement = Vector2.zero;
+            if (currentHighlight != null) currentHighlight.SetActive(false);
         }
     }
     
     private void FixedUpdate()
     {
-        if (staminaController != null && !staminaController.IsFainted() && !isInteracting)
+        if (staminaController != null && !staminaController.IsFainted() && !isInteracting && !isBackpackOpen)
         {
             Move();
         }
@@ -147,6 +161,8 @@ public class PlayerController : MonoBehaviour
         movement = Vector2.zero; 
         rb.linearVelocity = Vector2.zero;
         animator.SetBool("isFainted", true);
+        
+        if (currentHighlight != null) currentHighlight.SetActive(false);
         
         if (isBackpackOpen)
         {
@@ -193,12 +209,45 @@ public class PlayerController : MonoBehaviour
     {
         if (isInteracting) return; 
         if (staminaController != null && staminaController.IsFainted()) return;
+        
+        if (currentHighlight != null && currentHighlight.activeSelf)
+        {
+            StartCoroutine(HandleInteraction());
+        }
+    }
 
-        StartCoroutine(HandleInteraction());
+    private void HandleHighlighting()
+    {
+        if (farmlandManager == null || grid == null || currentHighlight == null)
+        {
+            if (currentHighlight != null) currentHighlight.SetActive(false);
+            return;
+        }
+
+        ItemData currentItem = GetCurrentHeldItem();
+        Vector3 playerDirection = new Vector3(animator.GetFloat("lastMoveX"), animator.GetFloat("lastMoveY"), 0).normalized;
+        if (playerDirection == Vector3.zero) playerDirection = Vector3.down; 
+        
+        Vector3Int targetCellPos = grid.WorldToCell(transform.position + playerDirection * interactionDistance);
+
+        bool canInteract = farmlandManager.CanInteract(targetCellPos, currentItem);
+
+        if (canInteract)
+        {
+            Vector3 cellWorldPos = grid.GetCellCenterWorld(targetCellPos);
+            currentHighlight.transform.position = cellWorldPos;
+            currentHighlight.SetActive(true);
+        }
+        else
+        {
+            currentHighlight.SetActive(false);
+        }
     }
 
     private IEnumerator HandleInteraction()
     {
+        if (currentHighlight != null) currentHighlight.SetActive(false); 
+
         isInteracting = true;
 
         ItemData currentItem = GetCurrentHeldItem();
@@ -231,8 +280,12 @@ public class PlayerController : MonoBehaviour
 
         if (farmlandManager != null)
         {
-            farmlandManager.Interact(targetCellPos, currentItem);
-            UseTool(staminaCost);
+            bool actionSucceeded = farmlandManager.Interact(targetCellPos, currentItem);
+
+            if (actionSucceeded)
+            {
+                UseTool(staminaCost);
+            }
         }
 
         isInteracting = false;
@@ -252,6 +305,8 @@ public class PlayerController : MonoBehaviour
         {
             playerControls.Movement.Move.Disable();
             playerControls.Movement.Interact.Disable();
+            
+            if (currentHighlight != null) currentHighlight.SetActive(false);
         }
         else
         {

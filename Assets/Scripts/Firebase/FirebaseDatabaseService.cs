@@ -2,9 +2,9 @@ using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
 using System.Text;
-using Newtonsoft.Json.Linq; 
+using Newtonsoft.Json.Linq;
 using System;
-
+using System.Linq;
 public class FirebaseDatabaseService
 {
     private ApiConfig apiConfig;
@@ -83,8 +83,8 @@ public class FirebaseDatabaseService
             ["stamina"] = new JObject { ["integerValue"] = $"{stamina}" },
         };
     }
-    
-    public static JObject CreatePlayerDataObject(string playerId, Time time , Position position)
+
+    public static JObject CreatePlayerDataObject(string playerId, Time time, Position position)
     {
         return new JObject
         {
@@ -112,6 +112,45 @@ public class FirebaseDatabaseService
                     }
                 }
             },
+        };
+    }
+    public IEnumerator UpdateDocument(string collectionId, string documentId, JObject fields, Action<bool, string> callback)
+    {
+        string url = apiConfig.Database + $"projects/{apiConfig.ProjectId}/databases/(default)/documents/{collectionId}/{documentId}";
+        
+        string[] fieldPaths = fields.Properties().Select(p => p.Name).ToArray();
+        string updateMaskParams = string.Join("&", fieldPaths.Select(fp => $"updateMask.fieldPaths={fp}"));
+        url += $"?{updateMaskParams}";
+
+        JObject body = new JObject
+        {
+            ["fields"] = fields
+        };
+
+        UnityWebRequest request = new UnityWebRequest(url, "PATCH"); // Sử dụng "PATCH"
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(body.ToString());
+        request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+        request.SetRequestHeader("Authorization", "Bearer " + FirebaseManager.Instance.Auth.IdToken);
+
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
+        {
+            callback?.Invoke(true, "Update document successful");
+        }
+        else
+        {
+            callback?.Invoke(false, request.downloadHandler.text);
+        }
+    }
+
+    public static JObject CreateStaminaUpdateObject(int stamina)
+    {
+        return new JObject
+        {
+            ["stamina"] = new JObject { ["integerValue"] = $"{stamina}" }
         };
     }
 }

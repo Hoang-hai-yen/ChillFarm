@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: Tilled_Tile
   m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.Tilemaps.Tile
-  m_Sprite: {fileID: -1978683130, guid: 892e7e4356b40e64c98086973de7bb5e, type: 3}
+  m_Sprite: {fileID: -2980106947640702679, guid: c33de37aadc27eb48a75b52965b239ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
