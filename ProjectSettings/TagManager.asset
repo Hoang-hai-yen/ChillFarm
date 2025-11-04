@@ -74,5 +74,17 @@ TagManager:
   - name: Player
     uniqueID: 1055369451
     locked: 0
+  - name: Ground 5
+    uniqueID: 996113015
+    locked: 0
+  - name: Fence
+    uniqueID: 1053348911
+    locked: 0
+  - name: Bridge
+    uniqueID: 3483589631
+    locked: 0
+  - name: Market
+    uniqueID: 3636617985
+    locked: 0
   m_RenderingLayers:
   - Default
