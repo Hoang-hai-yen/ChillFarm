@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-class Player
+public class PlayerProfile
 {
     public string Email { get; set; }
     public string Name { get; set; }
-    public Player() { }
+    public string Avatar { get; set; }
+    public PlayerProfile() { }
 }

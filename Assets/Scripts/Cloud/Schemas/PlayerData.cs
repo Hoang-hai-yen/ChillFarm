@@ -11,7 +11,7 @@ public class PlayerData
 
     public int Gold {get; set;}
     public double Stamina { get; set; }
-    public int MaxStamina { get; set; }
+    public double MaxStamina { get; set; }
     public int CurrentDay { get; set; }
     public int CurrentTime { get; set; }
 

@@ -11,15 +11,17 @@ public class CloudAuthService
     public string LocalId { get; private set; }
     public string RefreshToken { get; private set; }
     public string ObbCode { get; private set; }
+    public bool IsLogin { get; private set; }
     private ApiConfig apiConfig;
 
     public CloudAuthService(ApiConfig apiConfig)
     {
         this.apiConfig = apiConfig;
+        IsLogin = false;
     }
-    
 
-    public IEnumerator CreateAccount(string email, string password, Action<bool, string> callback)
+
+    public IEnumerator Register(string email, string password, string name, Action<bool, string> callback)
     {
         string url = apiConfig.Register + apiConfig.ApiKey;
         string json = $@"{{
@@ -41,7 +43,15 @@ public class CloudAuthService
             IdToken = data["idToken"].ToString();
             LocalId = data["localId"].ToString();
             RefreshToken = data["refreshToken"].ToString();
-            callback?.Invoke(true, "Account created successfully!");
+            yield return CloudManager.Instance.Database.CreateInitialData(LocalId, email, "player", "avatar_01", (success, message) => { 
+                if(success)
+                {
+                    IsLogin = true;
+                    callback?.Invoke(true, "Account created successfully!");
+                   
+                }
+
+            });
         }
         else
         {
@@ -72,6 +82,7 @@ public class CloudAuthService
             IdToken = data["idToken"].ToString();
             LocalId = data["localId"].ToString();
             RefreshToken = data["refreshToken"].ToString();
+            IsLogin = true;
             callback?.Invoke(true, "Login successful!");
         }
         else

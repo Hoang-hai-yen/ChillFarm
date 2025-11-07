@@ -13,10 +13,11 @@ public class CloudSaveManager : MonoBehaviour
     private bool animalFarmDirty = false;
     private bool fishingDirty = false;
 
-    private float autoSaveInterval = 60f;
+    private float autoSaveInterval = 20f;
     private float timeSinceLastSave = 0f;
 
-    private string playerId;
+
+    private GameDataManager gameDataManager;
 
     public enum DataType
     {
@@ -30,18 +31,29 @@ public class CloudSaveManager : MonoBehaviour
     
     void Start()
     {
+        gameDataManager = GetComponent<GameDataManager>();
         cloudManager = CloudManager.Instance;
-        playerId = cloudManager.Auth.LocalId;
     }
 
     void Update()
     {
         timeSinceLastSave += Time.deltaTime;
+        //if (timeSinceLastSave > 20f && gameDataManager.IsDataLoaded)
+        //{
+        //    gameDataManager.PlayerData.Gold += 5;
+        //    MarkDirty(DataType.player);
+        //}
 
         if (timeSinceLastSave >= autoSaveInterval && HasPendingChanges())
         {
-            StartCoroutine(SaveAllDirtyData());
-            timeSinceLastSave = 0f;
+            if (gameDataManager == null)
+                Debug.Log("GameDataManager is null");
+            else
+            {
+                StartCoroutine(SaveAllDirtyData());
+                timeSinceLastSave = 0f;
+            }
+                
         }
     }
 
@@ -52,7 +64,7 @@ public class CloudSaveManager : MonoBehaviour
             case DataType.player: playerDataDirty = true; break;
             case DataType.farmland: farmlandDirty = true; break;
             case DataType.animals: animalFarmDirty = true; break;
-            case DataType.fishing: fishingDirty = true; break;
+            //case DataType.fishing: fishingDirty = true; break;
         }
     }
 
@@ -63,22 +75,23 @@ public class CloudSaveManager : MonoBehaviour
 
     public IEnumerator SaveAllDirtyData()
     {
+
         if (playerDataDirty)
-            yield return cloudManager.Database.SavePlayerData((success, message) =>
+            yield return cloudManager.Database.SavePlayerData(CloudManager.Instance.Auth.LocalId, gameDataManager.PlayerData, (success, message) =>
             {
                 playerDataDirty = false;
                 Debug.Log("Player Data save successful");
             });
 
         if (farmlandDirty)
-            yield return cloudManager.Database.SaveFarmland((success, message) =>
+            yield return cloudManager.Database.SaveFarmland(CloudManager.Instance.Auth.LocalId, gameDataManager.FarmlandData,(success, message) =>
             {
                 playerDataDirty = false;
                 Debug.Log("Farmland Data save successful");
             });
 
         if (animalFarmDirty)
-            yield return cloudManager.Database.SaveAnimalFarm((success, message) =>
+            yield return cloudManager.Database.SaveAnimalFarm(CloudManager.Instance.Auth.LocalId, gameDataManager.AnimalFarmData, (success, message) =>
             {
                 playerDataDirty = false;
                 Debug.Log("Animal Farm Data save successful");
@@ -90,79 +103,11 @@ public class CloudSaveManager : MonoBehaviour
         Debug.Log("Cloud save completed!");
     }
 
+
+
     
 
-    //public IEnumerator LoadPlayerData(Action<PlayerData> callback)
-    //{
-    //    string url = $"{FIREBASE_DB_URL}/playerData/{userId}";
-
-    //    using (UnityWebRequest request = UnityWebRequest.Get(url))
-    //    {
-    //        request.SetRequestHeader("Authorization", $"Bearer {idToken}");
-
-    //        yield return request.SendWebRequest();
-
-    //        if (request.result == UnityWebRequest.Result.Success)
-    //        {
-    //            var response = JsonConvert.DeserializeObject<FirestoreDocument>(request.downloadHandler.text);
-    //            PlayerData data = ParsePlayerData(response);
-    //            callback?.Invoke(data);
-    //        }
-    //        else
-    //        {
-    //            Debug.LogError($"Load failed: {request.error}");
-    //            callback?.Invoke(null);
-    //        }
-    //    }
-    //}
-
-    /// <summary>
-    /// Load farmland
-    /// </summary>
-    //public IEnumerator LoadFarmland(Action<FarmlandData> callback)
-    //{
-    //    string url = $"{FIREBASE_DB_URL}/farmland/{userId}";
-
-    //    using (UnityWebRequest request = UnityWebRequest.Get(url))
-    //    {
-    //        request.SetRequestHeader("Authorization", $"Bearer {idToken}");
-
-    //        yield return request.SendWebRequest();
-
-    //        if (request.result == UnityWebRequest.Result.Success)
-    //        {
-    //            var response = JsonConvert.DeserializeObject<FirestoreDocument>(request.downloadHandler.text);
-    //            FarmlandData data = ParseFarmlandData(response);
-    //            callback?.Invoke(data);
-    //        }
-    //        else
-    //        {
-    //            Debug.LogError($"Load farmland failed: {request.error}");
-    //            callback?.Invoke(null);
-    //        }
-    //    }
-    //}
-
-    public IEnumerator UpdatePlayerField(string fieldName, object value, string valueType = "integerValue")
-    {
-        var firestoreData = new
-        {
-            fields = new Dictionary<string, object>
-            {
-                { fieldName, CreateFirestoreValue(value, valueType) },
-                { "updatedAt", new { timestampValue = DateTime.UtcNow.ToString("o") } }
-            }
-        };
-
-        string url = $"{FIREBASE_DB_URL}/playerData/{userId}?updateMask.fieldPaths={fieldName}&updateMask.fieldPaths=updatedAt";
-        string jsonData = JsonConvert.SerializeObject(firestoreData);
-
-        yield return PatchDocument(url, jsonData, success =>
-        {
-            if (success)
-                Debug.Log($"Updated field: {fieldName}");
-        });
-    }
+   
 
     //public IEnumerator GetPlayerQuests(string status, Action<List<Quest>> callback)
     //{
@@ -283,7 +228,7 @@ public class CloudSaveManager : MonoBehaviour
     //    }
     //}
 
-    
+
 
     // CRITICAL EVENTS SAVE
     public IEnumerator ForceSaveAll()
@@ -306,59 +251,4 @@ public class CloudSaveManager : MonoBehaviour
     }
 }
 
-// SUPPORTING CLASSES
 
-[Serializable]
-public class FirestoreDocument
-{
-    public string name;
-    public Dictionary<string, FirestoreValue> fields;
-    public string createTime;
-    public string updateTime;
-}
-
-[Serializable]
-public class FirestoreValue
-{
-    public string stringValue;
-    public string integerValue;
-    public double doubleValue;
-    public bool booleanValue;
-    public string timestampValue;
-    public FirestoreMapValue mapValue;
-    public FirestoreArrayValue arrayValue;
-}
-
-[Serializable]
-public class FirestoreMapValue
-{
-    public Dictionary<string, FirestoreValue> fields;
-}
-
-[Serializable]
-public class FirestoreArrayValue
-{
-    public List<FirestoreValue> values;
-}
-
-[Serializable]
-public class QueryResult
-{
-    public FirestoreDocument document;
-}
-
-public class BatchOperation
-{
-    public string Collection;
-    public string DocumentId;
-    public BatchOperationType Type;
-    public Dictionary<string, object> FirestoreFields;
-}
-
-public enum BatchOperationType
-{
-    Update,
-    Delete
-}
-
-}

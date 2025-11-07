@@ -10,5 +10,6 @@ public class Farmland
     public List<Plot> Plots { get; set; }
     public int TotalPlotsUnlocked { get; set; }
     public Farmland() { }
+   
 }
 
