@@ -9,19 +9,21 @@ using UnityEngine;
 public class ApiConfig
 {
     public string ApiKey;
-    public string ProjectId; 
+    public string ProjectId;
     public string Register;
     public string Login;
     public string Refresh;
-    public string SendOobCode; 
-    public string Database;    
+    public string SendPassResetEmail;
+    public string VerifyPassResetCode;
+    public string ConfirmPassReset;
+    public string Database;
 
     private static ApiConfig instance;
     public static ApiConfig Instance
     {
         get
         {
-            if(instance ==  null)
+            if (instance == null)
             {
                 TextAsset jsonFile = Resources.Load<TextAsset>("apiConfig");
                 instance = JsonUtility.FromJson<ApiConfig>(jsonFile.text);
@@ -34,4 +36,6 @@ public class ApiConfig
             instance = value;
         }
     }
+
 }
+
