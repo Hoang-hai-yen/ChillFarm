@@ -21,8 +21,8 @@ public class RegisterManager : MonoBehaviour
             messageText.text = "Vui lòng nhập Email và Mật khẩu!";
             return;
         }
-
-        StartCoroutine(FirebaseManager.Instance.Auth.CreateAccount(email, password, (success, message) =>
+         
+        StartCoroutine(CloudManager.Instance.Auth.Register(email, password, "Player", (success, message) =>
         {
             if (success)
             {

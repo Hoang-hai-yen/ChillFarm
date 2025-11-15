@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,7 +15,7 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Vị trí nhân vật sẽ xuất hiện khi Ngủ/Ngất xỉu.")]
     public Transform bedSpawnPoint;
 
-    private StaminaController staminaController;
+    private StaminaController staminaController; 
     
     private float lastMoveX;
     private float lastMoveY;
@@ -37,6 +36,7 @@ public class PlayerController : MonoBehaviour
     private bool isBackpackOpen = false;
 
     private bool isInteracting = false;
+
     public void Awake()
     {
         playerControls = new PlayerControls();
@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         
-        staminaController = FindFirstObjectByType<StaminaController>();
+        staminaController = FindFirstObjectByType<StaminaController>(); 
         if (staminaController == null)
         {
             Debug.LogError("StaminaController not found in the scene.");
@@ -78,12 +78,6 @@ public class PlayerController : MonoBehaviour
             staminaController.OnPlayerFaint += HandlePlayerFaint;
             staminaController.OnPlayerWakeUp += HandlePlayerWakeUp;
         }
-
-        playerControls.Movement.Interact.performed += OnInteract;
-        playerControls.Movement.Interact.Enable();
-        
-        playerControls.Movement.Backpack.performed += ToggleBackpack;
-        playerControls.Movement.Backpack.Enable();
     }
 
     private void OnDisable()
@@ -95,17 +89,12 @@ public class PlayerController : MonoBehaviour
             staminaController.OnPlayerFaint -= HandlePlayerFaint;
             staminaController.OnPlayerWakeUp -= HandlePlayerWakeUp;
         }
-        
-        playerControls.Movement.Interact.performed -= OnInteract;
-        playerControls.Movement.Interact.Disable();
-        
-        playerControls.Movement.Backpack.performed -= ToggleBackpack;
-        playerControls.Movement.Backpack.Disable();
     }
     
     private void Update()
     {
         if (staminaController != null && !staminaController.IsFainted())
+
         {
             if (!isInteracting && !isBackpackOpen)
             {
@@ -128,15 +117,14 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            rb.linearVelocity = Vector2.zero;
+            // Tạm dừng di chuyển (sử dụng velocity thay vì linearVelocity)
+            rb.linearVelocity = Vector2.zero; 
         }
     }
 
     private void PlayerInput()
     {
         movement = playerControls.Movement.Move.ReadValue<Vector2>();
-        
-        animator.SetBool("isMoving", movement != Vector2.zero);
         
         animator.SetFloat("moveX", movement.x);
         animator.SetFloat("moveY", movement.y);
@@ -187,11 +175,8 @@ public class PlayerController : MonoBehaviour
             Debug.LogError("Bed Spawn Point not assigned in PlayerController! Cannot teleport.");
         }
         
-        animator.SetBool("isFainted", false);
-        playerControls.Enable();
-        
-        playerControls.Movement.Move.Enable();
-        playerControls.Movement.Interact.Enable();
+        animator.SetBool("isFainted", false); 
+        playerControls.Enable(); 
         
         Debug.Log("PlayerController: Input enabled, starting new day.");
     }
@@ -204,7 +189,6 @@ public class PlayerController : MonoBehaviour
             Debug.Log($"Used tool. Stamina remaining: {staminaController.GetCurrentStamina()}");
         }
     }
-
     private void OnInteract(InputAction.CallbackContext context)
     {
         if (isInteracting) return; 
@@ -325,4 +309,3 @@ public class PlayerController : MonoBehaviour
         Debug.LogWarning("Không tìm thấy InventoryManager!");
         return null; 
     }
-}
