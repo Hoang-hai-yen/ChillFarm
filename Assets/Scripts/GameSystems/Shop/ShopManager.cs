@@ -2,16 +2,43 @@ using UnityEngine;
 
 public class ShopManager : MonoBehaviour
 {
-    public InventoryManager inventory;
     public PlayerStats playerStats;
 
     public void SellItem(string itemName, int quantity)
     {
-        Item item = inventory.inventory.Find(i => i.itemName == itemName);
-        if (item == null || item.quantity < quantity)
+        InventoryManager invManager = InventoryManager.Instance;
+        if (invManager == null)
+        {
+            Debug.LogError("ShopManager: Không tìm thấy InventoryManager!");
+            return; 
+        }
+
+        if (playerStats == null)
+        {
+            Debug.LogError("ShopManager: Chưa gán PlayerStats vào Inspector!");
             return;
-        int totalGold = item.sellPrice * quantity;
-        inventory.RemoveItem(itemName, quantity);
-        playerStats.gold += totalGold;
+        }
+
+        InventorySlot itemSlot = invManager.FindSlotByName(itemName);
+        
+        if (itemSlot == null || itemSlot.quantity < quantity)
+        {
+            Debug.Log($"Không tìm thấy item '{itemName}' hoặc không đủ số lượng để bán.");
+            return;
+        }
+
+        int totalGold = itemSlot.itemData.sellPrice * quantity;
+
+        bool removed = invManager.Remove(itemSlot.itemData, quantity);
+
+        if (removed)
+        {
+            playerStats.gold += totalGold; 
+            Debug.Log($"Đã bán {itemName} x{quantity} được {totalGold} vàng.");
+        }
+        else
+        {
+            Debug.LogError($"Lỗi: Không thể xóa {itemName} khỏi inventory.");
+        }
     }
 }

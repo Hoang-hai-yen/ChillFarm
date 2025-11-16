@@ -190,15 +190,17 @@ public class CloudDatabaseHelper
             IsUnlocked = fields["isUnlocked"].BooleanValue,
             IsDug = fields["isDug"].BooleanValue,
             Position = (fields["position"].MapValue.Fields["x"].DoubleValue, fields["position"].MapValue.Fields["y"].DoubleValue),
-            Crop = ConvertToCrop(fields["crop"].MapValue)
-};
+            
+            Crop = ConvertToCropSaveData(fields["crop"].MapValue) 
+        };
     }
 
-    static public Crop ConvertToCrop(FirestoreMap firestoreMap)
+    static public CropSaveData ConvertToCropSaveData(FirestoreMap firestoreMap)
     {
         var fields = firestoreMap.Fields;
 
-        return new Crop()
+        // Đổi tên class
+        return new CropSaveData() 
         {
            SeedId = fields["seedId"].StringValue,
             PlantedAt = DateTime.Parse(fields["plantedAt"].TimestampValue, null, System.Globalization.DateTimeStyles.RoundtripKind),

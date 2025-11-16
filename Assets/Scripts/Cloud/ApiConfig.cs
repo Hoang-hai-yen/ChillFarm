@@ -37,5 +37,6 @@ public class ApiConfig
         }
     }
 
+    public string SendOobCode { get; internal set; }
 }
 
