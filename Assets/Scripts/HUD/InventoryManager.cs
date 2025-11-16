@@ -39,6 +39,17 @@ public class InventoryManager : MonoBehaviour
         OnInventoryChanged?.Invoke();
     }
 
+    //Mới thêm hàm này
+    public void ForceSetSlot(int index)
+    {
+        if (index < 0) index = 0;
+        if (index >= hotbarSlots.Length) index = hotbarSlots.Length - 1;
+
+        SelectedHotbarSlot = index;
+        OnInventoryChanged?.Invoke();
+    }
+
+
     public ItemData GetSelectedItem()
     {
         return hotbarSlots[SelectedHotbarSlot].itemData;
