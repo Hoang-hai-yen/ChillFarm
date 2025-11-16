@@ -11,7 +11,6 @@ public class Plot
     public bool IsUnlocked { get; set; }
     public bool IsDug { get; set; }
     public (double x, double y) Position { get; set; }
-    public Crop Crop { get; set; }
-
+    public CropSaveData Crop { get; set; }
     public Plot() { }
 }

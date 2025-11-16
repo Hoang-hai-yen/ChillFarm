@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -309,3 +310,4 @@ public class PlayerController : MonoBehaviour
         Debug.LogWarning("Không tìm thấy InventoryManager!");
         return null; 
     }
+}

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-public class Crop
+public class CropSaveData
 {
     public string SeedId { get; set; }
     public DateTime PlantedAt { get; set; }
@@ -15,6 +15,6 @@ public class Crop
     public bool IsFertilized { get; set; }
     public bool ReadyToHarvest { get; set; }
 
-    public Crop() { }
+    public CropSaveData() { }
 }
 

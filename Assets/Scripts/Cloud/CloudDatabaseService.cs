@@ -443,42 +443,62 @@ public class CloudDatabaseService
 
     }
 
+
     public IEnumerator CreateInitialData(string playerId, string email, string name, string avatar, Action<bool, string> callback)
     {
-        //List<object> updateDocs = new List<object>();
-        //updateDocs.Add(new 
-        //{
-        //    update = CloudDatabaseHelper.CreateDocument($"projects/{apiConfig.ProjectId}/databases/(default)/documents/playerProfiles/{playerId}", CreatePlayerProfileObject(playerId, email, name, avatar))
-        //});
-        //updateDocs.Add(new
-        //{
-        //    update = CloudDatabaseHelper.CreateDocument($"projects/{apiConfig.ProjectId}/databases/(default)/documents/playerData/{playerId}", CreatePlayerDataObject(playerId))
-        //});
-        //updateDocs.Add(new
-        //{
-        //    update = CloudDatabaseHelper.CreateDocument($"projects/{apiConfig.ProjectId}/databases/(default)/documents/farmlandData/{playerId}", CreateFarmlandObject(playerId))
-        //});
-        //updateDocs.Add(new
-        //{
-        //    update = CloudDatabaseHelper.CreateDocument($"projects/{apiConfig.ProjectId}/databases/(default)/documents/animalFarmData/{playerId}", CreateAnimalFarmObject(playerId))
-        //});
+        bool profileSuccess = false;
+        bool dataSuccess = false;
+        bool farmSuccess = false;
+        bool animalSuccess = false;
+        string errorMessage = "";
 
-        //var firestoreData = new
-        //{
-        //    writes = updateDocs,
+        yield return CreatePlayerProfile(playerId, email, name, avatar, (success, message) => {
+            profileSuccess = success;
+            if (!success) errorMessage = "Create PlayerProfile failed: " + message;
+        });
 
-        //};
+        if (!profileSuccess)
+        {
+            callback?.Invoke(false, errorMessage);
+            yield break; 
+        }
 
-        //string jsonData = JsonConvert.SerializeObject(firestoreData);
-        ////Debug.Log(jsonData);
+        yield return CreatePlayerData(playerId, (success, message) => {
+            dataSuccess = success;
+            if (!success) errorMessage = "Create PlayerData failed: " + message;
+        });
 
-        //yield return BatchWrite(jsonData, callback);
+        if (!dataSuccess)
+        {
+            callback?.Invoke(false, errorMessage);
+            yield break; 
+        }
 
-        yield return CreatePlayerProfile(playerId, email, name, avatar, callback);
-        yield return CreatePlayerData(playerId, callback);
-        yield return CreateFarmland(playerId, callback);
-        yield return CreateAnimalFarm(playerId, callback);
+        yield return CreateFarmland(playerId, (success, message) => {
+            farmSuccess = success;
+            if (!success) errorMessage = "Create Farmland failed: " + message;
+        });
+
+        if (!farmSuccess)
+        {
+            callback?.Invoke(false, errorMessage);
+            yield break; 
+        }
+        
+        yield return CreateAnimalFarm(playerId, (success, message) => {
+            animalSuccess = success;
+            if (!success) errorMessage = "Create AnimalFarm failed: " + message;
+        });
+
+        if (!animalSuccess)
+        {
+            callback?.Invoke(false, errorMessage);
+            yield break; // Dừng lại nếu thất bại
+        }
+
+        // Tất cả đều thành công
         Debug.Log("Create initial data completed");
+        callback?.Invoke(true, "Create initial data successful");
     }
 
     public IEnumerator SavePlayerProfile(string playerId, string email, string name, string avatar, Action<bool, string> callback)
