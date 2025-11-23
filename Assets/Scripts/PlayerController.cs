@@ -179,15 +179,6 @@ public class PlayerController : MonoBehaviour
         
         Debug.Log("PlayerController: Input enabled, starting new day.");
     }
-    
-    public void UseTool(float staminaCost)
-    {
-        if (staminaController != null && !staminaController.IsFainted())
-        {
-            staminaController.ConsumeStamina(staminaCost);
-            Debug.Log($"Used tool. Stamina remaining: {staminaController.GetCurrentStamina()}");
-        }
-    }
 
     private void OnInteract(InputAction.CallbackContext context)
     {
@@ -197,46 +188,56 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(HandleInteraction());
     }
 
-    private IEnumerator HandleInteraction()
+private IEnumerator HandleInteraction()
+{
+    isInteracting = true;
+
+    ItemData currentItem = GetCurrentHeldItem();
+    Vector3 playerDirection = new Vector3(animator.GetFloat("lastMoveX"), animator.GetFloat("lastMoveY"), 0).normalized;
+    if (playerDirection == Vector3.zero) playerDirection = Vector3.down;
+    Vector3Int targetCellPos = grid.WorldToCell(transform.position + playerDirection * interactionDistance);
+
+    float staminaCost = (currentItem == null) ? 2f : currentItem.staminaCost;
+
+    if (staminaController == null || staminaController.GetCurrentStamina() < staminaCost)
     {
-        isInteracting = true;
-
-        ItemData currentItem = GetCurrentHeldItem();
-        Vector3 playerDirection = new Vector3(animator.GetFloat("lastMoveX"), animator.GetFloat("lastMoveY"), 0).normalized;
-        if (playerDirection == Vector3.zero) playerDirection = Vector3.down;
-        Vector3Int targetCellPos = grid.WorldToCell(transform.position + playerDirection * interactionDistance);
-
-        float staminaCost = (currentItem == null) ? 2f : currentItem.staminaCost;
-
-        if (staminaController.GetCurrentStamina() < staminaCost)
-        {
-            Debug.Log("Không đủ Stamina!");
-            isInteracting = false;
-            yield break; 
-        }
-
-        if (currentItem is ToolData tool)
-        {
-            if (tool.toolType == ToolType.Hoe)
-            {
-                animator.SetTrigger("useHoe");
-                yield return new WaitForSeconds(0.5f);
-            }
-            else if (tool.toolType == ToolType.WateringCan)
-            {
-                animator.SetTrigger("useWaterCan");
-                yield return new WaitForSeconds(0.7f); 
-            }
-        }
-
-        if (farmlandManager != null)
-        {
-            farmlandManager.Interact(targetCellPos, currentItem);
-            UseTool(staminaCost);
-        }
-
+        Debug.Log("Không đủ Stamina! Không thực hiện tương tác.");
         isInteracting = false;
+        yield break; 
     }
+
+    if (currentItem is ToolData tool)
+    {
+        if (tool.toolType == ToolType.Hoe)
+        {
+            animator.SetTrigger("useHoe");
+            yield return new WaitForSeconds(0.5f);
+        }
+        else if (tool.toolType == ToolType.WateringCan)
+        {
+            animator.SetTrigger("useWaterCan");
+            yield return new WaitForSeconds(0.7f); 
+        }
+    }
+
+    if (farmlandManager != null)
+    {
+        bool actionSuccessful = farmlandManager.Interact(targetCellPos, currentItem); 
+        
+        if (actionSuccessful)
+        {
+            if (staminaController.ConsumeStamina(staminaCost))
+            {
+                Debug.Log($"Action SUCCESSFUL. Stamina remaining: {staminaController.GetCurrentStamina()}");
+            }
+        }
+        else
+        {
+            Debug.Log("Action FAILED/No change. Stamina not consumed.");
+        }
+    }
+    isInteracting = false;
+}
     
     private void ToggleBackpack(InputAction.CallbackContext context)
     {

@@ -39,7 +39,6 @@ public class InventoryManager : MonoBehaviour
         OnInventoryChanged?.Invoke();
     }
 
-    //Mới thêm hàm này
     public void ForceSetSlot(int index)
     {
         if (index < 0) index = 0;
@@ -55,13 +54,28 @@ public class InventoryManager : MonoBehaviour
         return hotbarSlots[SelectedHotbarSlot].itemData;
     }
 
-    public void AddItem(ItemData item, int slotIndex)
+public void AddItem(ItemData item, int slotIndex, int count = 1)
     {
-         if (slotIndex < 0 || slotIndex >= hotbarSlots.Length) return;
-         
-         hotbarSlots[slotIndex].itemData = item;
-         hotbarSlots[slotIndex].quantity = 1;
-         OnInventoryChanged?.Invoke();
+        if (slotIndex < 0 || slotIndex >= hotbarSlots.Length) return;
+        
+        InventorySlot slot = hotbarSlots[slotIndex];
+
+        if (slot.itemData == null)
+        {
+            slot.itemData = item;
+            slot.quantity = count;
+        }
+        else if (slot.itemData == item) 
+        {
+            slot.quantity += count;
+        }
+        else
+        {
+            Debug.LogWarning("Ô đã có vật phẩm khác!");
+            return; 
+        }
+
+        OnInventoryChanged?.Invoke();
     }
     
     void Start()
