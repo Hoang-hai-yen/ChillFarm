@@ -83,12 +83,17 @@ public class Crop : MonoBehaviour
 
     public void Harvest()
     {
-        if(isHarvestable)
+        if(isHarvestable) 
         {
             Debug.Log($"Thu hoạch {cropData.cropName}!");
+            
             if(cropData.harvestItemPrefab != null)
             {
-                Instantiate(cropData.harvestItemPrefab, transform.position, Quaternion.identity);
+                for(int i = 0; i < cropData.harvestYield; i++) 
+                {
+                    Vector3 spawnOffset = new Vector3(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f), 0);
+                    Instantiate(cropData.harvestItemPrefab, transform.position + spawnOffset, Quaternion.identity);
+                }
             }
 
             Destroy(gameObject); 
