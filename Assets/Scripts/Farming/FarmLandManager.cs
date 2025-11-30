@@ -48,7 +48,11 @@ public class FarmlandManager : MonoBehaviour
     {
         PlotState currentState = GetPlotState(plotPosition);
         bool actionSuccessful = false; 
-
+        if (heldItem == null)
+        {
+            actionSuccessful = HandleHarvest(plotPosition); 
+            if (actionSuccessful) return true;
+        }
         if (heldItem is ToolData tool)
         {
             actionSuccessful = HandleToolInteraction(plotPosition, currentState, tool.toolType);
@@ -61,8 +65,6 @@ public class FarmlandManager : MonoBehaviour
         {
             actionSuccessful = HandleHarvest(plotPosition);
         }
-
-        // TRẢ VỀ KẾT QUẢ ĐÃ LƯU
         return actionSuccessful; 
     }
 
@@ -121,13 +123,14 @@ public class FarmlandManager : MonoBehaviour
 
     private bool HandleHarvest(Vector3Int plotPosition)
     {
-        if (cropsOnPlots.TryGetValue(plotPosition, out Crop crop))
+        if (cropsOnPlots.TryGetValue(plotPosition, out Crop crop)) 
         {
-            if (crop.IsHarvestable())
+            if (crop.IsHarvestable()) 
             {
                 crop.Harvest();
-                SetPlotState(plotPosition, PlotState.Tilled, tilledTile);
-                cropsOnPlots.Remove(plotPosition);
+                SetPlotState(plotPosition, PlotState.Tilled, tilledTile); 
+                
+                cropsOnPlots.Remove(plotPosition); 
                 return true;
             }
         }
@@ -173,5 +176,10 @@ public class FarmlandManager : MonoBehaviour
     {
         tillableTilemap.SetTile(position, tile);
         plotStates[position] = state;
+    }
+
+    public bool IsTillableArea(Vector3Int position)
+    {
+        return tillableTilemap.HasTile(position); 
     }
 }
