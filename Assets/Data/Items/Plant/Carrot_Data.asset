@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CropData
   cropName: 
   growthSprites:
-  - {fileID: -5784410927573482350, guid: 64ba9ecd33a51464f9a61430fcbcdd5a, type: 3}
-  - {fileID: 7448935753994061408, guid: 64ba9ecd33a51464f9a61430fcbcdd5a, type: 3}
   - {fileID: 1116706725642825598, guid: 64ba9ecd33a51464f9a61430fcbcdd5a, type: 3}
-  - {fileID: 1116706725642825598, guid: 64ba9ecd33a51464f9a61430fcbcdd5a, type: 3}
-  daysToGrow: 0
-  harvestItemPrefab: {fileID: 0}
+  - {fileID: 8796380703106566107, guid: 64ba9ecd33a51464f9a61430fcbcdd5a, type: 3}
+  - {fileID: -3098547097148736168, guid: 64ba9ecd33a51464f9a61430fcbcdd5a, type: 3}
+  - {fileID: 136203948458210870, guid: 64ba9ecd33a51464f9a61430fcbcdd5a, type: 3}
+  daysToGrow: 1
+  harvestItemPrefab: {fileID: 9006971852369712145, guid: 3ded8e61309d5d745ae6567ff63ba0e8, type: 3}
   harvestYield: 1

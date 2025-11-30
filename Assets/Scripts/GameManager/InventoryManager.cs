@@ -54,30 +54,33 @@ public class InventoryManager : MonoBehaviour
         return hotbarSlots[SelectedHotbarSlot].itemData;
     }
 
-public void AddItem(ItemData item, int slotIndex, int count = 1)
+    public bool AddItem(ItemData item, int count = 1)
     {
-        if (slotIndex < 0 || slotIndex >= hotbarSlots.Length) return;
-        
-        InventorySlot slot = hotbarSlots[slotIndex];
-
-        if (slot.itemData == null)
+        for (int i = 0; i < hotbarSlots.Length; i++)
         {
-            slot.itemData = item;
-            slot.quantity = count;
-        }
-        else if (slot.itemData == item) 
-        {
-            slot.quantity += count;
-        }
-        else
-        {
-            Debug.LogWarning("Ô đã có vật phẩm khác!");
-            return; 
+            InventorySlot slot = hotbarSlots[i];
+            if (slot.itemData == item)
+            {
+                slot.quantity += count;
+                OnInventoryChanged?.Invoke();
+                return true; 
+            }
         }
 
-        OnInventoryChanged?.Invoke();
+        for (int i = 0; i < hotbarSlots.Length; i++)
+        {
+            InventorySlot slot = hotbarSlots[i];
+            if (slot.itemData == null)
+            {
+                slot.itemData = item;
+                slot.quantity = count;
+                OnInventoryChanged?.Invoke();
+                return true; 
+            }
+        }
+
+        return false;
     }
-    
     void Start()
     {
         ItemData hoe = Resources.Load<ToolData>("Test_Hoe");

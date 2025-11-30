@@ -26,6 +26,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("UI Panels")]
     public GameObject backpackPanel;
+    [Header("Highlight")]
+    [Tooltip("Đối tượng SpriteRenderer dùng để highlight ô đất.")]
+    [SerializeField] private SpriteRenderer highlightRenderer;
     
     private FarmlandManager farmlandManager;
     private Grid grid;
@@ -99,10 +102,15 @@ public class PlayerController : MonoBehaviour
         if (staminaController != null && !staminaController.IsFainted() && !isInteracting)
         {
             PlayerInput();
+            UpdateInteractionHighlight();
         }
         else
         {
             movement = Vector2.zero;
+            if (highlightRenderer != null)
+            {
+                highlightRenderer.gameObject.SetActive(false); 
+            }
         }
     }
     
@@ -270,5 +278,42 @@ private IEnumerator HandleInteraction()
 
         Debug.LogWarning("Không tìm thấy InventoryManager!");
         return null; 
+    }
+    private void UpdateInteractionHighlight()
+    {
+        if (highlightRenderer == null || grid == null || farmlandManager == null) 
+        {
+            if (highlightRenderer != null)
+            {
+                highlightRenderer.gameObject.SetActive(false);
+            }
+            return;
+        }
+
+        Vector3 playerDirection = new Vector3(animator.GetFloat("lastMoveX"), animator.GetFloat("lastMoveY"), 0).normalized;
+        
+        if (playerDirection == Vector3.zero) 
+        {
+            playerDirection = new Vector3(lastMoveX, lastMoveY, 0).normalized; 
+            if (playerDirection == Vector3.zero) playerDirection = Vector3.down;
+        }
+        
+        Vector3 interactionWorldPos = transform.position + playerDirection * interactionDistance;
+        
+        Vector3Int targetCellPos = grid.WorldToCell(interactionWorldPos);
+        
+        if (farmlandManager.IsTillableArea(targetCellPos)) 
+        {
+            Vector3 cellCenterWorld = grid.GetCellCenterWorld(targetCellPos);
+            
+            cellCenterWorld.z = 0; 
+            
+            highlightRenderer.transform.position = cellCenterWorld;
+            highlightRenderer.gameObject.SetActive(true);
+        }
+        else
+        {
+            highlightRenderer.gameObject.SetActive(false);
+        }
     }
 }

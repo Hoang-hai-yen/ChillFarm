@@ -1,0 +1,624 @@
+fileFormatVersion: 2
+guid: e022a11ec760d914889b90c8c787d9db
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3345686328440115635
+    second: phukien1_0
+  - first:
+      213: 6007802171423114952
+    second: phukien1_1
+  - first:
+      213: -4958304016990558857
+    second: phukien1_2
+  - first:
+      213: 1707703626522606111
+    second: phukien1_3
+  - first:
+      213: -6458900237498855293
+    second: phukien1_4
+  - first:
+      213: -3868800586694772340
+    second: phukien1_5
+  - first:
+      213: 415104737037085045
+    second: phukien1_6
+  - first:
+      213: 3722331508739896222
+    second: phukien1_7
+  - first:
+      213: 8209185807725649865
+    second: phukien1_8
+  - first:
+      213: -2690344742323078564
+    second: phukien1_9
+  - first:
+      213: -7402272105483972557
+    second: phukien1_10
+  - first:
+      213: -8558487895913731565
+    second: phukien1_11
+  - first:
+      213: 6804315247724755712
+    second: phukien1_12
+  - first:
+      213: 1496858496147064734
+    second: phukien1_13
+  - first:
+      213: -1474012370825368473
+    second: phukien1_14
+  - first:
+      213: 4158014447155919442
+    second: phukien1_15
+  - first:
+      213: -3286610229298542678
+    second: phukien1_16
+  - first:
+      213: 1061454124140217739
+    second: phukien1_17
+  - first:
+      213: 4493618327977787415
+    second: phukien1_18
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: phukien1_0
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 349
+        width: 50
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b1dd805df34e6e20800000000000000
+      internalID: 3345686328440115635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: phukien1_1
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 353
+        width: 119
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c6ce748e30006350800000000000000
+      internalID: 6007802171423114952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: phukien1_2
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 351
+        width: 50
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 775a2ea44c0903bb0800000000000000
+      internalID: -4958304016990558857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: phukien1_3
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 349
+        width: 78
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1ab688866bf2b710800000000000000
+      internalID: 1707703626522606111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: phukien1_4
+      rect:
+        serializedVersion: 2
+        x: 394
+        y: 361
+        width: 62
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 380d13864706d56a0800000000000000
+      internalID: -6458900237498855293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: phukien1_5
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 198
+        width: 44
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c893c3b3d524f4ac0800000000000000
+      internalID: -3868800586694772340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: phukien1_6
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 198
+        width: 45
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5796dab1f8fb2c500800000000000000
+      internalID: 415104737037085045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: phukien1_7
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 207
+        width: 116
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e937fa219c068a330800000000000000
+      internalID: 3722331508739896222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: phukien1_8
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 205
+        width: 178
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cf5aac7ff2ece170800000000000000
+      internalID: 8209185807725649865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: phukien1_9
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 97
+        width: 77
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5a3e7ef5b9f9aad0800000000000000
+      internalID: -2690344742323078564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: phukien1_10
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 108
+        width: 65
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33058dd2db8d54990800000000000000
+      internalID: -7402272105483972557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: phukien1_11
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 164
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31ae49d7a942a3980800000000000000
+      internalID: -8558487895913731565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: phukien1_12
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 164
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00b7860caa8cd6e50800000000000000
+      internalID: 6804315247724755712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: phukien1_13
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 95
+        width: 162
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e970fdd1fd8e5c410800000000000000
+      internalID: 1496858496147064734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: phukien1_14
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 19
+        width: 74
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76c2c62fe814b8be0800000000000000
+      internalID: -1474012370825368473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: phukien1_15
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 21
+        width: 69
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25abbad0c1c34b930800000000000000
+      internalID: 4158014447155919442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: phukien1_16
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 21
+        width: 68
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa7ce7fd86d9362d0800000000000000
+      internalID: -3286610229298542678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: phukien1_17
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 19
+        width: 45
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8540cee6ea0bbe00800000000000000
+      internalID: 1061454124140217739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: phukien1_18
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 19
+        width: 53
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7100d43af0a8c5e30800000000000000
+      internalID: 4493618327977787415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      phukien1_0: 3345686328440115635
+      phukien1_1: 6007802171423114952
+      phukien1_10: -7402272105483972557
+      phukien1_11: -8558487895913731565
+      phukien1_12: 6804315247724755712
+      phukien1_13: 1496858496147064734
+      phukien1_14: -1474012370825368473
+      phukien1_15: 4158014447155919442
+      phukien1_16: -3286610229298542678
+      phukien1_17: 1061454124140217739
+      phukien1_18: 4493618327977787415
+      phukien1_2: -4958304016990558857
+      phukien1_3: 1707703626522606111
+      phukien1_4: -6458900237498855293
+      phukien1_5: -3868800586694772340
+      phukien1_6: 415104737037085045
+      phukien1_7: 3722331508739896222
+      phukien1_8: 8209185807725649865
+      phukien1_9: -2690344742323078564
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
