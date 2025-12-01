@@ -38,10 +38,12 @@ public class CloudSaveManager : MonoBehaviour
     void Update()
     {
         timeSinceLastSave += Time.deltaTime;
-        //if (timeSinceLastSave > 20f && gameDataManager.IsDataLoaded)
+        //if (timeSinceLastSave > 5f && gameDataManager.IsDataLoaded)
         //{
-        //    gameDataManager.PlayerData.Gold += 5;
+        //    gameDataManager.PlayerDataData.Gold += 5;
+        //    gameDataManager.FarmlandData.TotalPlotsUnlocked += 1;
         //    MarkDirty(DataType.player);
+        //    MarkDirty(DataType.farmland);
         //}
 
         if (timeSinceLastSave >= autoSaveInterval && HasPendingChanges())
@@ -77,7 +79,7 @@ public class CloudSaveManager : MonoBehaviour
     {
 
         if (playerDataDirty)
-            yield return cloudManager.Database.SavePlayerData(CloudManager.Instance.Auth.LocalId, gameDataManager.PlayerData, (success, message) =>
+            yield return cloudManager.Database.SavePlayerData(CloudManager.Instance.Auth.LocalId, gameDataManager.PlayerDataData, (success, message) =>
             {
                 playerDataDirty = false;
                 Debug.Log("Player Data save successful");

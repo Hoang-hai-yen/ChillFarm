@@ -7,19 +7,19 @@ public class testapi : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        StartCoroutine(CloudManager.Instance.Auth.Login(email, password, (success, message) =>
+        StartCoroutine(CloudManager.Instance.Auth.Register(email, password, "duckling", (success, message) =>
         {
             Debug.Log(message);
-            StartCoroutine(CloudManager.Instance.Database.GetData(CloudManager.Instance.Auth.LocalId, (success, message, gameData) =>
-            {
-                PlayerProfile p = (PlayerProfile)gameData["playerProfiles"];
-                PlayerData pd = (PlayerData)gameData["playerData"];
-                Farmland fd = (Farmland)gameData["farmlandData"];
-                AnimalFarm ad = (AnimalFarm)gameData["animalFarmData"];
+            //StartCoroutine(CloudManager.Instance.Database.GetData(CloudManager.Instance.Auth.LocalId, (success, message, gameData) =>
+            //{
+            //    PlayerProfile p = (PlayerProfile)gameData["playerProfiles"];
+            //    PlayerData pd = (PlayerData)gameData["playerData"];
+            //    Farmland fd = (Farmland)gameData["farmlandData"];
+            //    AnimalFarm ad = (AnimalFarm)gameData["animalFarmData"];
 
 
-                Debug.Log(message);
-            }));
+            //    Debug.Log(message);
+            //}));
         }));
     }
 

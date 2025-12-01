@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 public class PlayerProfile
 {
+    public string UserId { get; set; }
     public string Email { get; set; }
     public string Name { get; set; }
     public string Avatar { get; set; }

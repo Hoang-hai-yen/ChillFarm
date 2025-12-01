@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 public class Farmland
 {
-    public List<Plot> Plots { get; set; }
-    public int TotalPlotsUnlocked { get; set; }
+    public string UserId {get; set;}
+    public List<Plot> Plots { get; set; } = new List<Plot>();
+    public int TotalPlotsUnlocked { get; set; } = 0;
     public Farmland() { }
    
 }

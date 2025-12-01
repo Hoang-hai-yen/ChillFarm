@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 public class Inventory
 {
-    public List<Item> Items { get; set; }
-    public int MaxSlots { get; set; }
+    public List<Item> Items { get; set; } = new List<Item>();
+    public int MaxSlots { get; set; } = 20;
 
     public Inventory() { }
 
