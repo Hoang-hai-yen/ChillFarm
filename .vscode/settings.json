@@ -66,5 +66,6 @@
     "explorer.fileNesting.patterns": {
         "*.sln": "*.csproj",
     },
-    "dotnet.defaultSolution": "ChillFarm.sln"
+    "dotnet.defaultSolution": "ChillFarm.sln",
+    "dotnet.preferCSharpExtension": true
 }
