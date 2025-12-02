@@ -50,6 +50,11 @@ public class CloudAuthService
                     callback?.Invoke(true, "Account created successfully!");
                    
                 }
+                else
+                {
+                    callback?.Invoke(false, message);
+
+                }
 
             });
         }
