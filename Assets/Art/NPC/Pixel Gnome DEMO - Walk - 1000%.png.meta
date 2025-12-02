@@ -1,0 +1,442 @@
+fileFormatVersion: 2
+guid: d5b908b2988a6cc4eb1409bf859d3752
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6904076151997852597
+    second: Pixel Gnome DEMO - Walk - 1000%_0
+  - first:
+      213: -1219152112103245557
+    second: Pixel Gnome DEMO - Walk - 1000%_1
+  - first:
+      213: -1447268735273594823
+    second: Pixel Gnome DEMO - Walk - 1000%_2
+  - first:
+      213: -1249473745475474409
+    second: Pixel Gnome DEMO - Walk - 1000%_3
+  - first:
+      213: -2284460838756932298
+    second: Pixel Gnome DEMO - Walk - 1000%_4
+  - first:
+      213: -4693017108238043913
+    second: Pixel Gnome DEMO - Walk - 1000%_5
+  - first:
+      213: -8209235999099010799
+    second: Pixel Gnome DEMO - Walk - 1000%_6
+  - first:
+      213: -3570523607073785053
+    second: Pixel Gnome DEMO - Walk - 1000%_7
+  - first:
+      213: 5123921182277786023
+    second: Pixel Gnome DEMO - Walk - 1000%_8
+  - first:
+      213: 3467702889922315284
+    second: Pixel Gnome DEMO - Walk - 1000%_9
+  - first:
+      213: -8966087672876771021
+    second: Pixel Gnome DEMO - Walk - 1000%_10
+  - first:
+      213: 7118819918064225883
+    second: Pixel Gnome DEMO - Walk - 1000%_11
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Pixel Gnome DEMO - Walk - 1000%_0
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 1439
+        width: 222
+        height: 282
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b441ce1b15bcf20a0800000000000000
+      internalID: -6904076151997852597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pixel Gnome DEMO - Walk - 1000%_1
+      rect:
+        serializedVersion: 2
+        x: 1079
+        y: 1439
+        width: 242
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b093be60d93b41fe0800000000000000
+      internalID: -1219152112103245557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pixel Gnome DEMO - Walk - 1000%_2
+      rect:
+        serializedVersion: 2
+        x: 1889
+        y: 1439
+        width: 222
+        height: 282
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9301d73d0c44aebe0800000000000000
+      internalID: -1447268735273594823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pixel Gnome DEMO - Walk - 1000%_3
+      rect:
+        serializedVersion: 2
+        x: 2679
+        y: 1439
+        width: 242
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71ce1cc9f3af8aee0800000000000000
+      internalID: -1249473745475474409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pixel Gnome DEMO - Walk - 1000%_4
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 799
+        width: 152
+        height: 282
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6352a9288f6fb40e0800000000000000
+      internalID: -2284460838756932298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pixel Gnome DEMO - Walk - 1000%_5
+      rect:
+        serializedVersion: 2
+        x: 1109
+        y: 799
+        width: 162
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f4f3a20ecd0fdeb0800000000000000
+      internalID: -4693017108238043913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pixel Gnome DEMO - Walk - 1000%_6
+      rect:
+        serializedVersion: 2
+        x: 1919
+        y: 799
+        width: 152
+        height: 282
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 111ca5c6a5fe21e80800000000000000
+      internalID: -8209235999099010799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pixel Gnome DEMO - Walk - 1000%_7
+      rect:
+        serializedVersion: 2
+        x: 2709
+        y: 799
+        width: 162
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32b783262b3f27ec0800000000000000
+      internalID: -3570523607073785053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pixel Gnome DEMO - Walk - 1000%_8
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 159
+        width: 222
+        height: 282
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a954c6ea23db1740800000000000000
+      internalID: 5123921182277786023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pixel Gnome DEMO - Walk - 1000%_9
+      rect:
+        serializedVersion: 2
+        x: 1079
+        y: 159
+        width: 242
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4144a6cd761cf1030800000000000000
+      internalID: 3467702889922315284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pixel Gnome DEMO - Walk - 1000%_10
+      rect:
+        serializedVersion: 2
+        x: 1889
+        y: 159
+        width: 222
+        height: 282
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 339db2114ce029380800000000000000
+      internalID: -8966087672876771021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pixel Gnome DEMO - Walk - 1000%_11
+      rect:
+        serializedVersion: 2
+        x: 2679
+        y: 159
+        width: 242
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5e81349ff02bc260800000000000000
+      internalID: 7118819918064225883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Pixel Gnome DEMO - Walk - 1000%_0: -6904076151997852597
+      Pixel Gnome DEMO - Walk - 1000%_1: -1219152112103245557
+      Pixel Gnome DEMO - Walk - 1000%_10: -8966087672876771021
+      Pixel Gnome DEMO - Walk - 1000%_11: 7118819918064225883
+      Pixel Gnome DEMO - Walk - 1000%_2: -1447268735273594823
+      Pixel Gnome DEMO - Walk - 1000%_3: -1249473745475474409
+      Pixel Gnome DEMO - Walk - 1000%_4: -2284460838756932298
+      Pixel Gnome DEMO - Walk - 1000%_5: -4693017108238043913
+      Pixel Gnome DEMO - Walk - 1000%_6: -8209235999099010799
+      Pixel Gnome DEMO - Walk - 1000%_7: -3570523607073785053
+      Pixel Gnome DEMO - Walk - 1000%_8: 5123921182277786023
+      Pixel Gnome DEMO - Walk - 1000%_9: 3467702889922315284
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
