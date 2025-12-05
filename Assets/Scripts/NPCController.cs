@@ -5,17 +5,22 @@ public class NPCController : MonoBehaviour, Interactable
 {
     [SerializeField] private Dialog dialog;
 
-    private NPC_girlPatrol patrol;
+    private NPC_girlPatrol girlPatrol;
+    private NPC_IanPatrol ianPatrol;
 
     void Awake()
     {
-        patrol = GetComponent<NPC_girlPatrol>();
+        girlPatrol = GetComponent<NPC_girlPatrol>();
+        ianPatrol = GetComponent<NPC_IanPatrol>();
     }
-    
+
     public void Interact()
     {
-        if (patrol != null)
-            patrol.StopNPC(true);
+        if (girlPatrol != null)
+            girlPatrol.StopNPC(true);
+
+        if (ianPatrol != null)
+            ianPatrol.StopNPC(true);
 
         StartCoroutine(HandleDialog());
     }
@@ -24,7 +29,10 @@ public class NPCController : MonoBehaviour, Interactable
     {
         yield return StartCoroutine(DialogManager.Instance.ShowDialog(dialog));
 
-        if (patrol != null)
-            patrol.StopNPC(false);
+        if (girlPatrol != null)
+            girlPatrol.StopNPC(false);
+
+        if (ianPatrol != null)
+            ianPatrol.StopNPC(false);
     }
 }
