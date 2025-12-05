@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class NPC_girlPatrol : MonoBehaviour
@@ -11,19 +10,31 @@ public class NPC_girlPatrol : MonoBehaviour
     private Animator animator;
     private Transform currentPoint;
 
-    [SerializeField] private float speed = 2f;
+    [SerializeField] private float speed = 1f;
+
+    private bool isStopped = false;
 
     void Start()
     {
         rd = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
-        currentPoint = pointB; 
+        currentPoint = pointB;
         UpdateAnimation();
+
+        rd.gravityScale = 0;
+        rd.freezeRotation = true;
+        rd.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
     }
 
     void FixedUpdate()
     {
+        if (isStopped)
+        {
+            rd.linearVelocity = Vector2.zero;
+            return;
+        }
+
         if (pointA == null || pointB == null) return;
 
         float directionY = currentPoint.position.y > transform.position.y ? 1f : -1f;
@@ -31,10 +42,10 @@ public class NPC_girlPatrol : MonoBehaviour
 
         float distanceY = Mathf.Abs(transform.position.y - currentPoint.position.y);
 
-        if (distanceY < 0.1f)
+        if (distanceY < 0.05f)
         {
             currentPoint = (currentPoint == pointB) ? pointA : pointB;
-            UpdateAnimation(); 
+            UpdateAnimation();
         }
     }
 
@@ -43,9 +54,20 @@ public class NPC_girlPatrol : MonoBehaviour
         if (animator == null) return;
 
         if (currentPoint == pointB)
-            animator.SetBool("isRunning", false); 
+            animator.SetBool("isRunning", false);
         else
             animator.SetBool("isRunning", true);
+    }
+
+    public void StopNPC(bool stop)
+    {
+        isStopped = stop;
+        rd.linearVelocity = Vector2.zero;
+
+        if (stop)
+            animator.SetBool("isRunning", false);
+        else
+            UpdateAnimation();
     }
 
     private void OnDrawGizmos()

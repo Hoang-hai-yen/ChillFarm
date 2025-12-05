@@ -27,14 +27,13 @@ public class DialogManager : MonoBehaviour
 
     public IEnumerator ShowDialog(Dialog dialog)
     {
-        this.dialog = dialog;  
+        this.dialog = dialog;
         currentLine = 0;
-
         yield return new WaitForEndOfFrame();
-
         OnShowDialog?.Invoke();
         dialogBox.SetActive(true);
-        StartCoroutine(TypeDialog(dialog.Lines[0]));
+        yield return StartCoroutine(TypeDialog(dialog.Lines[0]));
+        yield return new WaitUntil(() => this.dialog == null);
     }
 
     public void HandleUpdate()
