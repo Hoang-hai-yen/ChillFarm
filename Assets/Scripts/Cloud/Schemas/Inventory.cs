@@ -5,20 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-public class Inventory
+
+
+
+namespace Assets.Scripts.Cloud.Schemas
 {
-    public List<Item> Items { get; set; } = new List<Item>();
-    public int MaxSlots { get; set; } = 20;
-
-    public Inventory() { }
-
-    public class Item
+    public class Inventory
     {
-        public string ItemId { get; set; }
-        public int Quantity { get; set; }
-        public int SlotIndex { get; set; }
+        public List<Item> Items { get; set; } = new List<Item>();
+        public int MaxSlots { get; set; } = 20;
 
-        public Item() { }
+        public Inventory() { }
+
+        public class Item
+        {
+            public string ItemId { get; set; }
+            public int Quantity { get; set; }
+            public int SlotIndex { get; set; }
+
+            public Item() { }
+        }
     }
 }
 

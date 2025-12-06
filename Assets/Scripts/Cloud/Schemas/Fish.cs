@@ -6,14 +6,19 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-public class Fish
+
+
+namespace Assets.Scripts.Cloud.Schemas
 {
-        public string FishId {get; set;}
-        public string Species {get; set;}
-        public DateTime AddedAt {get; set;}
-        public string Size {get; set;}
-        public bool CanCatch {get; set;}
+    public class Fish
+    {
+        public string FishId { get; set; }
+        public string Species { get; set; }
+        public DateTime AddedAt { get; set; }
+        public string Size { get; set; }
+        public bool CanCatch { get; set; }
 
         public Fish() { }
+    }
 }
 
