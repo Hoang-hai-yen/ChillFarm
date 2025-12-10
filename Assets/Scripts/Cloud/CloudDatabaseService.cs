@@ -512,7 +512,7 @@ public class CloudDatabaseService
             if (success)
             {
                 // Mapping thành List<Quest>
-                List<Quest> questList = CloudDatabaseHelper.FirestoreMapper.MapCollectionToList<Quest>(response);
+                List<Assets.Scripts.Cloud.Schemas.Quest> questList = CloudDatabaseHelper.FirestoreMapper.MapCollectionToList<Assets.Scripts.Cloud.Schemas.Quest>(response);
                 gameData["Quests"] = questList; 
             }
         });

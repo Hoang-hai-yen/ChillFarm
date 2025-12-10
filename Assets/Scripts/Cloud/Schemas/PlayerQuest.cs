@@ -13,6 +13,8 @@ namespace Assets.Scripts.Cloud.Schemas
     public class PlayerQuest
     {
         public string QuestId { get; set; }
+        public QuestType QuestType { get; set; }
+
 
         public List<QuestProgress> progresses { get; set; }
 
@@ -25,6 +27,8 @@ namespace Assets.Scripts.Cloud.Schemas
         {
             public string ItemId { get; set; }
             public int CurrentAmount { get; set; } = 0;
+            public int TargetAmount { get; set; } = 0;
+            public bool IsCompleted { get; set; } = false;
             public QuestProgress() { }
         }
     }

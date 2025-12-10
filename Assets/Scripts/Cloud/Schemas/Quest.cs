@@ -16,6 +16,7 @@ namespace Assets.Scripts.Cloud.Schemas
         public string NpcId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        public QuestType QuestType { get; set; }
 
         // Requirements
         public List<QuestRequirement> Requirements { get; set; }
@@ -51,6 +52,12 @@ namespace Assets.Scripts.Cloud.Schemas
                 public int amount { get; set; }
             }
         }
+    }
+
+    public enum QuestType
+    {
+        HARVEST,
+        FISHING
     }
 
 }

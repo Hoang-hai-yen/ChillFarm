@@ -16,7 +16,7 @@ public class CloudManager: MonoBehaviour
     public PlayerData PlayerDataData { get; set; }
     public PlayerProfile PlayerProfileData { get; set; }
     public Fishing FishingData { get; set; }
-    public List<Quest> QuestsData { get; set; } = new List<Quest>();
+    public List<Assets.Scripts.Cloud.Schemas.Quest> QuestsData { get; set; } = new List<Assets.Scripts.Cloud.Schemas.Quest>();
     public List<PlayerQuest> PlayerQuestsData { get; set; } = new List<PlayerQuest>();
     public bool IsDataLoaded { get; private set; }
     private bool isFetching = false;
@@ -88,176 +88,176 @@ public class CloudManager: MonoBehaviour
 
 
 
-    void Start()
-    {
-        TryLoadData();
-        EventManager.OnDataDirtyAction += MarkDirty;
-    }
+    //void Start()
+    //{
+    //    TryLoadData();
+    //    EventManager.OnDataDirtyAction += MarkDirty;
+    //}
 
-    void Update()
-    {
-        TryLoadData();
-        TrySaveData();
+    //void Update()
+    //{
+    //    TryLoadData();
+    //    TrySaveData();
        
-    }
+    //}
 
 
-    // SAVE DATA METHODS
-    private void TrySaveData()
-    {
-        timeSinceLastSave += Time.deltaTime;
-        //if (timeSinceLastSave > 5f && gameDataManager.IsDataLoaded)
-        //{
-        //    gameDataManager.PlayerDataData.Gold += 5;
-        //    gameDataManager.FarmlandData.TotalPlotsUnlocked += 1;
-        //    MarkDirty(DataType.player);
-        //    MarkDirty(DataType.farmland);
-        //}
+    //// SAVE DATA METHODS
+    //private void TrySaveData()
+    //{
+    //    timeSinceLastSave += Time.deltaTime;
+    //    //if (timeSinceLastSave > 5f && gameDataManager.IsDataLoaded)
+    //    //{
+    //    //    gameDataManager.PlayerDataData.Gold += 5;
+    //    //    gameDataManager.FarmlandData.TotalPlotsUnlocked += 1;
+    //    //    MarkDirty(DataType.player);
+    //    //    MarkDirty(DataType.farmland);
+    //    //}
 
-        if (timeSinceLastSave >= autoSaveInterval && HasPendingChanges())
-        {
-            if (!IsDataLoaded)
-                Debug.Log("Data is not loaded");
-            else
-            {
-                StartCoroutine(SaveAllDirtyData());
-                timeSinceLastSave = 0f;
-            }
+    //    if (timeSinceLastSave >= autoSaveInterval && HasPendingChanges())
+    //    {
+    //        if (!IsDataLoaded)
+    //            Debug.Log("Data is not loaded");
+    //        else
+    //        {
+    //            StartCoroutine(SaveAllDirtyData());
+    //            timeSinceLastSave = 0f;
+    //        }
 
-        }
-    }
+    //    }
+    //}
     
 
-    public void MarkDirty(DataType dataType)
-    {
-        switch (dataType)
-        {
-            case DataType.player: playerDataDirty = true; break;
-            case DataType.farmland: farmlandDirty = true; break;
-            case DataType.animals: animalFarmDirty = true; break;
-            case DataType.fishing: fishingDirty = true; break;
-            case DataType.quest: questDirty = true; break;
+    //public void MarkDirty(DataType dataType)
+    //{
+    //    switch (dataType)
+    //    {
+    //        case DataType.player: playerDataDirty = true; break;
+    //        case DataType.farmland: farmlandDirty = true; break;
+    //        case DataType.animals: animalFarmDirty = true; break;
+    //        case DataType.fishing: fishingDirty = true; break;
+    //        case DataType.quest: questDirty = true; break;
 
-        }
-    }
+    //    }
+    //}
 
-    public bool HasPendingChanges()
-    {
-        return playerDataDirty || farmlandDirty || animalFarmDirty || fishingDirty;
-    }
+    //public bool HasPendingChanges()
+    //{
+    //    return playerDataDirty || farmlandDirty || animalFarmDirty || fishingDirty;
+    //}
 
-    public IEnumerator SaveAllDirtyData()
-    {
+    //public IEnumerator SaveAllDirtyData()
+    //{
 
-        if (playerDataDirty)
-            yield return Database.SavePlayerData(Auth.LocalId, PlayerDataData, (success, message) =>
-            {
-                playerDataDirty = false;
-                Debug.Log("Player Data save successful");
-            });
+    //    if (playerDataDirty)
+    //        yield return Database.SavePlayerData(Auth.LocalId, PlayerDataData, (success, message) =>
+    //        {
+    //            playerDataDirty = false;
+    //            Debug.Log("Player Data save successful");
+    //        });
 
-        if (farmlandDirty)
-            yield return Database.SaveFarmland(Auth.LocalId, FarmlandData, (success, message) =>
-            {
-                farmlandDirty = false;
-                Debug.Log("Farmland Data save successful");
-            });
+    //    if (farmlandDirty)
+    //        yield return Database.SaveFarmland(Auth.LocalId, FarmlandData, (success, message) =>
+    //        {
+    //            farmlandDirty = false;
+    //            Debug.Log("Farmland Data save successful");
+    //        });
 
-        if (animalFarmDirty)
-            yield return Database.SaveAnimalFarm(Auth.LocalId, AnimalFarmData, (success, message) =>
-            {
-                animalFarmDirty = false;
-                Debug.Log("Animal Farm Data save successful");
-            });
+    //    if (animalFarmDirty)
+    //        yield return Database.SaveAnimalFarm(Auth.LocalId, AnimalFarmData, (success, message) =>
+    //        {
+    //            animalFarmDirty = false;
+    //            Debug.Log("Animal Farm Data save successful");
+    //        });
 
-        if (fishingDirty)
-            yield return Database.SaveFishing(Auth.LocalId, FishingData, (success, message) =>
-            {
-                fishingDirty = false;
-                Debug.Log("Fishing Data save successful");
-            });
+    //    if (fishingDirty)
+    //        yield return Database.SaveFishing(Auth.LocalId, FishingData, (success, message) =>
+    //        {
+    //            fishingDirty = false;
+    //            Debug.Log("Fishing Data save successful");
+    //        });
 
-        if (questDirty)
-            yield return Database.SavePlayerQuest(Auth.LocalId, PlayerQuestsData, (success, message) =>
-            {
-                questDirty = false;
-                Debug.Log("Player Quest Data save successful");
-            });
+    //    if (questDirty)
+    //        yield return Database.SavePlayerQuest(Auth.LocalId, PlayerQuestsData, (success, message) =>
+    //        {
+    //            questDirty = false;
+    //            Debug.Log("Player Quest Data save successful");
+    //        });
 
-        Debug.Log("Cloud save completed!");
-    }
+    //    Debug.Log("Cloud save completed!");
+    //}
 
-    // CRITICAL EVENTS SAVE
-    public IEnumerator ForceSaveAll()
-    {
-        Debug.Log("Force saving all data...");
+    //// CRITICAL EVENTS SAVE
+    //public IEnumerator ForceSaveAll()
+    //{
+    //    Debug.Log("Force saving all data...");
 
-        playerDataDirty = true;
-        farmlandDirty = true;
-        animalFarmDirty = true;
-        fishingDirty = true;
-        questDirty = true;
+    //    playerDataDirty = true;
+    //    farmlandDirty = true;
+    //    animalFarmDirty = true;
+    //    fishingDirty = true;
+    //    questDirty = true;
 
-        yield return SaveAllDirtyData();
+    //    yield return SaveAllDirtyData();
 
-        Debug.Log("Force save completed!");
-    }
+    //    Debug.Log("Force save completed!");
+    //}
 
-    void OnApplicationQuit()
-    {
-        //StartCoroutine(ForceSaveAll());
-    }
-
-
-
-    // LOAD DATA METHODS
-    private void TryLoadData()
-    {
-        if (IsDataLoaded || isFetching || !Auth.IsLogin) return;
-
-        isFetching = true;
-        Debug.Log("Staring loading data...");
-
-        StartCoroutine(Database.GetData(Auth.LocalId, (success, message, gameData) =>
-        {
-            if (success)
-            {
-                if (gameData.ContainsKey(nameof(PlayerProfile)))
-                    PlayerProfileData = (PlayerProfile)gameData[nameof(PlayerProfile)];
-
-                if (gameData.ContainsKey(nameof(PlayerData)))
-                    PlayerDataData = (PlayerData)gameData[nameof(PlayerData)];
-
-                if (gameData.ContainsKey(nameof(Farmland)))
-                    FarmlandData = (Farmland)gameData[nameof(Farmland)];
-
-                if (gameData.ContainsKey(nameof(AnimalFarm)))
-                    AnimalFarmData = (AnimalFarm)gameData[nameof(AnimalFarm)];
-
-                if (gameData.ContainsKey(nameof(Fishing)))
-                    FishingData = (Fishing)gameData[nameof(Fishing)];
-
-                if (gameData.ContainsKey("Quests"))
-                    QuestsData = (List<Quest>)gameData["Quests"];
-
-                if (gameData.ContainsKey("PlayerQuests"))
-                    PlayerQuestsData = (List<PlayerQuest>)gameData["PlayerQuests"];
+    //void OnApplicationQuit()
+    //{
+    //    //StartCoroutine(ForceSaveAll());
+    //}
 
 
-                IsDataLoaded = true;
-                Debug.Log("Load data successful!");
-            }
-            else
-            {
-                Debug.LogError("Loading error: " + message);
-            }
 
-            isFetching = false;
-        }));
-    }
+    //// LOAD DATA METHODS
+    //private void TryLoadData()
+    //{
+    //    if (IsDataLoaded || isFetching || !Auth.IsLogin) return;
 
-    private void OnDestroy()
-    {
-        EventManager.OnDataDirtyAction -= MarkDirty;
-    }
+    //    isFetching = true;
+    //    Debug.Log("Staring loading data...");
+
+    //    StartCoroutine(Database.GetData(Auth.LocalId, (success, message, gameData) =>
+    //    {
+    //        if (success)
+    //        {
+    //            if (gameData.ContainsKey(nameof(PlayerProfile)))
+    //                PlayerProfileData = (PlayerProfile)gameData[nameof(PlayerProfile)];
+
+    //            if (gameData.ContainsKey(nameof(PlayerData)))
+    //                PlayerDataData = (PlayerData)gameData[nameof(PlayerData)];
+
+    //            if (gameData.ContainsKey(nameof(Farmland)))
+    //                FarmlandData = (Farmland)gameData[nameof(Farmland)];
+
+    //            if (gameData.ContainsKey(nameof(AnimalFarm)))
+    //                AnimalFarmData = (AnimalFarm)gameData[nameof(AnimalFarm)];
+
+    //            if (gameData.ContainsKey(nameof(Fishing)))
+    //                FishingData = (Fishing)gameData[nameof(Fishing)];
+
+    //            if (gameData.ContainsKey("Quests"))
+    //                QuestsData = (List<Assets.Scripts.Cloud.Schemas.Quest>)gameData["Quests"];
+
+    //            if (gameData.ContainsKey("PlayerQuests"))
+    //                PlayerQuestsData = (List<PlayerQuest>)gameData["PlayerQuests"];
+
+
+    //            IsDataLoaded = true;
+    //            Debug.Log("Load data successful!");
+    //        }
+    //        else
+    //        {
+    //            Debug.LogError("Loading error: " + message);
+    //        }
+
+    //        isFetching = false;
+    //    }));
+    //}
+
+    //private void OnDestroy()
+    //{
+    //    EventManager.OnDataDirtyAction -= MarkDirty;
+    //}
 }
