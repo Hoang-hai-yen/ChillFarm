@@ -11,13 +11,14 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
-    
+    public LayerMask interactableLayer;
+
     [Header("Bed Spawn Point")]
     [Tooltip("Vị trí nhân vật sẽ xuất hiện khi Ngủ/Ngất xỉu.")]
     public Transform bedSpawnPoint;
 
     private StaminaController staminaController;
-    
+
     private float lastMoveX;
     private float lastMoveY;
 
@@ -29,42 +30,39 @@ public class PlayerController : MonoBehaviour
     [Header("Highlight")]
     [Tooltip("Đối tượng SpriteRenderer dùng để highlight ô đất.")]
     [SerializeField] private SpriteRenderer highlightRenderer;
-    
+
     private FarmlandManager farmlandManager;
     private Grid grid;
     private bool isBackpackOpen = false;
 
     private bool isInteracting = false;
+
     public void Awake()
     {
         playerControls = new PlayerControls();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        
+
         staminaController = FindFirstObjectByType<StaminaController>();
         if (staminaController == null)
-        {
             Debug.LogError("StaminaController not found in the scene.");
-        }
-        
+
         farmlandManager = FindFirstObjectByType<FarmlandManager>();
         grid = FindFirstObjectByType<Grid>();
         if (farmlandManager == null) Debug.LogError("Player: Không tìm thấy FarmlandManager");
         if (grid == null) Debug.LogError("Player: Không tìm thấy Grid");
 
         if (backpackPanel != null)
-        {
             backpackPanel.SetActive(false);
-        }
-        
+
         lastMoveY = -1f;
     }
-    
+
     private void OnEnable()
     {
         playerControls.Enable();
-        
+
         if (staminaController != null)
         {
             staminaController.OnPlayerFaint += HandlePlayerFaint;
@@ -73,7 +71,7 @@ public class PlayerController : MonoBehaviour
 
         playerControls.Movement.Interact.performed += OnInteract;
         playerControls.Movement.Interact.Enable();
-        
+
         playerControls.Movement.Backpack.performed += ToggleBackpack;
         playerControls.Movement.Backpack.Enable();
     }
@@ -81,39 +79,121 @@ public class PlayerController : MonoBehaviour
     private void OnDisable()
     {
         playerControls.Disable();
-        
+
         if (staminaController != null)
         {
             staminaController.OnPlayerFaint -= HandlePlayerFaint;
             staminaController.OnPlayerWakeUp -= HandlePlayerWakeUp;
         }
-        
+
         playerControls.Movement.Interact.performed -= OnInteract;
         playerControls.Movement.Interact.Disable();
-        
+
         playerControls.Movement.Backpack.performed -= ToggleBackpack;
         playerControls.Movement.Backpack.Disable();
     }
-    
-    private void Update()
+
+    public void HandleUpdate()
     {
-        // --- SỬA ---
-        // Thêm điều kiện !isInteracting
         if (staminaController != null && !staminaController.IsFainted() && !isInteracting)
         {
             PlayerInput();
             UpdateInteractionHighlight();
+
+            // Phím Z cho NPC interaction
+            if (Keyboard.current.zKey.wasPressedThisFrame)
+            {
+                StartCoroutine(HandleNPCInteraction());
+            }
         }
         else
         {
             movement = Vector2.zero;
             if (highlightRenderer != null)
-            {
-                highlightRenderer.gameObject.SetActive(false); 
-            }
+                highlightRenderer.gameObject.SetActive(false);
         }
     }
-    
+
+    private IEnumerator HandleInteraction()
+    {
+        isInteracting = true;
+
+        ItemData currentItem = GetCurrentHeldItem();
+        Vector3 playerDirection = new Vector3(animator.GetFloat("lastMoveX"), animator.GetFloat("lastMoveY"), 0).normalized;
+        if (playerDirection == Vector3.zero) playerDirection = Vector3.down;
+
+        Vector3 interactionWorldPos = transform.position + playerDirection * interactionDistance;
+        Vector3Int targetCellPos = grid.WorldToCell(interactionWorldPos);
+
+        float staminaCost = (currentItem == null) ? 2f : currentItem.staminaCost;
+        bool actionSuccessful = false;
+
+        if (staminaController == null || staminaController.GetCurrentStamina() < staminaCost)
+        {
+            Debug.Log("Không đủ Stamina! Không thực hiện tương tác.");
+            isInteracting = false;
+            yield break;
+        }
+
+        if (currentItem is ToolData tool)
+        {
+            if (tool.toolType == ToolType.Hoe)
+            {
+                animator.SetTrigger("useHoe");
+                yield return new WaitForSeconds(0.5f);
+            }
+            else if (tool.toolType == ToolType.WateringCan)
+            {
+                animator.SetTrigger("useWaterCan");
+                yield return new WaitForSeconds(0.7f);
+            }
+        }
+
+        if (farmlandManager != null)
+        {
+            actionSuccessful = farmlandManager.Interact(targetCellPos, currentItem);
+        }
+
+        if (actionSuccessful && staminaCost > 0)
+        {
+            if (staminaController.ConsumeStamina(staminaCost))
+                Debug.Log($"Action SUCCESSFUL. Stamina remaining: {staminaController.GetCurrentStamina()}");
+        }
+        else if (!actionSuccessful)
+        {
+            Debug.Log("Action FAILED/No change. Stamina not consumed.");
+        }
+
+        isInteracting = false;
+    }
+
+
+    private IEnumerator HandleNPCInteraction()
+    {
+        isInteracting = true;
+
+        Vector3 playerDirection = new Vector3(animator.GetFloat("lastMoveX"), animator.GetFloat("lastMoveY"), 0).normalized;
+        if (playerDirection == Vector3.zero) playerDirection = Vector3.down;
+
+        Vector3 interactionWorldPos = transform.position + playerDirection * interactionDistance;
+        float detectionRadius = 0.2f;
+
+        Collider2D npcCollider = Physics2D.OverlapCircle(interactionWorldPos, detectionRadius, interactableLayer);
+
+        if (npcCollider != null)
+        {
+            Interactable npc = npcCollider.GetComponent<Interactable>();
+            if (npc != null)
+            {
+                npc.Interact(); // Chỉ NPC
+                Debug.Log("NPC interaction triggered via Z key.");
+            }
+        }
+
+        yield return null;
+        isInteracting = false;
+    }
+
     private void FixedUpdate()
     {
         if (staminaController != null && !staminaController.IsFainted() && !isInteracting)
@@ -129,12 +209,12 @@ public class PlayerController : MonoBehaviour
     private void PlayerInput()
     {
         movement = playerControls.Movement.Move.ReadValue<Vector2>();
-        
+
         animator.SetBool("isMoving", movement != Vector2.zero);
-        
+
         animator.SetFloat("moveX", movement.x);
         animator.SetFloat("moveY", movement.y);
-        
+
         if (movement != Vector2.zero)
         {
             lastMoveX = movement.x;
@@ -143,25 +223,33 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("lastMoveX", lastMoveX);
         animator.SetFloat("lastMoveY", lastMoveY);
     }
-    
+
     private void Move()
     {
-        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+        Vector3 targetPos = rb.position + movement * speed * Time.fixedDeltaTime;
+        if (IsWalkable(targetPos))
+        {
+            rb.MovePosition(targetPos);
+        }
+        else
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
     }
 
     private void HandlePlayerFaint()
     {
         playerControls.Disable();
-        movement = Vector2.zero; 
+        movement = Vector2.zero;
         rb.linearVelocity = Vector2.zero;
         animator.SetBool("isFainted", true);
-        
+
         if (isBackpackOpen)
         {
             isBackpackOpen = false;
             backpackPanel.SetActive(false);
         }
-        
+
         Debug.Log("PlayerController: Input disabled, fainted animation playing.");
     }
 
@@ -178,80 +266,29 @@ public class PlayerController : MonoBehaviour
         {
             Debug.LogError("Bed Spawn Point not assigned in PlayerController! Cannot teleport.");
         }
-        
+
         animator.SetBool("isFainted", false);
         playerControls.Enable();
-        
+
         playerControls.Movement.Move.Enable();
         playerControls.Movement.Interact.Enable();
-        
+
         Debug.Log("PlayerController: Input enabled, starting new day.");
     }
 
     private void OnInteract(InputAction.CallbackContext context)
     {
-        if (isInteracting) return; 
+        if (isInteracting) return;
         if (staminaController != null && staminaController.IsFainted()) return;
 
-        StartCoroutine(HandleInteraction());
+        StartCoroutine(HandleInteraction()); // E key → tool/farmland
     }
 
-private IEnumerator HandleInteraction()
-{
-    isInteracting = true;
-
-    ItemData currentItem = GetCurrentHeldItem();
-    Vector3 playerDirection = new Vector3(animator.GetFloat("lastMoveX"), animator.GetFloat("lastMoveY"), 0).normalized;
-    if (playerDirection == Vector3.zero) playerDirection = Vector3.down;
-    Vector3Int targetCellPos = grid.WorldToCell(transform.position + playerDirection * interactionDistance);
-
-    float staminaCost = (currentItem == null) ? 2f : currentItem.staminaCost;
-
-    if (staminaController == null || staminaController.GetCurrentStamina() < staminaCost)
-    {
-        Debug.Log("Không đủ Stamina! Không thực hiện tương tác.");
-        isInteracting = false;
-        yield break; 
-    }
-
-    if (currentItem is ToolData tool)
-    {
-        if (tool.toolType == ToolType.Hoe)
-        {
-            animator.SetTrigger("useHoe");
-            yield return new WaitForSeconds(0.5f);
-        }
-        else if (tool.toolType == ToolType.WateringCan)
-        {
-            animator.SetTrigger("useWaterCan");
-            yield return new WaitForSeconds(0.7f); 
-        }
-    }
-
-    if (farmlandManager != null)
-    {
-        bool actionSuccessful = farmlandManager.Interact(targetCellPos, currentItem); 
-        
-        if (actionSuccessful)
-        {
-            if (staminaController.ConsumeStamina(staminaCost))
-            {
-                Debug.Log($"Action SUCCESSFUL. Stamina remaining: {staminaController.GetCurrentStamina()}");
-            }
-        }
-        else
-        {
-            Debug.Log("Action FAILED/No change. Stamina not consumed.");
-        }
-    }
-    isInteracting = false;
-}
-    
     private void ToggleBackpack(InputAction.CallbackContext context)
     {
         if (isInteracting) return;
         if (staminaController != null && staminaController.IsFainted()) return;
-        
+
         if (backpackPanel == null) return;
 
         isBackpackOpen = !isBackpackOpen;
@@ -268,7 +305,7 @@ private IEnumerator HandleInteraction()
             playerControls.Movement.Interact.Enable();
         }
     }
-    
+
     private ItemData GetCurrentHeldItem()
     {
         if (InventoryManager.Instance != null)
@@ -277,37 +314,32 @@ private IEnumerator HandleInteraction()
         }
 
         Debug.LogWarning("Không tìm thấy InventoryManager!");
-        return null; 
+        return null;
     }
+
     private void UpdateInteractionHighlight()
     {
-        if (highlightRenderer == null || grid == null || farmlandManager == null) 
+        if (highlightRenderer == null || grid == null || farmlandManager == null)
         {
             if (highlightRenderer != null)
-            {
                 highlightRenderer.gameObject.SetActive(false);
-            }
             return;
         }
 
         Vector3 playerDirection = new Vector3(animator.GetFloat("lastMoveX"), animator.GetFloat("lastMoveY"), 0).normalized;
-        
-        if (playerDirection == Vector3.zero) 
+        if (playerDirection == Vector3.zero)
         {
-            playerDirection = new Vector3(lastMoveX, lastMoveY, 0).normalized; 
+            playerDirection = new Vector3(lastMoveX, lastMoveY, 0).normalized;
             if (playerDirection == Vector3.zero) playerDirection = Vector3.down;
         }
-        
+
         Vector3 interactionWorldPos = transform.position + playerDirection * interactionDistance;
-        
         Vector3Int targetCellPos = grid.WorldToCell(interactionWorldPos);
-        
-        if (farmlandManager.IsTillableArea(targetCellPos)) 
+
+        if (farmlandManager.IsTillableArea(targetCellPos))
         {
             Vector3 cellCenterWorld = grid.GetCellCenterWorld(targetCellPos);
-            
-            cellCenterWorld.z = 0; 
-            
+            cellCenterWorld.z = 0;
             highlightRenderer.transform.position = cellCenterWorld;
             highlightRenderer.gameObject.SetActive(true);
         }
@@ -315,5 +347,13 @@ private IEnumerator HandleInteraction()
         {
             highlightRenderer.gameObject.SetActive(false);
         }
+    }
+
+    private bool IsWalkable(Vector3 targetPos)
+    {
+        if (Physics2D.OverlapCircle(targetPos, 0.2f, interactableLayer) != null)
+            return false;
+
+        return true;
     }
 }
