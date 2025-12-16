@@ -7,7 +7,7 @@ using Assets.Scripts.Cloud.Schemas; // Namespace chứa schema của bạn
 
 public class FishingController : MonoBehaviour
 {
-    //public enum FishingState { Idle, Casting, Waiting, Bite, Reeling, Caught }
+    public enum FishingState { Idle, Casting, Waiting, Bite, Reeling, Caught }
 
     //[Header("Settings")]
     //public float minWaitTime = 2f;
@@ -19,13 +19,13 @@ public class FishingController : MonoBehaviour
     //[Header("Runtime Config")]
     //public List<FishConfigData> currentMapFishList;
 
-    //private FishingState currentState = FishingState.Idle;
+    private FishingState currentState = FishingState.Idle;
 
     //// Reference to global Data Manager
     //private GameDataManager dataManager;
 
-    //void Start()
-    //{
+    void Start()
+    {
     //    dataManager = FindObjectOfType<GameDataManager>();
 
     //    // MOCK DATA: Nếu chưa có cloud, tự tạo data giả để test
@@ -37,7 +37,7 @@ public class FishingController : MonoBehaviour
     //            new FishConfigData { id = "fish_shark", name = "Shark", rarityWeight = 5, minSize = 100, maxSize = 200 }
     //        };
     //    }
-    //}
+    }
 
     //void Update()
     //{

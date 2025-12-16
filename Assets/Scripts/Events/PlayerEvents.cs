@@ -20,12 +20,12 @@ public class PlayerEvents
         }
     }
 
-    public event Action<int> onExperienceGained;
-    public void ExperienceGained(int experience) 
+    public event Action<string, int> onExperienceGained;
+    public void ExperienceGained(string type, int experience) 
     {
         if (onExperienceGained != null) 
         {
-            onExperienceGained(experience);
+            onExperienceGained(type, experience);
         }
     }
 

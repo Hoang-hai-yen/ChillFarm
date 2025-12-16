@@ -150,8 +150,11 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     private void ClaimRewards(Assets.Scripts.Cloud.Schemas.Quest quest)
     {
-        //GameEventsManager.instance.goldEvents.GoldGained(quest.info.goldReward);
-        //GameEventsManager.instance.playerEvents.ExperienceGained(quest.info.experienceReward);
+        GameEventsManager.instance.goldEvents.GoldGained(quest.Rewards.Gold);
+        foreach (var xpReward in quest.Rewards.Xp)
+        {
+            GameEventsManager.instance.playerEvents.ExperienceGained(xpReward.type, xpReward.amount);
+        }
     }
 
     private void QuestStepStateChange(string id, int stepIndex, QuestStepState questStepState)
