@@ -17,32 +17,7 @@ public class CloudDatabaseService
 {
     private ApiConfig apiConfig;
 
-    public class Position
-    {
-        public float X { get; set; }
-        public float Y { get; set; }
-
-        public string Scene { get; set; }
-
-        public Position(float x, float y, string scene)
-        {
-            X = x;
-            Y = y;
-            Scene = scene;
-        }
-    }
-
-    public class Time
-    {
-        public string CurrentTime { get; set; } //hh:mm
-        public int Day { get; set; }
-
-        public Time(string currentTime, int day)
-        {
-            CurrentTime = currentTime;
-            Day = day;
-        }
-    }
+  
 
     public CloudDatabaseService(ApiConfig apiConfig)
     {

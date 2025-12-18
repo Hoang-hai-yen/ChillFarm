@@ -3,16 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameHarvestQuest: GameQuest
+public class ActiveQuest
 {
+    PlayerQuest PlayerQuest { get; set; }
 
-    public GameHarvestQuest(PlayerQuest playerQuest)
+    public ActiveQuest(PlayerQuest playerQuest)
     {
         PlayerQuest = playerQuest;
-        GameEventsManager.instance.farmlandEvents.onCropHarvest += QuestUpdate;
+        if (playerQuest.QuestType == QuestType.HARVEST)
+        {
+            GameEventsManager.instance.farmlandEvents.onCropHarvest += QuestUpdate;
+
+        }
+        else
+        {
+            GameEventsManager.instance.fishingEvents.onFishCaught += QuestUpdate;
+        }
     }
 
-    public void QuestUpdate(string itemId, int amount = 1)
+    public void QuestUpdate(string itemId, int amount)
     {
         PlayerQuest.QuestProgress currentProress = PlayerQuest.progresses.Find(p => p.ItemId == itemId);
         currentProress.CurrentAmount += amount;
@@ -20,15 +29,15 @@ public class GameHarvestQuest: GameQuest
         {
             currentProress.IsCompleted = true;
         }
+        GameEventsManager.instance.questEvents.AdvanceQuest(PlayerQuest.QuestId);
 
-        if(PlayerQuest.progresses.TrueForAll(p => p.IsCompleted))
+        if (PlayerQuest.progresses.TrueForAll(p => p.IsCompleted))
         {
             PlayerQuest.IsCompleted = true;
             GameEventsManager.instance.questEvents.FinishQuest(PlayerQuest.QuestId);
         }
+       
 
     }
-
-    
 
 }
