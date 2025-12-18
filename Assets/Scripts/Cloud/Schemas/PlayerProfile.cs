@@ -5,11 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-public class PlayerProfile
+namespace Assets.Scripts.Cloud.Schemas
 {
-    public string UserId { get; set; }
-    public string Email { get; set; }
-    public string Name { get; set; }
-    public string Avatar { get; set; }
-    public PlayerProfile() { }
+    public class PlayerProfile
+    {
+        public string UserId { get; set; }
+        public string Email { get; set; }
+        public string Name { get; set; }
+        public string Avatar { get; set; }
+        public PlayerProfile() { }
+    }
 }
