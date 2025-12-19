@@ -36,7 +36,7 @@ public class CloudAuthService
         request.SetRequestHeader("Content-Type", "application/json");
 
         yield return request.SendWebRequest();
-
+       
         if (request.result == UnityWebRequest.Result.Success)
         {
             var data = JObject.Parse(request.downloadHandler.text);

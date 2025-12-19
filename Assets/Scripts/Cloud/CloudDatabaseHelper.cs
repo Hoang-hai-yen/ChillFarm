@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Assets.Scripts.Cloud.Schemas;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -208,6 +209,24 @@ public class CloudDatabaseHelper
 
             return null;
         }
+
+        public static List<T> MapCollectionToList<T>(FirestoreListResponse response) where T : new()
+        {
+            List<T> result = new List<T>();
+            if (response == null || response.Documents == null) return result;
+
+            foreach (var doc in response.Documents)
+            {
+                T item = FirestoreMapper.ToObject<T>(doc.Fields);
+
+                // Mẹo: Nếu Class T của bạn có trường Id, bạn có thể map ID từ doc.Name vào đây
+                // string docId = doc.Name.Split('/').Last();
+                // ... gán id vào item ...
+
+                result.Add(item);
+            }
+            return result;
+        }
     }
 
 
@@ -393,256 +412,6 @@ public class CloudDatabaseHelper
         }
     }
 
-    //public IEnumerator CreateNewPlayerData()
-    //{
-    //    var defaultPlayerData = new
-    //    {
-    //        fields = new
-    //        {
-    //            gold = new { integerValue = "500" },
-    //            stamina = new { doubleValue = 100.0 },
-    //            maxStamina = new { integerValue = "100" },
-    //            currentDay = new { integerValue = "1" },
-    //            currentTime = new { integerValue = "480" },
-    //            createdAt = new { timestampValue = DateTime.UtcNow.ToString("o") }
-    //        }
-    //    };
-
-    //    string url = $"{FIREBASE_DB_URL}/playerData/{userId}";
-    //    string jsonData = JsonConvert.SerializeObject(defaultPlayerData);
-
-    //    yield return PatchDocument(url, jsonData, success =>
-    //    {
-    //        if (success)
-    //            Debug.Log("New player data created!");
-    //    });
-    //}
-
-    //public PlayerData ParsePlayerData(FirestoreDocument doc)
-    //{
-    //    // Parse Firestore document to PlayerData object
-    //    // Implementation depends on your data structure
-    //    return new PlayerData();
-    //}
-
-    //public FarmlandData ParseFarmlandData(FirestoreDocument doc)
-    //{
-    //    return new FarmlandData();
-    //}
-
-    //public List<Quest> ParseQuests(List<QueryResult> results)
-    //{
-    //    return new List<Quest>();
-    //}
-
-    //    static public Animal ConvertToAnimal(FirestoreMap firestoreMap)
-    //    {
-    //        var fields = firestoreMap.Fields;
-
-    //        return new Animal()
-    //        {
-    //           AnimalId = fields["animalId"].StringValue,
-    //            Type = fields["type"].StringValue,
-    //            Name = fields["name"].StringValue,
-    //            Age = int.Parse(fields["age"].IntegerValue),
-    //            Affection = int.Parse(fields["affection"].IntegerValue),
-    //            IsFed = fields["isFed"].BooleanValue,
-    //            CanProduce = fields["canProduce"].BooleanValue,
-    //            ProductId = fields["productId"].StringValue,
-    //            IsDead = fields["isDead"].BooleanValue
-    //};
-    //    }
-
-    //    static public Plot ConvertToPlot(FirestoreMap firestoreMap)
-    //    {
-    //        var fields = firestoreMap.Fields;
-    //        return new Plot()
-    //        {
-    //            PlotId = fields["plotId"].StringValue,
-    //            IsUnlocked = fields["isUnlocked"].BooleanValue,
-    //            IsDug = fields["isDug"].BooleanValue,
-    //            Position = (fields["position"].MapValue.Fields["x"].DoubleValue, fields["position"].MapValue.Fields["y"].DoubleValue),
-    //            Crop = ConvertToCrop(fields["crop"].MapValue)
-    //};
-    //    }
-
-    //    static public Crop ConvertToCrop(FirestoreMap firestoreMap)
-    //    {
-    //        var fields = firestoreMap.Fields;
-
-    //        return new Crop()
-    //        {
-    //           SeedId = fields["seedId"].StringValue,
-    //            PlantedAt = DateTime.Parse(fields["plantedAt"].TimestampValue, null, System.Globalization.DateTimeStyles.RoundtripKind),
-    //            GrowthStage = int.Parse(fields["growthStage"].IntegerValue),
-    //            GrowthProgress = fields["growthProgress"].DoubleValue,
-    //            IsWatered = fields["isWatered"].BooleanValue,
-    //            IsFertilized = fields["isFertilized"].BooleanValue,
-    //            ReadyToHarvest = fields["readyToHarvest"].BooleanValue,
-    //        };
-    //    }
-
-    //    static public ExperiencePoint ConvertToExperiencePoint(FirestoreMap firestoreMap)
-    //    {
-    //        var fields = firestoreMap.Fields;
-
-    //        return new ExperiencePoint()
-    //        {
-    //            Level = int.Parse(fields["level"].IntegerValue),
-    //            CurrentXP = int.Parse(fields["currentXP"].IntegerValue),
-    //            TotalXP = int.Parse(fields["totalXP"].IntegerValue)
-    //        };
-
-    //    }
-
-    //    static public Inventory.Item ConvertToItem(FirestoreMap firestoreMap)
-    //    {
-    //        var fields = firestoreMap.Fields;
-
-    //        return new Inventory.Item()
-    //        {
-    //            ItemId = fields["itemId"].StringValue,
-    //            Quantity = int.Parse(fields["quantity"].IntegerValue),
-    //            SlotIndex = int.Parse(fields["slotIndex"].IntegerValue)
-
-    //        };
-
-    //    }
-
-    //    static public Inventory ConvertToInventory(FirestoreMap firestoreMap)
-    //    {
-    //        var fields = firestoreMap.Fields;
-    //        FirestoreArray itemsFirestore = fields["items"].ArrayValue;
-    //        List<Inventory.Item> items = new List<Inventory.Item>();
-
-    //        if(itemsFirestore.Values != null)
-    //            foreach(FirestoreValue firestoreValue in itemsFirestore.Values)
-    //            {
-    //                items.Add(ConvertToItem(firestoreValue.MapValue));
-    //            }
-
-    //        return new Inventory()
-    //        {
-    //            MaxSlots = int.Parse(fields["maxSlots"].IntegerValue),
-    //            Items = items
-    //        };
-
-    //    }
-
-    //    static public PlayerProfile ConvertToPlayerProfile(FirestoreBatchGetResponse firestoreBatchGetResponse)
-    //    {
-    //        var fields = firestoreBatchGetResponse.Found.Fields;
-    //        return new PlayerProfile()
-    //        {
-    //            Email = fields["email"].StringValue,
-    //            Name = fields["name"].StringValue,
-    //            Avatar = fields["avatar"].StringValue
-    //        };
-    //    }
-
-    //    static public PlayerData ConvertToPlayerData(FirestoreBatchGetResponse firestoreBatchGetResponse)
-    //    { 
-    //        var fields = firestoreBatchGetResponse.Found.Fields;
-
-    //        return new PlayerData()
-    //        {
-    //            Gold = int.Parse(fields["gold"].IntegerValue),
-    //            Stamina = fields["stamina"].DoubleValue,
-    //            MaxStamina = fields["maxStamina"].DoubleValue,
-    //            CurrentDay = int.Parse(fields["currentDay"].IntegerValue),
-    //            CurrentTime = int.Parse(fields["currentTime"].IntegerValue),
-    //            Position = (fields["position"].MapValue.Fields["x"].DoubleValue, fields["position"].MapValue.Fields["y"].DoubleValue),
-    //            CurrentScene = fields["position"].MapValue.Fields["scene"].StringValue,
-    //            SkillXP = ConvertToExperiencePoint(fields["experiencePoint"].MapValue.Fields["skill"].MapValue),
-    //            AnimalXP = ConvertToExperiencePoint(fields["experiencePoint"].MapValue.Fields["animal"].MapValue),
-    //            FishingXP = ConvertToExperiencePoint(fields["experiencePoint"].MapValue.Fields["fishing"].MapValue),
-    //            FarmingXP = ConvertToExperiencePoint(fields["experiencePoint"].MapValue.Fields["farming"].MapValue),
-    //            Inventory = ConvertToInventory(fields["inventory"].MapValue),
-    //            Storage = ConvertToInventory(fields["storage"].MapValue),
-    //        };
-    //    }
-
-    //    static public AnimalFarm ConvertToAnimalFarm(FirestoreBatchGetResponse firestoreBatchGetResponse)
-    //    {
-    //        var fields = firestoreBatchGetResponse.Found.Fields;
-
-    //        FirestoreArray animalsFirestore = fields["animals"].ArrayValue;
-    //        List<Animal> animals = new List<Animal>();
-
-    //        if(animalsFirestore.Values != null)
-    //            foreach(FirestoreValue firestoreValue in animalsFirestore.Values)
-    //            {
-    //                animals.Add(ConvertToAnimal(firestoreValue.MapValue));
-    //            }
-
-    //        return new AnimalFarm()
-    //        {
-    //            Animals = animals,
-    //            FarmLevel = int.Parse(fields["farmLevel"].IntegerValue),
-    //            MaxCapacity = int.Parse(fields["maxCapacity"].IntegerValue)
-    //        };
-    //    }
-
-
-
-    //    static public Farmland ConvertToFarmlam(FirestoreBatchGetResponse firestoreBatchGetResponse)
-    //    {
-    //        var fields = firestoreBatchGetResponse.Found.Fields;
-    //        FirestoreArray plotsFirestore = fields["plots"].ArrayValue;
-    //        List<Plot> plots = new List<Plot>();
-
-    //        if(plotsFirestore.Values != null)
-    //            foreach(FirestoreValue firestoreValue in plotsFirestore.Values)
-    //            {
-    //                plots.Add(ConvertToPlot(firestoreValue.MapValue));
-    //            }
-
-    //        return new Farmland()
-    //        {
-    //           Plots = plots,
-    //           TotalPlotsUnlocked = int.Parse(fields["totalPlotsUnlocked"].IntegerValue)
-    //        };
-    //    }
-
-    //    static public Fish ConvertToFish(FirestoreMap firestoreMap)
-    //    {
-    //        var fields = firestoreMap.Fields;
-
-    //        return new Fish()
-    //        {
-    //            FishId = fields["fishId"].StringValue,
-    //            Species = fields["species"].StringValue,
-    //            AddedAt = DateTime.Parse(fields["addedAt"].TimestampValue, null, System.Globalization.DateTimeStyles.RoundtripKind),
-    //            Size = fields["size"].StringValue,
-    //            CanCatch = fields["canCatch"].BooleanValue,
-    //        };
-    //    }
-
-    //    static public Pond ConvertToPond(FirestoreMap firestoreMap)
-    //    {
-    //        var fields = firestoreMap.Fields;
-    //        FirestoreArray fishFirestore = fields["plots"].ArrayValue;
-    //        List<Fish> fish = new List<Fish>();
-
-    //        if (fishFirestore.Values != null)
-    //            foreach (FirestoreValue firestoreValue in fishFirestore.Values)
-    //            {
-    //                fish.Add(ConvertToFish(firestoreValue.MapValue));
-    //            }
-
-    //        return new Pond()
-    //        {
-    //            IsUnlocked = fields["isUnlocked"].BooleanValue,
-    //            MaxCapacity = int.Parse(fields["maxCapacity"].IntegerValue),
-    //            Fish = fish,
-    //        };
-    //    }
-
-
-
-
-
-
 
     static public List<FirestoreBatchGetResponse> ParseBatchGetResponse(string ndjson)
     {
@@ -721,17 +490,21 @@ public class CloudDatabaseHelper
         public List<FirestoreValue> Values { get; set; }
     }
 
-
-
-
-    [Serializable]
-    public class FirestoreDocument
+    public class FirestoreListResponse
     {
-        public string name;
-        public Dictionary<string, FirestoreValue> fields;
-        public string createTime;
-        public string updateTime;
+        [JsonProperty("documents")]
+        public List<FirestoreFound> Documents { get; set; }
     }
+
+
+    //[Serializable]
+    //public class FirestoreDocument
+    //{
+    //    public string name;
+    //    public Dictionary<string, FirestoreValue> fields;
+    //    public string createTime;
+    //    public string updateTime;
+    //}
 
     //[Serializable]
     //public class FirestoreValue

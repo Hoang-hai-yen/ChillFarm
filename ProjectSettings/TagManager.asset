@@ -74,5 +74,8 @@ TagManager:
   - name: Player
     uniqueID: 1055369451
     locked: 0
+  - name: WNew Layer 12
+    uniqueID: 53181793
+    locked: 0
   m_RenderingLayers:
   - Default
