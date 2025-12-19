@@ -47,8 +47,7 @@ public class CloudAuthService
                 if(success)
                 {
                     IsLogin = true;
-                    callback?.Invoke(true, "Account created successfully!");
-                   
+                   Debug.Log("Create initial data successful!");
                 }
                 else
                 {
@@ -57,6 +56,9 @@ public class CloudAuthService
                 }
 
             });
+            yield return GameDataManager.instance.TryLoadData();
+            callback?.Invoke(true, "Account created successfully!");
+
         }
         else
         {
