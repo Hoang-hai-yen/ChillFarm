@@ -78,22 +78,25 @@ public class GameDataManager : MonoBehaviour
     private void OnEnable() 
     {
         // SceneManager.sceneLoaded += OnSceneLoaded;
+        // GameEventsManager.instance.inputEvents.onLogInPress += LoadGame;
     }
 
     private void OnDisable() 
     {
         // SceneManager.sceneLoaded -= OnSceneLoaded;
+        // GameEventsManager.instance.inputEvents.onLogInPress -= LoadGame;
+
     }
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode) 
     {
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
 
-        if (tryLoadGameCoroutine != null)
-        {
-            StopCoroutine(tryLoadGameCoroutine);
-        }
-        tryLoadGameCoroutine = StartCoroutine(LoadGame());
+        // if (tryLoadGameCoroutine != null)
+        // {
+        //     StopCoroutine(tryLoadGameCoroutine);
+        // }
+        // tryLoadGameCoroutine = StartCoroutine(LoadGame());
 
         // start up the auto saving coroutine
         if (autoSaveCoroutine != null) 
@@ -136,7 +139,7 @@ public class GameDataManager : MonoBehaviour
         this.gameData = new GameData();
     }
 
-    public IEnumerator LoadGame()
+    public void LoadGame()
     {
         //// return right away if data persistence is disabled
         //if (disableDataPersistence) 
@@ -166,62 +169,66 @@ public class GameDataManager : MonoBehaviour
         //    dataPersistenceObj.LoadData(gameData);
         //}
 
-        while (!IsDataLoaded)
-        {
-            yield return new WaitForSeconds(loadTimeIntervalSeconds);
-            TryLoadData();
-        }
+        StartCoroutine(TryLoadData());
     }
 
-    private void TryLoadData()
+    public IEnumerator TryLoadData()
     {
-        if (IsDataLoaded || isFetching || !CloudManager.Instance.Auth.IsLogin) return;
-
-        isFetching = true;
-        Debug.Log("Staring loading data...");
-
-        StartCoroutine(CloudManager.Instance.Database.GetData(CloudManager.Instance.Auth.LocalId, (success, message, gameDataRes) =>
+        while (!IsDataLoaded)
         {
-            if (success)
+            if (!isFetching)
             {
+                isFetching = true;
+            Debug.Log("Staring loading data...");
 
-                if (gameDataRes.ContainsKey(nameof(PlayerProfile)))
-                   gameData.PlayerProfileData = (PlayerProfile)gameDataRes[nameof(PlayerProfile)];
-
-                if (gameDataRes.ContainsKey(nameof(PlayerData)))
-                    gameData.PlayerDataData = (PlayerData)gameDataRes[nameof(PlayerData)];
-
-                if (gameDataRes.ContainsKey(nameof(Farmland)))
-                    gameData.FarmlandData = (Farmland)gameDataRes[nameof(Farmland)];
-
-                if (gameDataRes.ContainsKey(nameof(AnimalFarm)))
-                    gameData.AnimalFarmData = (AnimalFarm)gameDataRes[nameof(AnimalFarm)];
-
-                if (gameDataRes.ContainsKey(nameof(Fishing)))
-                    gameData.FishingData = (Fishing)gameDataRes[nameof(Fishing)];
-
-                if (gameDataRes.ContainsKey("Quests"))
-                    gameData.QuestsData = (List<Assets.Scripts.Cloud.Schemas.Quest>)gameDataRes["Quests"];
-
-                if (gameDataRes.ContainsKey("PlayerQuests"))
-                    gameData.PlayerQuestsData = (List<PlayerQuest>)gameDataRes["PlayerQuests"];
-
-
-                IsDataLoaded = true;
-
-                foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
+            yield return CloudManager.Instance.Database.GetData(CloudManager.Instance.Auth.LocalId, (success, message, gameDataRes) =>
+            {
+                if (success)
                 {
-                    dataPersistenceObj.LoadData(gameData);
-                }
-                Debug.Log("Load data successful!");
-            }
-            else
-            {
-                Debug.LogError("Loading error: " + message);
-            }
 
-            isFetching = false;
-        }));
+                    if (gameDataRes.ContainsKey(nameof(PlayerProfile)))
+                       gameData.PlayerProfileData = (PlayerProfile)gameDataRes[nameof(PlayerProfile)];
+
+                    if (gameDataRes.ContainsKey(nameof(PlayerData)))
+                        gameData.PlayerDataData = (PlayerData)gameDataRes[nameof(PlayerData)];
+
+                    if (gameDataRes.ContainsKey(nameof(Farmland)))
+                        gameData.FarmlandData = (Farmland)gameDataRes[nameof(Farmland)];
+
+                    if (gameDataRes.ContainsKey(nameof(AnimalFarm)))
+                        gameData.AnimalFarmData = (AnimalFarm)gameDataRes[nameof(AnimalFarm)];
+
+                    if (gameDataRes.ContainsKey(nameof(Fishing)))
+                        gameData.FishingData = (Fishing)gameDataRes[nameof(Fishing)];
+
+                    if (gameDataRes.ContainsKey("Quests"))
+                        gameData.QuestsData = (List<Assets.Scripts.Cloud.Schemas.Quest>)gameDataRes["Quests"];
+
+                    if (gameDataRes.ContainsKey("PlayerQuests"))
+                        gameData.PlayerQuestsData = (List<PlayerQuest>)gameDataRes["PlayerQuests"];
+
+
+                    IsDataLoaded = true;
+
+                    foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
+                    {
+                        dataPersistenceObj.LoadData(gameData);
+                    }
+                    Debug.Log("Load data successful!");
+                }
+                else
+                {
+                    Debug.LogError("Loading error: " + message);
+                }
+
+                isFetching = false;
+            });
+        }
+            yield return new WaitForSeconds(loadTimeIntervalSeconds);
+           
+           
+        }
+
     }
 
 

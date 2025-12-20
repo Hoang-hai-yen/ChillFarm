@@ -41,6 +41,7 @@ public class LoginManager : MonoBehaviour
     private IEnumerator DelayToScene(string sceneName, float delayTime)
     {
         yield return new WaitForSeconds(delayTime);
+        // yield return GameDataManager.instance.TryLoadData();
         SceneManager.LoadScene(sceneName);
     }
 }

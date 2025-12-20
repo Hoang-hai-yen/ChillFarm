@@ -3,6 +3,12 @@ using System;
 
 public class InputEvents
 {
+
+    // public event Action onLogInPress;
+    // public void LogInPress()
+    // {
+    //     onLogInPress?.Invoke();
+    // }
     public InputEventContext inputEventContext { get; private set; } = InputEventContext.DEFAULT;
 
     public void ChangeInputEventContext(InputEventContext newContext)
