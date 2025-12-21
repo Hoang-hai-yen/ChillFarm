@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,23 +12,34 @@ public enum GameState
 public class GameController : MonoBehaviour
 {
     [SerializeField] PlayerController playerController;
-
     GameState state;
 
     private void Start()
     {
-        DialogManager.Instance.OnShowDialog += () =>
+        if (DialogManager.Instance != null)
         {
-            state = GameState.Dialogue;
-        };
-        DialogManager.Instance.OnHideDialog += () =>
+            DialogManager.Instance.OnShowDialog += EnterDialogueState;
+            DialogManager.Instance.OnHideDialog += ExitDialogueState;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (DialogManager.Instance != null)
         {
-            if (state == GameState.Dialogue)
-            {
-                state = GameState.FreeRoam;
-            }    
-                
-        };
+            DialogManager.Instance.OnShowDialog -= EnterDialogueState;
+            DialogManager.Instance.OnHideDialog -= ExitDialogueState;
+        }
+    }
+
+    private void EnterDialogueState()
+    {
+        state = GameState.Dialogue;
+    }
+
+    private void ExitDialogueState()
+    {
+        if (state == GameState.Dialogue) state = GameState.FreeRoam;
     }
 
     private void Update()
@@ -36,14 +47,10 @@ public class GameController : MonoBehaviour
         if (state == GameState.FreeRoam)
         {
             playerController.HandleUpdate();
-        } 
+        }
         else if (state == GameState.Dialogue)
         {
             DialogManager.Instance.HandleUpdate();
-        }
-        else if (state == GameState.Battle)
-        {
-
         }
     }
 }

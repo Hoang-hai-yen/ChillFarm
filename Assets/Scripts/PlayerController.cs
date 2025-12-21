@@ -185,8 +185,16 @@ public class PlayerController : MonoBehaviour
             Interactable npc = npcCollider.GetComponent<Interactable>();
             if (npc != null)
             {
-                npc.Interact(); // Chỉ NPC
-                Debug.Log("NPC interaction triggered via Z key.");
+                DialogData dialogData = npcCollider.GetComponent<DialogData>();
+                if (dialogData != null && DialogManager.Instance != null)
+                {
+                    Dialog dialogToShow = dialogData.CreateDialog();
+                    yield return StartCoroutine(DialogManager.Instance.ShowDialog(dialogToShow));
+                }
+                else
+                {
+                    npc.Interact();
+                }
             }
         }
 
@@ -194,7 +202,10 @@ public class PlayerController : MonoBehaviour
         isInteracting = false;
     }
 
-    private void FixedUpdate()
+
+
+
+private void FixedUpdate()
     {
         if (staminaController != null && !staminaController.IsFainted() && !isInteracting)
         {

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class NPC_girlPatrol : MonoBehaviour
 {
@@ -11,7 +10,6 @@ public class NPC_girlPatrol : MonoBehaviour
     private Transform currentPoint;
 
     [SerializeField] private float speed = 1f;
-
     private bool isStopped = false;
 
     void Start()
@@ -29,19 +27,16 @@ public class NPC_girlPatrol : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (isStopped)
+        if (isStopped || pointA == null || pointB == null)
         {
             rd.linearVelocity = Vector2.zero;
             return;
         }
 
-        if (pointA == null || pointB == null) return;
-
         float directionY = currentPoint.position.y > transform.position.y ? 1f : -1f;
         rd.linearVelocity = new Vector2(0, directionY * speed);
 
         float distanceY = Mathf.Abs(transform.position.y - currentPoint.position.y);
-
         if (distanceY < 0.05f)
         {
             currentPoint = (currentPoint == pointB) ? pointA : pointB;
@@ -51,12 +46,8 @@ public class NPC_girlPatrol : MonoBehaviour
 
     void UpdateAnimation()
     {
-        if (animator == null) return;
-
-        if (currentPoint == pointB)
-            animator.SetBool("isRunning", false);
-        else
-            animator.SetBool("isRunning", true);
+        if (animator == null || isStopped) return;
+        animator.SetBool("isRunning", currentPoint != pointB);
     }
 
     public void StopNPC(bool stop)
@@ -65,19 +56,14 @@ public class NPC_girlPatrol : MonoBehaviour
         rd.linearVelocity = Vector2.zero;
 
         if (stop)
-            animator.SetBool("isRunning", false);
-        else
-            UpdateAnimation();
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (pointA != null && pointB != null)
         {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(pointA.position, 0.3f);
-            Gizmos.DrawWireSphere(pointB.position, 0.3f);
-            Gizmos.DrawLine(pointA.position, pointB.position);
+            rd.constraints = RigidbodyConstraints2D.FreezeAll;
+            animator.SetBool("isRunning", false);
+        }
+        else
+        {
+            rd.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+            UpdateAnimation();
         }
     }
 }
