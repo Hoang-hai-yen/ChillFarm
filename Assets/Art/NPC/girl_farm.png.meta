@@ -1,0 +1,316 @@
+fileFormatVersion: 2
+guid: 72b0401d26a994847b6100f901b1a370
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4332144586545151844
+    second: girl_farm_0
+  - first:
+      213: -4552389591965397642
+    second: girl_farm_1
+  - first:
+      213: 1142789278618707833
+    second: girl_farm_2
+  - first:
+      213: -1283292413322655005
+    second: girl_farm_3
+  - first:
+      213: 4128593489836095560
+    second: girl_farm_4
+  - first:
+      213: 7120259164080924155
+    second: girl_farm_5
+  - first:
+      213: 8319977528988782817
+    second: girl_farm_6
+  - first:
+      213: -6393699775923374055
+    second: girl_farm_7
+  - first:
+      213: 6927476208746046930
+    second: girl_farm_8
+  - first:
+      213: -7083429374129868554
+    second: girl_farm_9
+  - first:
+      213: -5261390168053470633
+    second: girl_farm_10
+  - first:
+      213: 8154882509188898755
+    second: girl_farm_11
+  - first:
+      213: -4075379929645495355
+    second: girl_farm_12
+  - first:
+      213: 997142017620661611
+    second: girl_farm_13
+  - first:
+      213: -7207606412371071116
+    second: girl_farm_14
+  - first:
+      213: -9076966211175390374
+    second: girl_farm_15
+  - first:
+      213: -7638488381089769470
+    second: girl_farm_16
+  - first:
+      213: 8664177521488301153
+    second: girl_farm_17
+  - first:
+      213: -986763851600125664
+    second: girl_farm_18
+  - first:
+      213: 9153843672343489766
+    second: girl_farm_19
+  - first:
+      213: 809765131720160341
+    second: girl_farm_20
+  - first:
+      213: 7031005570326039383
+    second: girl_farm_21
+  - first:
+      213: 1193077048289510650
+    second: girl_farm_22
+  - first:
+      213: 7566296219316587348
+    second: girl_farm_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 56
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: girl_farm_6
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 264
+        width: 62
+        height: 94
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7849667479679e04cac74211a61dfda5
+      internalID: 8319977528988782817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: girl_farm_7
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 264
+        width: 61
+        height: 154
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12c3a997c14e9c6469961d397e778fa6
+      internalID: -6393699775923374055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: girl_farm_19
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 89
+        width: 63
+        height: 151
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40732233b286b2f4baa05521d7a81fd8
+      internalID: 9153843672343489766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: girl_farm_23
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 89
+        width: 62
+        height: 153
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 526b6d7ff5c406943ab3b7d56d622db9
+      internalID: 7566296219316587348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 1834a5293f3e60a409fcef1c37bc79ef
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      girl_farm_0: -4332144586545151844
+      girl_farm_1: -4552389591965397642
+      girl_farm_10: -5261390168053470633
+      girl_farm_11: 8154882509188898755
+      girl_farm_12: -4075379929645495355
+      girl_farm_13: 997142017620661611
+      girl_farm_14: -7207606412371071116
+      girl_farm_15: -9076966211175390374
+      girl_farm_16: -7638488381089769470
+      girl_farm_17: 8664177521488301153
+      girl_farm_18: -986763851600125664
+      girl_farm_19: 9153843672343489766
+      girl_farm_2: 1142789278618707833
+      girl_farm_20: 809765131720160341
+      girl_farm_21: 7031005570326039383
+      girl_farm_22: 1193077048289510650
+      girl_farm_23: 7566296219316587348
+      girl_farm_3: -1283292413322655005
+      girl_farm_4: 4128593489836095560
+      girl_farm_5: 7120259164080924155
+      girl_farm_6: 8319977528988782817
+      girl_farm_7: -6393699775923374055
+      girl_farm_8: 6927476208746046930
+      girl_farm_9: -7083429374129868554
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
