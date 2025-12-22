@@ -15,7 +15,7 @@ MonoBehaviour:
   animalName: 
   type: 0
   tier: 0
-  daysToGrow: 5
+  daysToGrow: 1
   babySprite: {fileID: -5188880336413608483, guid: 8cbd534ac36ec5847a35e32cee3503bf, type: 3}
   adultSprite: {fileID: 5592592324294136559, guid: 8441389152112f046a864968b23226eb, type: 3}
   animatorController: {fileID: 9100000, guid: 3bd3ca8c1bb2609439db087813841634, type: 2}

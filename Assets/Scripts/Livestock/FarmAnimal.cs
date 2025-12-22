@@ -9,37 +9,36 @@ public class FarmAnimal : MonoBehaviour
     [Header("Status (Read Only)")]
     [SerializeField] private bool isAdult = false;
     [SerializeField] private int currentAge = 0;
-    [SerializeField] private float affection = 0f; 
+    [SerializeField] private float affection = 0f;
     [SerializeField] private bool isFedToday = false;
     [SerializeField] private bool hasPlayedToday = false;
-    [SerializeField] private bool isSick = false; 
+    
+    [SerializeField] private int daysWithoutFood = 0;
+    [SerializeField] private int maxStarvationDays = 3;
+    private Vector3 targetPosition;
+    private bool isDead = false; 
 
     [Header("Movement AI")]
-    private Collider2D currentPen; 
+    private Collider2D currentPen;
     private float moveSpeed = 0.5f;
-    private Vector3 targetPosition;
     private bool isMoving = false;
 
-    [Header("Components")]
     private SpriteRenderer sr;
     private Animator anim;
-    [SerializeField] private GameObject heartParticlePrefab; 
-    [SerializeField] private GameObject sadIconPrefab; 
-
     private TimeController timeController;
 
-    private void Start()
+    void Start()
     {
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
-        
+
         timeController = FindFirstObjectByType<TimeController>();
         if (timeController != null) timeController.OnNewDayStart += OnNewDay;
 
         UpdateVisuals();
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
         if (timeController != null) timeController.OnNewDayStart -= OnNewDay;
     }
@@ -47,140 +46,153 @@ public class FarmAnimal : MonoBehaviour
 
     public bool Feed()
     {
+        if (isDead) return false;
         if (isFedToday) return false;
-        
+
         isFedToday = true;
-        ShowEmote(heartParticlePrefab);
-        Debug.Log($"{data.animalName} đã ăn ngon miệng!");
+        daysWithoutFood = 0; 
+        
+        TriggerHappy();
+        UpdateStateAnimation(); 
+        
+        Debug.Log($"{data.animalName} đã ăn và hết buồn!");
         return true;
     }
 
     public void Play()
     {
+        if (isDead) return;
         if (hasPlayedToday) return;
 
         hasPlayedToday = true;
         affection = Mathf.Clamp(affection + 10f, 0, 100);
         
-        if(anim != null) anim.SetTrigger("Happy");
-        ShowEmote(heartParticlePrefab);
-        
-        Debug.Log($"Đã chơi với {data.animalName}. Tình cảm: {affection}");
+        TriggerHappy();
+    }
+
+    public void CleanupCorpse()
+    {
+        if (isDead)
+        {
+            Debug.Log("Đã dọn dẹp xác vật nuôi.");
+            Destroy(gameObject);
+        }
+    }
+
+    private void TriggerHappy()
+    {
+        if (anim != null) anim.SetTrigger("Happy");
     }
 
 
     private void OnNewDay()
     {
+        if (isDead) return; 
+
         if (!isFedToday)
         {
-            Die();
-            return; 
-        }
-
-        if (!hasPlayedToday)
-        {
-            affection = Mathf.Clamp(affection - 5f, 0, 100);
-        }
-
-        if (!isAdult)
-        {
-            currentAge++;
-            if (currentAge >= data.daysToGrow)
+            daysWithoutFood++;
+            if (daysWithoutFood >= maxStarvationDays)
             {
-                isAdult = true;
-                Debug.Log($"{data.animalName} đã trưởng thành!");
+                Die(); 
+                return;
             }
         }
+        else
+        {
+            daysWithoutFood = 0;
+        }
 
-        if (isAdult && affection >= data.minAffectionToProduce)
+        if (!hasPlayedToday) affection = Mathf.Clamp(affection - 5f, 0, 100);
+
+        if (!isAdult && daysWithoutFood == 0)
+        {
+            currentAge++;
+            if (currentAge >= data.daysToGrow) isAdult = true;
+        }
+
+        if (isAdult && affection >= data.minAffectionToProduce && daysWithoutFood == 0)
         {
             ProduceProduct();
         }
 
-        UpdateStateAnimation();
-
         isFedToday = false;
         hasPlayedToday = false;
-        
-        UpdateVisuals();
-    }
 
-    private void UpdateVisuals()
-    {
-    }
-
-    private void UpdateStateAnimation()
-    {
-        bool isSad = affection < 10 || !isFedToday; 
-        
-        if (anim != null)
-        {
-            anim.SetBool("IsAdult", isAdult);
-            anim.SetBool("IsSad", isSad); 
-        }
-
-        if (isSad && sadIconPrefab != null)
-        {
-        }
-    }
-
-    private void ProduceProduct()   
-    {
-        if (data.productPrefab != null)
-        {
-            Vector3 spawnPos = transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0);
-            Instantiate(data.productPrefab, spawnPos, Quaternion.identity);
-            Debug.Log($"{data.animalName} đã đẻ trứng/cho sữa!");
-        }
+        UpdateVisuals(); 
     }
 
     private void Die()
     {
-        Debug.Log($"{data.animalName} đã chết vì đói...");
-        Destroy(gameObject);
+        isDead = true;
+        isMoving = false;
+        
+        if (anim != null)
+        {
+            anim.SetBool("IsDead", true);
+            anim.SetBool("isMoving", false);
+        }
+        
+        Debug.Log($"{data.animalName} đã chết. Cần dọn dẹp.");
     }
 
-    private void ShowEmote(GameObject prefab)
+    private void UpdateStateAnimation()
     {
-        if (prefab != null)
+        if (isDead) return;
+
+        bool isSad = !isFedToday; 
+
+        if (anim != null)
         {
-            Vector3 spawnPos = transform.position + Vector3.up * 0.5f;
-            Instantiate(prefab, spawnPos, Quaternion.identity);
+            anim.SetBool("IsAdult", isAdult);
+            anim.SetBool("IsSad", isSad);
         }
     }
 
-    public AnimalType GetAnimalType() => data.type;
-    public AnimalTier GetTier() => data.tier;
-    public bool IsAdult() => isAdult;
+    private void UpdateVisuals()
+    {
+        UpdateStateAnimation();
+    }
+
+
     public void SetHome(Collider2D penCollider)
     {
         currentPen = penCollider;
         StartCoroutine(WanderRoutine());
     }
-    // Trong FarmAnimal.cs
 
     private IEnumerator WanderRoutine()
     {
-        while (true)
+        while (true)  
         {
+
+            if (isDead || (!isFedToday))
+            {
+                isMoving = false;
+                if (anim != null) anim.SetBool("isMoving", false);
+                
+                yield return new WaitForSeconds(1f); 
+                continue; 
+            }
+
+            
             isMoving = false;
             if (anim != null) anim.SetBool("isMoving", false);
             yield return new WaitForSeconds(Random.Range(2f, 5f));
 
-            if (currentPen != null)
+            if (currentPen != null && !isDead && isFedToday) 
             {
                 Vector3 potentialTarget = transform.position;
                 bool foundPoint = false;
-
-                for (int i = 0; i < 10; i++)
+                
+                 for (int i = 0; i < 10; i++)
                 {
                     Vector3 randPoint = GetRandomPointInBounds(currentPen.bounds);
-                    
                     if (currentPen.OverlapPoint(randPoint))
                     {
                         targetPosition = randPoint;
                         foundPoint = true;
-                        break; 
+                        break;
                     }
                 }
 
@@ -195,7 +207,7 @@ public class FarmAnimal : MonoBehaviour
                     float timeLimit = 5f;
                     float timer = 0;
                     
-                    while (Vector3.Distance(transform.position, targetPosition) > 0.1f && timer < timeLimit)
+                    while (Vector3.Distance(transform.position, targetPosition) > 0.1f && timer < timeLimit && !isDead)
                     {
                         transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
                         timer += Time.deltaTime;
@@ -205,11 +217,36 @@ public class FarmAnimal : MonoBehaviour
             }
         }
     }
-
+    
     private Vector3 GetRandomPointInBounds(Bounds bounds)
     {
         float randomX = Random.Range(bounds.min.x, bounds.max.x);
         float randomY = Random.Range(bounds.min.y, bounds.max.y);
         return new Vector3(randomX, randomY, 0);
+    }
+
+    private void ProduceProduct()
+    {
+        if (data.productPrefab != null)
+        {
+            Vector3 spawnPos = transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0);
+            Instantiate(data.productPrefab, spawnPos, Quaternion.identity);
+        }
+    }
+
+    public bool IsDead() => isDead;
+    public AnimalType GetAnimalType() 
+    {
+        return data.type;
+    }
+
+    public AnimalTier GetTier() 
+    {
+        return data.tier;
+    }
+
+    public bool IsAdult() 
+    {
+        return isAdult;
     }
 }

@@ -140,7 +140,30 @@ public class PlayerController : MonoBehaviour
         foreach (var hit in hits)
         {
             FarmAnimal animal = hit.GetComponent<FarmAnimal>();
-            if (animal != null)
+        if (animal != null)
+        {
+            if (animal.IsDead())
+            {
+                float cleanUpCost = 5f; 
+                
+                if (staminaController.GetCurrentStamina() >= cleanUpCost)
+                {
+                    animator.SetTrigger("doAction"); 
+                    animal.CleanupCorpse();
+                    
+                    staminaCost = cleanUpCost; 
+                    actionSuccessful = true;
+                    
+                    yield return new WaitForSeconds(0.5f);
+                    goto FinalizeInteraction;
+                }
+                else
+                {
+                    Debug.Log("Không đủ sức để dọn dẹp!");
+                }
+            }
+            
+            else 
             {
                 if (currentItem != null && currentItem.itemType == ItemType.AnimalFood)
                 {
@@ -151,12 +174,12 @@ public class PlayerController : MonoBehaviour
                         actionSuccessful = true;
                     }
                 }
+
                 else 
                 {
                     animal.Play(); 
                     animator.SetTrigger("petAnimal");
                     actionSuccessful = true;
-                    
                     staminaCost = 1f; 
                 }
 
@@ -166,6 +189,7 @@ public class PlayerController : MonoBehaviour
                     goto FinalizeInteraction; 
                 }
             }
+        }
             AnimalPen pen = hit.GetComponent<AnimalPen>();
             if (pen != null)
             {
@@ -444,4 +468,5 @@ public class PlayerController : MonoBehaviour
 
         return true;
     }
+    
 }

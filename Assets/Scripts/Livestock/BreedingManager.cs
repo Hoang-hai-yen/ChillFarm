@@ -2,14 +2,12 @@ using UnityEngine;
 
 public class BreedingManager : MonoBehaviour
 {
-    // Singleton
     public static BreedingManager Instance;
     
     [Header("Config")]
     public GameObject cowPrefab;
     public GameObject chickenPrefab;
 
-    // Các biến Data mẫu để gán khi sinh ra con mới (Cần assign trong Inspector)
     public AnimalData chickenNormal, chickenMedium, chickenHigh;
     public AnimalData cowNormal, cowMedium, cowHigh;
 
