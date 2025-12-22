@@ -86,4 +86,5 @@ public class NPCSharkPatrol : MonoBehaviour
         else
             rd.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
+
 }

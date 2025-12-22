@@ -1,23 +1,8 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
 public class QuestGiver : MonoBehaviour
 {
-    [Header("Quest")]
-    public Quest quest;
-
-    [Header("UI")]
-    public GameObject questDialog;
-    public TextMeshProUGUI questText;
-    public Button buttonAccept;
-    public Button buttonComplete;
-
-    [Header("Button Text")]
-    public TextMeshProUGUI acceptButtonText;
-    public TextMeshProUGUI completeButtonText;
-
-    [Header("Random Settings")]
+    [Header("Quest Data")]
     public string[] possibleItems = { "Carrot", "Fish", "Egg", "Milk" };
     public Vector2Int amountRange = new Vector2Int(1, 5);
     public Vector2Int goldRange = new Vector2Int(20, 100);
@@ -26,50 +11,44 @@ public class QuestGiver : MonoBehaviour
     [Header("Interaction")]
     public float interactDistance = 1.5f;
 
-    private Inventory inventory;
-    private Transform player;
-    private bool questGenerated = false;
+    public Quest quest { get; private set; }
+    public float nextQuestTime { get; private set; }
+
+    Transform player;
+    bool questGenerated = false;
+
+    const float QUEST_COOLDOWN = 60f;
 
     void Start()
     {
-        inventory = FindObjectOfType<Inventory>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
-
-        questDialog.SetActive(false);
-
-        buttonAccept.onClick.AddListener(AcceptQuest);
-        buttonComplete.onClick.AddListener(CompleteQuest);
-
-        acceptButtonText.text = "Nhận nhiệm vụ";
-        completeButtonText.text = "Hoàn thành";
+        quest = new Quest();
     }
 
     void Update()
     {
         if (player == null) return;
+        if (QuestDialogManager.Instance.IsOpen()) return;
 
         float distance = Vector2.Distance(transform.position, player.position);
 
         if (distance <= interactDistance && Input.GetKeyDown(KeyCode.Z))
         {
-            if (!questDialog.activeSelf)
-            {
-                if (!questGenerated)
-                {
-                    GenerateRandomQuest();
-                    questGenerated = true;
-                }
-
-                ShowQuest();
-            }
-            else
-            {
-                questDialog.SetActive(false);
-            }
+            QuestDialogManager.Instance.Open(this);
         }
     }
 
-    void GenerateRandomQuest()
+    public bool IsInCooldown()
+    {
+        return Time.time < nextQuestTime;
+    }
+
+    public float RemainingCooldown()
+    {
+        return Mathf.Ceil(nextQuestTime - Time.time);
+    }
+
+    public void GenerateQuest()
     {
         quest.itemRequired = possibleItems[Random.Range(0, possibleItems.Length)];
         quest.amountRequired = Random.Range(amountRange.x, amountRange.y + 1);
@@ -77,43 +56,34 @@ public class QuestGiver : MonoBehaviour
         quest.rewardXP = Random.Range(xpRange.x, xpRange.y + 1);
 
         quest.questContent = "Tôi đang cần một số nguyên liệu.";
-
         quest.isAccepted = false;
         quest.isCompleted = false;
+
+        questGenerated = true;
     }
 
-    void ShowQuest()
+    public bool HasQuest()
     {
-        questDialog.SetActive(true);
-
-        questText.text =
-            $"{quest.questContent}\n\n" +
-            $"Yêu cầu: {quest.amountRequired} {quest.itemRequired}\n" +
-            $"Thưởng: {quest.rewardGold} vàng, {quest.rewardXP} XP";
-
-        buttonAccept.gameObject.SetActive(!quest.isAccepted);
-        buttonComplete.gameObject.SetActive(quest.isAccepted && !quest.isCompleted);
+        return questGenerated;
     }
 
-    void AcceptQuest()
+    public void AcceptQuest()
     {
         quest.isAccepted = true;
-        ShowQuest();
     }
 
-    void CompleteQuest()
+    public void RejectQuest()
     {
-        if (!inventory.HasItem(quest.itemRequired, quest.amountRequired))
-        {
-            questText.text += "\n\n❌ Chưa đủ vật phẩm!";
-            return;
-        }
+        questGenerated = false;
+        quest.isAccepted = false;
+        quest.isCompleted = false;
+        nextQuestTime = Time.time + QUEST_COOLDOWN;
+    }
 
+    public void CompleteQuest(Inventory inventory)
+    {
         inventory.RemoveItem(quest.itemRequired, quest.amountRequired);
         quest.isCompleted = true;
-
-        Debug.Log($"Hoàn thành quest! +{quest.rewardGold} vàng, +{quest.rewardXP} XP");
-
-        questDialog.SetActive(false);
+        questGenerated = false;
     }
 }
