@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private SpriteRenderer highlightRenderer;
 
     private FarmlandManager farmlandManager;
+
+    private FishingController fishingController;
     private Grid grid;
     private bool isBackpackOpen = false;
 
@@ -43,6 +45,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        fishingController = GetComponent<FishingController>();
 
         staminaController = FindFirstObjectByType<StaminaController>();
         if (staminaController == null)
@@ -97,7 +100,11 @@ public class PlayerController : MonoBehaviour
     {
         if (staminaController != null && !staminaController.IsFainted() && !isInteracting)
         {
-            PlayerInput();
+            if(!animator.GetBool("isFishing"))
+            {
+                PlayerInput();
+
+            }
             UpdateInteractionHighlight();
 
             // Phím Z cho NPC interaction
@@ -146,6 +153,21 @@ public class PlayerController : MonoBehaviour
             {
                 animator.SetTrigger("useWaterCan");
                 yield return new WaitForSeconds(0.7f);
+            }
+            else if (tool.toolType == ToolType.FishingRod)
+            {
+                if(!animator.GetBool("isFishing") && fishingController.CanFishInDirection())
+                {
+                    animator.SetBool("isFishing", true);
+                    yield return new WaitForSeconds(0.7f);
+                }
+                else
+                {
+                    animator.SetBool("isFishing", false);
+                    yield return new WaitForSeconds(0.5f);
+
+                }
+                
             }
         }
 
@@ -209,7 +231,6 @@ public class PlayerController : MonoBehaviour
     private void PlayerInput()
     {
         movement = playerControls.Movement.Move.ReadValue<Vector2>();
-
         animator.SetBool("isMoving", movement != Vector2.zero);
 
         animator.SetFloat("moveX", movement.x);
@@ -219,6 +240,8 @@ public class PlayerController : MonoBehaviour
         {
             lastMoveX = movement.x;
             lastMoveY = movement.y;
+            fishingController.lastFacingDirection = movement;
+
         }
         animator.SetFloat("lastMoveX", lastMoveX);
         animator.SetFloat("lastMoveY", lastMoveY);

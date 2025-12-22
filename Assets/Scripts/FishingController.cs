@@ -1,205 +1,177 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using Assets.Scripts.Cloud.Schemas; // Namespace chứa schema của bạn
 
 public class FishingController : MonoBehaviour
 {
-    public enum FishingState { Idle, Casting, Waiting, Bite, Reeling, Caught }
+    [Header("Cài đặt chung")]
+    // [Tooltip("Nút bấm để bắt đầu câu")]
+    // public KeyCode fishKey = KeyCode.Space;
+    [Tooltip("Vị trí hiển thị kết quả trên đầu Player")]
+    public SpriteRenderer resultDisplaySprite;
+    [Tooltip("Thời gian hiển thị kết quả trước khi biến mất")]
+    public float resultDisplayDuration = 2f;
 
-    //[Header("Settings")]
-    //public float minWaitTime = 2f;
-    //public float maxWaitTime = 5f;
-    //public float biteWindow = 1.5f;
+    [Header("Thời gian chờ cá cắn câu")]
+    public float minWaitTime = 3f;
+    public float maxWaitTime = 7f;
 
-    //// Thay vì ScriptableObject, ta dùng List Class thuần
-    //// List này sẽ được "bơm" dữ liệu từ GameConfigManager (JSON Cloud)
-    //[Header("Runtime Config")]
-    //public List<FishConfigData> currentMapFishList;
+    [Header("Tỉ lệ và Danh sách Cá")]
+    [Tooltip("Tỉ lệ không câu được gì (0.1 = 10%)")]
+    [Range(0f, 1f)] public float missChance = 0.1f;
+    [Tooltip("Sprite hiển thị khi không câu được gì (Rác/Hụt)")]
+    public Sprite missSprite;
+    [Tooltip("Kéo các FishData bạn đã tạo vào danh sách này")]
+    public List<FishData> fishPool = new List<FishData>();
 
-    private FishingState currentState = FishingState.Idle;
+    [Header("Cấu hình 4 hướng")]
+    public float fishingDistance = 1.0f; // Khoảng cách quăng cần ra xa nhân vật
+    public float checkRadius = 0.3f;    // Độ rộng của điểm kiểm tra
+    public LayerMask waterLayer;
 
-    //// Reference to global Data Manager
-    //private GameDataManager dataManager;
+    private Animator animator;
+
+    private bool isFishing = false;
+    private Coroutine currentFishingRoutine;
+    public Vector2 lastFacingDirection = Vector2.down;
 
     void Start()
     {
-    //    dataManager = FindObjectOfType<GameDataManager>();
+        if (resultDisplaySprite != null)
+            resultDisplaySprite.gameObject.SetActive(false);
+        animator = GetComponent<Animator>();
 
-    //    // MOCK DATA: Nếu chưa có cloud, tự tạo data giả để test
-    //    if (currentMapFishList == null || currentMapFishList.Count == 0)
-    //    {
-    //        currentMapFishList = new List<FishConfigData>
-    //        {
-    //            new FishConfigData { id = "fish_carp", name = "Carp", rarityWeight = 50, minSize = 10, maxSize = 30 },
-    //            new FishConfigData { id = "fish_shark", name = "Shark", rarityWeight = 5, minSize = 100, maxSize = 200 }
-    //        };
-    //    }
     }
 
-    //void Update()
-    //{
-    //    // Spacebar to fish
-    //    if (Input.GetKeyDown(KeyCode.Space))
-    //    {
-    //        HandleInput();
-    //    }
-    //}
+    void Update()
+    {
+        if (animator.GetBool("isFishing") && !isFishing)
+        {
+            
+                StartFishing();
+           
+        }
+    }
 
-    //void HandleInput()
-    //{
-    //    switch (currentState)
-    //    {
-    //        case FishingState.Idle:
-    //            StartCoroutine(CastRodRoutine());
-    //            break;
+    void StartFishing()
+    {
+        if (fishPool.Count == 0)
+        {
+            Debug.LogError("Chưa gán danh sách cá vào Fish Pool!");
+            return;
+        }
 
-    //        case FishingState.Waiting:
-    //            Debug.Log("Pulled too early! Fish scared away.");
-    //            CancelFishing();
-    //            break;
+        isFishing = true;
+        Debug.Log("Bắt đầu thả câu... Đang chờ...");
+        
+        currentFishingRoutine = StartCoroutine(WaitForFishCoroutine());
+    }
 
-    //        case FishingState.Bite:
-    //            Debug.Log("Hooked! Caught the fish.");
-    //            CatchFish();
-    //            break;
-    //    }
-    //}
+    IEnumerator WaitForFishCoroutine()
+    {
+        // Random thời gian chờ
+        float waitTime = Random.Range(minWaitTime, maxWaitTime);
+        yield return new WaitForSeconds(waitTime);
 
-    //IEnumerator CastRodRoutine()
-    //{
-    //    currentState = FishingState.Casting;
-    //    Debug.Log("Casting rod...");
-    //    yield return new WaitForSeconds(1f);
+        // Hết thời gian chờ, tiến hành kéo cá
+        if(animator.GetBool("isFishing"))
+        {
+            yield return FinishFishing();
 
-    //    currentState = FishingState.Waiting;
-    //    Debug.Log("Waiting for bite...");
+        }
+        else
+        {
+            isFishing = false;
+        }
+    }
 
-    //    float waitTime = UnityEngine.Random.Range(minWaitTime, maxWaitTime);
-    //    yield return new WaitForSeconds(waitTime);
+    IEnumerator FinishFishing()
+    {
+        isFishing = false;
+        Debug.Log("Đã kéo cần!");
+        animator.SetBool("isFishing", false);
+        yield return new WaitForSeconds(0.5f);
 
-    //    if (currentState == FishingState.Waiting)
-    //    {
-    //        currentState = FishingState.Bite;
-    //        Debug.Log("!!! BITE !!! Press Space!");
+        // 1. Kiểm tra xem có bị hụt không (Miss chance)
+        if (Random.value < missChance)
+        {
+            
+            ShowResult(missSprite, "Không câu được gì cả!");
+        }
+        else
+        {
+            // 2. Nếu không hụt, chọn random cá dựa trên độ hiếm
+            FishData caughtFish = GetRandomFishWeighted();
+            if (caughtFish != null)
+            {
+               
+                ShowResult(caughtFish.itemIcon, $"Bạn đã câu được: {caughtFish.itemName}!");
 
-    //        yield return new WaitForSeconds(biteWindow);
+            }
+        }
 
-    //        if (currentState == FishingState.Bite)
-    //        {
-    //            Debug.Log("Fish escaped...");
-    //            CancelFishing();
-    //        }
-    //    }
-    //}
+    }
 
-    //void CatchFish()
-    //{
-    //    currentState = FishingState.Caught;
+    private FishData GetRandomFishWeighted()
+    {
+        int totalWeight = 0;
+        foreach (var fish in fishPool)
+        {
+            totalWeight += fish.rarityWeight;
+        }
 
-    //    // 1. Random Fish based on Config (Weight)
-    //    FishConfigData config = GetRandomFishConfig();
+        int randomValue = Random.Range(0, totalWeight);
+        int currentWeightSum = 0;
 
-    //    // 2. Random Size
-    //    float sizeVal = UnityEngine.Random.Range(config.minSize, config.maxSize);
-    //    string sizeStr = sizeVal.ToString("F2"); // Format: "12.55"
+        foreach (var fish in fishPool)
+        {
+            currentWeightSum += fish.rarityWeight;
+            if (randomValue < currentWeightSum)
+            {
+                return fish;
+            }
+        }
+        return fishPool[0];
+    }
 
-    //    Debug.Log($"You caught a {config.name} (Size: {sizeStr})!");
+    private void ShowResult(Sprite spriteToShow, string debugMessage)
+    {
+        Debug.Log(debugMessage);
 
-    //    // 3. Update Local Data Schema
-    //    if (dataManager != null && dataManager.FishingData != null)
-    //    {
-    //        UpdateFishingSchema(dataManager.FishingData, config, sizeStr);
-    //    }
-    //    else
-    //    {
-    //        Debug.LogError("GameDataManager or FishingData is null! Cannot save.");
-    //    }
+        if (resultDisplaySprite != null)
+        {
+            resultDisplaySprite.sprite = spriteToShow;
+            resultDisplaySprite.gameObject.SetActive(true);
+            StartCoroutine(HideResultAfterDelay());
+        }
+    }
 
-    //    ResetFishing();
-    //}
+    IEnumerator HideResultAfterDelay()
+    {
+        yield return new WaitForSeconds(resultDisplayDuration);
+        if (resultDisplaySprite != null)
+        {
+            resultDisplaySprite.gameObject.SetActive(false);
+        }
+    }
 
-    //// --- LOGIC MAPPING SCHEMA ---
-    //void UpdateFishingSchema(Fishing fishingData, FishConfigData config, string sizeStr)
-    //{
-    //    // A. Tạo object Fish mới theo Schema
-    //    Assets.Scripts.Cloud.Schemas.Fish newFish = new Assets.Scripts.Cloud.Schemas.Fish
-    //    {
-    //        FishId = config.id,
-    //        Species = config.name,
-    //        AddedAt = DateTime.UtcNow,
-    //        Size = sizeStr,
-    //        CanCatch = true
-    //    };
 
-    //    // B. Update FishingStats (TotalCaught)
-    //    fishingData.Stats.TotalCaught++;
+    public bool CanFishInDirection()
+    {
+        // Tính toán vị trí kiểm tra: Vị trí hiện tại + (Hướng nhìn * Khoảng cách)
+        Vector2 checkPosition = (Vector2)transform.position + (lastFacingDirection * fishingDistance);
+        
+        // Kiểm tra xem tại vị trí đó có Layer Water không
+        Collider2D hit = Physics2D.OverlapCircle(checkPosition, checkRadius, waterLayer);
+        Debug.Log(hit != null ? "Water" : "Not water");
+        return hit != null;
+    }
 
-    //    // C. Update CaughtFishes List (Inventory Logic)
-    //    // Tìm xem đã từng bắt loại cá này chưa?
-    //    var existingRecord = fishingData.Stats.CaughtFishes
-    //        .FirstOrDefault(x => x.Fish.FishId == config.id);
-
-    //    if (existingRecord != null)
-    //    {
-    //        // Nếu có rồi -> Tăng số lượng
-    //        existingRecord.Quantity++;
-    //        Debug.Log($"Inventory Updated: {config.name} (Quantity: {existingRecord.Quantity})");
-    //    }
-    //    else
-    //    {
-    //        // Nếu chưa -> Tạo record mới
-    //        Fishing.FishingStats.CaughtFish newRecord = new Fishing.FishingStats.CaughtFish
-    //        {
-    //            Fish = newFish, // Lưu thông tin con cá vừa bắt làm đại diện
-    //            Quantity = 1
-    //        };
-    //        fishingData.Stats.CaughtFishes.Add(newRecord);
-    //        Debug.Log($"New Species Registered: {config.name}");
-    //    }
-
-    //    // D. Update Pond (Optional)
-    //    // Nếu hồ đã mở khóa và còn chỗ -> Thả cá vào hồ
-    //    if (fishingData.Pond.IsUnlocked)
-    //    {
-    //        if (fishingData.Pond.Fish.Count < fishingData.Pond.MaxCapacity)
-    //        {
-    //            fishingData.Pond.Fish.Add(newFish);
-    //            Debug.Log("Fish added to Pond.");
-    //        }
-    //        else
-    //        {
-    //            Debug.Log("Pond is full.");
-    //        }
-    //    }
-    //}
-
-    //void CancelFishing()
-    //{
-    //    ResetFishing();
-    //}
-
-    //void ResetFishing()
-    //{
-    //    currentState = FishingState.Idle;
-    //}
-
-    //// Thuật toán chọn cá theo tỉ lệ (Weighted Random)
-    //FishConfigData GetRandomFishConfig()
-    //{
-    //    if (currentMapFishList == null || currentMapFishList.Count == 0) return null;
-
-    //    float totalWeight = currentMapFishList.Sum(f => f.rarityWeight);
-    //    float randomValue = UnityEngine.Random.Range(0, totalWeight);
-    //    float currentWeight = 0;
-
-    //    foreach (var fish in currentMapFishList)
-    //    {
-    //        currentWeight += fish.rarityWeight;
-    //        if (randomValue <= currentWeight) return fish;
-    //    }
-    //    return currentMapFishList[0];
-    //}
+    // Vẽ để bạn dễ căn chỉnh trong cửa sổ Scene
+    void OnDrawGizmosSelected()
+    {
+        Vector2 checkPosition = (Vector2)transform.position + (lastFacingDirection * fishingDistance);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(checkPosition, checkRadius);
+    }
 }
