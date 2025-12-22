@@ -166,6 +166,33 @@ public class PlayerController : MonoBehaviour
                     goto FinalizeInteraction; 
                 }
             }
+            AnimalPen pen = hit.GetComponent<AnimalPen>();
+            if (pen != null)
+            {
+                if (currentItem is LivestockItemData livestockItem)
+                {
+                    if (livestockItem.animalType == pen.allowedAnimal)
+                    {
+                        GameObject newAnimalObj = Instantiate(livestockItem.animalPrefab, interactionWorldPos, Quaternion.identity);
+                        FarmAnimal newAnimalScript = newAnimalObj.GetComponent<FarmAnimal>();
+                        
+                        newAnimalScript.SetHome(pen.GetBounds());
+
+                        InventoryManager.Instance.RemoveItem(currentItem, 1);
+                        
+                        animator.SetTrigger("doAction");
+                        Debug.Log("Đã thả gà vào chuồng!");
+                        
+                        actionSuccessful = true;
+                        yield return new WaitForSeconds(0.5f);
+                        goto FinalizeInteraction;
+                    }
+                    else
+                    {
+                        Debug.Log("Sai chuồng rồi! Đây là chuồng " + pen.allowedAnimal);
+                    }
+                }
+            }
         }
 
 
@@ -403,8 +430,17 @@ public class PlayerController : MonoBehaviour
 
     private bool IsWalkable(Vector3 targetPos)
     {
-        if (Physics2D.OverlapCircle(targetPos, 0.2f, interactableLayer) != null)
+        Collider2D hit = Physics2D.OverlapCircle(targetPos, 0.2f, interactableLayer);
+
+        if (hit != null)
+        {
+            if (hit.isTrigger) 
+            {
+                return true;
+            }
+            
             return false;
+        }
 
         return true;
     }

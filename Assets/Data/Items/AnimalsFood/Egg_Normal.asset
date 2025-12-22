@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Egg_Normal
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: "Tr\u1EE9ng g\xE0 2"
-  itemIcon: {fileID: -9092335394113956585, guid: f22da1fd3b85b0a438f8649f610d2f10, type: 3}
+  itemIcon: {fileID: 3615798674218886836, guid: f22da1fd3b85b0a438f8649f610d2f10, type: 3}
   itemType: 6
   staminaCost: 1
