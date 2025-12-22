@@ -1,7 +1,12 @@
 using UnityEngine;
 
-public enum ItemType { Tool, Seed, Crop, Resource, Fertilizer }
+public enum ItemType { Tool, Seed, Crop, Resource, Fertilizer, AnimalFood, AnimalProduct }
 
+public enum AnimalType { Chicken, Cow }
+public enum AnimalTier { Normal, Medium, High } 
+
+[CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Generic Item")] 
+// --------------------
 public class ItemData : ScriptableObject
 {
     public string itemName;

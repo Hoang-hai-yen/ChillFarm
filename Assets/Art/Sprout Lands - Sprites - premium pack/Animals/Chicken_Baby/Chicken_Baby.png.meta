@@ -349,7 +349,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -363,7 +363,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -421,6 +421,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -428,12 +441,12 @@ TextureImporter:
       name: Chicken_Baby_0
       rect:
         serializedVersion: 2
-        x: 2
+        x: 0
         y: 288
-        width: 11
-        height: 11
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -450,12 +463,12 @@ TextureImporter:
       name: Chicken_Baby_1
       rect:
         serializedVersion: 2
-        x: 18
+        x: 16
         y: 288
-        width: 11
-        height: 10
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -472,12 +485,12 @@ TextureImporter:
       name: Chicken_Baby_2
       rect:
         serializedVersion: 2
-        x: 34
+        x: 32
         y: 288
-        width: 11
-        height: 12
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -494,12 +507,12 @@ TextureImporter:
       name: Chicken_Baby_3
       rect:
         serializedVersion: 2
-        x: 50
+        x: 48
         y: 288
-        width: 11
-        height: 11
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -516,12 +529,12 @@ TextureImporter:
       name: Chicken_Baby_4
       rect:
         serializedVersion: 2
-        x: 2
+        x: 0
         y: 272
-        width: 11
-        height: 10
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -538,12 +551,12 @@ TextureImporter:
       name: Chicken_Baby_5
       rect:
         serializedVersion: 2
-        x: 18
+        x: 16
         y: 272
-        width: 11
-        height: 13
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -560,12 +573,12 @@ TextureImporter:
       name: Chicken_Baby_6
       rect:
         serializedVersion: 2
-        x: 34
+        x: 32
         y: 272
-        width: 11
-        height: 12
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -582,12 +595,12 @@ TextureImporter:
       name: Chicken_Baby_7
       rect:
         serializedVersion: 2
-        x: 50
+        x: 48
         y: 272
-        width: 11
-        height: 12
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -604,12 +617,12 @@ TextureImporter:
       name: Chicken_Baby_8
       rect:
         serializedVersion: 2
-        x: 66
+        x: 64
         y: 272
-        width: 11
-        height: 12
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -626,12 +639,12 @@ TextureImporter:
       name: Chicken_Baby_9
       rect:
         serializedVersion: 2
-        x: 82
+        x: 80
         y: 272
-        width: 11
-        height: 13
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -648,12 +661,12 @@ TextureImporter:
       name: Chicken_Baby_10
       rect:
         serializedVersion: 2
-        x: 98
+        x: 96
         y: 272
-        width: 11
-        height: 10
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -670,12 +683,12 @@ TextureImporter:
       name: Chicken_Baby_11
       rect:
         serializedVersion: 2
-        x: 2
+        x: 0
         y: 256
-        width: 11
-        height: 11
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -692,12 +705,12 @@ TextureImporter:
       name: Chicken_Baby_12
       rect:
         serializedVersion: 2
-        x: 18
+        x: 16
         y: 256
-        width: 11
-        height: 11
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -714,12 +727,12 @@ TextureImporter:
       name: Chicken_Baby_13
       rect:
         serializedVersion: 2
-        x: 34
+        x: 32
         y: 256
-        width: 11
-        height: 11
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -736,12 +749,12 @@ TextureImporter:
       name: Chicken_Baby_14
       rect:
         serializedVersion: 2
-        x: 50
+        x: 48
         y: 256
-        width: 11
-        height: 11
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -758,12 +771,12 @@ TextureImporter:
       name: Chicken_Baby_15
       rect:
         serializedVersion: 2
-        x: 66
+        x: 64
         y: 256
-        width: 11
-        height: 11
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -780,12 +793,12 @@ TextureImporter:
       name: Chicken_Baby_16
       rect:
         serializedVersion: 2
-        x: 82
+        x: 80
         y: 256
-        width: 11
-        height: 11
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -802,12 +815,12 @@ TextureImporter:
       name: Chicken_Baby_17
       rect:
         serializedVersion: 2
-        x: 98
+        x: 96
         y: 256
-        width: 11
-        height: 11
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -824,12 +837,12 @@ TextureImporter:
       name: Chicken_Baby_18
       rect:
         serializedVersion: 2
-        x: 114
+        x: 112
         y: 256
-        width: 11
-        height: 11
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -846,12 +859,12 @@ TextureImporter:
       name: Chicken_Baby_19
       rect:
         serializedVersion: 2
-        x: 2
-        y: 239
-        width: 11
-        height: 11
+        x: 0
+        y: 240
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -868,12 +881,12 @@ TextureImporter:
       name: Chicken_Baby_20
       rect:
         serializedVersion: 2
-        x: 18
+        x: 16
         y: 240
-        width: 11
-        height: 13
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -890,12 +903,12 @@ TextureImporter:
       name: Chicken_Baby_21
       rect:
         serializedVersion: 2
-        x: 34
+        x: 32
         y: 240
-        width: 11
-        height: 13
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -912,12 +925,12 @@ TextureImporter:
       name: Chicken_Baby_22
       rect:
         serializedVersion: 2
-        x: 50
+        x: 48
         y: 240
-        width: 11
-        height: 12
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -934,12 +947,12 @@ TextureImporter:
       name: Chicken_Baby_23
       rect:
         serializedVersion: 2
-        x: 66
+        x: 64
         y: 240
-        width: 12
-        height: 8
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -956,12 +969,12 @@ TextureImporter:
       name: Chicken_Baby_24
       rect:
         serializedVersion: 2
-        x: 83
+        x: 80
         y: 240
-        width: 10
-        height: 9
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -978,12 +991,12 @@ TextureImporter:
       name: Chicken_Baby_25
       rect:
         serializedVersion: 2
-        x: 99
+        x: 96
         y: 240
-        width: 10
-        height: 9
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1000,12 +1013,12 @@ TextureImporter:
       name: Chicken_Baby_26
       rect:
         serializedVersion: 2
-        x: 3
+        x: 0
         y: 224
-        width: 10
-        height: 9
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1022,12 +1035,12 @@ TextureImporter:
       name: Chicken_Baby_27
       rect:
         serializedVersion: 2
-        x: 18
+        x: 16
         y: 224
-        width: 12
-        height: 8
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1044,12 +1057,12 @@ TextureImporter:
       name: Chicken_Baby_28
       rect:
         serializedVersion: 2
-        x: 34
+        x: 32
         y: 224
-        width: 11
-        height: 12
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1066,12 +1079,12 @@ TextureImporter:
       name: Chicken_Baby_29
       rect:
         serializedVersion: 2
-        x: 50
+        x: 48
         y: 224
-        width: 11
-        height: 13
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1088,12 +1101,12 @@ TextureImporter:
       name: Chicken_Baby_30
       rect:
         serializedVersion: 2
-        x: 66
+        x: 64
         y: 224
-        width: 11
-        height: 12
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1110,12 +1123,12 @@ TextureImporter:
       name: Chicken_Baby_31
       rect:
         serializedVersion: 2
-        x: 82
-        y: 223
-        width: 11
-        height: 10
+        x: 80
+        y: 224
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1132,12 +1145,12 @@ TextureImporter:
       name: Chicken_Baby_32
       rect:
         serializedVersion: 2
-        x: 98
-        y: 223
-        width: 11
-        height: 11
+        x: 96
+        y: 224
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1154,12 +1167,12 @@ TextureImporter:
       name: Chicken_Baby_33
       rect:
         serializedVersion: 2
-        x: 2
-        y: 207
-        width: 11
-        height: 11
+        x: 0
+        y: 208
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1176,12 +1189,12 @@ TextureImporter:
       name: Chicken_Baby_34
       rect:
         serializedVersion: 2
-        x: 18
+        x: 16
         y: 208
-        width: 11
-        height: 13
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1198,12 +1211,12 @@ TextureImporter:
       name: Chicken_Baby_35
       rect:
         serializedVersion: 2
-        x: 34
+        x: 32
         y: 208
-        width: 11
-        height: 13
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1220,12 +1233,12 @@ TextureImporter:
       name: Chicken_Baby_36
       rect:
         serializedVersion: 2
-        x: 50
-        y: 211
-        width: 11
-        height: 9
+        x: 48
+        y: 208
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1242,12 +1255,12 @@ TextureImporter:
       name: Chicken_Baby_37
       rect:
         serializedVersion: 2
-        x: 66
-        y: 210
-        width: 12
-        height: 7
+        x: 64
+        y: 208
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1264,12 +1277,12 @@ TextureImporter:
       name: Chicken_Baby_38
       rect:
         serializedVersion: 2
-        x: 83
-        y: 210
-        width: 10
-        height: 8
+        x: 80
+        y: 208
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1286,12 +1299,12 @@ TextureImporter:
       name: Chicken_Baby_39
       rect:
         serializedVersion: 2
-        x: 99
-        y: 210
-        width: 10
-        height: 8
+        x: 96
+        y: 208
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1308,12 +1321,12 @@ TextureImporter:
       name: Chicken_Baby_40
       rect:
         serializedVersion: 2
-        x: 3
-        y: 194
-        width: 10
-        height: 8
+        x: 0
+        y: 192
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1330,12 +1343,12 @@ TextureImporter:
       name: Chicken_Baby_41
       rect:
         serializedVersion: 2
-        x: 18
-        y: 194
-        width: 12
-        height: 7
+        x: 16
+        y: 192
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1352,12 +1365,12 @@ TextureImporter:
       name: Chicken_Baby_42
       rect:
         serializedVersion: 2
-        x: 34
-        y: 195
-        width: 11
-        height: 9
+        x: 32
+        y: 192
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1374,12 +1387,12 @@ TextureImporter:
       name: Chicken_Baby_43
       rect:
         serializedVersion: 2
-        x: 50
+        x: 48
         y: 192
-        width: 11
-        height: 13
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1396,12 +1409,12 @@ TextureImporter:
       name: Chicken_Baby_44
       rect:
         serializedVersion: 2
-        x: 66
+        x: 64
         y: 192
-        width: 11
-        height: 12
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1418,12 +1431,12 @@ TextureImporter:
       name: Chicken_Baby_45
       rect:
         serializedVersion: 2
-        x: 82
-        y: 191
-        width: 11
-        height: 10
+        x: 80
+        y: 192
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1440,12 +1453,12 @@ TextureImporter:
       name: Chicken_Baby_46
       rect:
         serializedVersion: 2
-        x: 98
-        y: 191
-        width: 11
-        height: 11
+        x: 96
+        y: 192
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1462,12 +1475,12 @@ TextureImporter:
       name: Chicken_Baby_47
       rect:
         serializedVersion: 2
-        x: 3
+        x: 0
         y: 176
-        width: 10
-        height: 9
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1484,12 +1497,12 @@ TextureImporter:
       name: Chicken_Baby_48
       rect:
         serializedVersion: 2
-        x: 18
+        x: 16
         y: 176
-        width: 12
-        height: 8
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1506,12 +1519,12 @@ TextureImporter:
       name: Chicken_Baby_49
       rect:
         serializedVersion: 2
-        x: 35
+        x: 32
         y: 176
-        width: 10
-        height: 10
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1528,12 +1541,12 @@ TextureImporter:
       name: Chicken_Baby_50
       rect:
         serializedVersion: 2
-        x: 51
+        x: 48
         y: 176
-        width: 10
-        height: 10
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1550,12 +1563,12 @@ TextureImporter:
       name: Chicken_Baby_51
       rect:
         serializedVersion: 2
-        x: 67
+        x: 64
         y: 176
-        width: 10
-        height: 9
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1572,12 +1585,12 @@ TextureImporter:
       name: Chicken_Baby_52
       rect:
         serializedVersion: 2
-        x: 3
+        x: 0
         y: 160
-        width: 10
-        height: 10
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1594,12 +1607,12 @@ TextureImporter:
       name: Chicken_Baby_53
       rect:
         serializedVersion: 2
-        x: 19
+        x: 16
         y: 160
-        width: 10
-        height: 9
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1616,12 +1629,12 @@ TextureImporter:
       name: Chicken_Baby_54
       rect:
         serializedVersion: 2
-        x: 34
+        x: 32
         y: 160
-        width: 12
-        height: 8
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1638,12 +1651,12 @@ TextureImporter:
       name: Chicken_Baby_55
       rect:
         serializedVersion: 2
-        x: 51
+        x: 48
         y: 160
-        width: 10
-        height: 9
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1660,12 +1673,12 @@ TextureImporter:
       name: Chicken_Baby_56
       rect:
         serializedVersion: 2
-        x: 2
-        y: 146
-        width: 11
-        height: 8
+        x: 0
+        y: 144
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1682,12 +1695,12 @@ TextureImporter:
       name: Chicken_Baby_57
       rect:
         serializedVersion: 2
-        x: 17
-        y: 146
-        width: 13
-        height: 7
+        x: 16
+        y: 144
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1704,12 +1717,12 @@ TextureImporter:
       name: Chicken_Baby_58
       rect:
         serializedVersion: 2
-        x: 34
-        y: 146
-        width: 11
-        height: 9
+        x: 32
+        y: 144
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1726,12 +1739,12 @@ TextureImporter:
       name: Chicken_Baby_59
       rect:
         serializedVersion: 2
-        x: 51
-        y: 146
-        width: 10
-        height: 9
+        x: 48
+        y: 144
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1748,12 +1761,12 @@ TextureImporter:
       name: Chicken_Baby_60
       rect:
         serializedVersion: 2
-        x: 67
-        y: 146
-        width: 10
-        height: 8
+        x: 64
+        y: 144
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1770,12 +1783,12 @@ TextureImporter:
       name: Chicken_Baby_61
       rect:
         serializedVersion: 2
-        x: 3
-        y: 130
-        width: 10
-        height: 9
+        x: 0
+        y: 128
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1792,12 +1805,12 @@ TextureImporter:
       name: Chicken_Baby_62
       rect:
         serializedVersion: 2
-        x: 19
-        y: 130
-        width: 10
-        height: 8
+        x: 16
+        y: 128
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1814,12 +1827,12 @@ TextureImporter:
       name: Chicken_Baby_63
       rect:
         serializedVersion: 2
-        x: 34
-        y: 130
-        width: 12
-        height: 7
+        x: 32
+        y: 128
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1836,12 +1849,12 @@ TextureImporter:
       name: Chicken_Baby_64
       rect:
         serializedVersion: 2
-        x: 51
-        y: 130
-        width: 10
-        height: 8
+        x: 48
+        y: 128
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1858,12 +1871,12 @@ TextureImporter:
       name: Chicken_Baby_65
       rect:
         serializedVersion: 2
-        x: 2
+        x: 0
         y: 112
-        width: 11
-        height: 12
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1880,12 +1893,12 @@ TextureImporter:
       name: Chicken_Baby_66
       rect:
         serializedVersion: 2
-        x: 18
+        x: 16
         y: 112
-        width: 13
-        height: 11
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1902,12 +1915,12 @@ TextureImporter:
       name: Chicken_Baby_67
       rect:
         serializedVersion: 2
-        x: 34
+        x: 32
         y: 112
-        width: 13
-        height: 10
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1924,12 +1937,12 @@ TextureImporter:
       name: Chicken_Baby_68
       rect:
         serializedVersion: 2
-        x: 50
+        x: 48
         y: 112
-        width: 13
-        height: 11
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1946,12 +1959,12 @@ TextureImporter:
       name: Chicken_Baby_69
       rect:
         serializedVersion: 2
-        x: 66
+        x: 64
         y: 112
-        width: 13
-        height: 11
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1968,12 +1981,12 @@ TextureImporter:
       name: Chicken_Baby_70
       rect:
         serializedVersion: 2
-        x: 82
+        x: 80
         y: 112
-        width: 11
-        height: 12
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1990,12 +2003,12 @@ TextureImporter:
       name: Chicken_Baby_71
       rect:
         serializedVersion: 2
-        x: 2
+        x: 0
         y: 96
-        width: 13
-        height: 11
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2012,12 +2025,12 @@ TextureImporter:
       name: Chicken_Baby_72
       rect:
         serializedVersion: 2
-        x: 18
+        x: 16
         y: 96
-        width: 13
-        height: 10
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2034,12 +2047,12 @@ TextureImporter:
       name: Chicken_Baby_73
       rect:
         serializedVersion: 2
-        x: 4
-        y: 79
-        width: 7
-        height: 7
+        x: 0
+        y: 80
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2056,12 +2069,12 @@ TextureImporter:
       name: Chicken_Baby_74
       rect:
         serializedVersion: 2
-        x: 18
-        y: 81
-        width: 11
-        height: 9
+        x: 16
+        y: 80
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2078,12 +2091,12 @@ TextureImporter:
       name: Chicken_Baby_75
       rect:
         serializedVersion: 2
-        x: 35
-        y: 79
-        width: 9
-        height: 8
+        x: 32
+        y: 80
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2100,12 +2113,12 @@ TextureImporter:
       name: Chicken_Baby_76
       rect:
         serializedVersion: 2
-        x: 51
+        x: 48
         y: 80
-        width: 9
-        height: 8
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2122,12 +2135,12 @@ TextureImporter:
       name: Chicken_Baby_77
       rect:
         serializedVersion: 2
-        x: 67
-        y: 82
-        width: 9
-        height: 8
+        x: 64
+        y: 80
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2144,12 +2157,12 @@ TextureImporter:
       name: Chicken_Baby_78
       rect:
         serializedVersion: 2
-        x: 83
-        y: 81
-        width: 9
-        height: 8
+        x: 80
+        y: 80
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2166,12 +2179,12 @@ TextureImporter:
       name: Chicken_Baby_79
       rect:
         serializedVersion: 2
-        x: 100
-        y: 79
-        width: 7
-        height: 7
+        x: 96
+        y: 80
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2188,12 +2201,12 @@ TextureImporter:
       name: Chicken_Baby_80
       rect:
         serializedVersion: 2
-        x: 2
+        x: 0
         y: 64
-        width: 11
-        height: 11
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2210,12 +2223,12 @@ TextureImporter:
       name: Chicken_Baby_81
       rect:
         serializedVersion: 2
-        x: 18
+        x: 16
         y: 64
-        width: 11
-        height: 10
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2232,12 +2245,12 @@ TextureImporter:
       name: Chicken_Baby_82
       rect:
         serializedVersion: 2
-        x: 34
+        x: 32
         y: 64
-        width: 12
-        height: 12
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2254,12 +2267,12 @@ TextureImporter:
       name: Chicken_Baby_83
       rect:
         serializedVersion: 2
-        x: 50
+        x: 48
         y: 64
-        width: 12
-        height: 11
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2276,12 +2289,12 @@ TextureImporter:
       name: Chicken_Baby_84
       rect:
         serializedVersion: 2
-        x: 66
+        x: 64
         y: 64
-        width: 12
-        height: 10
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2298,12 +2311,12 @@ TextureImporter:
       name: Chicken_Baby_85
       rect:
         serializedVersion: 2
-        x: 82
+        x: 80
         y: 64
-        width: 12
-        height: 11
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2320,12 +2333,12 @@ TextureImporter:
       name: Chicken_Baby_86
       rect:
         serializedVersion: 2
-        x: 98
+        x: 96
         y: 64
-        width: 11
-        height: 11
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2342,12 +2355,12 @@ TextureImporter:
       name: Chicken_Baby_87
       rect:
         serializedVersion: 2
-        x: 2
-        y: 49
-        width: 12
-        height: 9
+        x: 0
+        y: 48
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2364,12 +2377,12 @@ TextureImporter:
       name: Chicken_Baby_88
       rect:
         serializedVersion: 2
-        x: 17
-        y: 49
-        width: 14
-        height: 8
+        x: 16
+        y: 48
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2387,11 +2400,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 49
+        y: 48
         width: 16
-        height: 7
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2408,12 +2421,12 @@ TextureImporter:
       name: Chicken_Baby_90
       rect:
         serializedVersion: 2
-        x: 47
-        y: 49
-        width: 18
-        height: 11
+        x: 48
+        y: 48
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2430,12 +2443,12 @@ TextureImporter:
       name: Chicken_Baby_91
       rect:
         serializedVersion: 2
-        x: 65
-        y: 49
-        width: 14
-        height: 13
+        x: 64
+        y: 48
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2452,12 +2465,12 @@ TextureImporter:
       name: Chicken_Baby_92
       rect:
         serializedVersion: 2
-        x: 1
-        y: 33
-        width: 14
-        height: 14
+        x: 0
+        y: 32
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2474,12 +2487,12 @@ TextureImporter:
       name: Chicken_Baby_93
       rect:
         serializedVersion: 2
-        x: 15
-        y: 33
-        width: 18
-        height: 11
+        x: 16
+        y: 32
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2497,11 +2510,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 33
+        y: 32
         width: 16
-        height: 12
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2519,11 +2532,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 48
-        y: 33
+        y: 32
         width: 16
-        height: 12
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2540,12 +2553,12 @@ TextureImporter:
       name: Chicken_Baby_96
       rect:
         serializedVersion: 2
-        x: 3
-        y: 18
-        width: 10
-        height: 8
+        x: 0
+        y: 16
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2562,12 +2575,12 @@ TextureImporter:
       name: Chicken_Baby_97
       rect:
         serializedVersion: 2
-        x: 18
-        y: 18
-        width: 12
-        height: 7
+        x: 16
+        y: 16
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2584,12 +2597,12 @@ TextureImporter:
       name: Chicken_Baby_98
       rect:
         serializedVersion: 2
-        x: 33
-        y: 18
-        width: 14
-        height: 6
+        x: 32
+        y: 16
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2607,11 +2620,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 48
-        y: 18
+        y: 16
         width: 16
-        height: 10
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2628,12 +2641,12 @@ TextureImporter:
       name: Chicken_Baby_100
       rect:
         serializedVersion: 2
-        x: 66
-        y: 18
-        width: 12
-        height: 12
+        x: 64
+        y: 16
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2650,12 +2663,12 @@ TextureImporter:
       name: Chicken_Baby_101
       rect:
         serializedVersion: 2
-        x: 2
-        y: 3
-        width: 12
-        height: 12
+        x: 0
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2673,11 +2686,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 16
-        y: 2
+        y: 0
         width: 16
-        height: 10
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2694,12 +2707,12 @@ TextureImporter:
       name: Chicken_Baby_103
       rect:
         serializedVersion: 2
-        x: 33
-        y: 2
-        width: 14
-        height: 11
+        x: 32
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2716,12 +2729,12 @@ TextureImporter:
       name: Chicken_Baby_104
       rect:
         serializedVersion: 2
-        x: 49
-        y: 2
-        width: 14
-        height: 11
+        x: 48
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2738,7 +2751,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 8a1f11499aced0544b873768ed8eec93
     internalID: 0
     vertices: []
     indices: 
@@ -2746,7 +2759,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":8.0,"y":18.0},"gridSpriteSize":{"x":16.0,"y":16.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Chicken_Baby_0: 1841958811001303414
       Chicken_Baby_1: 6205934756068861772
