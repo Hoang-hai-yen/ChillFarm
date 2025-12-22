@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum ItemType { Tool, Seed, Crop, Resource }
+public enum ItemType { Tool, Seed, Crop, Fish, Resource }
 
 public class ItemData : ScriptableObject
 {
