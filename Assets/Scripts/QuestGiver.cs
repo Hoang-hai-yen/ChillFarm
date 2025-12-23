@@ -11,7 +11,7 @@ public class QuestGiver : MonoBehaviour
     [Header("Interaction")]
     public float interactDistance = 1.5f;
 
-    public Quest quest { get; private set; }
+    public QuestDialog quest { get; private set; }
     public float nextQuestTime { get; private set; }
 
     Transform player;
@@ -21,21 +21,17 @@ public class QuestGiver : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        quest = new Quest();
+        GameObject p = GameObject.FindGameObjectWithTag("Player");
+        if (p != null)
+            player = p.transform;
+
+        quest = new QuestDialog();
     }
 
-    void Update()
+    public bool CanInteract(Transform playerTransform)
     {
-        if (player == null) return;
-        if (QuestDialogManager.Instance.IsOpen()) return;
-
-        float distance = Vector2.Distance(transform.position, player.position);
-
-        if (distance <= interactDistance && Input.GetKeyDown(KeyCode.Z))
-        {
-            QuestDialogManager.Instance.Open(this);
-        }
+        float distance = Vector2.Distance(transform.position, playerTransform.position);
+        return distance <= interactDistance;
     }
 
     public bool IsInCooldown()
@@ -80,7 +76,7 @@ public class QuestGiver : MonoBehaviour
         nextQuestTime = Time.time + QUEST_COOLDOWN;
     }
 
-    public void CompleteQuest(Inventory inventory)
+    public void CompleteQuest(PlayerInventory inventory)
     {
         inventory.RemoveItem(quest.itemRequired, quest.amountRequired);
         quest.isCompleted = true;

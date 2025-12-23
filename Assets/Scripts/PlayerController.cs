@@ -106,12 +106,6 @@ public class PlayerController : MonoBehaviour
 
             }
             UpdateInteractionHighlight();
-
-            // Phím Z cho NPC interaction
-            if (Keyboard.current.zKey.wasPressedThisFrame)
-            {
-                StartCoroutine(HandleNPCInteraction());
-            }
         }
         else
         {
@@ -297,40 +291,54 @@ public class PlayerController : MonoBehaviour
     {
         isInteracting = true;
 
-        Vector3 playerDirection = new Vector3(animator.GetFloat("lastMoveX"), animator.GetFloat("lastMoveY"), 0).normalized;
-        if (playerDirection == Vector3.zero) playerDirection = Vector3.down;
+        Vector3 playerDirection = new Vector3(
+            animator.GetFloat("lastMoveX"),
+            animator.GetFloat("lastMoveY"),
+            0
+        ).normalized;
+
+        if (playerDirection == Vector3.zero)
+            playerDirection = Vector3.down;
 
         Vector3 interactionWorldPos = transform.position + playerDirection * interactionDistance;
-        float detectionRadius = 0.2f;
 
-        Collider2D npcCollider = Physics2D.OverlapCircle(interactionWorldPos, detectionRadius, interactableLayer);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(interactionWorldPos, 0.5f);
 
-        if (npcCollider != null)
+        foreach (var hit in hits)
         {
-            Interactable npc = npcCollider.GetComponent<Interactable>();
+            QuestGiver questGiver = hit.GetComponent<QuestGiver>();
+            if (questGiver != null && questGiver.CanInteract(transform))
+            {
+                QuestDialogManager.Instance.Open(questGiver);
+                isInteracting = false;
+                yield break; 
+            }
+
+            Interactable npc = hit.GetComponent<Interactable>();
             if (npc != null)
             {
-                DialogData dialogData = npcCollider.GetComponent<DialogData>();
+                DialogData dialogData = hit.GetComponent<DialogData>();
                 if (dialogData != null && DialogManager.Instance != null)
                 {
-                    Dialog dialogToShow = dialogData.CreateDialog();
-                    yield return StartCoroutine(DialogManager.Instance.ShowDialog(dialogToShow));
+                    Dialog dialog = dialogData.CreateDialog();
+                    yield return StartCoroutine(DialogManager.Instance.ShowDialog(dialog));
                 }
                 else
                 {
                     npc.Interact();
                 }
+
+                isInteracting = false;
+                yield break; 
             }
         }
 
-        yield return null;
         isInteracting = false;
+        StartCoroutine(HandleInteraction());
     }
 
 
-
-
-private void FixedUpdate()
+    private void FixedUpdate()
     {
         if (staminaController != null && !staminaController.IsFainted() && !isInteracting)
         {
@@ -418,7 +426,7 @@ private void FixedUpdate()
         if (isInteracting) return;
         if (staminaController != null && staminaController.IsFainted()) return;
 
-        StartCoroutine(HandleInteraction()); // E key → tool/farmland
+        StartCoroutine(HandleNPCInteraction());
     }
 
     private void ToggleBackpack(InputAction.CallbackContext context)

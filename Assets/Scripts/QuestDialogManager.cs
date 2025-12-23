@@ -14,25 +14,45 @@ public class QuestDialogManager : MonoBehaviour
     public Button buttonComplete;
 
     QuestGiver currentNPC;
-    Inventory inventory;
+    PlayerInventory inventory;
+
+    public bool IsOpen
+    {
+        get { return dialog != null && dialog.activeSelf; }
+    }
 
     void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
         Instance = this;
     }
 
     void Start()
     {
-        inventory = FindObjectOfType<Inventory>();
+        inventory = FindObjectOfType<PlayerInventory>();
+
+        if (dialog == null) return;
+
         dialog.SetActive(false);
 
-        buttonAccept.onClick.AddListener(Accept);
-        buttonReject.onClick.AddListener(Reject);
-        buttonComplete.onClick.AddListener(Complete);
+        if (buttonAccept != null)
+            buttonAccept.onClick.AddListener(Accept);
+
+        if (buttonReject != null)
+            buttonReject.onClick.AddListener(Reject);
+
+        if (buttonComplete != null)
+            buttonComplete.onClick.AddListener(Complete);
     }
 
     void Update()
     {
+        if (dialog == null) return;
+
         if (dialog.activeSelf && Input.GetKeyDown(KeyCode.Z))
         {
             Close();
@@ -45,13 +65,16 @@ public class QuestDialogManager : MonoBehaviour
         }
     }
 
-    public bool IsOpen()
-    {
-        return dialog.activeSelf;
-    }
-
     public void Open(QuestGiver npc)
     {
+        if (npc == null || dialog == null)
+        {
+            Debug.LogError("QuestDialogManager.Open FAILED: npc or dialog null");
+            return;
+        }
+
+        Debug.Log("QuestDialog OPEN CALLED");
+
         currentNPC = npc;
         dialog.SetActive(true);
 
@@ -69,6 +92,7 @@ public class QuestDialogManager : MonoBehaviour
         ShowQuest();
     }
 
+
     void Close()
     {
         dialog.SetActive(false);
@@ -77,10 +101,12 @@ public class QuestDialogManager : MonoBehaviour
 
     void ShowQuest()
     {
-        Quest q = currentNPC.quest;
+        if (currentNPC == null || currentNPC.quest == null) return;
+
+        QuestDialog q = currentNPC.quest;
 
         questText.text =
-            $"{q.questContent}\n\n" +
+            $"{q.questContent}\n" +
             $"Yêu cầu: {q.amountRequired} {q.itemRequired}\n" +
             $"Thưởng: {q.rewardGold} vàng, {q.rewardXP} XP";
 
@@ -91,7 +117,9 @@ public class QuestDialogManager : MonoBehaviour
 
     void ShowCooldown()
     {
-        questText.text = $"⏳ Quay lại sau {currentNPC.RemainingCooldown()}s";
+        if (currentNPC == null) return;
+
+        questText.text = $"⏳ Quay lại sau {currentNPC.RemainingCooldown()} giây";
 
         buttonAccept.gameObject.SetActive(false);
         buttonReject.gameObject.SetActive(false);
@@ -100,19 +128,26 @@ public class QuestDialogManager : MonoBehaviour
 
     void Accept()
     {
+        if (currentNPC == null) return;
+
         currentNPC.AcceptQuest();
         ShowQuest();
     }
 
     void Reject()
     {
+        if (currentNPC == null) return;
+
         currentNPC.RejectQuest();
         ShowCooldown();
     }
 
     void Complete()
     {
-        Quest q = currentNPC.quest;
+        if (currentNPC == null || inventory == null) return;
+
+        QuestDialog q = currentNPC.quest;
+        if (q == null) return;
 
         if (!inventory.HasItem(q.itemRequired, q.amountRequired))
         {
