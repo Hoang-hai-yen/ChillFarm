@@ -1,60 +1,111 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class DialogManager : MonoBehaviour
 {
-    [SerializeField] GameObject dialogBox;
-    [SerializeField] Text dialogText;
+    [Header("UI Components")]
+    [SerializeField] private GameObject dialogBox;
+    [SerializeField] private TMP_Text dialogText;
 
-    [SerializeField] int lettersPerSecond;
+    [Header("Choice UI")]
+    [SerializeField] private GameObject choicePanel;
+    [SerializeField] private Button choiceButton1;
+    [SerializeField] private Button choiceButton2;
+
+    [SerializeField] private int lettersPerSecond = 30;
 
     public event Action OnShowDialog;
     public event Action OnHideDialog;
 
-    Dialog dialog;
-    int currentLine;
-    bool isTyping;
+    private Dialog dialog;
+    private bool isTyping;
+    private bool isWaitingForClose;
 
     public static DialogManager Instance { get; private set; }
 
     private void Awake()
     {
         Instance = this;
+        choicePanel.SetActive(false);
+        dialogBox.SetActive(false);
     }
 
     public IEnumerator ShowDialog(Dialog dialog)
     {
         this.dialog = dialog;
-        currentLine = 0;
+        isWaitingForClose = false;
         yield return new WaitForEndOfFrame();
+
         OnShowDialog?.Invoke();
         dialogBox.SetActive(true);
-        yield return StartCoroutine(TypeDialog(dialog.Lines[0]));
+
+        yield return StartCoroutine(TypeDialog(dialog.NpcText));
+
+        if (dialog.Choices != null && dialog.Choices.Count > 0)
+        {
+            ShowChoices(dialog.Choices);
+        }
+        else
+        {
+            isWaitingForClose = true;
+        }
+
         yield return new WaitUntil(() => this.dialog == null);
+    }
+
+    private void ShowChoices(List<DialogChoice> choices)
+    {
+        if (choices.Count < 2) return;
+
+        choicePanel.SetActive(true);
+
+        choiceButton1.GetComponentInChildren<TMP_Text>().text = choices[0].OptionText;
+        choiceButton1.onClick.RemoveAllListeners();
+        choiceButton1.onClick.AddListener(() => OnChoiceSelected(choices[0]));
+
+        choiceButton2.GetComponentInChildren<TMP_Text>().text = choices[1].OptionText;
+        choiceButton2.onClick.RemoveAllListeners();
+        choiceButton2.onClick.AddListener(() => OnChoiceSelected(choices[1]));
+    }
+
+    private void OnChoiceSelected(DialogChoice choice)
+    {
+        choicePanel.SetActive(false);
+        if (choice.OnSelected != null)
+            choice.OnSelected.Invoke();
+        else
+            StartCoroutine(HandleResponse(choice.ResponseText));
+    }
+
+    private IEnumerator HandleResponse(string response)
+    {
+        yield return StartCoroutine(TypeDialog(response));
+        isWaitingForClose = true;
     }
 
     public void HandleUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Z) && !isTyping)
+        if (choicePanel.activeSelf || isTyping) return;
+
+        if (Input.GetKeyDown(KeyCode.Z) && isWaitingForClose && dialog != null)
         {
-            currentLine++;
-            if (currentLine < dialog.Lines.Count)
-            {
-                StartCoroutine(TypeDialog(dialog.Lines[currentLine]));
-            }
-            else
-            {
-                dialogBox.SetActive(false);
-                OnHideDialog?.Invoke();
-                dialog = null;
-            }
+            CloseDialog();
         }
     }
 
-    public IEnumerator TypeDialog(string line)
+    private void CloseDialog()
+    {
+        dialogBox.SetActive(false);
+        dialog = null;
+        isWaitingForClose = false;
+        OnHideDialog?.Invoke();
+    }
+
+    private IEnumerator TypeDialog(string line)
     {
         isTyping = true;
         dialogText.text = "";
