@@ -53,13 +53,17 @@ public class FarmlandManager : MonoBehaviour
             actionSuccessful = HandleHarvest(plotPosition); 
             if (actionSuccessful) return true;
         }
-        if (heldItem is ToolData tool)
+        else if (heldItem is ToolData tool)
         {
             actionSuccessful = HandleToolInteraction(plotPosition, currentState, tool.toolType);
         }
         else if (heldItem is SeedData seed)
         {
             actionSuccessful = HandleSeedInteraction(plotPosition, currentState, seed);
+        }
+        else if (heldItem is FertilizerData fertilizer)
+        {
+            actionSuccessful = HandleFertilizerInteraction(plotPosition, fertilizer);
         }
         else if (heldItem == null) 
         {
@@ -106,14 +110,12 @@ public class FarmlandManager : MonoBehaviour
                 GameObject cropObj = Instantiate(cropPrefab, tillableTilemap.GetCellCenterWorld(plotPosition), Quaternion.identity);
                 Crop cropInstance = cropObj.GetComponent<Crop>();
                 
-                cropInstance.Initialize(seed.cropToPlant);
-                cropsOnPlots.Add(plotPosition, cropInstance);
-                
-                if(currentState == PlotState.Tilled)
-                {
-                     SetPlotState(plotPosition, PlotState.Watered, wateredTile);
-                }
+                bool isSoilWet = (currentState == PlotState.Watered);
 
+                cropInstance.Initialize(seed.cropToPlant, isSoilWet);
+                
+                cropsOnPlots.Add(plotPosition, cropInstance);
+            
                 Debug.Log($"Gieo hạt {seed.cropToPlant.cropName}!");
                 return true;
             }
@@ -181,5 +183,18 @@ public class FarmlandManager : MonoBehaviour
     public bool IsTillableArea(Vector3Int position)
     {
         return tillableTilemap.HasTile(position); 
+    }
+    private bool HandleFertilizerInteraction(Vector3Int plotPosition, FertilizerData fertilizer)
+    {
+        if (cropsOnPlots.TryGetValue(plotPosition, out Crop crop))
+        {
+            bool success = crop.ApplyFertilizer(fertilizer.minMultiplier, fertilizer.maxMultiplier);
+            
+            if (success)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

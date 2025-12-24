@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private SpriteRenderer highlightRenderer;
 
     private FarmlandManager farmlandManager;
+
+    private FishingController fishingController;
     private Grid grid;
     private bool isBackpackOpen = false;
 
@@ -43,6 +45,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        fishingController = GetComponent<FishingController>();
 
         staminaController = FindFirstObjectByType<StaminaController>();
         if (staminaController == null)
@@ -97,14 +100,12 @@ public class PlayerController : MonoBehaviour
     {
         if (staminaController != null && !staminaController.IsFainted() && !isInteracting)
         {
-            PlayerInput();
-            UpdateInteractionHighlight();
-
-            // Phím Z cho NPC interaction
-            if (Keyboard.current.zKey.wasPressedThisFrame)
+            if(!animator.GetBool("isFishing"))
             {
-                StartCoroutine(HandleNPCInteraction());
+                PlayerInput();
+
             }
+            UpdateInteractionHighlight();
         }
         else
         {
@@ -126,34 +127,153 @@ public class PlayerController : MonoBehaviour
         Vector3Int targetCellPos = grid.WorldToCell(interactionWorldPos);
 
         float staminaCost = (currentItem == null) ? 2f : currentItem.staminaCost;
-        bool actionSuccessful = false;
-
+        
         if (staminaController == null || staminaController.GetCurrentStamina() < staminaCost)
         {
-            Debug.Log("Không đủ Stamina! Không thực hiện tương tác.");
+            Debug.Log("Không đủ Stamina!");
             isInteracting = false;
             yield break;
         }
+
+        bool actionSuccessful = false;
+
+        Collider2D[] hits = Physics2D.OverlapCircleAll(interactionWorldPos, 0.5f);
+        foreach (var hit in hits)
+        {
+            FarmAnimal animal = hit.GetComponent<FarmAnimal>();
+        if (animal != null)
+        {
+            if (animal.IsDead())
+            {
+                float cleanUpCost = 5f; 
+                
+                if (staminaController.GetCurrentStamina() >= cleanUpCost)
+                {
+                    animator.SetTrigger("doAction"); 
+                    animal.CleanupCorpse();
+                    
+                    staminaCost = cleanUpCost; 
+                    actionSuccessful = true;
+                    
+                    yield return new WaitForSeconds(0.5f);
+                    goto FinalizeInteraction;
+                }
+                else
+                {
+                    Debug.Log("Không đủ sức để dọn dẹp!");
+                }
+            }
+            
+            else 
+            {
+                if (currentItem != null && currentItem.itemType == ItemType.AnimalFood)
+                {
+                    if (animal.Feed()) 
+                    {
+                        animator.SetTrigger("doAction"); 
+                        InventoryManager.Instance.RemoveItem(currentItem, 1); 
+                        actionSuccessful = true;
+                    }
+                }
+
+                else 
+                {
+                    animal.Play(); 
+                    animator.SetTrigger("petAnimal");
+                    actionSuccessful = true;
+                    staminaCost = 1f; 
+                }
+
+                if (actionSuccessful)
+                {
+                    yield return new WaitForSeconds(0.5f); 
+                    goto FinalizeInteraction; 
+                }
+            }
+        }
+            AnimalPen pen = hit.GetComponent<AnimalPen>();
+            if (pen != null)
+            {
+                if (currentItem is LivestockItemData livestockItem)
+                {
+                    if (livestockItem.animalType == pen.allowedAnimal)
+                    {
+                        GameObject newAnimalObj = Instantiate(livestockItem.animalPrefab, interactionWorldPos, Quaternion.identity);
+                        FarmAnimal newAnimalScript = newAnimalObj.GetComponent<FarmAnimal>();
+                        
+                        newAnimalScript.SetHome(pen.GetBounds());
+
+                        InventoryManager.Instance.RemoveItem(currentItem, 1);
+                        
+                        animator.SetTrigger("doAction");
+                        Debug.Log("Đã thả gà vào chuồng!");
+                        
+                        actionSuccessful = true;
+                        yield return new WaitForSeconds(0.5f);
+                        goto FinalizeInteraction;
+                    }
+                    else
+                    {
+                        Debug.Log("Sai chuồng rồi! Đây là chuồng " + pen.allowedAnimal);
+                    }
+                }
+            }
+        }
+
 
         if (currentItem is ToolData tool)
         {
             if (tool.toolType == ToolType.Hoe)
             {
                 animator.SetTrigger("useHoe");
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(0.5f); 
             }
             else if (tool.toolType == ToolType.WateringCan)
             {
                 animator.SetTrigger("useWaterCan");
-                yield return new WaitForSeconds(0.7f);
+                yield return new WaitForSeconds(0.7f); 
             }
+            else if (tool.toolType == ToolType.FishingRod)
+            {
+                if(!animator.GetBool("isFishing") && fishingController.CanFishInDirection())
+                {
+                    animator.SetBool("isFishing", true);
+                    yield return new WaitForSeconds(0.7f);
+                }
+                else
+                {
+                    animator.SetBool("isFishing", false);
+                    yield return new WaitForSeconds(0.5f);
+
+                }
+                
+            }
+        }
+        else if (currentItem != null && (currentItem.itemType == ItemType.Seed || currentItem.itemType == ItemType.Fertilizer))
+        {
+            animator.SetTrigger("doAction"); 
+            yield return new WaitForSeconds(0.2f);
+        }
+        else if (currentItem == null)
+        {
+            animator.SetTrigger("doAction");
         }
 
         if (farmlandManager != null)
         {
             actionSuccessful = farmlandManager.Interact(targetCellPos, currentItem);
+            
+            if (actionSuccessful && currentItem != null)
+            {
+                if (currentItem.itemType == ItemType.Seed || currentItem.itemType == ItemType.Fertilizer)
+                {
+                    InventoryManager.Instance.RemoveItem(currentItem, 1);
+                }
+            }
         }
 
+        FinalizeInteraction:
+        
         if (actionSuccessful && staminaCost > 0)
         {
             if (staminaController.ConsumeStamina(staminaCost))
@@ -161,38 +281,62 @@ public class PlayerController : MonoBehaviour
         }
         else if (!actionSuccessful)
         {
-            Debug.Log("Action FAILED/No change. Stamina not consumed.");
+            Debug.Log("Action FAILED. No valid target or insufficient conditions.");
         }
 
         isInteracting = false;
     }
-
 
     private IEnumerator HandleNPCInteraction()
     {
         isInteracting = true;
 
-        Vector3 playerDirection = new Vector3(animator.GetFloat("lastMoveX"), animator.GetFloat("lastMoveY"), 0).normalized;
-        if (playerDirection == Vector3.zero) playerDirection = Vector3.down;
+        Vector3 playerDirection = new Vector3(
+            animator.GetFloat("lastMoveX"),
+            animator.GetFloat("lastMoveY"),
+            0
+        ).normalized;
+
+        if (playerDirection == Vector3.zero)
+            playerDirection = Vector3.down;
 
         Vector3 interactionWorldPos = transform.position + playerDirection * interactionDistance;
-        float detectionRadius = 0.2f;
 
-        Collider2D npcCollider = Physics2D.OverlapCircle(interactionWorldPos, detectionRadius, interactableLayer);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(interactionWorldPos, 0.5f);
 
-        if (npcCollider != null)
+        foreach (var hit in hits)
         {
-            Interactable npc = npcCollider.GetComponent<Interactable>();
+            QuestGiver questGiver = hit.GetComponent<QuestGiver>();
+            if (questGiver != null && questGiver.CanInteract(transform))
+            {
+                QuestDialogManager.Instance.Open(questGiver);
+                isInteracting = false;
+                yield break; 
+            }
+
+            Interactable npc = hit.GetComponent<Interactable>();
             if (npc != null)
             {
-                npc.Interact(); // Chỉ NPC
-                Debug.Log("NPC interaction triggered via Z key.");
+                DialogData dialogData = hit.GetComponent<DialogData>();
+                if (dialogData != null && DialogManager.Instance != null)
+                {
+                    Dialog dialog = dialogData.CreateDialog();
+                    yield return StartCoroutine(DialogManager.Instance.ShowDialog(dialog));
+                }
+                else
+                {
+                    npc.Interact();
+                }
+
+                isInteracting = false;
+                yield break; 
             }
         }
 
-        yield return null;
         isInteracting = false;
+        StartCoroutine(HandleInteraction());
     }
+
 
     private void FixedUpdate()
     {
@@ -209,7 +353,6 @@ public class PlayerController : MonoBehaviour
     private void PlayerInput()
     {
         movement = playerControls.Movement.Move.ReadValue<Vector2>();
-
         animator.SetBool("isMoving", movement != Vector2.zero);
 
         animator.SetFloat("moveX", movement.x);
@@ -219,6 +362,8 @@ public class PlayerController : MonoBehaviour
         {
             lastMoveX = movement.x;
             lastMoveY = movement.y;
+            fishingController.lastFacingDirection = movement;
+
         }
         animator.SetFloat("lastMoveX", lastMoveX);
         animator.SetFloat("lastMoveY", lastMoveY);
@@ -281,7 +426,7 @@ public class PlayerController : MonoBehaviour
         if (isInteracting) return;
         if (staminaController != null && staminaController.IsFainted()) return;
 
-        StartCoroutine(HandleInteraction()); // E key → tool/farmland
+        StartCoroutine(HandleNPCInteraction());
     }
 
     private void ToggleBackpack(InputAction.CallbackContext context)
@@ -351,9 +496,19 @@ public class PlayerController : MonoBehaviour
 
     private bool IsWalkable(Vector3 targetPos)
     {
-        if (Physics2D.OverlapCircle(targetPos, 0.2f, interactableLayer) != null)
+        Collider2D hit = Physics2D.OverlapCircle(targetPos, 0.2f, interactableLayer);
+
+        if (hit != null)
+        {
+            if (hit.isTrigger) 
+            {
+                return true;
+            }
+            
             return false;
+        }
 
         return true;
     }
+    
 }

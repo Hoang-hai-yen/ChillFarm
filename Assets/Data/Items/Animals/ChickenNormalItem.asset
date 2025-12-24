@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c6e34fdb410cf34d84141fa10eedaf6, type: 3}
+  m_Name: ChickenNormalItem
+  m_EditorClassIdentifier: Assembly-CSharp::LivestockItemData
+  itemName: "G\xE0 con th\u01B0\u1EDDng"
+  itemIcon: {fileID: 8406634026043086284, guid: 8cbd534ac36ec5847a35e32cee3503bf, type: 3}
+  itemType: 7
+  staminaCost: 5
+  animalPrefab: {fileID: 4099093254813222119, guid: 5533865bc6123264b8126b6399d895a4, type: 3}
+  animalType: 0

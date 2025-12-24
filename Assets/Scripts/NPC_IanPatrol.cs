@@ -65,10 +65,17 @@ public class NPC_IanPatrol : MonoBehaviour
         rd.linearVelocity = Vector2.zero;
 
         if (stop)
+        {
+            rd.constraints = RigidbodyConstraints2D.FreezeAll;
             animator.SetBool("isRunning", false);
+        }
         else
+        {
+            rd.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
             UpdateAnimation();
+        }
     }
+
 
     private void OnDrawGizmos()
     {

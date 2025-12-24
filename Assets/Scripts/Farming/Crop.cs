@@ -13,6 +13,8 @@ public class Crop : MonoBehaviour
     private int currentStage = 0;
     private bool isWatered = false;
     private bool isHarvestable = false;
+    private float yieldMultiplier = 1f; 
+    private bool hasBeenFertilized = false; 
 
     void Awake()
     {
@@ -23,10 +25,14 @@ public class Crop : MonoBehaviour
             progressBarCanvas.gameObject.SetActive(false);
     }
 
-    public void Initialize(CropData data)
+    public void Initialize(CropData data, bool isSoilWet) 
     {
         cropData = data;
-        isWatered = true;
+        
+        isWatered = isSoilWet; 
+        hasBeenFertilized = false;
+        yieldMultiplier = 1f;
+        
         sr.sprite = cropData.growthSprites[0];
         UpdateGrowthUI();
     }
@@ -89,7 +95,13 @@ public class Crop : MonoBehaviour
             
             if(cropData.harvestItemPrefab != null)
             {
-                for(int i = 0; i < cropData.harvestYield; i++) 
+                int finalYield = Mathf.RoundToInt(cropData.harvestYield * yieldMultiplier);
+
+                if (finalYield < 1) finalYield = 1;
+
+                Debug.Log($"Thu hoạch được: {finalYield} (Gốc: {cropData.harvestYield} x Hệ số: {yieldMultiplier:F2})");
+
+                for(int i = 0; i < finalYield; i++) 
                 {
                     Vector3 spawnOffset = new Vector3(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f), 0);
                     Instantiate(cropData.harvestItemPrefab, transform.position + spawnOffset, Quaternion.identity);
@@ -125,4 +137,20 @@ public class Crop : MonoBehaviour
     public float GetCurrentGrowth() => currentGrowth;
     public bool IsWatered() => isWatered;
     public bool IsHarvestable() => isHarvestable;
+
+    public bool ApplyFertilizer(float minMult, float maxMult)
+{
+    if (hasBeenFertilized) 
+    {
+        Debug.Log("Cây này đã được bón phân rồi!");
+        return false; 
+    }
+
+    hasBeenFertilized = true;
+    
+    yieldMultiplier = Random.Range(minMult, maxMult);
+    
+    Debug.Log($"Đã bón phân! Sản lượng sẽ nhân lên: {yieldMultiplier:F2} lần");
+    return true; 
+}
 }

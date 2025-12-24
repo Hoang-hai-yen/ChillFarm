@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa856f108eb3df3469303cd861838974, type: 3}
+  m_Name: Chicken_Normal
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalData
+  animalName: 
+  type: 0
+  tier: 0
+  daysToGrow: 1
+  babySprite: {fileID: -5188880336413608483, guid: 8cbd534ac36ec5847a35e32cee3503bf, type: 3}
+  adultSprite: {fileID: 5592592324294136559, guid: 8441389152112f046a864968b23226eb, type: 3}
+  animatorController: {fileID: 9100000, guid: 3bd3ca8c1bb2609439db087813841634, type: 2}
+  productPrefab: {fileID: 6114755408179589450, guid: a6f82f22c1a4e7b4b915b86a83d8e9a1, type: 3}
+  minAffectionToProduce: 30
+  breedingChance: 20

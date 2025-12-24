@@ -1,15 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-
 public class Dialog
 {
-    [SerializeField] List<string> lines;
+    [SerializeField] private string npcText;
+    [SerializeField] private List<DialogChoice> choices;
 
-    public List<string> Lines
+    public string NpcText => npcText;
+    public List<DialogChoice> Choices => choices;
+
+    public Dialog(string npcText, List<DialogChoice> choices)
     {
-        get { return lines; }
+        this.npcText = npcText;
+        this.choices = choices;
     }
 }
