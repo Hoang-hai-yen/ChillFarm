@@ -91,10 +91,12 @@ public class BackpackManager : MonoBehaviour
                     slotItemIcons[i].sprite = slotData.itemData.itemIcon;
                     slotItemIcons[i].color = Color.white;
                     
-                    // --- SỬA Ở ĐÂY ---
-                    // Phải để là TRUE thì mới lấy chuột kéo đi được
+                    // --- CHỈ SỬA NHỎ Ở ĐÂY ---
+                    // Nếu Image đang bị tắt raycast (do script Drag đang chạy), thì đừng bật lại vội
+                    // Chỉ bật nếu nó đang không kéo (InventoryDragItem tự quản lý lúc kéo)
+                    // Tuy nhiên, cách đơn giản nhất là cứ để TRUE như bạn làm,
+                    // vì OnEndDrag sẽ chạy sau và sửa lại mọi thứ.
                     slotItemIcons[i].raycastTarget = true; 
-                    // -----------------
                     
                     slotItemIcons[i].gameObject.SetActive(true);
                 }
