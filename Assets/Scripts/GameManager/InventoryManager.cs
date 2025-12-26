@@ -15,6 +15,7 @@ public class InventoryManager : MonoBehaviour
 
     [Header("Inventory Data")]
     public InventorySlot[] hotbarSlots = new InventorySlot[9];
+    public InventorySlot[] backpackSlots = new InventorySlot[20];
     public int SelectedHotbarSlot { get; private set; } = 0; 
     public event Action OnInventoryChanged;
 
@@ -26,6 +27,10 @@ public class InventoryManager : MonoBehaviour
         for (int i = 0; i < hotbarSlots.Length; i++)
         {
             if (hotbarSlots[i] == null) hotbarSlots[i] = new InventorySlot();
+        }
+        for (int i = 0; i < backpackSlots.Length; i++)
+        {
+            if (backpackSlots[i] == null) backpackSlots[i] = new InventorySlot();
         }
     }
 
@@ -63,9 +68,9 @@ public class InventoryManager : MonoBehaviour
         return slot != null ? slot.itemData : null;
     }
 
-    public bool AddItem(ItemData item, int count = 1)
+public bool AddItem(ItemData item, int count = 1)
     {
-        for (int i = 0; i < hotbarSlots.Length; i++)
+        for (int i = 1; i < hotbarSlots.Length; i++) 
         {
             InventorySlot slot = hotbarSlots[i];
             if (slot.itemData == item)
@@ -75,8 +80,8 @@ public class InventoryManager : MonoBehaviour
                 return true; 
             }
         }
-
-        for (int i = 0; i < hotbarSlots.Length; i++)
+        
+        for (int i = 1; i < hotbarSlots.Length; i++)
         {
             InventorySlot slot = hotbarSlots[i];
             if (slot.itemData == null)
@@ -85,6 +90,18 @@ public class InventoryManager : MonoBehaviour
                 slot.quantity = count;
                 OnInventoryChanged?.Invoke();
                 return true; 
+            }
+        }
+
+        for (int i = 0; i < backpackSlots.Length; i++)
+        {
+            InventorySlot slot = backpackSlots[i];
+            if (slot.itemData == null)
+            {
+                slot.itemData = item;
+                slot.quantity = count;
+                OnInventoryChanged?.Invoke();
+                return true;
             }
         }
 
@@ -131,5 +148,24 @@ public class InventoryManager : MonoBehaviour
         }
 
         return false; 
+    }
+    public void SwapItems(int indexA, bool isHotbarA, int indexB, bool isHotbarB)
+    {
+        InventorySlot[] listA = isHotbarA ? hotbarSlots : backpackSlots;
+        InventorySlot[] listB = isHotbarB ? hotbarSlots : backpackSlots;
+
+        InventorySlot slotDataA = listA[indexA];
+        InventorySlot slotDataB = listB[indexB];
+
+        ItemData tempItem = slotDataA.itemData;
+        int tempQty = slotDataA.quantity;
+
+        slotDataA.itemData = slotDataB.itemData;
+        slotDataA.quantity = slotDataB.quantity;
+
+        slotDataB.itemData = tempItem;
+        slotDataB.quantity = tempQty;
+
+        OnInventoryChanged?.Invoke();
     }
 }
