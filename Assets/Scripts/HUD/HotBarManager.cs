@@ -9,6 +9,7 @@ public class HotbarManager : MonoBehaviour
 
     public Color normalColor = Color.white;
     public Color selectedColor = Color.yellow;
+    public Sprite handIconSprite;
 
     void Start()
     {
@@ -86,7 +87,13 @@ public class HotbarManager : MonoBehaviour
             slotBackgroundImages[i].color = (i == selectedIndexFromInventory) ? selectedColor : normalColor;
 
             InventorySlot slot = InventoryManager.Instance.hotbarSlots[i];
-            if (slot.itemData != null)
+
+            if (i == 0) 
+            {
+                slotItemIcons[i].sprite = handIconSprite;
+                slotItemIcons[i].color = Color.white;
+            }
+            else if (slot.itemData != null)
             {
                 slotItemIcons[i].sprite = slot.itemData.itemIcon;
                 slotItemIcons[i].color = Color.white;
