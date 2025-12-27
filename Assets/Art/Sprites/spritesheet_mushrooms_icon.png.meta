@@ -1,0 +1,702 @@
+fileFormatVersion: 2
+guid: b59e7c19804ef3342bab8f3cf47959c7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -969169045095353416
+    second: spritesheet_mushrooms 1_0
+  - first:
+      213: 1691134678044115290
+    second: spritesheet_mushrooms 1_1
+  - first:
+      213: 8750481713157789025
+    second: spritesheet_mushrooms 1_2
+  - first:
+      213: -7140743218334636871
+    second: spritesheet_mushrooms 1_3
+  - first:
+      213: 6962263974733444744
+    second: spritesheet_mushrooms 1_4
+  - first:
+      213: -3085699947009482641
+    second: spritesheet_mushrooms 1_5
+  - first:
+      213: 7098910668465297838
+    second: spritesheet_mushrooms 1_6
+  - first:
+      213: 1373458131189615509
+    second: spritesheet_mushrooms 1_7
+  - first:
+      213: 1816175657535432011
+    second: spritesheet_mushrooms 1_8
+  - first:
+      213: 3303377001524879665
+    second: spritesheet_mushrooms 1_9
+  - first:
+      213: 4936332299345872904
+    second: spritesheet_mushrooms 1_10
+  - first:
+      213: 2443999605216195650
+    second: spritesheet_mushrooms 1_11
+  - first:
+      213: 6887843542045572304
+    second: spritesheet_mushrooms 1_12
+  - first:
+      213: 5008110706619682464
+    second: spritesheet_mushrooms 1_13
+  - first:
+      213: 519453440125275571
+    second: spritesheet_mushrooms 1_14
+  - first:
+      213: -2146910657692036179
+    second: spritesheet_mushrooms 1_15
+  - first:
+      213: 1560966087657054609
+    second: spritesheet_mushrooms 1_16
+  - first:
+      213: -3473421094744555329
+    second: spritesheet_mushrooms 1_17
+  - first:
+      213: 617947643640549457
+    second: spritesheet_mushrooms 1_18
+  - first:
+      213: -6607442832516572347
+    second: spritesheet_mushrooms 1_19
+  - first:
+      213: 3295575690930513476
+    second: spritesheet_mushrooms 1_20
+  - first:
+      213: 763679591749107492
+    second: spritesheet_mushrooms 1_21
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: spritesheet_mushrooms 1_0
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 108
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b379cb63e1dc82f0800000000000000
+      internalID: -969169045095353416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_mushrooms 1_1
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 108
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a510a28970e187710800000000000000
+      internalID: 1691134678044115290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_mushrooms 1_2
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 108
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 165525e81c4ff6970800000000000000
+      internalID: 8750481713157789025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_mushrooms 1_3
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 108
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b462ee40ebf6ec90800000000000000
+      internalID: -7140743218334636871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_mushrooms 1_4
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 108
+        width: 12
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8867c76823eee9060800000000000000
+      internalID: 6962263974733444744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_mushrooms 1_5
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 82
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f60ee073f346d25d0800000000000000
+      internalID: -3085699947009482641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_mushrooms 1_6
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 82
+        width: 16
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea9da1e24a5648260800000000000000
+      internalID: 7098910668465297838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_mushrooms 1_7
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 82
+        width: 16
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59bcd67b4e08f0310800000000000000
+      internalID: 1373458131189615509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_mushrooms 1_8
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 82
+        width: 16
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b456c15532a543910800000000000000
+      internalID: 1816175657535432011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_mushrooms 1_9
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 82
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 131e51f71e3f7dd20800000000000000
+      internalID: 3303377001524879665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_mushrooms 1_10
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 56
+        width: 16
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8084ccb8210618440800000000000000
+      internalID: 4936332299345872904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_mushrooms 1_11
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 56
+        width: 16
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2443b1c21b4dae120800000000000000
+      internalID: 2443999605216195650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_mushrooms 1_12
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 56
+        width: 16
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0dc38184539869f50800000000000000
+      internalID: 6887843542045572304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_mushrooms 1_13
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 56
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ae85ef4722608540800000000000000
+      internalID: 5008110706619682464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_mushrooms 1_14
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 56
+        width: 11
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bd8500d628753700800000000000000
+      internalID: 519453440125275571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_mushrooms 1_15
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 30
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da314c3b124a432e0800000000000000
+      internalID: -2146910657692036179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_mushrooms 1_16
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 30
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 191ea39e26aa9a510800000000000000
+      internalID: 1560966087657054609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_mushrooms 1_17
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 30
+        width: 16
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb00764daedebcfc0800000000000000
+      internalID: -3473421094744555329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_mushrooms 1_18
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 30
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1501cfc9b14639800800000000000000
+      internalID: 617947643640549457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_mushrooms 1_19
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 30
+        width: 16
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54b162660c5ad44a0800000000000000
+      internalID: -6607442832516572347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_mushrooms 1_20
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 4
+        width: 17
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 446635451ac3cbd20800000000000000
+      internalID: 3295575690930513476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_mushrooms 1_21
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 4
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42fbb64ea82299a00800000000000000
+      internalID: 763679591749107492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      spritesheet_mushrooms 1_0: -969169045095353416
+      spritesheet_mushrooms 1_1: 1691134678044115290
+      spritesheet_mushrooms 1_10: 4936332299345872904
+      spritesheet_mushrooms 1_11: 2443999605216195650
+      spritesheet_mushrooms 1_12: 6887843542045572304
+      spritesheet_mushrooms 1_13: 5008110706619682464
+      spritesheet_mushrooms 1_14: 519453440125275571
+      spritesheet_mushrooms 1_15: -2146910657692036179
+      spritesheet_mushrooms 1_16: 1560966087657054609
+      spritesheet_mushrooms 1_17: -3473421094744555329
+      spritesheet_mushrooms 1_18: 617947643640549457
+      spritesheet_mushrooms 1_19: -6607442832516572347
+      spritesheet_mushrooms 1_2: 8750481713157789025
+      spritesheet_mushrooms 1_20: 3295575690930513476
+      spritesheet_mushrooms 1_21: 763679591749107492
+      spritesheet_mushrooms 1_3: -7140743218334636871
+      spritesheet_mushrooms 1_4: 6962263974733444744
+      spritesheet_mushrooms 1_5: -3085699947009482641
+      spritesheet_mushrooms 1_6: 7098910668465297838
+      spritesheet_mushrooms 1_7: 1373458131189615509
+      spritesheet_mushrooms 1_8: 1816175657535432011
+      spritesheet_mushrooms 1_9: 3303377001524879665
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

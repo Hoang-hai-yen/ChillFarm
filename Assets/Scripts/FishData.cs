@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New ToolData", menuName = "Fishing/Fish Data")]
+[CreateAssetMenu(fileName = "New Item", menuName = "Fishing/Fish Data")]
 public class FishData : ItemData
 {
     
@@ -10,5 +10,6 @@ public class FishData : ItemData
     private void OnValidate()
     {
         itemType = ItemType.Fish;
+        staminaCost = 0;
     }
 }
