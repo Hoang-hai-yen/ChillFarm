@@ -18,6 +18,8 @@ public class InventoryManager : MonoBehaviour
     public InventorySlot[] backpackSlots = new InventorySlot[20];
     public int SelectedHotbarSlot { get; private set; } = 0; 
     public event Action OnInventoryChanged;
+    public int currentGold = 500;
+    public Action<int> OnGoldChanged;
 
     void Awake()
     {
@@ -167,5 +169,24 @@ public bool AddItem(ItemData item, int count = 1)
         slotDataB.quantity = tempQty;
 
         OnInventoryChanged?.Invoke();
+    }
+    public bool TrySpendGold(int amount)
+    {
+        if (currentGold >= amount)
+        {
+            currentGold -= amount;
+            Debug.Log($"Đã tiêu {amount} Gold. Còn lại: {currentGold}");
+            OnGoldChanged?.Invoke(currentGold);
+            return true;
+        }
+        
+        Debug.Log("Không đủ tiền!");
+        return false;
+    }
+
+    public void AddGold(int amount)
+    {
+        currentGold += amount;
+        OnGoldChanged?.Invoke(currentGold);
     }
 }
