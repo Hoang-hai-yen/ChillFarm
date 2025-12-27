@@ -12,4 +12,6 @@ public class ItemData : ScriptableObject
     public Sprite itemIcon;
     public ItemType itemType;
     public float staminaCost = 5f; 
+    [Header("Shop Info")]
+    public int price = 100;
 }
