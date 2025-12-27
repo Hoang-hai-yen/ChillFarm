@@ -226,11 +226,13 @@ public class PlayerController : MonoBehaviour
             if (tool.toolType == ToolType.Hoe)
             {
                 animator.SetTrigger("useHoe");
+                AudioManager.Instance.PlayDigPlant();
                 yield return new WaitForSeconds(0.5f); 
             }
             else if (tool.toolType == ToolType.WateringCan)
             {
                 animator.SetTrigger("useWaterCan");
+                AudioManager.Instance.PlayFishing();
                 yield return new WaitForSeconds(0.7f); 
             }
             else if (tool.toolType == ToolType.FishingRod)
@@ -238,11 +240,13 @@ public class PlayerController : MonoBehaviour
                 if(!animator.GetBool("isFishing") && fishingController.CanFishInDirection())
                 {
                     animator.SetBool("isFishing", true);
+                    AudioManager.Instance.PlayFishing();
                     yield return new WaitForSeconds(0.7f);
                 }
                 else
                 {
                     animator.SetBool("isFishing", false);
+                    AudioManager.Instance.PlayFishing();
                     yield return new WaitForSeconds(0.5f);
 
                 }
@@ -251,7 +255,8 @@ public class PlayerController : MonoBehaviour
         }
         else if (currentItem != null && (currentItem.itemType == ItemType.Seed || currentItem.itemType == ItemType.Fertilizer))
         {
-            animator.SetTrigger("doAction"); 
+            animator.SetTrigger("doAction");
+            AudioManager.Instance.PlayDigPlant();
             yield return new WaitForSeconds(0.2f);
         }
         else if (currentItem == null)

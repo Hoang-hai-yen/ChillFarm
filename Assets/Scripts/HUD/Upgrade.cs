@@ -24,6 +24,7 @@ public class UpgradeBuyImageButton : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         BuyUpgrade();
+        AudioManager.Instance.PlayUpgrade();
     }
 
     private void BuyUpgrade()
