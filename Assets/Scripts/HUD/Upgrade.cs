@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UpgradeBuyImageButton : MonoBehaviour, IPointerClickHandler
+public class Upgrade : MonoBehaviour, IPointerClickHandler
 {
-    [Header("Diamonds (set in order left → right)")]
+    [Header("Diamonds (left → right)")]
     [SerializeField] private GameObject[] diamonds;
 
     [Header("Max upgrade level")]
@@ -13,33 +13,50 @@ public class UpgradeBuyImageButton : MonoBehaviour, IPointerClickHandler
 
     void Start()
     {
-        // Đảm bảo tất cả kim cương đều tắt lúc đầu
+        // Auto fix: tắt toàn bộ diamond khi bắt đầu
         for (int i = 0; i < diamonds.Length; i++)
         {
             if (diamonds[i] != null)
+            {
                 diamonds[i].SetActive(false);
+            }
+            else
+            {
+                Debug.LogWarning("Diamond element " + i + " đang NULL");
+            }
         }
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         BuyUpgrade();
-        AudioManager.Instance.PlayUpgrade();
     }
 
     private void BuyUpgrade()
     {
+        // Đã max
         if (currentLevel >= maxLevel)
         {
             Debug.Log("Đã nâng cấp tối đa");
             return;
         }
 
-        if (currentLevel < diamonds.Length)
+        // Mảng thiếu phần tử
+        if (currentLevel >= diamonds.Length)
         {
-            diamonds[currentLevel].SetActive(true);
+            Debug.LogError("Diamonds array KHÔNG đủ phần tử");
+            return;
         }
 
+        // Element bị null
+        if (diamonds[currentLevel] == null)
+        {
+            Debug.LogError("Diamond element " + currentLevel + " bị NULL");
+            return;
+        }
+
+        // Hiện diamond
+        diamonds[currentLevel].SetActive(true);
         currentLevel++;
 
         Debug.Log("Upgrade level: " + currentLevel);
