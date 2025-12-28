@@ -106,7 +106,7 @@ public class FishingController : MonoBehaviour
             {
                
                 ShowResult(caughtFish.itemIcon, $"Bạn đã câu được: {caughtFish.itemName}!");
-
+                InventoryManager.Instance.AddItem(caughtFish);
             }
         }
 

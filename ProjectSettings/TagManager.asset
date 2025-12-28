@@ -12,7 +12,7 @@ TagManager:
   - Water
   - UI
   - Interactable
-  - 
+  - Mushroom
   - 
   - 
   - 
@@ -71,8 +71,14 @@ TagManager:
   - name: Furniture
     uniqueID: 2603596393
     locked: 0
+  - name: Mushroom
+    uniqueID: 1292074589
+    locked: 0
   - name: Player
     uniqueID: 1055369451
+    locked: 0
+  - name: Effect
+    uniqueID: 12574233
     locked: 0
   - name: WNew Layer 12
     uniqueID: 53181793

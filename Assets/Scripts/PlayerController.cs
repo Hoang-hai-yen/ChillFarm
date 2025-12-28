@@ -39,6 +39,10 @@ public class PlayerController : MonoBehaviour
 
     private bool isInteracting = false;
 
+    [Header("Mushroom")]    
+    public LayerMask mushroomLayer;
+    [SerializeField] private float mushroomPickingRadius = 0.2f;
+
     public void Awake()
     {
         playerControls = new PlayerControls();
@@ -223,7 +227,12 @@ public class PlayerController : MonoBehaviour
 
         if (currentItem is ToolData tool)
         {
-            if (tool.toolType == ToolType.Hoe)
+            if (tool.toolType == ToolType.Hand)
+            {
+                TryPickMushroom();
+ 
+            }
+            else if (tool.toolType == ToolType.Hoe)
             {
                 animator.SetTrigger("useHoe");
                 AudioManager.Instance.PlayDigPlant();
@@ -252,6 +261,7 @@ public class PlayerController : MonoBehaviour
                 }
                 
             }
+            
         }
         else if (currentItem != null && (currentItem.itemType == ItemType.Seed || currentItem.itemType == ItemType.Fertilizer))
         {
@@ -262,6 +272,7 @@ public class PlayerController : MonoBehaviour
         else if (currentItem == null)
         {
             animator.SetTrigger("doAction");
+            yield return new WaitForSeconds(0.2f);
         }
 
         if (farmlandManager != null)
@@ -514,6 +525,26 @@ public class PlayerController : MonoBehaviour
         }
 
         return true;
+    }
+
+    void TryPickMushroom()
+    {
+        Collider2D hit = Physics2D.OverlapCircle(transform.position, mushroomPickingRadius, mushroomLayer);
+        
+        if (hit != null)
+        {
+            Mushroom mush = hit.GetComponent<Mushroom>();
+            if (mush != null)
+            {
+                mush.Collected();
+            }
+        }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, mushroomPickingRadius);
     }
     
 }
