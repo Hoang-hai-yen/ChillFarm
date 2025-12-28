@@ -1,0 +1,728 @@
+fileFormatVersion: 2
+guid: d7401dd34d366834aa85d7a5be7507ef
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -599525958935534755
+    second: canhquan3_0
+  - first:
+      213: -4405773379544438960
+    second: canhquan3_1
+  - first:
+      213: 2142907370096142547
+    second: canhquan3_2
+  - first:
+      213: -7484604987342357564
+    second: canhquan3_3
+  - first:
+      213: 554628515983263543
+    second: canhquan3_4
+  - first:
+      213: -278293455499939733
+    second: canhquan3_5
+  - first:
+      213: -2174448339395072370
+    second: canhquan3_6
+  - first:
+      213: 5699956087462295206
+    second: canhquan3_7
+  - first:
+      213: 5875581457082657219
+    second: canhquan3_8
+  - first:
+      213: -6123272094613675652
+    second: canhquan3_9
+  - first:
+      213: 5163664772069281677
+    second: canhquan3_10
+  - first:
+      213: 8156429289612227185
+    second: canhquan3_11
+  - first:
+      213: 3931769643022361205
+    second: canhquan3_12
+  - first:
+      213: 5523850630770595370
+    second: canhquan3_13
+  - first:
+      213: -809654682131128445
+    second: canhquan3_14
+  - first:
+      213: -2134039130039916264
+    second: canhquan3_15
+  - first:
+      213: -7244838279418809563
+    second: canhquan3_16
+  - first:
+      213: 8968338838369209201
+    second: canhquan3_17
+  - first:
+      213: 3820487166460341926
+    second: canhquan3_18
+  - first:
+      213: -7647683002348431362
+    second: canhquan3_19
+  - first:
+      213: -5344642519328577546
+    second: canhquan3_20
+  - first:
+      213: 6967288838477911655
+    second: canhquan3_21
+  - first:
+      213: 620541400095497751
+    second: canhquan3_22
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: canhquan3_0
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 420
+        width: 89
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d53a508115e0ea7f0800000000000000
+      internalID: -599525958935534755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: canhquan3_1
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 422
+        width: 71
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 057a16f347c8bd2c0800000000000000
+      internalID: -4405773379544438960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: canhquan3_2
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 425
+        width: 93
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d8a52546e22dbd10800000000000000
+      internalID: 2142907370096142547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: canhquan3_3
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 328
+        width: 123
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cb775d4b67512890800000000000000
+      internalID: -7484604987342357564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: canhquan3_4
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 422
+        width: 98
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7370c7d52bf62b700800000000000000
+      internalID: 554628515983263543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: canhquan3_5
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 320
+        width: 97
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b603c91a39d432cf0800000000000000
+      internalID: -278293455499939733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: canhquan3_6
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 323
+        width: 51
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8e2beb81cec2d1e0800000000000000
+      internalID: -2174448339395072370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: canhquan3_7
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 325
+        width: 46
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a6f384acdf4a1f40800000000000000
+      internalID: 5699956087462295206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: canhquan3_8
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 328
+        width: 72
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c9a84e74324a8150800000000000000
+      internalID: 5875581457082657219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: canhquan3_9
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 221
+        width: 100
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c716d71f874c50ba0800000000000000
+      internalID: -6123272094613675652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: canhquan3_10
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 219
+        width: 116
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8f436e70c509a740800000000000000
+      internalID: 5163664772069281677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: canhquan3_11
+      rect:
+        serializedVersion: 2
+        x: 287
+        y: 166
+        width: 108
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 172bdea6935713170800000000000000
+      internalID: 8156429289612227185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: canhquan3_12
+      rect:
+        serializedVersion: 2
+        x: 413
+        y: 213
+        width: 70
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 572230fa8a3709630800000000000000
+      internalID: 3931769643022361205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: canhquan3_13
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 11
+        width: 41
+        height: 185
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a26166fc1e8a8ac40800000000000000
+      internalID: 5523850630770595370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: canhquan3_14
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 79
+        width: 51
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38f97d83b5783c4f0800000000000000
+      internalID: -809654682131128445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: canhquan3_15
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 83
+        width: 25
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 819ef25c7be5262e0800000000000000
+      internalID: -2134039130039916264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: canhquan3_16
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 81
+        width: 41
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 523f61c38f9257b90800000000000000
+      internalID: -7244838279418809563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: canhquan3_17
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 87
+        width: 87
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17b065e38a0f57c70800000000000000
+      internalID: 8968338838369209201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: canhquan3_18
+      rect:
+        serializedVersion: 2
+        x: 415
+        y: 83
+        width: 64
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6aeaec906d8150530800000000000000
+      internalID: 3820487166460341926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: canhquan3_19
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 13
+        width: 87
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef79a3a14d8fdd590800000000000000
+      internalID: -7647683002348431362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: canhquan3_20
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 13
+        width: 87
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f7a8ff12f304d5b0800000000000000
+      internalID: -5344642519328577546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: canhquan3_21
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 13
+        width: 86
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7661509c848c0b060800000000000000
+      internalID: 6967288838477911655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: canhquan3_22
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 13
+        width: 87
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71e9d199d1b9c9800800000000000000
+      internalID: 620541400095497751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      canhquan3_0: -599525958935534755
+      canhquan3_1: -4405773379544438960
+      canhquan3_10: 5163664772069281677
+      canhquan3_11: 8156429289612227185
+      canhquan3_12: 3931769643022361205
+      canhquan3_13: 5523850630770595370
+      canhquan3_14: -809654682131128445
+      canhquan3_15: -2134039130039916264
+      canhquan3_16: -7244838279418809563
+      canhquan3_17: 8968338838369209201
+      canhquan3_18: 3820487166460341926
+      canhquan3_19: -7647683002348431362
+      canhquan3_2: 2142907370096142547
+      canhquan3_20: -5344642519328577546
+      canhquan3_21: 6967288838477911655
+      canhquan3_22: 620541400095497751
+      canhquan3_3: -7484604987342357564
+      canhquan3_4: 554628515983263543
+      canhquan3_5: -278293455499939733
+      canhquan3_6: -2174448339395072370
+      canhquan3_7: 5699956087462295206
+      canhquan3_8: 5875581457082657219
+      canhquan3_9: -6123272094613675652
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

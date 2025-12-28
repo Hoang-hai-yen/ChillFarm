@@ -63,7 +63,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 72
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -154,12 +154,12 @@ TextureImporter:
       name: Gemini_Generated_Image_h48pimh48pimh48p-Photoroom_0
       rect:
         serializedVersion: 2
-        x: 128
-        y: 347
-        width: 155
-        height: 138
+        x: 129
+        y: 348
+        width: 152
+        height: 136
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -176,12 +176,12 @@ TextureImporter:
       name: Gemini_Generated_Image_h48pimh48pimh48p-Photoroom_1
       rect:
         serializedVersion: 2
-        x: 396
-        y: 345
-        width: 146
-        height: 159
+        x: 397
+        y: 347
+        width: 144
+        height: 155
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -198,12 +198,12 @@ TextureImporter:
       name: Gemini_Generated_Image_h48pimh48pimh48p-Photoroom_2
       rect:
         serializedVersion: 2
-        x: 699
-        y: 36
-        width: 517
-        height: 483
+        x: 700
+        y: 37
+        width: 515
+        height: 480
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -220,12 +220,12 @@ TextureImporter:
       name: Gemini_Generated_Image_h48pimh48pimh48p-Photoroom_3
       rect:
         serializedVersion: 2
-        x: 87
-        y: 40
-        width: 146
-        height: 133
+        x: 88
+        y: 42
+        width: 144
+        height: 130
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -242,12 +242,12 @@ TextureImporter:
       name: Gemini_Generated_Image_h48pimh48pimh48p-Photoroom_4
       rect:
         serializedVersion: 2
-        x: 404
-        y: 40
-        width: 146
-        height: 134
+        x: 405
+        y: 42
+        width: 144
+        height: 131
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -264,7 +264,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 7ac1aa7fe1f287241b6b065caab8ab34
     internalID: 0
     vertices: []
     indices: 
@@ -272,7 +272,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Gemini_Generated_Image_h48pimh48pimh48p-Photoroom_0: -6705109916507909729
       Gemini_Generated_Image_h48pimh48pimh48p-Photoroom_1: -3058723184808520438

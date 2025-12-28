@@ -1,0 +1,944 @@
+fileFormatVersion: 2
+guid: 9d61173da20c1394fa6099f4c3bff232
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5254098924479710671
+    second: damlay1_0
+  - first:
+      213: -9059546917425022993
+    second: damlay1_1
+  - first:
+      213: 6397070710838521296
+    second: damlay1_2
+  - first:
+      213: 8113031760948960533
+    second: damlay1_3
+  - first:
+      213: 1303692325304330041
+    second: damlay1_4
+  - first:
+      213: 9172778965027060020
+    second: damlay1_5
+  - first:
+      213: -1320842680261688913
+    second: damlay1_6
+  - first:
+      213: -1289194724206977856
+    second: damlay1_7
+  - first:
+      213: 4643366594196104540
+    second: damlay1_8
+  - first:
+      213: -4473185301915492989
+    second: damlay1_9
+  - first:
+      213: 2850282559625002924
+    second: damlay1_10
+  - first:
+      213: 4189932016854175619
+    second: damlay1_11
+  - first:
+      213: 6064802732290516014
+    second: damlay1_12
+  - first:
+      213: 1716548244055373429
+    second: damlay1_13
+  - first:
+      213: -576117784041125144
+    second: damlay1_14
+  - first:
+      213: 1732077679557929568
+    second: damlay1_15
+  - first:
+      213: 6574455457112063948
+    second: damlay1_16
+  - first:
+      213: -1276856350462281189
+    second: damlay1_17
+  - first:
+      213: -5058978857934585040
+    second: damlay1_18
+  - first:
+      213: 4125134081922457980
+    second: damlay1_19
+  - first:
+      213: -1998922098549983833
+    second: damlay1_20
+  - first:
+      213: 2211442788633064279
+    second: damlay1_21
+  - first:
+      213: 1406057232442624384
+    second: damlay1_22
+  - first:
+      213: -7965886502609286599
+    second: damlay1_23
+  - first:
+      213: 1449916911138362727
+    second: damlay1_24
+  - first:
+      213: -8976792034755209957
+    second: damlay1_25
+  - first:
+      213: 3232391960384434310
+    second: damlay1_26
+  - first:
+      213: 8413649703570147168
+    second: damlay1_27
+  - first:
+      213: -7837749186031976899
+    second: damlay1_28
+  - first:
+      213: -119878026725220357
+    second: damlay1_29
+  - first:
+      213: -7367207135815139833
+    second: damlay1_30
+  - first:
+      213: -1649607310081617121
+    second: damlay1_31
+  - first:
+      213: 3759488581947146570
+    second: damlay1_32
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 40
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: damlay1_0
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 409
+        width: 127
+        height: 81
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13aff979dd0b517b0800000000000000
+      internalID: -5254098924479710671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damlay1_1
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 415
+        width: 179
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe775e00416064280800000000000000
+      internalID: -9059546917425022993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damlay1_2
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 409
+        width: 165
+        height: 81
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0dde59a1be5f6c850800000000000000
+      internalID: 6397070710838521296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damlay1_3
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 316
+        width: 140
+        height: 81
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51d13d2e667479070800000000000000
+      internalID: 8113031760948960533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damlay1_4
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 304
+        width: 132
+        height: 99
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 937ea2a3345a71210800000000000000
+      internalID: 1303692325304330041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damlay1_6
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 332
+        width: 58
+        height: 63
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa1c3d6949c6bade0800000000000000
+      internalID: -1320842680261688913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damlay1_7
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 303
+        width: 98
+        height: 105
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ccd5519a3cdb1ee0800000000000000
+      internalID: -1289194724206977856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damlay1_9
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 160
+        width: 76
+        height: 161
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38d14d8faad0ce1c0800000000000000
+      internalID: -4473185301915492989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damlay1_10
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 249
+        width: 78
+        height: 57
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: caf70f3f2ec3e8720800000000000000
+      internalID: 2850282559625002924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damlay1_11
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 260
+        width: 83
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38f01a958f0a52a30800000000000000
+      internalID: 4189932016854175619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damlay1_12
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 230
+        width: 80
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e24aefac3f18a2450800000000000000
+      internalID: 6064802732290516014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damlay1_13
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 249
+        width: 96
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 576bdb6888762d710800000000000000
+      internalID: 1716548244055373429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damlay1_14
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 140
+        width: 70
+        height: 98
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ea81758de73108f0800000000000000
+      internalID: -576117784041125144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damlay1_15
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 146
+        width: 29
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06aee6df873990810800000000000000
+      internalID: 1732077679557929568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damlay1_16
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 234
+        width: 61
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ccffac0c7682d3b50800000000000000
+      internalID: 6574455457112063948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damlay1_17
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 230
+        width: 30
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1a7e711ae1b74ee0800000000000000
+      internalID: -1276856350462281189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damlay1_18
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 99
+        width: 71
+        height: 141
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03309964885eac9b0800000000000000
+      internalID: -5058978857934585040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damlay1_19
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 159
+        width: 64
+        height: 58
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7168d3779b6f3930800000000000000
+      internalID: 4125134081922457980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damlay1_20
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 158
+        width: 63
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a5ff3e21f66244e0800000000000000
+      internalID: -1998922098549983833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damlay1_21
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 160
+        width: 57
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 753b291ef7f90be10800000000000000
+      internalID: 2211442788633064279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damlay1_22
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 91
+        width: 109
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0898c917a91538310800000000000000
+      internalID: 1406057232442624384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damlay1_23
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 81
+        width: 64
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93a05e25e6c737190800000000000000
+      internalID: -7965886502609286599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damlay1_24
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 82
+        width: 64
+        height: 61
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 765db3aafb32f1410800000000000000
+      internalID: 1449916911138362727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damlay1_25
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 88
+        width: 72
+        height: 63
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b151cd994370c6380800000000000000
+      internalID: -8976792034755209957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damlay1_26
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 86
+        width: 61
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 680fa8dac53cbdc20800000000000000
+      internalID: 3232391960384434310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damlay1_27
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 10
+        width: 53
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0678ed5f3d943c470800000000000000
+      internalID: 8413649703570147168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damlay1_28
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 16
+        width: 47
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3ef4f734a8ba3390800000000000000
+      internalID: -7837749186031976899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damlay1_29
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 14
+        width: 44
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bff1ba0e19b165ef0800000000000000
+      internalID: -119878026725220357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damlay1_30
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 13
+        width: 41
+        height: 58
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70ef303a42c62c990800000000000000
+      internalID: -7367207135815139833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damlay1_31
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 8
+        width: 66
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1392b734ea6b19e0800000000000000
+      internalID: -1649607310081617121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damlay1_32
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 10
+        width: 179
+        height: 76
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a41c81852f26c2430800000000000000
+      internalID: 3759488581947146570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: dcfd0dd83cfec3645b0ed71dba8a32bc
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      damlay1_0: -5254098924479710671
+      damlay1_1: -9059546917425022993
+      damlay1_10: 2850282559625002924
+      damlay1_11: 4189932016854175619
+      damlay1_12: 6064802732290516014
+      damlay1_13: 1716548244055373429
+      damlay1_14: -576117784041125144
+      damlay1_15: 1732077679557929568
+      damlay1_16: 6574455457112063948
+      damlay1_17: -1276856350462281189
+      damlay1_18: -5058978857934585040
+      damlay1_19: 4125134081922457980
+      damlay1_2: 6397070710838521296
+      damlay1_20: -1998922098549983833
+      damlay1_21: 2211442788633064279
+      damlay1_22: 1406057232442624384
+      damlay1_23: -7965886502609286599
+      damlay1_24: 1449916911138362727
+      damlay1_25: -8976792034755209957
+      damlay1_26: 3232391960384434310
+      damlay1_27: 8413649703570147168
+      damlay1_28: -7837749186031976899
+      damlay1_29: -119878026725220357
+      damlay1_3: 8113031760948960533
+      damlay1_30: -7367207135815139833
+      damlay1_31: -1649607310081617121
+      damlay1_32: 3759488581947146570
+      damlay1_4: 1303692325304330041
+      damlay1_5: 9172778965027060020
+      damlay1_6: -1320842680261688913
+      damlay1_7: -1289194724206977856
+      damlay1_8: 4643366594196104540
+      damlay1_9: -4473185301915492989
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

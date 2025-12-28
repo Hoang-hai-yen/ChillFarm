@@ -54,7 +54,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 80
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -845,10 +845,10 @@ TextureImporter:
       name: PathAndObjects_52
       rect:
         serializedVersion: 2
-        x: 227
-        y: 97
-        width: 60
-        height: 56
+        x: 279
+        y: 34
+        width: 108
+        height: 61
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -859,28 +859,6 @@ TextureImporter:
       bones: []
       spriteID: 5f50831f48132ec46abc7a98ce3784f5
       internalID: 784706951
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PathAndObjects_53
-      rect:
-        serializedVersion: 2
-        x: 281
-        y: 1
-        width: 101
-        height: 94
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 160cde52c6c824a43859edf06fc45ece
-      internalID: 621391680
       vertices: []
       indices: 
       edges: []
