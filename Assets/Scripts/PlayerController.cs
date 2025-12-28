@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Mushroom")]    
     public LayerMask mushroomLayer;
-    [SerializeField] private float mushroomPickingRadius = 0.2f;
+    [SerializeField] private float mushroomPickingRadius = 0.5f;
 
     public void Awake()
     {
@@ -524,7 +524,9 @@ public class PlayerController : MonoBehaviour
 
     void TryPickMushroom()
     {
-        Collider2D hit = Physics2D.OverlapCircle(transform.position, mushroomPickingRadius, mushroomLayer);
+        Vector2 checkPosition = (Vector2)transform.position + (new Vector2(lastMoveX, lastMoveY) * interactionDistance);
+
+        Collider2D hit = Physics2D.OverlapCircle(checkPosition, mushroomPickingRadius, mushroomLayer);
         
         if (hit != null)
         {
