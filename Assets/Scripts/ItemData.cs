@@ -14,4 +14,6 @@ public class ItemData : ScriptableObject
     public float staminaCost = 5f; 
     [Header("Shop Info")]
     public int price = 100;
+    [Header("Sell Info")]
+    public int sellPrice = 50;
 }

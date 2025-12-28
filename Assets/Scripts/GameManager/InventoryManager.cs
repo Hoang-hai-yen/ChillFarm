@@ -13,13 +13,15 @@ public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance { get; private set; }
 
+    [Header("Money")]
+    public int currentGold = 500; 
+    public event Action<int> OnGoldChanged; 
+
     [Header("Inventory Data")]
     public InventorySlot[] hotbarSlots = new InventorySlot[9];
     public InventorySlot[] backpackSlots = new InventorySlot[20];
     public int SelectedHotbarSlot { get; private set; } = 0; 
     public event Action OnInventoryChanged;
-    public int currentGold = 500;
-    public Action<int> OnGoldChanged;
 
     void Awake()
     {
@@ -70,7 +72,7 @@ public class InventoryManager : MonoBehaviour
         return slot != null ? slot.itemData : null;
     }
 
-public bool AddItem(ItemData item, int count = 1)
+    public bool AddItem(ItemData item, int count = 1)
     {
         for (int i = 1; i < hotbarSlots.Length; i++) 
         {
@@ -170,13 +172,14 @@ public bool AddItem(ItemData item, int count = 1)
 
         OnInventoryChanged?.Invoke();
     }
+
     public bool TrySpendGold(int amount)
     {
         if (currentGold >= amount)
         {
             currentGold -= amount;
-            Debug.Log($"Đã tiêu {amount} Gold. Còn lại: {currentGold}");
-            OnGoldChanged?.Invoke(currentGold);
+            OnGoldChanged?.Invoke(currentGold); 
+            Debug.Log($"Mua thành công! Còn lại: {currentGold} G");
             return true;
         }
         
@@ -188,5 +191,23 @@ public bool AddItem(ItemData item, int count = 1)
     {
         currentGold += amount;
         OnGoldChanged?.Invoke(currentGold);
+    }
+
+    public void SellItem(ItemData item, int quantity = 1)
+    {
+        if (item == null) return;
+
+        bool isRemoved = RemoveItem(item, quantity);
+
+        if (isRemoved)
+        {
+            int totalEarned = item.sellPrice * quantity;
+            AddGold(totalEarned);
+            Debug.Log($"Đã bán {item.itemName} nhận được {totalEarned} G");
+        }
+        else
+        {
+            Debug.Log("Không còn vật phẩm này để bán!");
+        }
     }
 }
