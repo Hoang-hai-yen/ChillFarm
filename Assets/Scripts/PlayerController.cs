@@ -130,9 +130,13 @@ public class PlayerController : MonoBehaviour
         Vector3 interactionWorldPos = transform.position + playerDirection * interactionDistance;
         Vector3Int targetCellPos = grid.WorldToCell(interactionWorldPos);
 
-        float staminaCost = (currentItem == null) ? 2f : currentItem.staminaCost;
-        
-        if (staminaController == null || staminaController.GetCurrentStamina() < staminaCost)
+        float baseStaminaCost = (currentItem == null) ? 2f : currentItem.staminaCost;
+    
+        // ÁP DỤNG KỸ NĂNG GIẢM STAMINA
+        float reduction = SkillManager.Instance.GetStaminaReduction();
+        float finalStaminaCost = baseStaminaCost * (1f - reduction); 
+
+        if (staminaController == null || staminaController.GetCurrentStamina() < finalStaminaCost)
         {
             Debug.Log("Không đủ Stamina!");
             isInteracting = false;
@@ -149,14 +153,14 @@ public class PlayerController : MonoBehaviour
         {
             if (animal.IsDead())
             {
-                float cleanUpCost = 5f; 
+                float cleanUpCost = 5f * (1f - reduction); 
                 
                 if (staminaController.GetCurrentStamina() >= cleanUpCost)
                 {
                     animator.SetTrigger("doAction"); 
                     animal.CleanupCorpse();
                     
-                    staminaCost = cleanUpCost; 
+                    finalStaminaCost = cleanUpCost; 
                     actionSuccessful = true;
                     
                     yield return new WaitForSeconds(0.5f);
@@ -185,7 +189,7 @@ public class PlayerController : MonoBehaviour
                     animal.Play(); 
                     animator.SetTrigger("petAnimal");
                     actionSuccessful = true;
-                    staminaCost = 1f; 
+                    finalStaminaCost = 1f * (1f - reduction); 
                 }
 
                 if (actionSuccessful)
@@ -288,12 +292,11 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        FinalizeInteraction:
-        
-        if (actionSuccessful && staminaCost > 0)
+       FinalizeInteraction:
+        if (actionSuccessful && finalStaminaCost > 0)
         {
-            if (staminaController.ConsumeStamina(staminaCost))
-                Debug.Log($"Action SUCCESSFUL. Stamina remaining: {staminaController.GetCurrentStamina()}");
+            if (staminaController.ConsumeStamina(finalStaminaCost)) 
+                Debug.Log($"Tiêu tốn {finalStaminaCost} Stamina.");
         }
         else if (!actionSuccessful)
         {
