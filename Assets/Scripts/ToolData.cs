@@ -6,8 +6,9 @@ public class ToolData : ItemData
 {
     public ToolType toolType;
 
-    private void OnValidate()
+    protected override void OnValidate()
     {
+        base.OnValidate();
         itemType = ItemType.Tool;
     }
 }
