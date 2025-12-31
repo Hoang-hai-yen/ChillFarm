@@ -317,6 +317,10 @@ public class PlayerController : MonoBehaviour
             Interactable npc = hit.GetComponent<Interactable>();
             if (npc != null)
             {
+                NPCController npcController = hit.GetComponent<NPCController>();
+                if (npcController != null)
+                    npcController.PauseDirect();
+
                 DialogData dialogData = hit.GetComponent<DialogData>();
                 if (dialogData != null && DialogManager.Instance != null)
                 {
