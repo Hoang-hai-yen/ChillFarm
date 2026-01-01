@@ -15,10 +15,10 @@ public class QuestUIController: MonoBehaviour
 
     void Start()
     {
-        for(int i = 0; i < testQuestAmount; i++)
-        {
-            testQuests.Add(new QuestProgress(testQuest));
-        }
+        // for(int i = 0; i < testQuestAmount; i++)
+        // {
+        //     testQuests.Add(new QuestProgress(testQuest));
+        // }
         UpdateUI();
     }
 
@@ -29,8 +29,8 @@ public class QuestUIController: MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        foreach(var quest in testQuests)
-        {
+        foreach(var quest in QuestController.Instance.activeQuests)
+        { Debug.Log("Updating quest UI for quest: " + quest.quest.name);
             GameObject entry =  Instantiate(questEntryPrefab, questListContent);
             TMP_Text questNameText = entry.transform.Find("QuestNameText").GetComponent<TMP_Text>();
             Transform objectiveList = entry.transform.Find("ObjectiveList");
@@ -41,7 +41,7 @@ public class QuestUIController: MonoBehaviour
             {
                 GameObject objTextGO = Instantiate(objectiveTextPrefab, objectiveList);
                 TMP_Text objText = objTextGO.GetComponent<TMP_Text>();
-                objText.text = $"{objective.description}: {objective.targetAmount}";
+                objText.text = $"{objective.description}: ({objective.currentAmount}/{objective.targetAmount})";
             }
         }
     }

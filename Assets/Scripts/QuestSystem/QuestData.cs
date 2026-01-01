@@ -10,6 +10,7 @@ public class QuestData: ScriptableObject
     public string questName;
     public List<QuestObjective> questObjectives;
     public string description;
+    public List<QuestReward> rewards;
 
     private void OnValidate()
     {

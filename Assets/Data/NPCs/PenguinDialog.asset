@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8fa0dd1d99350f4ba011ec0aa7f5029, type: 3}
+  m_Name: PenguinDialog
+  m_EditorClassIdentifier: Assembly-CSharp::NPCDialog
+  npcName: Penguine
+  npcPortrait: {fileID: -1467358709627880836, guid: f580e0e6664ce8e4e971df309d4a003c, type: 3}
+  dialogLines:
+  - Hello there!
+  - Long time no see
+  - Can you help me?
+  - Please help me collect some Shiitake mushroom
+  - Oh, ok! See you later
+  - Good luck collecting them
+  - Thank you!
+  - You made my day!
+  autoProgressLines: 0101000000000100
+  endDialogLines: 0000000101010001
+  autoProgressDelay: 1.5
+  typingSpeed: 0.05
+  voiceSound: {fileID: 0}
+  voicePitch: 1
+  dialogChoices:
+  - dialogueIndex: 2
+    choices:
+    - Ok
+    - Sorry
+    nextDialogueIndices: 0300000004000000
+    givesQuest: 0100
+  questInProgressIndex: 5
+  questCompletedIndex: 6
+  quest: {fileID: 11400000, guid: ae17266635b353d4ab6afa57d92ff702, type: 2}
