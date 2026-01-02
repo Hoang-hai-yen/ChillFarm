@@ -83,5 +83,8 @@ TagManager:
   - name: WNew Layer 12
     uniqueID: 53181793
     locked: 0
+  - name: Canvas
+    uniqueID: 1300240063
+    locked: 0
   m_RenderingLayers:
   - Default
