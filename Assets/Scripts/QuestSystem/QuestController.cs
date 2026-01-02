@@ -126,4 +126,12 @@ public class QuestController: MonoBehaviour
         }
         return true;
     }
+
+    public void ResetQuestStatus(string questId)
+    {
+        if (handInQuestIds.Contains(questId))
+        {
+            handInQuestIds.Remove(questId);
+        }
+    }
 }

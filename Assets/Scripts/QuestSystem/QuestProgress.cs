@@ -5,6 +5,7 @@ using UnityEngine;
 public class QuestObjective
 {
     public string objectiveId;
+    public ItemData objectiveItem;
     public string description;
     public ObjectiveType objectiveType;
     public int currentAmount;
@@ -43,6 +44,7 @@ public class QuestProgress
                 new QuestObjective()
                 {
                     objectiveId = obj.objectiveId,
+                    objectiveItem = obj.objectiveItem,
                     description = obj.description,
                     objectiveType = obj.objectiveType,
                     targetAmount = finalTargetAmount,

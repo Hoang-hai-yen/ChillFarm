@@ -26,6 +26,13 @@ public class DialogueController: MonoBehaviour
     public void ShowDialogUI(bool show)
     {
         dialogPanel.SetActive(show);
+
+        Time.timeScale = show ? 0f : 1f;
+
+    }
+    public void CloseDialogUI()
+    {
+        ShowDialogUI(false);
     }
 
     public void SetNPCInfo(string npcName, Sprite npcPortrait)
@@ -37,6 +44,7 @@ public class DialogueController: MonoBehaviour
     public void SetDialogText(string text)
     {
         dialogText.SetText(text);
+        
     }
 
     public void ClearChoices()
@@ -48,7 +56,7 @@ public class DialogueController: MonoBehaviour
     }
 
     public void CreateChoiceButton(string choiceText, UnityAction onClickAction)
-    {
+    {   
         GameObject choiceBtnObj = Instantiate(choiceButton, choiceContainter);
         TMP_Text btnText = choiceBtnObj.GetComponentInChildren<TMP_Text>();
         btnText.SetText(choiceText);

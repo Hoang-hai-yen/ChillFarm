@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8fa0dd1d99350f4ba011ec0aa7f5029, type: 3}
+  m_Name: ElenaDialog
+  m_EditorClassIdentifier: Assembly-CSharp::NPCDialog
+  npcName: Elena
+  npcPortrait: {fileID: -4040868977581525404, guid: 34e4fd29b5ee4a94784e48ff3e4e85ab, type: 3}
+  dialogLines:
+  - You're still digging in the dirt?
+  - I just came back from the deep woods. I found something you might find... interesting.
+  - I spotted some rare 'Moonlight Berries' near the waterfall. ?
+  - They only grow where the shadows are thickest. Want the coordinates?
+  - 'Go be careful. '
+  - If the forest spirits catch you stealing their snacks, even Ian won't be able
+    to help you. Good luck.
+  - 'Domesticated crops are fine, but wild seeds have a ''kick''. '
+  - They grow slower, but they sell for a lot of gold at the market.
+  - 'I''ll keep an eye out for more during my scouts. '
+  - Just make sure you have enough space in your backpack next time.
+  - I'm going back into the shadows.
+  - Too much sunlight makes my fur itchy. Try not to get lost, farmer.
+  autoProgressLines: 010001010100010101000100
+  endDialogLines: 000000000001000000010001
+  autoProgressDelay: 2
+  typingSpeed: 0.05
+  voiceSound: {fileID: 0}
+  voicePitch: 1
+  dialogChoices:
+  - dialogueIndex: 1
+    choices:
+    - Did you find anything cool?
+    - Why grow wild seeds?
+    - See you later, Elena.
+    nextDialogueIndices: 02000000060000000a000000
+    givesQuest: 000000
+  questPool: []
+  questTransitionIndexs: 
+  targetQuestStartIndexs: 
+  questInProgressIndex: 0
+  questCompletedIndex: 0
+  questOnCooldownIndex: 0

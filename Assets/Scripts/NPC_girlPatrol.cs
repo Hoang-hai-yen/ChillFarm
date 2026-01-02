@@ -66,4 +66,6 @@ public class NPC_girlPatrol : MonoBehaviour
             UpdateAnimation();
         }
     }
+
+    
 }

@@ -16,6 +16,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip digPlant;
     public AudioClip fishing;
     public AudioClip upgrade;
+    public AudioClip dialogVoice;
     //public AudioClip click;
 
     void Awake()
@@ -64,6 +65,18 @@ public class AudioManager : MonoBehaviour
     public void PlayUpgrade()
     {
         sfxSource.PlayOneShot(upgrade);
+    }
+
+    public void PlayDialogVoice()
+    {
+        sfxSource.clip = dialogVoice;
+        sfxSource.loop = true;
+        sfxSource.Play();
+    }
+    public void StopDialogVoice()
+    {
+        sfxSource.Stop();
+        sfxSource.loop = false;
     }
 
     //public void PlayClick()

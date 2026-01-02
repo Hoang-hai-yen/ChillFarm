@@ -15,27 +15,63 @@ MonoBehaviour:
   npcName: Penguine
   npcPortrait: {fileID: -1467358709627880836, guid: f580e0e6664ce8e4e971df309d4a003c, type: 3}
   dialogLines:
-  - Hello there!
-  - Long time no see
-  - Can you help me?
-  - Please help me collect some Shiitake mushroom
-  - Oh, ok! See you later
-  - Good luck collecting them
-  - Thank you!
-  - You made my day!
-  autoProgressLines: 0101000000000100
-  endDialogLines: 0000000101010001
+  - 'Waddle waddle! Ahoy there, land-strider! '
+  - You look like someone who doesn't mind getting their boots a bit dirty.
+  - 'This tropical sun is melting my brain-freeze! '
+  - I need something to keep my spirits 'chill'.
+  - Tell me, are you here to help a captain in distress, or are you just admiring
+    my magnificent tuxedo?
+  - "Listen, I\u2019ve heard rumors of these 'mushrooms' - weird little umbrellas
+    growing out of the dirt!"
+  - To a penguin like me, that's exotic gourmet!
+  - 'Could you waddle over to the forest and snag some for me? '
+  - I'll make it worth your while!
+  - 'Splendid! Just make sure they aren''t the ''spin-your-head-round'' kind. '
+  - Pingu wants a tasty snack, not a trip to the moon!
+  - 'Fine, keep your dry boots! '
+  - I guess I'll just starve in this heat while dreaming of forest snacks. Cold-hearted,
+    truly!
+  - Cold-hearted, truly!
+  - My tummy is growling louder than a hungry leopard seal!
+  - I'm craving the taste of the deep blue, but my flippers are too sore for diving
+    today.
+  - 'Cast your line and bring me a fresh catch! '
+  - Something scaly and delicious, if you catch my drift!
+  - 'Perfect! I''ll be waiting here, sharpening my beak. '
+  - Don't let the big one get away!
+  - "No fish? You\u2019re really leaving me high and dry! "
+  - My tummy will remember this betrayal, land-strider! Waddle away then!
+  - Still empty-handed?
+  - Don't leave me out in the cold, pal!
+  - "I\u2019m counting on you to bring those goodies back!"
+  - 'Ice-tastic! You actually did it! You''re a real life-saver. '
+  - Here, take this gold! Don't spend it all on snow-cones!
+  - Phew, I'm stuffed! Give a penguin a break, will ya?
+  - My digestion needs some 'me-time'. Come back in a bit!
+  autoProgressLines: 0101010101010101000100010100010101000100010001010001000100
+  endDialogLines: 0000000000000000000001000001000000000001000100000100010001
   autoProgressDelay: 1.5
-  typingSpeed: 0.05
+  typingSpeed: 0.02
   voiceSound: {fileID: 0}
   voicePitch: 1
   dialogChoices:
-  - dialogueIndex: 2
+  - dialogueIndex: 8
     choices:
-    - Ok
-    - Sorry
-    nextDialogueIndices: 0300000004000000
+    - OK
+    - No
+    nextDialogueIndices: 090000000b000000
     givesQuest: 0100
-  questInProgressIndex: 5
-  questCompletedIndex: 6
-  quest: {fileID: 11400000, guid: ae17266635b353d4ab6afa57d92ff702, type: 2}
+  - dialogueIndex: 17
+    choices:
+    - OK
+    - No
+    nextDialogueIndices: 1200000014000000
+    givesQuest: 0100
+  questPool:
+  - {fileID: 11400000, guid: ae17266635b353d4ab6afa57d92ff702, type: 2}
+  - {fileID: 11400000, guid: 13bb49babe634be4990a827b1841a53f, type: 2}
+  questTransitionIndexs: 000000000100
+  targetQuestStartIndexs: 050000000e000000
+  questInProgressIndex: 22
+  questCompletedIndex: 25
+  questOnCooldownIndex: 27

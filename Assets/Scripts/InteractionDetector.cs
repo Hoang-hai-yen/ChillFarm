@@ -12,9 +12,8 @@ public class InteractionDetector : MonoBehaviour
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        Debug.Log("Interaction input received");
         if(context.performed && interactableInRange != null && interactableInRange.CanInteract())
-        {   Debug.Log("Interacting with " + interactableInRange.ToString());
+        {   
             interactableInRange.Interact();
         }
     }
@@ -23,7 +22,7 @@ public class InteractionDetector : MonoBehaviour
     {
         IInteractable interactable = collision.GetComponent<IInteractable>();
         if(interactable != null)
-        {
+        {   interactable.OnInteractableRangeEnter();
             interactableInRange = interactable;
         }
     }
@@ -32,7 +31,8 @@ public class InteractionDetector : MonoBehaviour
     {
         IInteractable interactable = collision.GetComponent<IInteractable>();
         if(interactable != null && interactable == interactableInRange)
-        {
+        {   
+            interactable.OnInteractableRangeExit();
             interactableInRange = null;
         }
     }

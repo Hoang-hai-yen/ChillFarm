@@ -16,15 +16,16 @@ MonoBehaviour:
   questName: Collect Shiitake Mushroom
   questObjectives:
   - objectiveId: Shiitake Mushroom_2288742c-f934-4b19-8807-86dbd6295ee4
+    objectiveItem: {fileID: 11400000, guid: 10c0a32304feaab4797449a1ed2284da, type: 2}
     description: Collect Shiitake Mushroom
     objectiveType: 0
     currentAmount: 0
     targetAmount: 0
     isRandomEnable: 1
-    minRandomAmount: 1
-    maxRandomAmount: 5
+    minRandomAmount: 3
+    maxRandomAmount: 6
   description: 
   rewards:
   - rewardType: 1
     rewardId: 
-    amount: 20
+    amount: 40

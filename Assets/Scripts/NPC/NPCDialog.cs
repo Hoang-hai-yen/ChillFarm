@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "newNPCDialog", menuName ="NPC Dialog")]
@@ -5,7 +6,7 @@ public class NPCDialog: ScriptableObject
 {
     public string npcName;
     public Sprite npcPortrait;
-    public string[] dialogLines;
+    [TextArea(3, 10)] public string[] dialogLines;
     public bool[] autoProgressLines;
     public bool[] endDialogLines;
     public float autoProgressDelay = 2f;
@@ -15,8 +16,12 @@ public class NPCDialog: ScriptableObject
 
     public DialogueChoice[] dialogChoices;
 
+   [Header("Quest Settings")]
+    public List<QuestData> questPool;
+    public bool[] questTransitionIndexs; 
+    public int[] targetQuestStartIndexs;   
     public int questInProgressIndex;
     public int questCompletedIndex;
-    public QuestData quest;
+    public int questOnCooldownIndex;
 
 }

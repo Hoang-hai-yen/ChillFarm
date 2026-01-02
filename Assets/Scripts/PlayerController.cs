@@ -363,7 +363,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (staminaController != null && !staminaController.IsFainted() && !isInteracting && !PauseController.IsGamePaused)
+        if (staminaController != null && !staminaController.IsFainted() && !isInteracting)
         {
             Move();
         }

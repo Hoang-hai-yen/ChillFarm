@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8fa0dd1d99350f4ba011ec0aa7f5029, type: 3}
+  m_Name: FloraDialog
+  m_EditorClassIdentifier: Assembly-CSharp::NPCDialog
+  npcName: Flora
+  npcPortrait: {fileID: -3663483716041874582, guid: 947e60d06a9c9924b8491e45d747a3be, type: 3}
+  dialogLines:
+  - Oh! Look at those sprouts! Can you hear them singing? The soil is so happy today
+    after the rain!
+  - The soil is so happy today after the rain!
+  - The secret is in the compost! I've been mixing forest moss with dried leaves.
+  - It makes the tomatoes grow as red as a wolf's summer coat!
+  - 'Take some of my special herbal mulch. '
+  - Your cabbages will be the envy of the whole valley! Happy planting!
+  - 'I''m worried about the winter frost. '
+  - My paws feel a chill in the wind. We should start drying the herbs soon.
+  - 'Make sure your silo is full. '
+  - A wolf with an empty stomach is a grumpy wolf, and we want a happy winter feast!
+  - Don't forget to talk to your plants!
+  - They listen, you know. May your harvest be bountiful!
+  autoProgressLines: 010001010100010101000100
+  endDialogLines: 000000000001000000010001
+  autoProgressDelay: 2
+  typingSpeed: 0.05
+  voiceSound: {fileID: 0}
+  voicePitch: 1
+  dialogChoices:
+  - dialogueIndex: 1
+    choices:
+    - What's your secret for big crops?
+    - How's the weather looking?
+    - I'll get back to watering!
+    nextDialogueIndices: 02000000060000000a000000
+    givesQuest: 000000
+  questPool: []
+  questTransitionIndexs: 
+  targetQuestStartIndexs: 
+  questInProgressIndex: 0
+  questCompletedIndex: 0
+  questOnCooldownIndex: 0

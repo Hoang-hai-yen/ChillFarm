@@ -15,7 +15,7 @@ public class QuestLogsToggle : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.V))
-        { Debug.Log("Toggling Quest Logs UI");
+        { 
             ToggleUpgrade();
         }
     }

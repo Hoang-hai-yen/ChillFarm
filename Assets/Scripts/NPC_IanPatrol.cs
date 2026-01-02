@@ -87,4 +87,6 @@ public class NPC_IanPatrol : MonoBehaviour
             Gizmos.DrawLine(pointB.position, pointC.position);
         }
     }
+
+    
 }
