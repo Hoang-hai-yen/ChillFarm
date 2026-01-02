@@ -1,18 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class QuestData
+[CreateAssetMenu(fileName = "NewQuest", menuName = "Quests/QuestData")]
+public class QuestData: ScriptableObject
 {
-    public QuestState state;
-    public int questStepIndex;
-    public QuestStepState[] questStepStates;
+    public string questId;
+    public string questName;
+    public List<QuestObjective> questObjectives;
+    public string description;
+    public List<QuestReward> rewards;
 
-    public QuestData(QuestState state, int questStepIndex, QuestStepState[] questStepStates)
+    private void OnValidate()
     {
-        this.state = state;
-        this.questStepIndex = questStepIndex;
-        this.questStepStates = questStepStates;
+        if(String.IsNullOrEmpty(questId))
+        {
+            questId = questName + "_" + Guid.NewGuid().ToString();
+        }
     }
 }

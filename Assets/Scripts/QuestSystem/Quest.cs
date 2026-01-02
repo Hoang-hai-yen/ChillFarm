@@ -92,10 +92,10 @@ public class Quest
         }
     }
 
-    public QuestData GetQuestData()
-    {
-        return new QuestData(state, currentQuestStepIndex, questStepStates);
-    }
+    // public QuestData GetQuestData()
+    // {
+    //     return new QuestData(state, currentQuestStepIndex, questStepStates);
+    // }
 
     public string GetFullStatusText()
     {

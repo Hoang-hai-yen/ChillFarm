@@ -87,30 +87,76 @@ public class Crop : MonoBehaviour
         }
     }
 
-    public void Harvest()
-    {
-        if(isHarvestable) 
-        {
-            Debug.Log($"Thu hoạch {cropData.cropName}!");
+    // public void Harvest()
+    // {
+    //     if(isHarvestable) 
+    //     {
+    //         Debug.Log($"Thu hoạch {cropData.cropName}!");
             
-            if(cropData.harvestItemPrefab != null)
+    //         if(cropData.harvestItemPrefab != null)
+    //         {
+    //             int finalYield = Mathf.RoundToInt(cropData.harvestYield * yieldMultiplier);
+
+    //             if (finalYield < 1) finalYield = 1;
+
+    //             Debug.Log($"Thu hoạch được: {finalYield} (Gốc: {cropData.harvestYield} x Hệ số: {yieldMultiplier:F2})");
+
+    //             for(int i = 0; i < finalYield; i++) 
+    //             {
+    //                 Vector3 spawnOffset = new Vector3(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f), 0);
+    //                 Instantiate(cropData.harvestItemPrefab, transform.position + spawnOffset, Quaternion.identity);
+    //             }
+    //         }
+
+    //         Destroy(gameObject); 
+    //     }
+    // }
+
+    public void Harvest()
+{
+    if (isHarvestable) 
+    {
+        Debug.Log($"Thu hoạch {cropData.cropName}!");
+        
+        if (cropData.harvestItemPrefab != null)
+        {
+            // 1. Tính toán sản lượng gốc dựa trên dữ liệu và hệ số vùng (yieldMultiplier)
+            int baseYield = cropData.harvestYield;
+            
+            // 2. Tính toán Bonus từ kỹ năng
+            int bonusItems = 0;
+            if (SkillManager.Instance != null)
             {
-                int finalYield = Mathf.RoundToInt(cropData.harvestYield * yieldMultiplier);
-
-                if (finalYield < 1) finalYield = 1;
-
-                Debug.Log($"Thu hoạch được: {finalYield} (Gốc: {cropData.harvestYield} x Hệ số: {yieldMultiplier:F2})");
-
-                for(int i = 0; i < finalYield; i++) 
+                float harvestBonusChance = SkillManager.Instance.GetHarvestBonus();
+                
+                // Sử dụng tỷ lệ ngẫu nhiên để quyết định có cộng thêm sản phẩm hay không
+                // Ví dụ: Level 5 có 100% cơ hội (1.0), chắc chắn cộng thêm sản phẩm
+                if (Random.value < harvestBonusChance)
                 {
-                    Vector3 spawnOffset = new Vector3(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f), 0);
-                    Instantiate(cropData.harvestItemPrefab, transform.position + spawnOffset, Quaternion.identity);
+                    bonusItems = 1; 
+                    Debug.Log("<color=cyan>Kỹ năng Thu Hoạch kích hoạt! Nhận thêm sản phẩm.</color>");
                 }
             }
 
-            Destroy(gameObject); 
+            // 3. Tổng hợp sản lượng cuối cùng
+            int finalYield = Mathf.RoundToInt((baseYield + bonusItems) * yieldMultiplier);
+
+            // Đảm bảo luôn có ít nhất 1 sản phẩm
+            if (finalYield < 1) finalYield = 1;
+
+            Debug.Log($"Tổng thu hoạch: {finalYield} (Gốc: {baseYield} + Bonus: {bonusItems}) x Hệ số: {yieldMultiplier:F2}");
+
+            // 4. Sinh ra (Spawn) các item vật phẩm
+            for (int i = 0; i < finalYield; i++) 
+            {
+                Vector3 spawnOffset = new Vector3(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f), 0);
+                Instantiate(cropData.harvestItemPrefab, transform.position + spawnOffset, Quaternion.identity);
+            }
         }
+
+        Destroy(gameObject); 
     }
+}
 
     private void UpdateGrowthUI()
     {

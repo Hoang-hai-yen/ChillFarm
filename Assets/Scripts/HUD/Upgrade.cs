@@ -1,30 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using TMPro; 
 
 public class Upgrade : MonoBehaviour, IPointerClickHandler
 {
-    [Header("Diamonds (left → right)")]
+    [SerializeField] private SkillType skillType;
     [SerializeField] private GameObject[] diamonds;
+    [SerializeField] private int[] levelCosts = {100, 200, 400, 800, 1600};
+    public TMP_Text costText;
 
-    [Header("Max upgrade level")]
-    [SerializeField] private int maxLevel = 5;
-
-    private int currentLevel = 0;
+    private int currentLevel = 0; 
 
     void Start()
     {
-        // Auto fix: tắt toàn bộ diamond khi bắt đầu
-        for (int i = 0; i < diamonds.Length; i++)
-        {
-            if (diamonds[i] != null)
-            {
-                diamonds[i].SetActive(false);
-            }
-            else
-            {
-                Debug.LogWarning("Diamond element " + i + " đang NULL");
-            }
-        }
+        UpdateUI();
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -32,33 +21,61 @@ public class Upgrade : MonoBehaviour, IPointerClickHandler
         BuyUpgrade();
     }
 
-    private void BuyUpgrade()
-    {
-        // Đã max
-        if (currentLevel >= maxLevel)
-        {
-            Debug.Log("Đã nâng cấp tối đa");
-            return;
-        }
-
-        // Mảng thiếu phần tử
-        if (currentLevel >= diamonds.Length)
-        {
-            Debug.LogError("Diamonds array KHÔNG đủ phần tử");
-            return;
-        }
-
-        // Element bị null
-        if (diamonds[currentLevel] == null)
-        {
-            Debug.LogError("Diamond element " + currentLevel + " bị NULL");
-            return;
-        }
-
-        // Hiện diamond
-        diamonds[currentLevel].SetActive(true);
-        currentLevel++;
-
-        Debug.Log("Upgrade level: " + currentLevel);
+   private void BuyUpgrade()
+{
+    // 1. Kiểm tra Singleton
+    if (InventoryManager.Instance == null) {
+        Debug.LogError("Chưa có InventoryManager trong Scene!");
+        return;
     }
+
+    if (currentLevel >= 5) return;
+
+    // 2. Kiểm tra mảng levelCosts
+    if (levelCosts == null || levelCosts.Length <= currentLevel) {
+        Debug.LogError("Mảng levelCosts chưa được thiết lập đủ 5 phần tử!");
+        return;
+    }
+
+    int cost = levelCosts[currentLevel];
+
+    if (InventoryManager.Instance.TrySpendGold(cost))
+    {
+        currentLevel++;
+        UpdateSkillLevel();
+        UpdateUI();
+    }
+    else
+    {
+        Debug.Log("Không đủ Gold!");
+    }
+}
+
+    private void UpdateSkillLevel()
+    {
+        switch (skillType)
+        {
+            case SkillType.Stamina: SkillManager.Instance.staminaLevel = currentLevel; break;
+            case SkillType.Fishing: SkillManager.Instance.fishingLevel = currentLevel; break;
+            case SkillType.Animal: SkillManager.Instance.animalLevel = currentLevel; break;
+            case SkillType.Harvest: SkillManager.Instance.harvestLevel = currentLevel; break;
+        }
+    }
+
+    private void UpdateUI()
+{
+    if (diamonds == null) return;
+
+    costText.text = levelCosts[currentLevel].ToString();
+    for (int i = 0; i < diamonds.Length; i++)
+    {
+        if (diamonds[i] != null)
+        {
+            diamonds[i].SetActive(i < currentLevel);
+        }
+        else {
+            Debug.LogWarning($"Phần tử thứ {i} trong mảng diamonds bị thiếu (Null)!");
+        }
+    }
+}
 }
