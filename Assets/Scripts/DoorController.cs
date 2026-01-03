@@ -5,6 +5,8 @@ public class DoorController : MonoBehaviour
     public Transform door;
 
     private bool isOpen = false;
+    private bool playerInRange = false;
+
     private Animator animator;
     private BoxCollider2D doorCollider;
 
@@ -14,21 +16,38 @@ public class DoorController : MonoBehaviour
         doorCollider = door.GetComponent<BoxCollider2D>();
     }
 
-    void OnTriggerStay2D(Collider2D other)
+    void Update()
     {
-        if (!other.CompareTag("Player"))
+        if (!playerInRange)
             return;
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            isOpen = !isOpen;
-
-            if (animator != null)
-            {
-                animator.SetBool("isOpen", isOpen);
-            }
-
-            doorCollider.enabled = !isOpen;
+            ToggleDoor();
         }
+    }
+
+    void ToggleDoor()
+    {
+        isOpen = !isOpen;
+
+        if (animator != null)
+        {
+            animator.SetBool("isOpen", isOpen);
+        }
+
+        doorCollider.enabled = !isOpen;
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+            playerInRange = true;
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+            playerInRange = false;
     }
 }
