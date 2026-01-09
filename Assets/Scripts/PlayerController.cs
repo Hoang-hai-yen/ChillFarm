@@ -314,47 +314,51 @@ public class PlayerController : MonoBehaviour
     {
         isInteracting = true;
 
-        // Vector3 playerDirection = new Vector3(
-        //     animator.GetFloat("lastMoveX"),
-        //     animator.GetFloat("lastMoveY"),
-        //     0
-        // ).normalized;
+        Vector3 playerDirection = new Vector3(
+            animator.GetFloat("lastMoveX"),
+            animator.GetFloat("lastMoveY"),
+            0
+        ).normalized;
 
-        // if (playerDirection == Vector3.zero)
-        //     playerDirection = Vector3.down;
+        if (playerDirection == Vector3.zero)
+            playerDirection = Vector3.down;
 
-        // Vector3 interactionWorldPos = transform.position + playerDirection * interactionDistance;
+        Vector3 interactionWorldPos = transform.position + playerDirection * interactionDistance;
 
-        // Collider2D[] hits = Physics2D.OverlapCircleAll(interactionWorldPos, 0.5f);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(interactionWorldPos, 0.5f);
 
-        // foreach (var hit in hits)
-        // {
-        //     QuestGiver questGiver = hit.GetComponent<QuestGiver>();
-        //     if (questGiver != null && questGiver.CanInteract(transform))
-        //     {
-        //         QuestDialogManager.Instance.Open(questGiver);
-        //         isInteracting = false;
-        //         yield break; 
-        //     }
+        foreach (var hit in hits)
+        {
+            QuestGiver questGiver = hit.GetComponent<QuestGiver>();
+            if (questGiver != null && questGiver.CanInteract(transform))
+            {
+                QuestDialogManager.Instance.Open(questGiver);
+                isInteracting = false;
+                yield break; 
+            }
 
-        //     Interactable npc = hit.GetComponent<Interactable>();
-        //     if (npc != null)
-        //     {
-        //         DialogData dialogData = hit.GetComponent<DialogData>();
-        //         if (dialogData != null && DialogManager.Instance != null)
-        //         {
-        //             Dialog dialog = dialogData.CreateDialog();
-        //             yield return StartCoroutine(DialogManager.Instance.ShowDialog(dialog));
-        //         }
-        //         else
-        //         {
-        //             npc.Interact();
-        //         }
+            Interactable npc = hit.GetComponent<Interactable>();
+            if (npc != null)
+            {
+                NPCController npcController = hit.GetComponent<NPCController>();
+                if (npcController != null)
+                    npcController.PauseDirect();
 
-        //         isInteracting = false;
-        //         yield break; 
-        //     }
-        // }
+                DialogData dialogData = hit.GetComponent<DialogData>();
+                if (dialogData != null && DialogManager.Instance != null)
+                {
+                    Dialog dialog = dialogData.CreateDialog();
+                    yield return StartCoroutine(DialogManager.Instance.ShowDialog(dialog));
+                }
+                else
+                {
+                    npc.Interact();
+                }
+
+                isInteracting = false;
+                yield break; 
+            }
+        }
 
         isInteracting = false;
         yield return HandleInteraction();

@@ -62,16 +62,22 @@ public class NPC_IanPatrol : MonoBehaviour
     public void StopNPC(bool stop)
     {
         isStopped = stop;
-        rd.linearVelocity = Vector2.zero;
 
         if (stop)
         {
+            rd.linearVelocity = Vector2.zero;
             rd.constraints = RigidbodyConstraints2D.FreezeAll;
             animator.SetBool("isRunning", false);
         }
         else
         {
-            rd.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+            rd.constraints = RigidbodyConstraints2D.FreezeRotation;
+            rd.linearVelocity = Vector2.zero;
+            rd.WakeUp();
+
+            if (currentPoint == null)
+                currentPoint = pointB;
+
             UpdateAnimation();
         }
     }

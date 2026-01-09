@@ -46,6 +46,12 @@ public class NPCController : MonoBehaviour, Interactable
             StartCoroutine(HandleDialog());
     }
 
+    public void PauseDirect()
+    {
+        PauseNPC();
+    }
+
+
     private IEnumerator HandleDialog()
     {
         isInteracting = true;
