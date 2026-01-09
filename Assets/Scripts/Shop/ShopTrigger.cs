@@ -1,33 +1,54 @@
 using UnityEngine;
+using System.Collections.Generic;
 using TMPro;
 
 public class ShopTrigger : MonoBehaviour
 {
-    public GameObject shopPanel;
-    public GameObject hotbarPanel;
-    public GameObject Key;
-    public GameObject UI;
-    public TMP_Text pressFText;
+    [Header("Shop Data")]
+    [Tooltip("Kéo thả các vật phẩm cửa hàng này bán vào đây")]
+    public List<ItemData> products; 
+
+    [Header("UI Hints")]
+    public TMP_Text pressText; 
 
     private bool playerInRange = false;
-    private bool shopOpen = false;
+    private bool isShopOpen = false;
 
     void Start()
     {
-        if (pressFText != null) pressFText.gameObject.SetActive(false);
-        if (shopPanel != null) shopPanel.SetActive(false);
+        if (pressText != null) pressText.gameObject.SetActive(false);
     }
 
     void Update()
     {
-        if (playerInRange && Input.GetKeyDown(KeyCode.F))
+        if (playerInRange && Input.GetKeyDown(KeyCode.E))
         {
-            shopOpen = !shopOpen;
-            shopPanel.SetActive(shopOpen);
-            hotbarPanel.SetActive(!shopOpen);
-            Key.SetActive(!shopOpen);
-            UI.SetActive(!shopOpen);
+            if (!isShopOpen)
+            {
+                OpenShop();
+            }
+            else
+            {
+                CloseShop();
+            }
         }
+
+        if (isShopOpen && Input.GetKeyDown(KeyCode.Escape))
+        {
+            CloseShop();
+        }
+    }
+
+    void OpenShop()
+    {
+        isShopOpen = true;
+        ShopManager.Instance.OpenShop(products);
+    }
+
+    void CloseShop()
+    {
+        isShopOpen = false;
+        ShopManager.Instance.CloseShop();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -35,7 +56,11 @@ public class ShopTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            if (pressFText != null) pressFText.gameObject.SetActive(true);
+            if (pressText != null) 
+            {
+                pressText.text = "Press E";
+                pressText.gameObject.SetActive(true);
+            }
         }
     }
 
@@ -44,13 +69,9 @@ public class ShopTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            if (pressFText != null) pressFText.gameObject.SetActive(false);
-            if (shopPanel != null) shopPanel.SetActive(false);
-            if (hotbarPanel != null) hotbarPanel.SetActive(true);
-            if (Key != null) Key.SetActive(true);   
-            if (UI != null) UI.SetActive(true);
-            shopOpen = false;
+            if (pressText != null) pressText.gameObject.SetActive(false);
+            
+            if (isShopOpen) CloseShop();
         }
     }
 }
-    

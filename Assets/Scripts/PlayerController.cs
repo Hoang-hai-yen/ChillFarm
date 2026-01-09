@@ -34,10 +34,16 @@ public class PlayerController : MonoBehaviour
     private FarmlandManager farmlandManager;
 
     private FishingController fishingController;
+
+    private InteractionDetector interactionDetector;
     private Grid grid;
     private bool isBackpackOpen = false;
 
     private bool isInteracting = false;
+
+    [Header("Mushroom")]    
+    public LayerMask mushroomLayer;
+    [SerializeField] private float mushroomPickingRadius = 0.5f;
 
     public void Awake()
     {
@@ -46,7 +52,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         fishingController = GetComponent<FishingController>();
-
+        interactionDetector = GetComponent<InteractionDetector>();
         staminaController = FindFirstObjectByType<StaminaController>();
         if (staminaController == null)
             Debug.LogError("StaminaController not found in the scene.");
@@ -73,6 +79,7 @@ public class PlayerController : MonoBehaviour
         }
 
         playerControls.Movement.Interact.performed += OnInteract;
+        playerControls.Movement.Interact.performed += interactionDetector.OnInteract;
         playerControls.Movement.Interact.Enable();
 
         playerControls.Movement.Backpack.performed += ToggleBackpack;
@@ -90,6 +97,7 @@ public class PlayerController : MonoBehaviour
         }
 
         playerControls.Movement.Interact.performed -= OnInteract;
+        playerControls.Movement.Interact.performed -= interactionDetector.OnInteract;
         playerControls.Movement.Interact.Disable();
 
         playerControls.Movement.Backpack.performed -= ToggleBackpack;
@@ -126,9 +134,13 @@ public class PlayerController : MonoBehaviour
         Vector3 interactionWorldPos = transform.position + playerDirection * interactionDistance;
         Vector3Int targetCellPos = grid.WorldToCell(interactionWorldPos);
 
-        float staminaCost = (currentItem == null) ? 2f : currentItem.staminaCost;
-        
-        if (staminaController == null || staminaController.GetCurrentStamina() < staminaCost)
+        float baseStaminaCost = (currentItem == null) ? 2f : currentItem.staminaCost;
+    
+        // ÁP DỤNG KỸ NĂNG GIẢM STAMINA
+        float reduction = SkillManager.Instance.GetStaminaReduction();
+        float finalStaminaCost = baseStaminaCost * (1f - reduction); 
+
+        if (staminaController == null || staminaController.GetCurrentStamina() < finalStaminaCost)
         {
             Debug.Log("Không đủ Stamina!");
             isInteracting = false;
@@ -145,14 +157,14 @@ public class PlayerController : MonoBehaviour
         {
             if (animal.IsDead())
             {
-                float cleanUpCost = 5f; 
+                float cleanUpCost = 5f * (1f - reduction); 
                 
                 if (staminaController.GetCurrentStamina() >= cleanUpCost)
                 {
                     animator.SetTrigger("doAction"); 
                     animal.CleanupCorpse();
                     
-                    staminaCost = cleanUpCost; 
+                    finalStaminaCost = cleanUpCost; 
                     actionSuccessful = true;
                     
                     yield return new WaitForSeconds(0.5f);
@@ -181,7 +193,7 @@ public class PlayerController : MonoBehaviour
                     animal.Play(); 
                     animator.SetTrigger("petAnimal");
                     actionSuccessful = true;
-                    staminaCost = 1f; 
+                    finalStaminaCost = 1f * (1f - reduction); 
                 }
 
                 if (actionSuccessful)
@@ -223,14 +235,21 @@ public class PlayerController : MonoBehaviour
 
         if (currentItem is ToolData tool)
         {
-            if (tool.toolType == ToolType.Hoe)
+            if (tool.toolType == ToolType.Hand)
+            {
+                TryPickMushroom();
+ 
+            }
+            else if (tool.toolType == ToolType.Hoe)
             {
                 animator.SetTrigger("useHoe");
+                AudioManager.Instance.PlayDigPlant();
                 yield return new WaitForSeconds(0.5f); 
             }
             else if (tool.toolType == ToolType.WateringCan)
             {
                 animator.SetTrigger("useWaterCan");
+                AudioManager.Instance.PlayFishing();
                 yield return new WaitForSeconds(0.7f); 
             }
             else if (tool.toolType == ToolType.FishingRod)
@@ -238,25 +257,30 @@ public class PlayerController : MonoBehaviour
                 if(!animator.GetBool("isFishing") && fishingController.CanFishInDirection())
                 {
                     animator.SetBool("isFishing", true);
+                    AudioManager.Instance.PlayFishing();
                     yield return new WaitForSeconds(0.7f);
                 }
                 else
                 {
                     animator.SetBool("isFishing", false);
+                    AudioManager.Instance.PlayFishing();
                     yield return new WaitForSeconds(0.5f);
 
                 }
                 
             }
+            
         }
         else if (currentItem != null && (currentItem.itemType == ItemType.Seed || currentItem.itemType == ItemType.Fertilizer))
         {
-            animator.SetTrigger("doAction"); 
+            animator.SetTrigger("doAction");
+            AudioManager.Instance.PlayDigPlant();
             yield return new WaitForSeconds(0.2f);
         }
         else if (currentItem == null)
         {
             animator.SetTrigger("doAction");
+            yield return new WaitForSeconds(0.2f);
         }
 
         if (farmlandManager != null)
@@ -272,12 +296,11 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        FinalizeInteraction:
-        
-        if (actionSuccessful && staminaCost > 0)
+       FinalizeInteraction:
+        if (actionSuccessful && finalStaminaCost > 0)
         {
-            if (staminaController.ConsumeStamina(staminaCost))
-                Debug.Log($"Action SUCCESSFUL. Stamina remaining: {staminaController.GetCurrentStamina()}");
+            if (staminaController.ConsumeStamina(finalStaminaCost)) 
+                Debug.Log($"Tiêu tốn {finalStaminaCost} Stamina.");
         }
         else if (!actionSuccessful)
         {
@@ -338,7 +361,7 @@ public class PlayerController : MonoBehaviour
         }
 
         isInteracting = false;
-        StartCoroutine(HandleInteraction());
+        yield return HandleInteraction();
     }
 
 
@@ -513,6 +536,28 @@ public class PlayerController : MonoBehaviour
         }
 
         return true;
+    }
+
+    void TryPickMushroom()
+    {
+        Vector2 checkPosition = (Vector2)transform.position + (new Vector2(lastMoveX, lastMoveY) * interactionDistance);
+
+        Collider2D hit = Physics2D.OverlapCircle(checkPosition, mushroomPickingRadius, mushroomLayer);
+        
+        if (hit != null)
+        {
+            Mushroom mush = hit.GetComponent<Mushroom>();
+            if (mush != null)
+            {
+                mush.Collected();
+            }
+        }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, mushroomPickingRadius);
     }
     
 }

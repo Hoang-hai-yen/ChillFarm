@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8c55f5f7b7c6c84094217a83d84b746, type: 3}
+  m_Name: Fishing
+  m_EditorClassIdentifier: Assembly-CSharp::QuestData
+  questId: Catch Goldfish_361dbe5a-9f6c-4839-a915-d234caf3d3e3
+  questName: Catch Goldfish
+  questObjectives:
+  - objectiveId: Goldfish_410a7417-c350-4bbf-a649-380598a3fe74
+    objectiveItem: {fileID: 11400000, guid: 55865bc95b78ba34e9b440ee44fc8829, type: 2}
+    description: Catch Goldfish
+    objectiveType: 0
+    currentAmount: 0
+    targetAmount: 5
+    isRandomEnable: 1
+    minRandomAmount: 2
+    maxRandomAmount: 5
+  description: 
+  rewards:
+  - rewardType: 1
+    rewardId: 
+    amount: 50

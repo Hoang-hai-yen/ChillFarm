@@ -13,11 +13,17 @@ public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance { get; private set; }
 
+    [Header("Money")]
+    public int currentGold = 500; 
+    public event Action<int> OnGoldChanged; 
+
     [Header("Inventory Data")]
     public InventorySlot[] hotbarSlots = new InventorySlot[9];
     public InventorySlot[] backpackSlots = new InventorySlot[20];
     public int SelectedHotbarSlot { get; private set; } = 0; 
     public event Action OnInventoryChanged;
+
+    Dictionary<string, int> itemsCountCache = new ();
 
     void Awake()
     {
@@ -41,6 +47,8 @@ public class InventoryManager : MonoBehaviour
 
         if (hoe != null) AddItem(hoe, 1); 
         if (waterCan != null) AddItem(waterCan, 1); 
+
+        RebuildItemCounts();
     }
 
     public void SelectSlot(int index)
@@ -68,7 +76,7 @@ public class InventoryManager : MonoBehaviour
         return slot != null ? slot.itemData : null;
     }
 
-public bool AddItem(ItemData item, int count = 1)
+    public bool AddItem(ItemData item, int count = 1)
     {
         for (int i = 1; i < hotbarSlots.Length; i++) 
         {
@@ -76,7 +84,8 @@ public bool AddItem(ItemData item, int count = 1)
             if (slot.itemData == item)
             {
                 slot.quantity += count;
-                OnInventoryChanged?.Invoke();
+                RebuildItemCounts();
+                // OnInventoryChanged?.Invoke();
                 return true; 
             }
         }
@@ -88,7 +97,8 @@ public bool AddItem(ItemData item, int count = 1)
             {
                 slot.itemData = item;
                 slot.quantity = count;
-                OnInventoryChanged?.Invoke();
+                RebuildItemCounts();
+                // OnInventoryChanged?.Invoke();
                 return true; 
             }
         }
@@ -100,7 +110,8 @@ public bool AddItem(ItemData item, int count = 1)
             {
                 slot.itemData = item;
                 slot.quantity = count;
-                OnInventoryChanged?.Invoke();
+                RebuildItemCounts();
+                // OnInventoryChanged?.Invoke();
                 return true;
             }
         }
@@ -108,6 +119,7 @@ public bool AddItem(ItemData item, int count = 1)
         Debug.Log("Inventory Full!");
         return false;
     }
+    
 
     public bool RemoveItem(ItemData itemToRemove, int count = 1)
     {
@@ -123,7 +135,8 @@ public bool AddItem(ItemData item, int count = 1)
                     currentSlot.itemData = null;
                     currentSlot.quantity = 0;
                 }
-                OnInventoryChanged?.Invoke();
+                RebuildItemCounts();
+                // OnInventoryChanged?.Invoke();
                 return true;
             }
         }
@@ -141,11 +154,99 @@ public bool AddItem(ItemData item, int count = 1)
                         slot.itemData = null;
                         slot.quantity = 0;
                     }
-                    OnInventoryChanged?.Invoke();
+                    // OnInventoryChanged?.Invoke();
+                    RebuildItemCounts();
                     return true;
                 }
             }
         }
+
+        for (int i = 0; i < backpackSlots.Length; i++)
+        {
+            InventorySlot slot = backpackSlots[i];
+            if (slot.itemData == itemToRemove)
+            {
+                if (slot.quantity >= count)
+                {
+                    slot.quantity -= count;
+                    if (slot.quantity <= 0)
+                    {
+                        slot.itemData = null;
+                        slot.quantity = 0;
+                    }
+                    RebuildItemCounts();
+                    // OnInventoryChanged?.Invoke();
+                    return true;
+                }
+            }
+        }
+
+        
+
+        return false; 
+    }
+
+    public bool RemoveItemById(string itemId, int count = 1)
+    {
+        InventorySlot currentSlot = hotbarSlots[SelectedHotbarSlot];
+        
+        if (currentSlot.itemData.itemId == itemId)
+        {
+            if (currentSlot.quantity >= count)
+            {
+                currentSlot.quantity -= count;
+                if (currentSlot.quantity <= 0)
+                {
+                    currentSlot.itemData = null;
+                    currentSlot.quantity = 0;
+                }
+                RebuildItemCounts();
+                // OnInventoryChanged?.Invoke();
+                return true;
+            }
+        }
+
+        for (int i = 0; i < hotbarSlots.Length; i++)
+        {
+            InventorySlot slot = hotbarSlots[i];
+            if (slot.itemData.itemId == itemId)
+            {
+                if (slot.quantity >= count)
+                {
+                    slot.quantity -= count;
+                    if (slot.quantity <= 0)
+                    {
+                        slot.itemData = null;
+                        slot.quantity = 0;
+                    }
+                    // OnInventoryChanged?.Invoke();
+                    RebuildItemCounts();
+                    return true;
+                }
+            }
+        }
+
+        for (int i = 0; i < backpackSlots.Length; i++)
+        {
+            InventorySlot slot = backpackSlots[i];
+            if (slot.itemData.itemId == itemId)
+            {
+                if (slot.quantity >= count)
+                {
+                    slot.quantity -= count;
+                    if (slot.quantity <= 0)
+                    {
+                        slot.itemData = null;
+                        slot.quantity = 0;
+                    }
+                    RebuildItemCounts();
+                    // OnInventoryChanged?.Invoke();
+                    return true;
+                }
+            }
+        }
+
+        
 
         return false; 
     }
@@ -168,4 +269,99 @@ public bool AddItem(ItemData item, int count = 1)
 
         OnInventoryChanged?.Invoke();
     }
+
+    public bool TrySpendGold(int amount)
+    {
+        if (currentGold >= amount)
+        {
+            currentGold -= amount;
+            OnGoldChanged?.Invoke(currentGold); 
+            Debug.Log($"Mua thành công! Còn lại: {currentGold} G");
+            return true;
+        }
+        
+        Debug.Log("Không đủ tiền!");
+        return false;
+    }
+
+    public void AddGold(int amount)
+    {
+        currentGold += amount;
+        OnGoldChanged?.Invoke(currentGold);
+    }
+
+    public void SellItem(ItemData item, int quantity = 1)
+    {
+        if (item == null) return;
+
+        bool isRemoved = RemoveItem(item, quantity);
+
+        if (isRemoved)
+        {
+            int totalEarned = item.sellPrice * quantity;
+            AddGold(totalEarned);
+            Debug.Log($"Đã bán {item.itemName} nhận được {totalEarned} G");
+        }
+        else
+        {
+            Debug.Log("Không còn vật phẩm này để bán!");
+        }
+    }
+    public bool BuyItem(ItemData item, int price)
+    {
+        if (currentGold < price)
+        {
+            Debug.Log("Không đủ tiền!");
+            return false;
+        }
+
+        bool added = AddItem(item, 1);
+        
+        if (added)
+        {
+            currentGold -= price;
+            OnGoldChanged?.Invoke(currentGold);
+            Debug.Log($"Mua thành công {item.itemName}. Tiền còn: {currentGold}");
+            return true;
+        }
+        else
+        {
+            Debug.Log("Túi đồ đã đầy! Không thể mua thêm.");
+            return false; 
+        }
+    }
+
+    public void RebuildItemCounts()
+    {
+        itemsCountCache.Clear();
+
+        foreach(var slot in hotbarSlots)
+        {
+            if (slot.itemData != null)
+            {
+                string itemId = slot.itemData.itemId;
+                if (itemsCountCache.ContainsKey(itemId))
+                    itemsCountCache[itemId] += slot.quantity;
+                else
+                    itemsCountCache[itemId] = slot.quantity;
+                Debug.Log($"Đếm vật phẩm trong hotbar: {itemId} = {itemsCountCache[itemId]}");
+            }
+        }
+
+        foreach(var slot in backpackSlots)
+        {
+            if (slot.itemData != null)
+            {
+                string itemId = slot.itemData.itemId;
+                if (itemsCountCache.ContainsKey(itemId))
+                    itemsCountCache[itemId] += slot.quantity;
+                else
+                    itemsCountCache[itemId] = slot.quantity;
+            }
+        }
+
+        OnInventoryChanged?.Invoke();
+    }
+
+    public Dictionary<string, int> GetItemCounts() => itemsCountCache;
 }
