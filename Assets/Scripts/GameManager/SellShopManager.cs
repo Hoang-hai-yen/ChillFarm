@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class SellShopManager : MonoBehaviour
 {
@@ -45,7 +46,10 @@ public class SellShopManager : MonoBehaviour
 
     public void CloseSellShop()
     {
+        if (sellPanel == null) return; 
+
         sellPanel.SetActive(false);
+        
         if (hotbarPanel != null) hotbarPanel.SetActive(true);
     }
 
@@ -58,14 +62,28 @@ public class SellShopManager : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        InventorySlot[] backpack = InventoryManager.Instance.backpackSlots;
+        System.Collections.Generic.List<InventorySlot> allSlotsToSell = new System.Collections.Generic.List<InventorySlot>();
 
-        foreach (InventorySlot slot in backpack)
+        if (InventoryManager.Instance.backpackSlots != null)
+        {
+            allSlotsToSell.AddRange(InventoryManager.Instance.backpackSlots);
+        }
+
+        if (InventoryManager.Instance.hotbarSlots != null)
+        {
+            for (int i = 1; i < InventoryManager.Instance.hotbarSlots.Length; i++)
+            {
+                allSlotsToSell.Add(InventoryManager.Instance.hotbarSlots[i]);
+            }
+        }
+
+        foreach (InventorySlot slot in allSlotsToSell)
         {
             if (slot != null && slot.itemData != null)
             {
                 GameObject newSlot = Instantiate(sellSlotPrefab, contentPanel);
                 SellSlotUI uiScript = newSlot.GetComponent<SellSlotUI>();
+                
                 if (uiScript != null)
                 {
                     uiScript.SetSlotData(slot);

@@ -4,7 +4,6 @@ using TMPro;
 
 public class ShopItemUI : MonoBehaviour
 {
-    [Header("UI References")]
     public Image iconImage;
     public TMP_Text nameText;
     public TMP_Text priceText;
@@ -15,38 +14,44 @@ public class ShopItemUI : MonoBehaviour
     void Start()
     {
         buyButton.onClick.AddListener(OnBuyClick);
+        if (InventoryManager.Instance != null)
+        {
+            InventoryManager.Instance.OnGoldChanged += UpdateButtonState;
+        }
+    }
+
+    void OnDestroy() 
+    {
+        if (InventoryManager.Instance != null)
+        {
+            InventoryManager.Instance.OnGoldChanged -= UpdateButtonState;
+        }
     }
 
     public void SetItemData(ItemData item)
     {
         currentItem = item;
-
         if (currentItem != null)
         {
             iconImage.sprite = currentItem.itemIcon;
             iconImage.gameObject.SetActive(true);
             nameText.text = currentItem.itemName;
             priceText.text = $"{currentItem.price} G";
+
+            UpdateButtonState(InventoryManager.Instance.currentGold);
         }
+    }
+
+    private void UpdateButtonState(int currentGold)
+    {
+        if (currentItem == null) return;
+        buyButton.interactable = (currentGold >= currentItem.price);
     }
 
     private void OnBuyClick()
     {
         if (currentItem == null) return;
-
-        if (InventoryManager.Instance.TrySpendGold(currentItem.price))
-        {
-            bool added = InventoryManager.Instance.AddItem(currentItem, 1);
-            
-            if (added)
-            {
-                Debug.Log($"Đã mua {currentItem.itemName}");
-            }
-            else
-            {
-                InventoryManager.Instance.AddGold(currentItem.price);
-                Debug.Log("Túi đồ đã đầy!");
-            }
-        }
+        
+        InventoryManager.Instance.BuyItem(currentItem, currentItem.price);
     }
 }

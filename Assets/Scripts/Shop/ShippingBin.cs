@@ -54,7 +54,11 @@ public class ShippingBin : MonoBehaviour
             
             if (isOpen)
             {
-                SellShopManager.Instance.CloseSellShop();
+                if (SellShopManager.Instance != null) 
+                {
+                    SellShopManager.Instance.CloseSellShop();
+                }
+                
                 isOpen = false;
             }
         }

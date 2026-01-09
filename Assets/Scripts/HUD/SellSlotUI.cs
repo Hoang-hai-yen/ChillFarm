@@ -11,6 +11,7 @@ public class SellSlotUI : MonoBehaviour
     public Button sellButton;
 
     private ItemData currentItem;
+    private int currentQuantity;
 
     void Start()
     {
@@ -23,6 +24,7 @@ public class SellSlotUI : MonoBehaviour
         if (slot != null && slot.itemData != null)
         {
             currentItem = slot.itemData;
+            currentQuantity = slot.quantity;
             
             iconImage.sprite = currentItem.itemIcon;
             iconImage.gameObject.SetActive(true);
@@ -52,8 +54,7 @@ public class SellSlotUI : MonoBehaviour
     {
         if (currentItem != null)
         {
-            InventoryManager.Instance.SellItem(currentItem, 1);
-            
+        InventoryManager.Instance.SellItem(currentItem, currentQuantity);            
         }
     }
 }

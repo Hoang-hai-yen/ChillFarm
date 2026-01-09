@@ -210,4 +210,27 @@ public class InventoryManager : MonoBehaviour
             Debug.Log("Không còn vật phẩm này để bán!");
         }
     }
+    public bool BuyItem(ItemData item, int price)
+    {
+        if (currentGold < price)
+        {
+            Debug.Log("Không đủ tiền!");
+            return false;
+        }
+
+        bool added = AddItem(item, 1);
+        
+        if (added)
+        {
+            currentGold -= price;
+            OnGoldChanged?.Invoke(currentGold);
+            Debug.Log($"Mua thành công {item.itemName}. Tiền còn: {currentGold}");
+            return true;
+        }
+        else
+        {
+            Debug.Log("Túi đồ đã đầy! Không thể mua thêm.");
+            return false; 
+        }
+    }
 }
