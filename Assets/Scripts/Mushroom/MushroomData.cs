@@ -5,8 +5,9 @@ public class MushroomData : ItemData
 {
     public Sprite mushroomSprite;
     
-    private void OnValidate()
+    protected override void OnValidate()
     {
+        base.OnValidate();
         itemType = ItemType.Mushroom;
         staminaCost = 0;
     }

@@ -226,13 +226,32 @@ public class FarmAnimal : MonoBehaviour
     }
 
     private void ProduceProduct()
+{
+    if (data.productPrefab != null)
     {
-        if (data.productPrefab != null)
+        int amountToProduce = 1; // Số lượng mặc định hàng ngày
+
+        // 1. Kiểm tra Bonus từ kỹ năng chăn nuôi
+        if (SkillManager.Instance != null)
+        {
+            float bonusChance = SkillManager.Instance.GetAnimalProductBonus(); // Trả về 0.1 -> 0.5 (10% - 50%)
+            
+            // Sử dụng tỉ lệ ngẫu nhiên để quyết định có rơi thêm sản phẩm hay không
+            if (Random.value < bonusChance)
+            {
+                amountToProduce++; 
+                Debug.Log($"<color=cyan>Kỹ năng Chăn Nuôi kích hoạt! {data.animalName} tạo thêm sản phẩm bonus.</color>");
+            }
+        }
+
+        // 2. Sinh ra (Spawn) các sản phẩm dựa trên số lượng đã tính
+        for (int i = 0; i < amountToProduce; i++)
         {
             Vector3 spawnPos = transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0);
             Instantiate(data.productPrefab, spawnPos, Quaternion.identity);
         }
     }
+}
 
     public bool IsDead() => isDead;
     public AnimalType GetAnimalType() 

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public enum ItemType { Tool, Seed, Crop, Resource, Fertilizer, AnimalFood, AnimalProduct, Livestock, Fish, Mushroom } 
@@ -8,6 +9,7 @@ public enum AnimalTier { Normal, Medium, High }
 // --------------------
 public class ItemData : ScriptableObject
 {
+    public string itemId;
     public string itemName;
     public Sprite itemIcon;
     public ItemType itemType;
@@ -16,4 +18,14 @@ public class ItemData : ScriptableObject
     public int price = 100;
     [Header("Sell Info")]
     public int sellPrice = 50;
+
+    protected virtual void OnValidate()
+    {
+        if(String.IsNullOrEmpty(itemId))
+        {
+            itemId = itemName + "_" + Guid.NewGuid().ToString();
+        }
+    }
+
+
 }

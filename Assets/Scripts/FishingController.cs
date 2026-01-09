@@ -113,26 +113,46 @@ public class FishingController : MonoBehaviour
     }
 
     private FishData GetRandomFishWeighted()
+{
+    // 1. Lấy tỷ lệ bonus từ SkillManager (ví dụ: 0.05 đến 0.25)
+    float rareBonus = (SkillManager.Instance != null) ? SkillManager.Instance.GetRareFishBonus() : 0f;
+
+    // Ngưỡng để xác định thế nào là cá "Hiếm" (Trọng số càng thấp càng hiếm)
+    int rareThreshold = 30; 
+
+    float totalWeight = 0;
+    
+    // Tạo một danh sách tạm thời để lưu trọng số đã được tính toán lại
+    List<float> adjustedWeights = new List<float>();
+
+    // 2. Tính tổng trọng số mới sau khi đã áp dụng Bonus
+    foreach (var fish in fishPool)
     {
-        int totalWeight = 0;
-        foreach (var fish in fishPool)
+        float weight = fish.rarityWeight;
+
+        if (fish.rarityWeight <= rareThreshold)
         {
-            totalWeight += fish.rarityWeight;
+            weight *= 1f + rareBonus;
         }
 
-        int randomValue = Random.Range(0, totalWeight);
-        int currentWeightSum = 0;
-
-        foreach (var fish in fishPool)
-        {
-            currentWeightSum += fish.rarityWeight;
-            if (randomValue < currentWeightSum)
-            {
-                return fish;
-            }
-        }
-        return fishPool[0];
+        adjustedWeights.Add(weight);
+        totalWeight += weight;
     }
+
+    float randomValue = Random.Range(0, totalWeight);
+    float currentWeightSum = 0;
+
+    for (int i = 0; i < fishPool.Count; i++)
+    {
+        currentWeightSum += adjustedWeights[i];
+        if (randomValue < currentWeightSum)
+        {
+            return fishPool[i];
+        }
+    }
+
+    return fishPool[0];
+}
 
     private void ShowResult(Sprite spriteToShow, string debugMessage)
     {
