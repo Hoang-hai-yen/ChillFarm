@@ -2,52 +2,67 @@ using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
-    public Transform door;
+    [Header("Cài đặt")]
+    public string doorName = "Chuồng Gà"; 
+    public bool isLocked = false; 
+    public int unlockCost = 500; 
 
+    [Header("Components")]
+    public Transform doorVisuals; 
+    
     private bool isOpen = false;
-    private bool playerInRange = false;
-
     private Animator animator;
     private BoxCollider2D doorCollider;
 
     void Start()
     {
-        animator = door.GetComponent<Animator>();
-        doorCollider = door.GetComponent<BoxCollider2D>();
+        if (doorVisuals != null)
+        {
+            animator = doorVisuals.GetComponent<Animator>();
+            doorCollider = doorVisuals.GetComponent<BoxCollider2D>();
+        }
+        else
+        {
+            animator = GetComponent<Animator>();
+            doorCollider = GetComponent<BoxCollider2D>();
+        }
+        UpdateVisuals();
     }
 
-    void Update()
+    public bool InteractWithDoor()
     {
-        if (!playerInRange)
-            return;
+        if (isLocked)
+        {
+            string msg = $"Bạn có muốn mở khóa {doorName} không?";
+            
+            ConfirmationUI.Instance.ShowQuestion(msg, unlockCost, () => 
+            {
+                if (InventoryManager.Instance.TrySpendGold(unlockCost))
+                {
+                    isLocked = false;
+                    Debug.Log("Mở khóa thành công!");
+                    SetDoorState(true); 
+                }
+                else
+                {
+                    Debug.Log("Không đủ tiền!");
+                }
+            });
 
-        if (Input.GetKeyDown(KeyCode.E))
+            return true; 
+        }
+        else
         {
             ToggleDoor();
+            return true;
         }
     }
 
-    void ToggleDoor()
+    void ToggleDoor() { SetDoorState(!isOpen); }
+    void SetDoorState(bool openState) { isOpen = openState; UpdateVisuals(); }
+    private void UpdateVisuals()
     {
-        isOpen = !isOpen;
-
-        if (animator != null)
-        {
-            animator.SetBool("isOpen", isOpen);
-        }
-
-        doorCollider.enabled = !isOpen;
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-            playerInRange = true;
-    }
-
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-            playerInRange = false;
+        if (animator != null) animator.SetBool("isOpen", isOpen);
+        if (doorCollider != null) doorCollider.enabled = !isOpen;
     }
 }

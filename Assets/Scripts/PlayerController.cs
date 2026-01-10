@@ -135,10 +135,9 @@ public class PlayerController : MonoBehaviour
         Vector3Int targetCellPos = grid.WorldToCell(interactionWorldPos);
 
         float baseStaminaCost = (currentItem == null) ? 2f : currentItem.staminaCost;
-    
-        // ÁP DỤNG KỸ NĂNG GIẢM STAMINA
+
         float reduction = SkillManager.Instance.GetStaminaReduction();
-        float finalStaminaCost = baseStaminaCost * (1f - reduction); 
+        float finalStaminaCost = baseStaminaCost * (1f - reduction);
 
         if (staminaController == null || staminaController.GetCurrentStamina() < finalStaminaCost)
         {
@@ -149,60 +148,91 @@ public class PlayerController : MonoBehaviour
 
         bool actionSuccessful = false;
 
+        // Quét tất cả vật thể trong phạm vi tương tác
         Collider2D[] hits = Physics2D.OverlapCircleAll(interactionWorldPos, 0.5f);
+        
         foreach (var hit in hits)
         {
+            // 1. Kiểm tra Vật nuôi (FarmAnimal)
             FarmAnimal animal = hit.GetComponent<FarmAnimal>();
-        if (animal != null)
-        {
-            if (animal.IsDead())
+            if (animal != null)
             {
-                float cleanUpCost = 5f * (1f - reduction); 
-                
-                if (staminaController.GetCurrentStamina() >= cleanUpCost)
+                if (animal.IsDead())
                 {
-                    animator.SetTrigger("doAction"); 
-                    animal.CleanupCorpse();
-                    
-                    finalStaminaCost = cleanUpCost; 
-                    actionSuccessful = true;
-                    
-                    yield return new WaitForSeconds(0.5f);
-                    goto FinalizeInteraction;
+                    float cleanUpCost = 5f * (1f - reduction);
+
+                    if (staminaController.GetCurrentStamina() >= cleanUpCost)
+                    {
+                        animator.SetTrigger("doAction");
+                        animal.CleanupCorpse();
+
+                        finalStaminaCost = cleanUpCost;
+                        actionSuccessful = true;
+
+                        yield return new WaitForSeconds(0.5f);
+                        goto FinalizeInteraction;
+                    }
+                    else
+                    {
+                        Debug.Log("Không đủ sức để dọn dẹp!");
+                    }
                 }
                 else
                 {
-                    Debug.Log("Không đủ sức để dọn dẹp!");
-                }
-            }
-            
-            else 
-            {
-                if (currentItem != null && currentItem.itemType == ItemType.AnimalFood)
-                {
-                    if (animal.Feed()) 
+                    if (currentItem != null && currentItem.itemType == ItemType.AnimalFood)
                     {
-                        animator.SetTrigger("doAction"); 
-                        InventoryManager.Instance.RemoveItem(currentItem, 1); 
+                        if (animal.Feed())
+                        {
+                            animator.SetTrigger("doAction");
+                            InventoryManager.Instance.RemoveItem(currentItem, 1);
+                            actionSuccessful = true;
+                        }
+                    }
+                    else
+                    {
+                        animal.Play();
+                        animator.SetTrigger("petAnimal");
                         actionSuccessful = true;
+                        finalStaminaCost = 1f * (1f - reduction);
+                    }
+
+                    if (actionSuccessful)
+                    {
+                        yield return new WaitForSeconds(0.5f);
+                        goto FinalizeInteraction;
                     }
                 }
+            }
 
-                else 
+            // 2. Kiểm tra Cửa chuồng (BarnDoor)
+            DoorController door = hit.GetComponent<DoorController>();
+            if (door != null)
+            {
+                if (door.InteractWithDoor())
                 {
-                    animal.Play(); 
-                    animator.SetTrigger("petAnimal");
+                    animator.SetTrigger("doAction"); 
+                    finalStaminaCost = 0f; 
                     actionSuccessful = true;
-                    finalStaminaCost = 1f * (1f - reduction); 
-                }
-
-                if (actionSuccessful)
-                {
-                    yield return new WaitForSeconds(0.5f); 
-                    goto FinalizeInteraction; 
+                    yield return new WaitForSeconds(0.5f);
+                    goto FinalizeInteraction;
                 }
             }
-        }
+
+            // 3. Kiểm tra Nhà trong chuồng (BarnStructure)
+            BarnStructure barnHouse = hit.GetComponent<BarnStructure>();
+            if (barnHouse != null)
+            {
+                if (barnHouse.TryUpgrade())
+                {
+                    animator.SetTrigger("doAction"); 
+                    AudioManager.Instance.PlayDigPlant();
+                    actionSuccessful = true;
+                    yield return new WaitForSeconds(0.5f);
+                    goto FinalizeInteraction;
+                }
+            }
+
+            // 4. Kiểm tra Chuồng (AnimalPen) để thả vật nuôi
             AnimalPen pen = hit.GetComponent<AnimalPen>();
             if (pen != null)
             {
@@ -210,19 +240,39 @@ public class PlayerController : MonoBehaviour
                 {
                     if (livestockItem.animalType == pen.allowedAnimal)
                     {
-                        GameObject newAnimalObj = Instantiate(livestockItem.animalPrefab, interactionWorldPos, Quaternion.identity);
-                        FarmAnimal newAnimalScript = newAnimalObj.GetComponent<FarmAnimal>();
-                        
-                        newAnimalScript.SetHome(pen.GetBounds());
+                        // Đếm số lượng vật nuôi hiện tại trong chuồng
+                        Collider2D[] animalsInside = Physics2D.OverlapBoxAll(pen.GetBounds().bounds.center, pen.GetBounds().bounds.size, 0);
+                        int count = 0;
+                        foreach (var col in animalsInside)
+                        {
+                            FarmAnimal fa = col.GetComponent<FarmAnimal>();
+                            if (fa != null && fa.GetAnimalType() == pen.allowedAnimal && !fa.IsDead())
+                            {
+                                count++;
+                            }
+                        }
 
-                        InventoryManager.Instance.RemoveItem(currentItem, 1);
-                        
-                        animator.SetTrigger("doAction");
-                        Debug.Log("Đã thả gà vào chuồng!");
-                        
-                        actionSuccessful = true;
-                        yield return new WaitForSeconds(0.5f);
-                        goto FinalizeInteraction;
+                        // Kiểm tra sức chứa (dựa trên code AnimalPen mới đã thêm IsFull)
+                        if (pen.IsFull(count)) 
+                        {
+                            Debug.Log("Chuồng đã đầy! Hãy nâng cấp.");
+                        }
+                        else
+                        {
+                            GameObject newAnimalObj = Instantiate(livestockItem.animalPrefab, interactionWorldPos, Quaternion.identity);
+                            FarmAnimal newAnimalScript = newAnimalObj.GetComponent<FarmAnimal>();
+
+                            newAnimalScript.SetHome(pen.GetBounds());
+
+                            InventoryManager.Instance.RemoveItem(currentItem, 1);
+
+                            animator.SetTrigger("doAction");
+                            Debug.Log("Đã thả gà vào chuồng!");
+
+                            actionSuccessful = true;
+                            yield return new WaitForSeconds(0.5f);
+                            goto FinalizeInteraction;
+                        }
                     }
                     else
                     {
@@ -230,31 +280,31 @@ public class PlayerController : MonoBehaviour
                     }
                 }
             }
-        }
+        } // Kết thúc vòng lặp foreach
 
 
+        // 5. Nếu không tương tác với Entity nào thì dùng Tool hoặc Tương tác đất
         if (currentItem is ToolData tool)
         {
             if (tool.toolType == ToolType.Hand)
             {
                 TryPickMushroom();
- 
             }
             else if (tool.toolType == ToolType.Hoe)
             {
                 animator.SetTrigger("useHoe");
                 AudioManager.Instance.PlayDigPlant();
-                yield return new WaitForSeconds(0.5f); 
+                yield return new WaitForSeconds(0.5f);
             }
             else if (tool.toolType == ToolType.WateringCan)
             {
                 animator.SetTrigger("useWaterCan");
                 AudioManager.Instance.PlayFishing();
-                yield return new WaitForSeconds(0.7f); 
+                yield return new WaitForSeconds(0.7f);
             }
             else if (tool.toolType == ToolType.FishingRod)
             {
-                if(!animator.GetBool("isFishing") && fishingController.CanFishInDirection())
+                if (!animator.GetBool("isFishing") && fishingController.CanFishInDirection())
                 {
                     animator.SetBool("isFishing", true);
                     AudioManager.Instance.PlayFishing();
@@ -265,11 +315,8 @@ public class PlayerController : MonoBehaviour
                     animator.SetBool("isFishing", false);
                     AudioManager.Instance.PlayFishing();
                     yield return new WaitForSeconds(0.5f);
-
                 }
-                
             }
-            
         }
         else if (currentItem != null && (currentItem.itemType == ItemType.Seed || currentItem.itemType == ItemType.Fertilizer))
         {
@@ -286,7 +333,7 @@ public class PlayerController : MonoBehaviour
         if (farmlandManager != null)
         {
             actionSuccessful = farmlandManager.Interact(targetCellPos, currentItem);
-            
+
             if (actionSuccessful && currentItem != null)
             {
                 if (currentItem.itemType == ItemType.Seed || currentItem.itemType == ItemType.Fertilizer)
@@ -296,15 +343,15 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-       FinalizeInteraction:
+        FinalizeInteraction:
         if (actionSuccessful && finalStaminaCost > 0)
         {
-            if (staminaController.ConsumeStamina(finalStaminaCost)) 
+            if (staminaController.ConsumeStamina(finalStaminaCost))
                 Debug.Log($"Tiêu tốn {finalStaminaCost} Stamina.");
         }
         else if (!actionSuccessful)
         {
-            Debug.Log("Action FAILED. No valid target or insufficient conditions.");
+            Debug.Log("Hành động thất bại hoặc không có mục tiêu hợp lệ.");
         }
 
         isInteracting = false;
