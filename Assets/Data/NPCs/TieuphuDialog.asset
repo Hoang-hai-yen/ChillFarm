@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8fa0dd1d99350f4ba011ec0aa7f5029, type: 3}
+  m_Name: TieuphuDialog
+  m_EditorClassIdentifier: Assembly-CSharp::NPCDialog
+  npcName: TieuPhu
+  npcPortrait: {fileID: -1427311554746373772, guid: ace542bf83df6fe43ac4fe9364a2c95e, type: 3}
+  dialogLines:
+  - Greetings, farmer.
+  - I've been patrolling the perimeter. Your fences are holding up, but I can smell
+    wild boars near the south ridge.
+  - 'Don''t worry. As long as I''m Alpha, no pest will touch your pumpkins. '
+  - But you should probably reinforce the gate before the moon is full.
+  - 'Keep your shovel close and your eyes sharper. A farm is only as strong as its
+    guardian. '
+  - ' Stay alert.'
+  - 'My claws are better for digging than planting, but I respect your hard work. '
+  - The pack is grateful for the food you grow.
+  - 'If you need heavy stones moved for your new barn, just howl. '
+  - I'll send some of the younger wolves to help
+  - 'Back to work. The sun waits for no one, and neither do the weeds. '
+  - Move along.
+  autoProgressLines: 010001010100010101000100
+  endDialogLines: 000000000001000000010001
+  autoProgressDelay: 2
+  typingSpeed: 0.04
+  voiceSound: {fileID: 0}
+  voicePitch: 1
+  dialogChoices:
+  - dialogueIndex: 1
+    choices:
+    - Is the farm safe tonight?
+    - Do you like farming, Ian?
+    - Thanks, Ian. See you!
+    nextDialogueIndices: 02000000060000000a000000
+    givesQuest: 000000
+  questPool: []
+  questTransitionIndexs: 
+  targetQuestStartIndexs: 
+  questInProgressIndex: 0
+  questCompletedIndex: 0
+  questOnCooldownIndex: 0
