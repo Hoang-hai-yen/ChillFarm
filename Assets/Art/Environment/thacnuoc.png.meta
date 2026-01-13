@@ -1,0 +1,444 @@
+fileFormatVersion: 2
+guid: f9cc3c11f60fbae48b17c4e03964782a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3038230726006881047
+    second: thacnuoc_0
+  - first:
+      213: 3423159985986597615
+    second: thacnuoc_1
+  - first:
+      213: -3177931944601902911
+    second: thacnuoc_2
+  - first:
+      213: 4461191920473372415
+    second: thacnuoc_3
+  - first:
+      213: 3545959375095237976
+    second: thacnuoc_4
+  - first:
+      213: 3847941995157987589
+    second: thacnuoc_5
+  - first:
+      213: 8182438316199348752
+    second: thacnuoc_6
+  - first:
+      213: 2096557420727708188
+    second: thacnuoc_7
+  - first:
+      213: -1611193117555806031
+    second: thacnuoc_8
+  - first:
+      213: -9112216412589292580
+    second: thacnuoc_9
+  - first:
+      213: 6252374957092423186
+    second: thacnuoc_10
+  - first:
+      213: 4941830459531897724
+    second: thacnuoc_11
+  - first:
+      213: 5159725499353525035
+    second: thacnuoc_12
+  - first:
+      213: -3728772532533169634
+    second: thacnuoc_13
+  - first:
+      213: 8578484474297270864
+    second: thacnuoc_14
+  - first:
+      213: 3241639267809695022
+    second: thacnuoc_15
+  - first:
+      213: -6745373539967798266
+    second: thacnuoc_16
+  - first:
+      213: 3203557711487332476
+    second: thacnuoc_17
+  - first:
+      213: -2404675571696474640
+    second: thacnuoc_18
+  - first:
+      213: 3564291827457100423
+    second: thacnuoc_19
+  - first:
+      213: 7250103849407730863
+    second: thacnuoc_20
+  - first:
+      213: 2774769394514297603
+    second: thacnuoc_21
+  - first:
+      213: -3590528620483653265
+    second: thacnuoc_22
+  - first:
+      213: 6226760280795871072
+    second: thacnuoc_23
+  - first:
+      213: 3395825814537437794
+    second: thacnuoc_24
+  - first:
+      213: -743525207065110434
+    second: thacnuoc_25
+  - first:
+      213: 3368682725315418957
+    second: thacnuoc_26
+  - first:
+      213: -8130265485667337886
+    second: thacnuoc_27
+  - first:
+      213: -4149449267319417104
+    second: thacnuoc_28
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 56
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: thacnuoc_0
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 347
+        width: 140
+        height: 153
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71b31518fb6f92a20800000000000000
+      internalID: 3038230726006881047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thacnuoc_2
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 347
+        width: 140
+        height: 153
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c023a9dbb7b5e3d0800000000000000
+      internalID: -3177931944601902911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thacnuoc_3
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 347
+        width: 140
+        height: 153
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff678ae4a6659ed30800000000000000
+      internalID: 4461191920473372415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thacnuoc_14
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 179
+        width: 140
+        height: 153
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05241b9bd26ec0770800000000000000
+      internalID: 8578484474297270864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thacnuoc_16
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 179
+        width: 140
+        height: 153
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60476e0018e9362a0800000000000000
+      internalID: -6745373539967798266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thacnuoc_21
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 179
+        width: 140
+        height: 153
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30386ad1016f18620800000000000000
+      internalID: 2774769394514297603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thacnuoc_22
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 14
+        width: 140
+        height: 153
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f61d23c3e31eb2ec0800000000000000
+      internalID: -3590528620483653265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thacnuoc_25
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 14
+        width: 140
+        height: 153
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e58d55773c77ea5f0800000000000000
+      internalID: -743525207065110434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thacnuoc_28
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 15
+        width: 140
+        height: 153
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f6dbe740e13a66c0800000000000000
+      internalID: -4149449267319417104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 7394882c61836d4409e368a77119cf76
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      thacnuoc_0: 3038230726006881047
+      thacnuoc_1: 3423159985986597615
+      thacnuoc_10: 6252374957092423186
+      thacnuoc_11: 4941830459531897724
+      thacnuoc_12: 5159725499353525035
+      thacnuoc_13: -3728772532533169634
+      thacnuoc_14: 8578484474297270864
+      thacnuoc_15: 3241639267809695022
+      thacnuoc_16: -6745373539967798266
+      thacnuoc_17: 3203557711487332476
+      thacnuoc_18: -2404675571696474640
+      thacnuoc_19: 3564291827457100423
+      thacnuoc_2: -3177931944601902911
+      thacnuoc_20: 7250103849407730863
+      thacnuoc_21: 2774769394514297603
+      thacnuoc_22: -3590528620483653265
+      thacnuoc_23: 6226760280795871072
+      thacnuoc_24: 3395825814537437794
+      thacnuoc_25: -743525207065110434
+      thacnuoc_26: 3368682725315418957
+      thacnuoc_27: -8130265485667337886
+      thacnuoc_28: -4149449267319417104
+      thacnuoc_3: 4461191920473372415
+      thacnuoc_4: 3545959375095237976
+      thacnuoc_5: 3847941995157987589
+      thacnuoc_6: 8182438316199348752
+      thacnuoc_7: 2096557420727708188
+      thacnuoc_8: -1611193117555806031
+      thacnuoc_9: -9112216412589292580
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
