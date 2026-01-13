@@ -101,8 +101,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -1942078743
-  m_SortingLayer: 5
+  m_SortingLayerID: -174093193
+  m_SortingLayer: 9
   m_SortingOrder: 0
   m_Sprite: {fileID: 1841958811001303414, guid: 8cbd534ac36ec5847a35e32cee3503bf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -133,9 +133,8 @@ MonoBehaviour:
   affection: 0
   isFedToday: 0
   hasPlayedToday: 0
-  isSick: 0
-  heartParticlePrefab: {fileID: 0}
-  sadIconPrefab: {fileID: 0}
+  daysWithoutFood: 0
+  maxStarvationDays: 3
 --- !u!61 &8002687970717029029
 BoxCollider2D:
   m_ObjectHideFlags: 0

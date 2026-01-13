@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9cad39d4e0365642931fe7f9bee0e96, type: 3}
   m_Name: AdvFer
   m_EditorClassIdentifier: Assembly-CSharp::FertilizerData
-  itemName: 
-  itemIcon: {fileID: 0}
+  itemId: 1
+  itemName: "Ph\xE2n b\xF3n cao c\u1EA5p"
+  itemIcon: {fileID: -7094758524550589834, guid: 8a4cae6559dc22d40bdb11c5b798d7e6, type: 3}
   itemType: 4
   staminaCost: 5
+  price: 200
+  sellPrice: 50
   minMultiplier: 3
-  maxMultiplier: 3
+  maxMultiplier: 6

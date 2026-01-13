@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; // Nhớ thêm thư viện này
+using TMPro; 
 
 public class BackpackManager : MonoBehaviour
 {

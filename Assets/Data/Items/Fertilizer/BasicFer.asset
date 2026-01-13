@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9cad39d4e0365642931fe7f9bee0e96, type: 3}
   m_Name: BasicFer
   m_EditorClassIdentifier: Assembly-CSharp::FertilizerData
-  itemName: BasicFer
+  itemId: 3
+  itemName: "Ph\xE2n b\xF3n c\u01A1 b\u1EA3n"
   itemIcon: {fileID: -842748779033256923, guid: 8a4cae6559dc22d40bdb11c5b798d7e6, type: 3}
   itemType: 4
   staminaCost: 5
+  price: 100
+  sellPrice: 50
   minMultiplier: 1
   maxMultiplier: 2

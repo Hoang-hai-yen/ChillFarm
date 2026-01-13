@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 851e532cdd08a5742afac31a76b7b82e, type: 3}
+  m_Name: CowFeed
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  itemId: "Th\u1EE9c \u0103n cho g\xE0_56df3b8c-0fca-485c-adf8-f8433bdf5351"
+  itemName: "Th\u1EE9c \u0103n cho b\xF2"
+  itemIcon: {fileID: -1621340587286962615, guid: 71df1a610642b2c46aabe09ff145fbde, type: 3}
+  itemType: 5
+  staminaCost: 1
+  price: 120
+  sellPrice: 50

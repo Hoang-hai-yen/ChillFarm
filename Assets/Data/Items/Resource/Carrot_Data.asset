@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c54ad4b120c7ec4994907f7c3feea9f, type: 3}
   m_Name: Carrot_Data
   m_EditorClassIdentifier: Assembly-CSharp::ResourceData
-  itemName: 
-  itemIcon: {fileID: 1520462160614537146, guid: 4816a6b36d249a34a96df477d5d65bcb, type: 3}
+  itemId: 1
+  itemName: "C\xE0 chua"
+  itemIcon: {fileID: -1407192652626693244, guid: 4816a6b36d249a34a96df477d5d65bcb, type: 3}
   itemType: 2
   staminaCost: 0
+  price: 100
+  sellPrice: 120

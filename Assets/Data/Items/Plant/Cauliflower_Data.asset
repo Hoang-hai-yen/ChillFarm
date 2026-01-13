@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51a58f95604da654394b52a578ea6423, type: 3}
+  m_Name: Cauliflower_Data
+  m_EditorClassIdentifier: Assembly-CSharp::CropData
+  cropName: "B\xF4ng c\u1EA3i xanh"
+  growthSprites:
+  - {fileID: -1975231421049208761, guid: 64ba9ecd33a51464f9a61430fcbcdd5a, type: 3}
+  - {fileID: -7682574386745198715, guid: 64ba9ecd33a51464f9a61430fcbcdd5a, type: 3}
+  - {fileID: 2296300339379097373, guid: 64ba9ecd33a51464f9a61430fcbcdd5a, type: 3}
+  - {fileID: 837022769627655913, guid: 64ba9ecd33a51464f9a61430fcbcdd5a, type: 3}
+  daysToGrow: 6
+  harvestItemPrefab: {fileID: 9006971852369712145, guid: f0408c8781eab084d82f3e3d3f69ded1, type: 3}
+  harvestYield: 1

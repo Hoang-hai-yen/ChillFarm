@@ -255,12 +255,12 @@ TextureImporter:
       name: baby pink cow animations sprites_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 257
-        width: 21
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 256
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -277,12 +277,12 @@ TextureImporter:
       name: baby pink cow animations sprites_1
       rect:
         serializedVersion: 2
-        x: 39
-        y: 257
-        width: 21
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 256
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -299,12 +299,12 @@ TextureImporter:
       name: baby pink cow animations sprites_2
       rect:
         serializedVersion: 2
-        x: 7
-        y: 225
-        width: 21
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 224
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -321,12 +321,12 @@ TextureImporter:
       name: baby pink cow animations sprites_3
       rect:
         serializedVersion: 2
-        x: 39
-        y: 225
-        width: 21
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 224
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -343,12 +343,12 @@ TextureImporter:
       name: baby pink cow animations sprites_4
       rect:
         serializedVersion: 2
-        x: 71
-        y: 225
-        width: 21
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 64
+        y: 224
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -365,12 +365,12 @@ TextureImporter:
       name: baby pink cow animations sprites_5
       rect:
         serializedVersion: 2
-        x: 103
-        y: 225
-        width: 21
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 96
+        y: 224
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -387,12 +387,12 @@ TextureImporter:
       name: baby pink cow animations sprites_6
       rect:
         serializedVersion: 2
-        x: 8
-        y: 193
-        width: 22
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 192
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -409,12 +409,12 @@ TextureImporter:
       name: baby pink cow animations sprites_7
       rect:
         serializedVersion: 2
-        x: 39
-        y: 193
-        width: 21
-        height: 18
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 192
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -431,12 +431,12 @@ TextureImporter:
       name: baby pink cow animations sprites_8
       rect:
         serializedVersion: 2
-        x: 71
-        y: 193
-        width: 21
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 64
+        y: 192
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -453,12 +453,12 @@ TextureImporter:
       name: baby pink cow animations sprites_9
       rect:
         serializedVersion: 2
-        x: 103
-        y: 193
-        width: 21
-        height: 18
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 96
+        y: 192
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -475,12 +475,12 @@ TextureImporter:
       name: baby pink cow animations sprites_10
       rect:
         serializedVersion: 2
-        x: 7
-        y: 161
-        width: 23
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 160
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -497,12 +497,12 @@ TextureImporter:
       name: baby pink cow animations sprites_11
       rect:
         serializedVersion: 2
-        x: 40
-        y: 161
-        width: 21
-        height: 18
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 160
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -519,12 +519,12 @@ TextureImporter:
       name: baby pink cow animations sprites_12
       rect:
         serializedVersion: 2
-        x: 72
-        y: 161
-        width: 21
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 64
+        y: 160
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -541,12 +541,12 @@ TextureImporter:
       name: baby pink cow animations sprites_13
       rect:
         serializedVersion: 2
-        x: 7
-        y: 129
-        width: 21
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 128
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -563,12 +563,12 @@ TextureImporter:
       name: baby pink cow animations sprites_14
       rect:
         serializedVersion: 2
-        x: 39
-        y: 129
-        width: 21
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 128
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -585,12 +585,12 @@ TextureImporter:
       name: baby pink cow animations sprites_15
       rect:
         serializedVersion: 2
-        x: 71
-        y: 129
-        width: 21
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 64
+        y: 128
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -607,12 +607,12 @@ TextureImporter:
       name: baby pink cow animations sprites_16
       rect:
         serializedVersion: 2
-        x: 103
-        y: 129
-        width: 21
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 96
+        y: 128
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -629,12 +629,12 @@ TextureImporter:
       name: baby pink cow animations sprites_17
       rect:
         serializedVersion: 2
-        x: 7
-        y: 97
-        width: 21
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 96
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -651,12 +651,12 @@ TextureImporter:
       name: baby pink cow animations sprites_18
       rect:
         serializedVersion: 2
-        x: 39
-        y: 97
-        width: 21
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 96
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -673,12 +673,12 @@ TextureImporter:
       name: baby pink cow animations sprites_19
       rect:
         serializedVersion: 2
-        x: 7
-        y: 65
-        width: 21
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -695,12 +695,12 @@ TextureImporter:
       name: baby pink cow animations sprites_20
       rect:
         serializedVersion: 2
-        x: 39
-        y: 65
-        width: 21
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -717,12 +717,12 @@ TextureImporter:
       name: baby pink cow animations sprites_21
       rect:
         serializedVersion: 2
-        x: 71
-        y: 65
-        width: 22
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -739,12 +739,12 @@ TextureImporter:
       name: baby pink cow animations sprites_22
       rect:
         serializedVersion: 2
-        x: 103
-        y: 65
-        width: 22
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 96
+        y: 64
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -761,12 +761,12 @@ TextureImporter:
       name: baby pink cow animations sprites_23
       rect:
         serializedVersion: 2
-        x: 135
-        y: 65
-        width: 22
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 128
+        y: 64
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -783,12 +783,12 @@ TextureImporter:
       name: baby pink cow animations sprites_24
       rect:
         serializedVersion: 2
-        x: 167
-        y: 65
-        width: 21
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 160
+        y: 64
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -805,12 +805,12 @@ TextureImporter:
       name: baby pink cow animations sprites_25
       rect:
         serializedVersion: 2
-        x: 199
-        y: 65
-        width: 21
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 192
+        y: 64
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -827,12 +827,12 @@ TextureImporter:
       name: baby pink cow animations sprites_26
       rect:
         serializedVersion: 2
-        x: 231
-        y: 65
-        width: 21
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 224
+        y: 64
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -849,12 +849,12 @@ TextureImporter:
       name: baby pink cow animations sprites_27
       rect:
         serializedVersion: 2
-        x: 7
-        y: 33
-        width: 21
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -871,12 +871,12 @@ TextureImporter:
       name: baby pink cow animations sprites_28
       rect:
         serializedVersion: 2
-        x: 39
-        y: 33
-        width: 21
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -893,12 +893,12 @@ TextureImporter:
       name: baby pink cow animations sprites_29
       rect:
         serializedVersion: 2
-        x: 71
-        y: 33
-        width: 21
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -915,12 +915,12 @@ TextureImporter:
       name: baby pink cow animations sprites_30
       rect:
         serializedVersion: 2
-        x: 103
-        y: 33
-        width: 21
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -937,12 +937,12 @@ TextureImporter:
       name: baby pink cow animations sprites_31
       rect:
         serializedVersion: 2
-        x: 17
-        y: 16
-        width: 7
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -959,12 +959,12 @@ TextureImporter:
       name: baby pink cow animations sprites_32
       rect:
         serializedVersion: 2
-        x: 47
-        y: 18
-        width: 11
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -981,12 +981,12 @@ TextureImporter:
       name: baby pink cow animations sprites_33
       rect:
         serializedVersion: 2
-        x: 80
-        y: 18
-        width: 9
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1003,12 +1003,12 @@ TextureImporter:
       name: baby pink cow animations sprites_34
       rect:
         serializedVersion: 2
-        x: 112
-        y: 17
-        width: 9
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1025,12 +1025,12 @@ TextureImporter:
       name: baby pink cow animations sprites_35
       rect:
         serializedVersion: 2
-        x: 144
-        y: 16
-        width: 9
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1047,12 +1047,12 @@ TextureImporter:
       name: baby pink cow animations sprites_36
       rect:
         serializedVersion: 2
-        x: 176
-        y: 17
-        width: 9
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1065,143 +1065,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: baby pink cow animations sprites_37
-      rect:
-        serializedVersion: 2
-        x: 7
-        y: 1
-        width: 21
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e36a1302c929a3e00800000000000000
-      internalID: 1025293064432887358
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: baby pink cow animations sprites_38
-      rect:
-        serializedVersion: 2
-        x: 39
-        y: 1
-        width: 21
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3a46f824d781b7ac0800000000000000
-      internalID: -3856461729646025565
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: baby pink cow animations sprites_39
-      rect:
-        serializedVersion: 2
-        x: 71
-        y: 1
-        width: 21
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 05ab76622e16d1870800000000000000
-      internalID: 8655181682810796624
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: baby pink cow animations sprites_40
-      rect:
-        serializedVersion: 2
-        x: 103
-        y: 1
-        width: 21
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8a59370d466e387a0800000000000000
-      internalID: -6375999326758136408
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: baby pink cow animations sprites_41
-      rect:
-        serializedVersion: 2
-        x: 135
-        y: 1
-        width: 21
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c2736ce36498ae0e0800000000000000
-      internalID: -2239826929869506772
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: baby pink cow animations sprites_42
-      rect:
-        serializedVersion: 2
-        x: 167
-        y: 1
-        width: 21
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0535c7e8bd7223ba0800000000000000
-      internalID: -6110777920446508208
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 88079a6dfab5da249861c9168994deaa
     internalID: 0
     vertices: []
     indices: 
@@ -1209,7 +1077,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":8.0,"y":9.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       baby pink cow animations sprites_0: -1401412902313932518
       baby pink cow animations sprites_1: 4053047900054244846
@@ -1242,13 +1112,7 @@ TextureImporter:
       baby pink cow animations sprites_34: 1917804652166861327
       baby pink cow animations sprites_35: 3737337522034699835
       baby pink cow animations sprites_36: 489555102858736140
-      baby pink cow animations sprites_37: 1025293064432887358
-      baby pink cow animations sprites_38: -3856461729646025565
-      baby pink cow animations sprites_39: 8655181682810796624
       baby pink cow animations sprites_4: 5108573112378467648
-      baby pink cow animations sprites_40: -6375999326758136408
-      baby pink cow animations sprites_41: -2239826929869506772
-      baby pink cow animations sprites_42: -6110777920446508208
       baby pink cow animations sprites_5: -687218164989782703
       baby pink cow animations sprites_6: 2924897461356963331
       baby pink cow animations sprites_7: 3701492581974392053

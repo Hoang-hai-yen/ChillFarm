@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa856f108eb3df3469303cd861838974, type: 3}
   m_Name: Chicken_High
   m_EditorClassIdentifier: Assembly-CSharp::AnimalData
-  animalName: 
+  animalName: "G\xE0 cao c\u1EA5p"
   type: 0
   tier: 2
-  daysToGrow: 5
+  daysToGrow: 3
   babySprite: {fileID: 1589970349292723827, guid: cdcf288228d45694fa8a02ed89b94800, type: 3}
   adultSprite: {fileID: -4371327572078126551, guid: c800cdadb5cf1d44681327e2173d3761, type: 3}
-  animatorController: {fileID: 0}
+  animatorController: {fileID: 22100000, guid: 3cb01e2ad3d8ff041b12dbda4aa847c0, type: 2}
   productPrefab: {fileID: 7088621430719539547, guid: 5129693a1642fc948abaebc39bbee7ed, type: 3}
   minAffectionToProduce: 30
   breedingChance: 20

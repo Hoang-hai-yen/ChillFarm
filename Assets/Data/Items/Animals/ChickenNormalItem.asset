@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c6e34fdb410cf34d84141fa10eedaf6, type: 3}
   m_Name: ChickenNormalItem
   m_EditorClassIdentifier: Assembly-CSharp::LivestockItemData
-  itemName: "G\xE0 con th\u01B0\u1EDDng"
+  itemId: 
+  itemName: "G\xE0 con s\u01A1 c\u1EA5p"
   itemIcon: {fileID: 8406634026043086284, guid: 8cbd534ac36ec5847a35e32cee3503bf, type: 3}
   itemType: 7
   staminaCost: 5
+  price: 100
+  sellPrice: 50
   animalPrefab: {fileID: 4099093254813222119, guid: 5533865bc6123264b8126b6399d895a4, type: 3}
   animalType: 0
