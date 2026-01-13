@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d92ce04bd62d0a441953a3c3a80be760, type: 3}
-  m_Name: ChickenLv1 2
+  m_Name: CowLv3
   m_EditorClassIdentifier: Assembly-CSharp::BarnLevelData
-  levelIndex: 1
-  levelName: Chicken House Lv2
-  upgradeCost: 1000
-  maxCapacity: 5
-  houseSprite: {fileID: -746093420795464808, guid: f032c0453c444e54db2c2c1344fe6113, type: 3}
+  levelIndex: 2
+  levelName: Cow House Lv3
+  upgradeCost: 3000
+  maxCapacity: 10
+  houseSprite: {fileID: 4185578170567565313, guid: 4951becd928c3374c8aa54e48bc7d2df, type: 3}

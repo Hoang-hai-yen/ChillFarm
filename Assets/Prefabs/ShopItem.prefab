@@ -386,7 +386,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000071526, y: 91.1}
+  m_AnchoredPosition: {x: 0.0000071526, y: 94.5}
   m_SizeDelta: {x: 125.9901, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4593512876478937214
@@ -417,7 +417,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: "H\u1EA1t gi\u1ED1ng n\xF4ng nghi\u1EC7p"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 463c2fcabc6c2b64897fe1ddbf4573e0, type: 2}
   m_sharedMaterial: {fileID: -8531723921449108984, guid: 463c2fcabc6c2b64897fe1ddbf4573e0, type: 2}
@@ -456,7 +456,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: -43.11
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -522,7 +522,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 27.2}
+  m_AnchoredPosition: {x: 0, y: 11.3}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7132592229317645183

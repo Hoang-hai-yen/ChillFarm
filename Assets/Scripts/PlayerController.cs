@@ -350,6 +350,31 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("doAction");
             yield return new WaitForSeconds(0.2f);
         }
+        else if (currentItem is FoodData foodItem)
+        {
+            if (staminaController.GetCurrentStamina() >= staminaController.maxStamina)
+            {
+                Debug.Log("Bụng no rồi, không ăn nổi nữa!");
+            }
+            else
+            {
+                animator.SetTrigger("doAction"); 
+
+                if (foodItem.eatSound != null && audioSource != null)
+                {
+                    audioSource.PlayOneShot(foodItem.eatSound);
+                }
+
+                staminaController.RestoreStamina(foodItem.staminaRecover);
+                Debug.Log($"Đã ăn {foodItem.itemName}, hồi {foodItem.staminaRecover} sức.");
+
+                InventoryManager.Instance.RemoveItem(currentItem, 1);
+
+                actionSuccessful = true;
+                finalStaminaCost = 0f;
+                yield return new WaitForSeconds(0.5f); 
+            }
+        }
 
         if (farmlandManager != null)
         {

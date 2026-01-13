@@ -20,6 +20,12 @@ public class InventoryManager : MonoBehaviour
     [Header("Inventory Data")]
     public InventorySlot[] hotbarSlots = new InventorySlot[9];
     public InventorySlot[] backpackSlots = new InventorySlot[20];
+    [Header("Audio - Shop")]
+    [Tooltip("Âm thanh khi mua thành công (Tiếng tiền lẻ, Kaching...)")]
+    public AudioClip buySuccessSound;
+    [Tooltip("Âm thanh khi mua thất bại (Tiếng Buzz, Error...)")]
+    public AudioClip buyFailSound;
+    private AudioSource audioSource;
     public int SelectedHotbarSlot { get; private set; } = 0; 
     public event Action OnInventoryChanged;
 
@@ -29,6 +35,12 @@ public class InventoryManager : MonoBehaviour
     {
         if (Instance != null && Instance != this) Destroy(gameObject);
         else Instance = this;
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
 
         for (int i = 0; i < hotbarSlots.Length; i++)
         {
@@ -300,6 +312,12 @@ public class InventoryManager : MonoBehaviour
         {
             int totalEarned = item.sellPrice * quantity;
             AddGold(totalEarned);
+            
+            if (buySuccessSound != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(buySuccessSound);
+            }
+
             Debug.Log($"Đã bán {item.itemName} nhận được {totalEarned} G");
         }
         else
@@ -312,6 +330,11 @@ public class InventoryManager : MonoBehaviour
         if (currentGold < price)
         {
             Debug.Log("Không đủ tiền!");
+            
+            if (buyFailSound != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(buyFailSound);
+            }
             return false;
         }
 
@@ -321,12 +344,22 @@ public class InventoryManager : MonoBehaviour
         {
             currentGold -= price;
             OnGoldChanged?.Invoke(currentGold);
+
+            if (buySuccessSound != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(buySuccessSound);
+            }
+
             Debug.Log($"Mua thành công {item.itemName}. Tiền còn: {currentGold}");
             return true;
         }
         else
         {
             Debug.Log("Túi đồ đã đầy! Không thể mua thêm.");
+            if (buyFailSound != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(buyFailSound);
+            }
             return false; 
         }
     }

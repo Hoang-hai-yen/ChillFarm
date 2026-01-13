@@ -16,7 +16,7 @@ MonoBehaviour:
   type: 0
   tier: 2
   daysToGrow: 3
-  babySprite: {fileID: 1589970349292723827, guid: cdcf288228d45694fa8a02ed89b94800, type: 3}
+  babySprite: {fileID: -7228780232133667501, guid: 53c71feeffe6b9846a57094f7e2dfd35, type: 3}
   adultSprite: {fileID: -4371327572078126551, guid: c800cdadb5cf1d44681327e2173d3761, type: 3}
   animatorController: {fileID: 22100000, guid: 3cb01e2ad3d8ff041b12dbda4aa847c0, type: 2}
   productPrefab: {fileID: 7088621430719539547, guid: 5129693a1642fc948abaebc39bbee7ed, type: 3}

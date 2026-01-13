@@ -19,3 +19,5 @@ MonoBehaviour:
   staminaCost: 0
   price: 130
   sellPrice: 150
+  staminaRecover: 15
+  eatSound: {fileID: 8300000, guid: 693c2433ae464914c972124f5bb1e93f, type: 3}

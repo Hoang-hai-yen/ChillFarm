@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54b7f0a1973993d44ad28d0ce2e0dfc0, type: 3}
+  m_Name: OrangeFruit
+  m_EditorClassIdentifier: Assembly-CSharp::FoodData
+  itemId: _0c7dea55-75c9-45ae-b69b-b8d988475d08
+  itemName: Cam
+  itemIcon: {fileID: 79940327233902711, guid: c25103e30f238aa4a896f91c206edad3, type: 3}
+  itemType: 10
+  staminaCost: 0
+  price: 150
+  sellPrice: 50
+  staminaRecover: 16
+  eatSound: {fileID: 8300000, guid: 693c2433ae464914c972124f5bb1e93f, type: 3}

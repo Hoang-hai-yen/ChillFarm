@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public enum ItemType { Tool, Seed, Crop, Resource, Fertilizer, AnimalFood, AnimalProduct, Livestock, Fish, Mushroom } 
+public enum ItemType { Tool, Seed, Crop, Resource, Fertilizer, AnimalFood, AnimalProduct, Livestock, Fish, Mushroom, Food } 
 public enum AnimalType { Chicken, Cow }
 public enum AnimalTier { Normal, Medium, High } 
 

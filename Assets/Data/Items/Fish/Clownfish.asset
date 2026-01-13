@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ceac2bb6a57caf468a1d67781c0d756, type: 3}
   m_Name: Clownfish
   m_EditorClassIdentifier: Assembly-CSharp::FishData
+  itemId: Clownfish_d82e83b2-f388-461f-8a66-784d16138cc8
   itemName: Clownfish
   itemIcon: {fileID: -43424163271399821, guid: 48c54c7bf90beab458f5faef53ea05b0, type: 3}
-  itemType: 3
-  staminaCost: 5
-  toolType: 0
+  itemType: 8
+  staminaCost: 0
+  price: 100
+  sellPrice: 750
   rarityWeight: 20

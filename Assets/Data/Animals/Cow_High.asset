@@ -18,7 +18,7 @@ MonoBehaviour:
   daysToGrow: 3
   babySprite: {fileID: 1415749063527452247, guid: de5ae5e8fcbeb364b8031eebd0d8bce7, type: 3}
   adultSprite: {fileID: 1014694878715894129, guid: 71ecc4faf5a5b4543843272c7f87e162, type: 3}
-  animatorController: {fileID: 22100000, guid: fc6491a91dab1c34686c6521090101da, type: 2}
+  animatorController: {fileID: 22100000, guid: 926dd402b950da04d912604c546991a6, type: 2}
   productPrefab: {fileID: 7088621430719539547, guid: 11e8452a3de0938448fbcb7a3ad422d5, type: 3}
   minAffectionToProduce: 30
   breedingChance: 20

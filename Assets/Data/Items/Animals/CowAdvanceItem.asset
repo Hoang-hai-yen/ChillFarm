@@ -19,5 +19,5 @@ MonoBehaviour:
   staminaCost: 5
   price: 300
   sellPrice: 50
-  animalPrefab: {fileID: 4099093254813222119, guid: 2617d5e5b9a77d7409fd215035485013, type: 3}
+  animalPrefab: {fileID: 4099093254813222119, guid: 6f8ac90a39f0cab40b8388ee3dc220e9, type: 3}
   animalType: 1

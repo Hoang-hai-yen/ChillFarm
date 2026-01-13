@@ -19,4 +19,6 @@ MonoBehaviour:
   staminaCost: 0
   price: 100
   sellPrice: 50
+  staminaRecover: 10
+  eatSound: {fileID: 8300000, guid: 693c2433ae464914c972124f5bb1e93f, type: 3}
   mushroomSprite: {fileID: 602391492105519581, guid: 146a97506772f9c459980fc8ad41d169, type: 3}

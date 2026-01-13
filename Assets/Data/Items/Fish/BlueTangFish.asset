@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ceac2bb6a57caf468a1d67781c0d756, type: 3}
   m_Name: BlueTangFish
   m_EditorClassIdentifier: Assembly-CSharp::FishData
+  itemId: Blue Tang Fish_7a872cfe-febf-47eb-b6f9-f1643514a9dd
   itemName: Blue Tang Fish
   itemIcon: {fileID: -8587906519044402103, guid: 48c54c7bf90beab458f5faef53ea05b0, type: 3}
-  itemType: 3
-  staminaCost: 5
-  toolType: 0
+  itemType: 8
+  staminaCost: 0
+  price: 100
+  sellPrice: 100
+  rarityWeight: 50
