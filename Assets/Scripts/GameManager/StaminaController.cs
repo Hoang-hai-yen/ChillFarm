@@ -3,10 +3,16 @@ using System;
 
 public class StaminaController : MonoBehaviour
 {
+    [Header("Settings")]
     public float maxStamina = 100f;
     public float eveningHourStart = 22f; 
+    
+    [Header("Sleep Logic")]
+    public float lateSleepHour = 23f;        
+    public float lateSleepMaxStamina = 80f;  
 
     private float currentStamina;
+    private float staminaToRecover;
     private bool isFainted = false;
 
     private TimeController timeController;
@@ -18,6 +24,7 @@ public class StaminaController : MonoBehaviour
     void Awake()
     {
         currentStamina = maxStamina;
+        staminaToRecover = maxStamina; 
         
         timeController = FindFirstObjectByType<TimeController>();
         if (timeController == null)
@@ -76,23 +83,37 @@ public class StaminaController : MonoBehaviour
         isFainted = true;
         Debug.Log("Player fainted! Stamina hết.");
         
+        CalculateRecoveryAmount();
+
         OnPlayerFaint?.Invoke(); 
-        
-        EndDayAndRecover();
     }
 
     public void EndDayAndRecover()
     {
         if (timeController != null)
         {
+            CalculateRecoveryAmount();
+
             timeController.SkipToNextDayStart();
         }
     }
     
+    private void CalculateRecoveryAmount()
+    {
+        if (timeController == null) return;
+
+        float currentHour = timeController.GetCurrentHour();
+        staminaToRecover = lateSleepMaxStamina; 
+        Debug.Log($"Đã ngất/Ngủ muộn. Mai chỉ hồi {lateSleepMaxStamina}.");
+    }
+    
     public void Recover()
     {
-        currentStamina = maxStamina;
+        currentStamina = staminaToRecover;
         isFainted = false; 
+        
+        staminaToRecover = maxStamina;
+
         OnStaminaChange?.Invoke(currentStamina);
         OnPlayerWakeUp?.Invoke();
         Debug.Log("Player recovered and started a new day.");

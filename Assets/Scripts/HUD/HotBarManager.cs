@@ -1,12 +1,17 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using TMPro; 
 
 public class HotbarManager : MonoBehaviour
 {
     [Header("UI Visuals")]
     public Image[] slotBackgroundImages;
     public Image[] slotItemIcons;
+    
+    [Header("Quantity UI")]
+    public TextMeshProUGUI[] slotQuantityTexts; 
 
+    [Header("Colors & Sprites")]
     public Color normalColor = Color.white;
     public Color selectedColor = Color.yellow;
     public Sprite handIconSprite;
@@ -20,6 +25,8 @@ public class HotbarManager : MonoBehaviour
         }
 
         InventoryManager.Instance.OnInventoryChanged += UpdateHotbarVisuals;
+        
+        // Chọn mặc định ô đầu tiên
         InventoryManager.Instance.SelectSlot(0);
         UpdateHotbarVisuals();
     }
@@ -84,24 +91,43 @@ public class HotbarManager : MonoBehaviour
 
         for (int i = 0; i < slotBackgroundImages.Length; i++)
         {
-            slotBackgroundImages[i].color = (i == selectedIndexFromInventory) ? selectedColor : normalColor;
+            if (slotBackgroundImages[i] != null)
+            {
+                slotBackgroundImages[i].color = (i == selectedIndexFromInventory) ? selectedColor : normalColor;
+            }
 
             InventorySlot slot = InventoryManager.Instance.hotbarSlots[i];
 
-            if (i == 0) 
+            if (slotItemIcons[i] != null)
             {
-                slotItemIcons[i].sprite = handIconSprite;
-                slotItemIcons[i].color = Color.white;
+                if (i == 0) 
+                {
+                    slotItemIcons[i].sprite = handIconSprite;
+                    slotItemIcons[i].color = Color.white;
+                }
+                else if (slot.itemData != null)
+                {
+                    slotItemIcons[i].sprite = slot.itemData.itemIcon;
+                    slotItemIcons[i].color = Color.white;
+                }
+                else
+                {
+                    slotItemIcons[i].sprite = null;
+                    slotItemIcons[i].color = new Color(1, 1, 1, 0); 
+                }
             }
-            else if (slot.itemData != null)
+
+            if (slotQuantityTexts != null && i < slotQuantityTexts.Length && slotQuantityTexts[i] != null)
             {
-                slotItemIcons[i].sprite = slot.itemData.itemIcon;
-                slotItemIcons[i].color = Color.white;
-            }
-            else
-            {
-                slotItemIcons[i].sprite = null;
-                slotItemIcons[i].color = new Color(1, 1, 1, 0);
+                if (i == 0 || slot.itemData == null || slot.quantity <= 1)
+                {
+                    slotQuantityTexts[i].gameObject.SetActive(false);
+                }
+                else
+                {
+                    slotQuantityTexts[i].text = slot.quantity.ToString();
+                    slotQuantityTexts[i].gameObject.SetActive(true);
+                }
             }
         }
     }

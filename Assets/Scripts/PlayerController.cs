@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public Transform bedSpawnPoint;
 
     private StaminaController staminaController;
+    private TimeController timeController; 
 
     private float lastMoveX;
     private float lastMoveY;
@@ -30,6 +31,11 @@ public class PlayerController : MonoBehaviour
     [Header("Highlight")]
     [Tooltip("Đối tượng SpriteRenderer dùng để highlight ô đất.")]
     [SerializeField] private SpriteRenderer highlightRenderer;
+    [Header("Audio")]
+    [SerializeField] private AudioClip faintClip; 
+    private AudioSource audioSource;
+    [Header("UI Managers")]
+    [SerializeField] private FaintUIManager faintUIManager;
 
     private FarmlandManager farmlandManager;
 
@@ -54,6 +60,8 @@ public class PlayerController : MonoBehaviour
         fishingController = GetComponent<FishingController>();
         interactionDetector = GetComponent<InteractionDetector>();
         staminaController = FindFirstObjectByType<StaminaController>();
+        timeController = FindFirstObjectByType<TimeController>();
+        if (timeController == null) Debug.LogError("TimeController not found!");
         if (staminaController == null)
             Debug.LogError("StaminaController not found in the scene.");
 
@@ -66,16 +74,25 @@ public class PlayerController : MonoBehaviour
             backpackPanel.SetActive(false);
 
         lastMoveY = -1f;
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null) 
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     private void OnEnable()
     {
         playerControls.Enable();
-
         if (staminaController != null)
         {
-            staminaController.OnPlayerFaint += HandlePlayerFaint;
+            staminaController.OnPlayerFaint += HandleStaminaFaint; 
             staminaController.OnPlayerWakeUp += HandlePlayerWakeUp;
+        }
+
+        if (timeController != null)
+        {
+            timeController.OnPassOutTime += HandleTimePassOut;
         }
 
         playerControls.Movement.Interact.performed += OnInteract;
@@ -92,8 +109,12 @@ public class PlayerController : MonoBehaviour
 
         if (staminaController != null)
         {
-            staminaController.OnPlayerFaint -= HandlePlayerFaint;
+    staminaController.OnPlayerFaint -= HandleStaminaFaint;
             staminaController.OnPlayerWakeUp -= HandlePlayerWakeUp;
+        }
+        if (timeController != null)
+        {
+            timeController.OnPassOutTime -= HandleTimePassOut;
         }
 
         playerControls.Movement.Interact.performed -= OnInteract;
@@ -456,45 +477,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void HandlePlayerFaint()
-    {
-        playerControls.Disable();
-        movement = Vector2.zero;
-        rb.linearVelocity = Vector2.zero;
-        animator.SetBool("isFainted", true);
-
-        if (isBackpackOpen)
-        {
-            isBackpackOpen = false;
-            backpackPanel.SetActive(false);
-        }
-
-        Debug.Log("PlayerController: Input disabled, fainted animation playing.");
-    }
-
-    private void HandlePlayerWakeUp()
-    {
-        if (bedSpawnPoint != null)
-        {
-            transform.position = bedSpawnPoint.position;
-            animator.SetFloat("lastMoveX", 0f);
-            animator.SetFloat("lastMoveY", -1f);
-            Debug.Log("Player teleported to bed spawn point.");
-        }
-        else
-        {
-            Debug.LogError("Bed Spawn Point not assigned in PlayerController! Cannot teleport.");
-        }
-
-        animator.SetBool("isFainted", false);
-        playerControls.Enable();
-
-        playerControls.Movement.Move.Enable();
-        playerControls.Movement.Interact.Enable();
-
-        Debug.Log("PlayerController: Input enabled, starting new day.");
-    }
-
     private void OnInteract(InputAction.CallbackContext context)
     {
         if (isInteracting) return;
@@ -606,5 +588,75 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, mushroomPickingRadius);
     }
-    
+    private void HandleStaminaFaint()
+    {
+        Debug.Log("Player: Ngất do hết Stamina.");
+        StartCoroutine(ProcessFaintSequence());
+    }
+
+    private void HandleTimePassOut()
+    {
+        Debug.Log("Player: Ngất do thức quá 3 ngày.");
+        StartCoroutine(ProcessFaintSequence());
+    }
+
+    private IEnumerator ProcessFaintSequence()
+    {
+        playerControls.Disable();
+        movement = Vector2.zero;
+        rb.linearVelocity = Vector2.zero;
+        animator.SetBool("isFainted", true);
+
+        if (isBackpackOpen)
+        {
+            isBackpackOpen = false;
+            backpackPanel.SetActive(false);
+        }
+
+        yield return new WaitForSeconds(1f);
+
+        if (faintClip != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(faintClip);
+        }
+
+        yield return new WaitForSeconds(2f);
+
+        if (faintUIManager != null)
+        {
+            yield return StartCoroutine(faintUIManager.PlayFaintSequence(() => 
+            {
+                if (timeController != null)
+                {
+                    timeController.SkipToNextDayStart();
+                }
+            }));
+        }
+        else
+        {
+            if (timeController != null) timeController.SkipToNextDayStart();
+        }
+    }
+
+    private void HandlePlayerWakeUp()
+    {
+        if (bedSpawnPoint != null)
+        {
+            transform.position = bedSpawnPoint.position;
+            animator.SetFloat("lastMoveX", 0f);
+            animator.SetFloat("lastMoveY", -1f);
+        }
+        else
+        {
+            Debug.LogError("Chưa gán Bed Spawn Point!");
+        }
+
+        animator.SetBool("isFainted", false);
+        playerControls.Enable();
+
+        playerControls.Movement.Move.Enable();
+        playerControls.Movement.Interact.Enable();
+
+        Debug.Log("Player: Đã tỉnh dậy ở giường.");
+    }
 }
