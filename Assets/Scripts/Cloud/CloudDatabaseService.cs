@@ -270,7 +270,13 @@ public class CloudDatabaseService
                     }
                     catch (Exception e)
                     {
-                        callback?.Invoke(false, "Parse error: " + e.Message + "\nRAW: " + response, null);
+                        Exception realError = e.InnerException != null ? e.InnerException : e;
+    
+                        string detailedMessage = $"Message: {realError.Message}\n" +
+                             $"Stack Trace: {realError.StackTrace}";
+
+                        Debug.LogError("FULL ERROR: " + detailedMessage);
+                        callback?.Invoke(false, "Parse error: " + realError.Message, null);
                     }
                 }
                 else
@@ -541,6 +547,7 @@ public class CloudDatabaseService
         // Gọi BatchGet
         yield return BatchGet(jsonData, (success, message, responses) =>
         {
+            Debug.Log(message);
             batchSuccess = success;
             if (!success) return;
 

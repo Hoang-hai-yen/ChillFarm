@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa856f108eb3df3469303cd861838974, type: 3}
   m_Name: Cow_High
   m_EditorClassIdentifier: Assembly-CSharp::AnimalData
+  Id: _0be14982-5c8b-4a1a-ad54-20697fd45b06
+  Name: 
   animalName: "B\xF2 cao c\u1EA5p"
+  liveStockItemId: Cow Advance_2a3e1c8c-efdd-4af5-b3b8-eb395f981424
   type: 1
   tier: 2
   daysToGrow: 3

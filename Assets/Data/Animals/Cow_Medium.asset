@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa856f108eb3df3469303cd861838974, type: 3}
   m_Name: Cow_Medium
   m_EditorClassIdentifier: Assembly-CSharp::AnimalData
+  Id: _da3cdf8a-d01f-48cd-9b15-0169c3d36d1a
+  Name: 
   animalName: "B\xF2 trung c\u1EA5p"
+  liveStockItemId: Cow Medium_c9ab0fa9-c312-44d8-8c2b-bc6e74cb4784
   type: 1
   tier: 1
   daysToGrow: 3

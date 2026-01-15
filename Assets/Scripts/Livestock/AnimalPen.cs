@@ -7,8 +7,8 @@ public class AnimalPen : MonoBehaviour
     [SerializeField] private string id;
     public string Id => id;
 
-    [SerializeField] private bool isUnlocked = false;
-    public bool IsUnlocked => isUnlocked;
+    // [SerializeField] private bool isUnlocked = false;
+    // public bool IsUnlocked => isUnlocked;
 
     [Header("Cài đặt Chuồng")]
     public AnimalType allowedAnimal; 
@@ -48,10 +48,10 @@ public class AnimalPen : MonoBehaviour
         if(penSchema != null)
         {
             linkedStructure.currentLevelIndex = penSchema.CurrentLevel;
-            isUnlocked = penSchema.IsUnlocked;
+            // isUnlocked = penSchema.IsUnlocked;
             if(doorController != null)
             {
-                doorController.isLocked = !isUnlocked;
+                doorController.isLocked = !penSchema.IsUnlocked;
             }
             animalsInPen = AnimalFarmManager.Instance.LoadAnimalsInPen(penSchema.Animals, this);
         }
@@ -62,7 +62,7 @@ public class AnimalPen : MonoBehaviour
         Assets.Scripts.Cloud.Schemas.Pen penSchema = new Assets.Scripts.Cloud.Schemas.Pen
         {
             Id = this.Id,
-            IsUnlocked = this.isUnlocked,
+            IsUnlocked = doorController != null ? !doorController.isLocked : false,
             CurrentLevel = linkedStructure != null ? linkedStructure.currentLevelIndex : 0,
             Animals = new List<Assets.Scripts.Cloud.Schemas.Animal>()
         };

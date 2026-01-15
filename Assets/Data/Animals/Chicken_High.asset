@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa856f108eb3df3469303cd861838974, type: 3}
   m_Name: Chicken_High
   m_EditorClassIdentifier: Assembly-CSharp::AnimalData
+  Id: _47785bc6-f0b4-4430-bf5e-200bb8dc0a67
+  Name: 
   animalName: "G\xE0 cao c\u1EA5p"
+  liveStockItemId: Chicken Advance_f8489973-c7d5-4ba9-9321-820a4451cc03
   type: 0
   tier: 2
   daysToGrow: 3

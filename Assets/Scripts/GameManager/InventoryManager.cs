@@ -67,7 +67,7 @@ public class InventoryManager : MonoBehaviour, IDataPersistence
     public void LoadData(GameData data)
     {
         currentGold = data.PlayerDataData.Gold;
-
+        Debug.Log(currentGold);
         // Load Hotbar
         for (int i = 0; i < data.PlayerDataData.Inventory.HotbarItems.Count; i++)
         {
