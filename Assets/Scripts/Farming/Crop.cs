@@ -37,6 +37,41 @@ public class Crop : MonoBehaviour
         UpdateGrowthUI();
     }
 
+    public void LoadFromSchema(Assets.Scripts.Cloud.Schemas.Crop cropSchema)
+    {
+        // Load the crop data from the schema
+        if (cropSchema != null)
+        {
+            cropData = GameDataManager.instance.gameSODatabase.GetItemById(cropSchema.CropId) as CropData;
+            currentGrowth = cropSchema.CurrentGrowth;
+            isWatered = cropSchema.IsWatered;
+            isHarvestable = cropSchema.IsHarvestable;
+            yieldMultiplier = cropSchema.YieldMultiplier;
+            hasBeenFertilized = cropSchema.HasBeenFertilized;
+
+            CalculateStage();
+            sr.sprite = cropData.growthSprites[currentStage];
+
+            if (isHarvestable)
+                progressBarCanvas.gameObject.SetActive(false);
+
+            UpdateGrowthUI();
+        }
+    }
+
+    public Assets.Scripts.Cloud.Schemas.Crop ToSchema()
+    {
+        return new Assets.Scripts.Cloud.Schemas.Crop
+        {
+            CropId = cropData.Id,
+            CurrentGrowth = currentGrowth,
+            CurrentStage = currentStage,
+            IsWatered = isWatered,
+            IsHarvestable = isHarvestable,
+            YieldMultiplier = yieldMultiplier,
+            HasBeenFertilized = hasBeenFertilized
+        };
+    }
     public void LoadState(CropData data, float growth, bool watered)
     {
         cropData = data;

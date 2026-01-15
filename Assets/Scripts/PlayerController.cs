@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
+using Assets.Scripts.Cloud.Schemas;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDataPersistence
 {
     [SerializeField] private float speed = 1f;
     private PlayerControls playerControls;
@@ -123,6 +124,30 @@ public class PlayerController : MonoBehaviour
 
         playerControls.Movement.Backpack.performed -= ToggleBackpack;
         playerControls.Movement.Backpack.Disable();
+    }
+
+    public void LoadData(GameData data)
+    {
+        if (data.PlayerDataData != null)
+        {
+            // PlayerData.PlayerPosition pos = data.PlayerDataData.Position;
+            // transform.position = new Vector3((float)pos.X, (float)pos.Y, (float)pos.Z);
+        }
+    }
+
+    public void SaveData(GameData data)
+    {
+        if (data.PlayerDataData == null)
+        {
+            data.PlayerDataData = new PlayerData();
+        }
+
+        data.PlayerDataData.Position = new PlayerData.PlayerPosition()
+        {
+            X = transform.position.x,
+            Y = transform.position.y,
+            Z = transform.position.z
+        };
     }
 
     public void HandleUpdate()
@@ -262,19 +287,19 @@ public class PlayerController : MonoBehaviour
                     if (livestockItem.animalType == pen.allowedAnimal)
                     {
                         // Đếm số lượng vật nuôi hiện tại trong chuồng
-                        Collider2D[] animalsInside = Physics2D.OverlapBoxAll(pen.GetBounds().bounds.center, pen.GetBounds().bounds.size, 0);
-                        int count = 0;
-                        foreach (var col in animalsInside)
-                        {
-                            FarmAnimal fa = col.GetComponent<FarmAnimal>();
-                            if (fa != null && fa.GetAnimalType() == pen.allowedAnimal && !fa.IsDead())
-                            {
-                                count++;
-                            }
-                        }
+                        // Collider2D[] animalsInside = Physics2D.OverlapBoxAll(pen.GetBounds().bounds.center, pen.GetBounds().bounds.size, 0);
+                        // int count = 0;
+                        // foreach (var col in animalsInside)
+                        // {
+                        //     FarmAnimal fa = col.GetComponent<FarmAnimal>();
+                        //     if (fa != null && fa.GetAnimalType() == pen.allowedAnimal && !fa.IsDead())
+                        //     {
+                        //         count++;
+                        //     }
+                        // }
 
                         // Kiểm tra sức chứa (dựa trên code AnimalPen mới đã thêm IsFull)
-                        if (pen.IsFull(count)) 
+                        if (pen.IsFull()) 
                         {
                             Debug.Log("Chuồng đã đầy! Hãy nâng cấp.");
                         }
@@ -284,7 +309,8 @@ public class PlayerController : MonoBehaviour
                             FarmAnimal newAnimalScript = newAnimalObj.GetComponent<FarmAnimal>();
 
                             newAnimalScript.SetHome(pen.GetBounds());
-
+                            
+                            pen.AddAniamal(newAnimalScript);
                             InventoryManager.Instance.RemoveItem(currentItem, 1);
 
                             animator.SetTrigger("doAction");

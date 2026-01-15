@@ -54,6 +54,33 @@ public class QuestProgress
         }
     }
 
+    public QuestProgress(Assets.Scripts.Cloud.Schemas.PlayerQuest schema)
+    {
+        LoadFromSchema(schema);
+    }
+
+    public void LoadFromSchema(Assets.Scripts.Cloud.Schemas.PlayerQuest schema)
+    {
+        this.quest = GameDataManager.instance.gameSODatabase.GetItemById(schema.QuestId) as QuestData;
+        
+        questObjectives = new();
+        foreach(var obj in quest.questObjectives)
+        {
+            var questObjectiveSchema = schema.progresses.Find(p => p.ObjectiveId == obj.objectiveId);
+            questObjectives.Add(
+                new QuestObjective()
+                {
+                    objectiveId = obj.objectiveId,
+                    objectiveItem = obj.objectiveItem,
+                    description = obj.description,
+                    objectiveType = obj.objectiveType,
+                    targetAmount = questObjectiveSchema?.TargetAmount ?? obj.targetAmount,
+                    currentAmount = questObjectiveSchema?.CurrentAmount ?? 0,
+                }
+            );
+        }
+    }
+
     public bool isCompleted => questObjectives.TrueForAll(obj => obj.isCompleted);
     public string questId => quest.questId;
 }

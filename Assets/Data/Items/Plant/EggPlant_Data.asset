@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51a58f95604da654394b52a578ea6423, type: 3}
   m_Name: EggPlant_Data
   m_EditorClassIdentifier: Assembly-CSharp::CropData
-  cropName: "C\xE0 chua"
+  Id: Egg Plant Crop_49cd8074-9174-4c22-9048-fd86a68a8244
+  Name: Eggpllant Crop
+  cropName: "C\xE0 "
   growthSprites:
   - {fileID: -8813222334067813782, guid: 64ba9ecd33a51464f9a61430fcbcdd5a, type: 3}
   - {fileID: 3220655293762564766, guid: 64ba9ecd33a51464f9a61430fcbcdd5a, type: 3}

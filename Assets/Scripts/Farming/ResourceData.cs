@@ -4,8 +4,9 @@ using UnityEngine;
 public class ResourceData : FoodData
 {
 
-    private void OnValidate()
+    protected override void OnValidate()
     {
+        base.OnValidate();
         itemType = ItemType.Crop; 
     }
 }

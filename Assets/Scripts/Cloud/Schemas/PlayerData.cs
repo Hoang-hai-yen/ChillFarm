@@ -13,15 +13,19 @@ namespace Assets.Scripts.Cloud.Schemas
 
         public string UserId { get; set; }
 
-        public int Gold { get; set; } = 0;
-        public double Stamina { get; set; } = 0;
-        public double MaxStamina { get; set; } = 1;
+        public int Gold { get; set; } = 500;
+        public double Stamina { get; set; } = 100f;
+        public double MaxStamina { get; set; } = 100f;
         public int CurrentDay { get; set; } = 1;
-        public string CurrentTime { get; set; } = "";
-
+        public DateTime CurrentTime { get; set; } = DateTime.Today.AddHours(6); // Bắt đầu lúc 6 giờ sáng
+        public int CurrentDaysAwake { get; set; } = 0;
+        public int SkillLevel { get; set; } = 0;
+        public int AnimalLevel { get; set; } = 0;
+        public int FishingLevel { get; set; } = 0;
+        public int FarmingLevel { get; set; } = 0;
         public PlayerPosition Position { get; set; } = new PlayerPosition();
 
-        public PlayerXP ExperiencePoint { get; set; } = new PlayerXP();
+        // public PlayerXP ExperiencePoint { get; set; } = new PlayerXP();
 
         public Inventory Inventory { get; set; } = new Inventory();
         public Inventory Storage { get; set; } = new Inventory();
@@ -34,6 +38,7 @@ namespace Assets.Scripts.Cloud.Schemas
         {
             public double X { get; set; } = 0;
             public double Y { get; set; } = 0;
+            public double Z { get; set; } = 0;
             public string CurrentScene { get; set; } = "Test";
 
             public PlayerPosition() { }

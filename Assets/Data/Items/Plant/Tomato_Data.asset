@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51a58f95604da654394b52a578ea6423, type: 3}
   m_Name: Tomato_Data
   m_EditorClassIdentifier: Assembly-CSharp::CropData
+  Id: Tomato Crop_667d5014-f465-44b2-8bc2-5887909ab6c2
+  Name: Tomato Crop
   cropName: "C\xE0 chua"
   growthSprites:
   - {fileID: 2738774946353408788, guid: 64ba9ecd33a51464f9a61430fcbcdd5a, type: 3}

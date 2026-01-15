@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-public class StaminaController : MonoBehaviour
+public class StaminaController : MonoBehaviour, IDataPersistence
 {
     [Header("Settings")]
     public float maxStamina = 100f;
@@ -49,6 +49,17 @@ public class StaminaController : MonoBehaviour
         }
     }
 
+    public void LoadData(GameData data)
+    {
+        currentStamina = (float) data.PlayerDataData.Stamina;
+        maxStamina = (float) data.PlayerDataData.MaxStamina;
+        OnStaminaChange?.Invoke(currentStamina);    
+    }
+    public void SaveData(GameData data)
+    {
+        data.PlayerDataData.Stamina = currentStamina; 
+        data.PlayerDataData.MaxStamina = maxStamina;
+    }
     void Update()
     {
         if (currentStamina <= 0 && !isFainted)

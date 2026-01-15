@@ -47,38 +47,38 @@ public class CloudDatabaseHelper
         };
     }
 
-    static public object CreateInventoryField(Inventory inventory)
-    {
-        var itemsArray = new List<object>();
+    // static public object CreateInventoryField(Inventory inventory)
+    // {
+    //     var itemsArray = new List<object>();
 
-        foreach (var item in inventory.Items)
-        {
-            itemsArray.Add(new
-            {
-                mapValue = new
-                {
-                    fields = new
-                    {
-                        itemId = new { stringValue = item.ItemId },
-                        quantity = new { integerValue = item.Quantity.ToString() },
-                        slotIndex = new { integerValue = item.SlotIndex.ToString() }
-                    }
-                }
-            });
-        }
+    //     foreach (var item in inventory.Items)
+    //     {
+    //         itemsArray.Add(new
+    //         {
+    //             mapValue = new
+    //             {
+    //                 fields = new
+    //                 {
+    //                     itemId = new { stringValue = item.ItemId },
+    //                     quantity = new { integerValue = item.Quantity.ToString() },
+    //                     slotIndex = new { integerValue = item.SlotIndex.ToString() }
+    //                 }
+    //             }
+    //         });
+    //     }
 
-        return new
-        {
-            mapValue = new
-            {
-                fields = new
-                {
-                    maxSlots = new { integerValue = inventory.MaxSlots.ToString() },
-                    items = new { arrayValue = new { values = itemsArray } }
-                }
-            }
-        };
-    }
+    //     return new
+    //     {
+    //         mapValue = new
+    //         {
+    //             fields = new
+    //             {
+    //                 maxSlots = new { integerValue = inventory.MaxSlots.ToString() },
+    //                 items = new { arrayValue = new { values = itemsArray } }
+    //             }
+    //         }
+    //     };
+    // }
 
     static public object CreateInventoryField()
     {

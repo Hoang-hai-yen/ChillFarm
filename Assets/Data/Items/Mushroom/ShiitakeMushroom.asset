@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8028acedc4d10459e3ab3aa34794e1, type: 3}
   m_Name: ShiitakeMushroom
   m_EditorClassIdentifier: Assembly-CSharp::MushroomData
-  itemId: Shiitake Mushroom_2288742c-f934-4b19-8807-86dbd6295ee4
-  itemName: Shiitake Mushroom
+  Id: Shiitake Mushroom_33d28e09-5cd3-4d12-909a-333543a4fbd5
+  Name: Shiitake Mushroom
   itemIcon: {fileID: 3295575690930513476, guid: b59e7c19804ef3342bab8f3cf47959c7, type: 3}
   itemType: 9
   staminaCost: 0

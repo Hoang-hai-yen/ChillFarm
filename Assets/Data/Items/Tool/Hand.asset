@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d96d274ff98cae049b18df11a5ab0303, type: 3}
   m_Name: Hand
   m_EditorClassIdentifier: Assembly-CSharp::ToolData
-  itemId: Hand32feb0fa-2737-447e-acaa-67f65fe38369
-  itemName: Hand
+  Id: Hand_44ac886d-4835-4f9d-8f5c-25581c4ded9a
+  Name: Hand
   itemIcon: {fileID: 5675857372675088757, guid: 01d4a11f3e0fedf42bbbeb6fca20a14a, type: 3}
   itemType: 0
   staminaCost: 1

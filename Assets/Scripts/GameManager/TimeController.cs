@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-public class TimeController : MonoBehaviour
+public class TimeController : MonoBehaviour, IDataPersistence
 {
     public float dayDurationInSeconds = 120f; 
     [Range(0, 24)]
@@ -29,6 +29,20 @@ public class TimeController : MonoBehaviour
     void Update()
     {
         UpdateGameTime();
+    }
+
+    public void LoadData(GameData data)
+    {
+        currentTime = data.PlayerDataData.CurrentTime;
+        currentDay = data.PlayerDataData.CurrentDay;
+        currentDaysAwake = data.PlayerDataData.CurrentDaysAwake;
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.PlayerDataData.CurrentTime = currentTime;
+        data.PlayerDataData.CurrentDay = currentDay;
+        data.PlayerDataData.CurrentDaysAwake = currentDaysAwake;
     }
 
     private void UpdateGameTime()

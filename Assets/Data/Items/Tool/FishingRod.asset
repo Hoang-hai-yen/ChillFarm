@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d96d274ff98cae049b18df11a5ab0303, type: 3}
   m_Name: FishingRod
   m_EditorClassIdentifier: Assembly-CSharp::ToolData
-  itemId: "C\u1EA7n c\xE2u9feb4b70-c02e-4ec5-a27c-9cbddca5e446"
-  itemName: "C\u1EA7n c\xE2u"
+  Id: Fishing Rod_b5590241-5e1d-495e-9212-72a1bd769331
+  Name: Fishing Rod
   itemIcon: {fileID: 21300000, guid: 0157dc4c3a3842941abc345631a82ab4, type: 3}
   itemType: 0
   staminaCost: 0

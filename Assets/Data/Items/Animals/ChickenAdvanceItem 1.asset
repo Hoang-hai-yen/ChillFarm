@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c6e34fdb410cf34d84141fa10eedaf6, type: 3}
   m_Name: ChickenAdvanceItem 1
   m_EditorClassIdentifier: Assembly-CSharp::LivestockItemData
-  itemId: 
-  itemName: "G\xE0 con cao c\u1EA5p"
+  Id: Chicken Advance_f8489973-c7d5-4ba9-9321-820a4451cc03
+  Name: Chicken Advance
   itemIcon: {fileID: 3803699255439933936, guid: 53c71feeffe6b9846a57094f7e2dfd35, type: 3}
   itemType: 7
   staminaCost: 5

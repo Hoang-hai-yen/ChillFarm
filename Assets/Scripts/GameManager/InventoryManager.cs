@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using Assets.Scripts.Cloud.Schemas;
 
 [System.Serializable]
 public class InventorySlot
@@ -9,7 +10,7 @@ public class InventorySlot
     public int quantity;
 }
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : MonoBehaviour, IDataPersistence
 {
     public static InventoryManager Instance { get; private set; }
 
@@ -63,6 +64,75 @@ public class InventoryManager : MonoBehaviour
         RebuildItemCounts();
     }
 
+    public void LoadData(GameData data)
+    {
+        currentGold = data.PlayerDataData.Gold;
+
+        // Load Hotbar
+        for (int i = 0; i < data.PlayerDataData.Inventory.HotbarItems.Count; i++)
+        {
+            var slotData = data.PlayerDataData.Inventory.HotbarItems[i];
+            if (slotData != null && !string.IsNullOrEmpty(slotData.ItemId))
+            {
+                // Debug.Log($"Loading Hotbar Item ID: {slotData.ItemId} Qty: {slotData.Quantity}");
+                hotbarSlots[i].itemData = GameDataManager.instance.gameSODatabase.GetItemById(slotData.ItemId) as ItemData;
+                hotbarSlots[i].quantity = slotData.Quantity;
+            }
+        }
+
+        // Load Backpack
+        for (int i = 0; i < data.PlayerDataData.Inventory.BackpackItems.Count; i++)
+        {
+            var slotData = data.PlayerDataData.Inventory.BackpackItems[i];
+            if (slotData != null && !string.IsNullOrEmpty(slotData.ItemId))
+            {
+                backpackSlots[i].itemData = GameDataManager.instance.gameSODatabase.GetItemById(slotData.ItemId) as ItemData;
+                backpackSlots[i].quantity = slotData.Quantity;
+            }
+        }
+
+        RebuildItemCounts();
+        OnGoldChanged?.Invoke(currentGold);
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.PlayerDataData.Gold = currentGold;
+
+        // Save Hotbar
+        // for (int i = 0; i < hotbarSlots.Length; i++)
+        // {
+        //     var slot = hotbarSlots[i];
+        //     data.PlayerDataData.Inventory.HotbarItems[i].ItemId = slot.itemData != null ? slot.itemData.itemId : "";
+        //     data.PlayerDataData.Inventory.HotbarItems[i].Quantity = slot.quantity;
+        // }
+        data.PlayerDataData.Inventory.HotbarItems = new List<Inventory.Item>(GetInventoryItemsSchema(hotbarSlots));
+
+        // Save Backpack
+        // for (int i = 0; i < backpackSlots.Length; i++)
+        // {
+        //     var slot = backpackSlots[i];
+        //     data.PlayerDataData.Inventory.BackpackItems[i].ItemId = slot.itemData != null ? slot.itemData.itemId : "";
+        //     data.PlayerDataData.Inventory.BackpackItems[i].Quantity = slot.quantity;
+        // }
+        data.PlayerDataData.Inventory.BackpackItems = new List<Inventory.Item>(GetInventoryItemsSchema(backpackSlots));
+    }
+
+    public Inventory.Item[] GetInventoryItemsSchema(InventorySlot[] slots)
+    {
+        Inventory.Item[] inventoryItemSchema = new Inventory.Item[slots.Length];
+        for (int i = 0; i < slots.Length; i++)
+        {
+            var slot = slots[i];
+            inventoryItemSchema[i] = new Inventory.Item
+            {
+                ItemId = slot.itemData != null ? slot.itemData.itemId : "",
+                Quantity = slot.quantity
+            };
+        }
+        return inventoryItemSchema;
+    }
+
     public void SelectSlot(int index)
     {
         if (index < 0 || index >= hotbarSlots.Length) return;
@@ -112,6 +182,18 @@ public class InventoryManager : MonoBehaviour
                 RebuildItemCounts();
                 // OnInventoryChanged?.Invoke();
                 return true; 
+            }
+        }
+
+        for (int i = 0; i < backpackSlots.Length; i++)
+        {
+            InventorySlot slot = backpackSlots[i];
+            if (slot.itemData == item)
+            {
+                slot.quantity += count;
+                RebuildItemCounts();
+                // OnInventoryChanged?.Invoke();
+                return true;
             }
         }
 
@@ -377,7 +459,7 @@ public class InventoryManager : MonoBehaviour
                     itemsCountCache[itemId] += slot.quantity;
                 else
                     itemsCountCache[itemId] = slot.quantity;
-                Debug.Log($"Đếm vật phẩm trong hotbar: {itemId} = {itemsCountCache[itemId]}");
+                // Debug.Log($"Đếm vật phẩm trong hotbar: {itemId} = {itemsCountCache[itemId]}");
             }
         }
 
@@ -390,6 +472,7 @@ public class InventoryManager : MonoBehaviour
                     itemsCountCache[itemId] += slot.quantity;
                 else
                     itemsCountCache[itemId] = slot.quantity;
+                // Debug.Log($"Đếm vật phẩm trong balo: {itemId} = {itemsCountCache[itemId]}");
             }
         }
 

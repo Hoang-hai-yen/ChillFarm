@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54b7f0a1973993d44ad28d0ce2e0dfc0, type: 3}
   m_Name: OrangeFruit
   m_EditorClassIdentifier: Assembly-CSharp::FoodData
-  itemId: _0c7dea55-75c9-45ae-b69b-b8d988475d08
-  itemName: Cam
+  Id: Orange_9b1bc8d9-fad5-4f7e-be32-a2ba93316706
+  Name: Orange
   itemIcon: {fileID: 79940327233902711, guid: c25103e30f238aa4a896f91c206edad3, type: 3}
   itemType: 10
   staminaCost: 0

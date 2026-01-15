@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51a58f95604da654394b52a578ea6423, type: 3}
   m_Name: Cauliflower_Data
   m_EditorClassIdentifier: Assembly-CSharp::CropData
+  Id: Cauliflower Crop_3353ec76-1874-42ce-b107-455f932df5b5
+  Name: Cauliflower Crop
   cropName: "B\xF4ng c\u1EA3i xanh"
   growthSprites:
   - {fileID: -1975231421049208761, guid: 64ba9ecd33a51464f9a61430fcbcdd5a, type: 3}

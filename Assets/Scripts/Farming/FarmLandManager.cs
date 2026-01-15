@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Collections.Generic;
+using Assets.Scripts.Cloud.Schemas;
+using UnityEditor.VersionControl;
 
-public class FarmlandManager : MonoBehaviour
+public class FarmlandManager : MonoBehaviour, IDataPersistence
 {
     public enum PlotState
     {
@@ -44,6 +46,55 @@ public class FarmlandManager : MonoBehaviour
         }
     }
 
+    public void LoadData(GameData data)
+    {
+        foreach(var plot in data.FarmlandData.Plots)
+        {
+            Vector3Int plotPos = new Vector3Int(plot.PlotPosition.X, plot.PlotPosition.Y, plot.PlotPosition.Z);
+            PlotState state = (PlotState)plot.PlotState;
+            SetPlotState(plotPos, state, state == PlotState.Tilled ? tilledTile : wateredTile);
+
+            if (plot.Crop != null)
+            {
+                GameObject cropObj = Instantiate(cropPrefab, tillableTilemap.GetCellCenterWorld(plotPos), Quaternion.identity);
+                Crop cropInstance = cropObj.GetComponent<Crop>();
+                cropInstance.LoadFromSchema(plot.Crop);
+                cropsOnPlots.Add(plotPos, cropInstance);
+            }
+        }
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.FarmlandData.Plots.Clear();
+        foreach (var plotEntry in plotStates)
+        {
+            Plot plotSchema = new Plot
+            {
+                PlotPosition = new Plot.Position
+                (
+                    plotEntry.Key.x,
+                    plotEntry.Key.y,
+                    plotEntry.Key.z
+                ),
+                PlotState = (int)plotEntry.Value
+            };
+
+            if (cropsOnPlots.TryGetValue(plotEntry.Key, out Crop crop))
+            {
+                plotSchema.Crop = crop.ToSchema();
+            }
+
+            data.FarmlandData.Plots.Add(plotSchema);
+        }
+    }
+
+    public void MarkDataDirty()
+    {
+        GameDataManager.instance.MarkDirty(GameDataManager.DataType.farmland);
+    }
+
+
     public bool Interact(Vector3Int plotPosition, ItemData heldItem)
     {
         PlotState currentState = GetPlotState(plotPosition);
@@ -69,11 +120,13 @@ public class FarmlandManager : MonoBehaviour
         {
             actionSuccessful = HandleHarvest(plotPosition);
         }
+        MarkDataDirty();
         return actionSuccessful; 
     }
 
     private bool HandleToolInteraction(Vector3Int plotPosition, PlotState currentState, ToolType toolType)
-    {
+    {   
+        MarkDataDirty();
         switch (toolType)
         {
             case ToolType.Hoe:
@@ -117,6 +170,7 @@ public class FarmlandManager : MonoBehaviour
                 cropsOnPlots.Add(plotPosition, cropInstance);
             
                 Debug.Log($"Gieo hạt {seed.cropToPlant.cropName}!");
+                MarkDataDirty();
                 return true;
             }
         }
@@ -132,7 +186,8 @@ public class FarmlandManager : MonoBehaviour
                 crop.Harvest();
                 SetPlotState(plotPosition, PlotState.Tilled, tilledTile); 
                 
-                cropsOnPlots.Remove(plotPosition); 
+                cropsOnPlots.Remove(plotPosition);
+                MarkDataDirty(); 
                 return true;
             }
         }
@@ -163,6 +218,7 @@ public class FarmlandManager : MonoBehaviour
         {
             crop.Grow();
         }
+        MarkDataDirty();
     }
 
     public PlotState GetPlotState(Vector3Int position)
@@ -192,6 +248,7 @@ public class FarmlandManager : MonoBehaviour
             
             if (success)
             {
+                MarkDataDirty();
                 return true;
             }
         }

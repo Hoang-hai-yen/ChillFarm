@@ -5,8 +5,9 @@ public class SeedData : ItemData
 {
     public CropData cropToPlant; 
 
-    private void OnValidate()
+    protected override void OnValidate()
     {
+        base.OnValidate();
         itemType = ItemType.Seed;
     }
 }

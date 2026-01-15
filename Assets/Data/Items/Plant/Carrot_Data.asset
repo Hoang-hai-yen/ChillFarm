@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51a58f95604da654394b52a578ea6423, type: 3}
   m_Name: Carrot_Data
   m_EditorClassIdentifier: Assembly-CSharp::CropData
+  Id: Carrot Crop_4b94d6ae-5372-4864-8768-bde30aed2f4f
+  Name: Carrot Crop
   cropName: "C\xE0 r\u1ED1t"
   growthSprites:
   - {fileID: 1116706725642825598, guid: 64ba9ecd33a51464f9a61430fcbcdd5a, type: 3}

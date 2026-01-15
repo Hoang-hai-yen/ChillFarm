@@ -9,13 +9,13 @@ namespace Assets.Scripts.Cloud.Schemas
 {
     public class Crop
     {
-        public string SeedId { get; set; }
-        public DateTime PlantedAt { get; set; }
-        public int GrowthStage { get; set; }
-        public double GrowthProgress { get; set; }
-        public bool IsWatered { get; set; }
-        public bool IsFertilized { get; set; }
-        public bool ReadyToHarvest { get; set; }
+        public string CropId { get; set; }
+        public float CurrentGrowth { get; set; } = 0;
+        public int CurrentStage { get; set; } = 0;
+        public bool IsWatered { get; set; } = false;
+        public bool IsHarvestable { get; set; } = false;
+        public float YieldMultiplier { get; set; } = 1f;
+        public bool HasBeenFertilized { get; set; } = false;
 
         public Crop() { }
     }

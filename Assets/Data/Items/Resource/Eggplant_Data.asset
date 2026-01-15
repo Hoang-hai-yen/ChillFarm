@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c54ad4b120c7ec4994907f7c3feea9f, type: 3}
   m_Name: Eggplant_Data
   m_EditorClassIdentifier: Assembly-CSharp::ResourceData
-  itemId: 3
-  itemName: "C\xE0 t\xEDm"
+  Id: Eggplant_c47c2ada-3b86-4628-b317-4b6542c952a3
+  Name: Eggplant
   itemIcon: {fileID: 9158497917273618566, guid: 4816a6b36d249a34a96df477d5d65bcb, type: 3}
   itemType: 2
   staminaCost: 0

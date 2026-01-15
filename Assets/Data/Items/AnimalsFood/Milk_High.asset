@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 851e532cdd08a5742afac31a76b7b82e, type: 3}
   m_Name: Milk_High
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemId: "Tr\u1EE9ng g\xE0 3_d58e314e-5467-46fc-b98e-67bff1a8f3ef"
-  itemName: "S\u1EEFa cao c\u1EA5p"
+  Id: Milk High_68b8df07-9806-427c-8cb1-55c13f232215
+  Name: Milk High
   itemIcon: {fileID: 5915080853684760172, guid: 44ad26f8a2ce5e542a28d7073bb6051d, type: 3}
   itemType: 6
   staminaCost: 1

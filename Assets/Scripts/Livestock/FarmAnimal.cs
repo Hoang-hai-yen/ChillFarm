@@ -7,6 +7,10 @@ public class FarmAnimal : MonoBehaviour
     public AnimalData data;
 
     [Header("Status (Read Only)")]
+    [SerializeField] private string id;
+
+    public string Id => id;
+
     [SerializeField] private bool isAdult = false;
     [SerializeField] private int currentAge = 0;
     [SerializeField] private float affection = 0f;
@@ -34,7 +38,8 @@ public class FarmAnimal : MonoBehaviour
 
         timeController = FindFirstObjectByType<TimeController>();
         if (timeController != null) timeController.OnNewDayStart += OnNewDay;
-
+        if(System.String.IsNullOrEmpty(id))
+            id = data.animalName + "_" + System.Guid.NewGuid().ToString();
         UpdateVisuals();
     }
 
@@ -43,6 +48,45 @@ public class FarmAnimal : MonoBehaviour
         if (timeController != null) timeController.OnNewDayStart -= OnNewDay;
     }
 
+    
+    public void MarkDataDirty()
+    {
+        GameDataManager.instance.MarkDirty(GameDataManager.DataType.animals);
+    }
+    public void LoadFromSchema(Assets.Scripts.Cloud.Schemas.Animal animalSchema)
+    {
+        if(animalSchema != null)
+        {
+            id = animalSchema.Id;
+            data = GameDataManager.instance.gameSODatabase.GetItemById(animalSchema.AnimalDataId) as AnimalData;
+            isAdult = animalSchema.IsAdult;
+            currentAge = animalSchema.CurrentAge;
+            affection = animalSchema.Affection;
+            isFedToday = animalSchema.IsFedToday;
+            hasPlayedToday = animalSchema.HasPlayedToday;
+            daysWithoutFood = animalSchema.DaysWithoutFood;
+            maxStarvationDays = animalSchema.MaxStarvationDays;
+            isDead = animalSchema.IsDead;
+        }
+    }
+    
+    public Assets.Scripts.Cloud.Schemas.Animal ToSchema()
+    {
+        Assets.Scripts.Cloud.Schemas.Animal animalSchema = new Assets.Scripts.Cloud.Schemas.Animal
+        {
+            Id = id,
+            AnimalDataId = data.Id,
+            IsAdult = isAdult,
+            CurrentAge = currentAge,
+            Affection = affection,
+            IsFedToday = isFedToday,
+            HasPlayedToday = hasPlayedToday,
+            DaysWithoutFood = daysWithoutFood,
+            MaxStarvationDays = maxStarvationDays,
+            IsDead = isDead
+        };
+        return animalSchema;
+    }
 
     public bool Feed()
     {
@@ -56,6 +100,7 @@ public class FarmAnimal : MonoBehaviour
         UpdateStateAnimation(); 
         
         Debug.Log($"{data.animalName} đã ăn và hết buồn!");
+        MarkDataDirty();
         return true;
     }
 
@@ -68,6 +113,8 @@ public class FarmAnimal : MonoBehaviour
         affection = Mathf.Clamp(affection + 10f, 0, 100);
         
         TriggerHappy();
+
+        MarkDataDirty();
     }
 
     public void CleanupCorpse()
@@ -76,6 +123,7 @@ public class FarmAnimal : MonoBehaviour
         {
             Debug.Log("Đã dọn dẹp xác vật nuôi.");
             Destroy(gameObject);
+            MarkDataDirty();
         }
     }
 
@@ -86,7 +134,8 @@ public class FarmAnimal : MonoBehaviour
 
 
     private void OnNewDay()
-    {
+    {   
+        MarkDataDirty();
         if (isDead) return; 
 
         if (!isFedToday)

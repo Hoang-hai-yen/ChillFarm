@@ -4,19 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewQuest", menuName = "Quests/QuestData")]
-public class QuestData: ScriptableObject
+public class QuestData: GameSOData
 {
-    public string questId;
-    public string questName;
+    public string questId => Id;
+    public string questName => Name;
     public List<QuestObjective> questObjectives;
     public string description;
     public List<QuestReward> rewards;
 
-    private void OnValidate()
-    {
-        if(String.IsNullOrEmpty(questId))
-        {
-            questId = questName + "_" + Guid.NewGuid().ToString();
-        }
-    }
+    
 }

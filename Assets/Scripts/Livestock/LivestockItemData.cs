@@ -7,8 +7,9 @@ public class LivestockItemData : ItemData
     public GameObject animalPrefab;
     public AnimalType animalType;
 
-    private void OnValidate()
+    protected override void OnValidate()
     {
+        base.OnValidate();
         itemType = ItemType.Livestock;
     }
 }

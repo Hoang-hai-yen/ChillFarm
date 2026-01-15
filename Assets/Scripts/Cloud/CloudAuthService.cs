@@ -14,10 +14,66 @@ public class CloudAuthService
     public bool IsLogin { get; private set; }
     private ApiConfig apiConfig;
 
+    // Token expiry tracking
+    private DateTime tokenExpireTime;
+    private const int TOKEN_REFRESH_BUFFER_SECONDS = 300; // Refresh 5 phút trước khi hết hạn
+
+    // Event khi authentication hết hạn
+    public event Action OnAuthenticationExpired;
+
     public CloudAuthService(ApiConfig apiConfig)
     {
         this.apiConfig = apiConfig;
         IsLogin = false;
+        tokenExpireTime = DateTime.MinValue;
+        LoadAuthData();
+    }
+
+    /// <summary>
+    /// Kiểm tra token đã hết hạn chưa
+    /// </summary>
+    public bool IsTokenExpired()
+    {
+        return DateTime.UtcNow >= tokenExpireTime;
+    }
+
+    /// <summary>
+    /// Kiểm tra có nên refresh token không (trước khi hết hạn 5 phút)
+    /// </summary>
+    public bool ShouldRefreshToken()
+    {
+        if (!IsLogin) return false;
+        return DateTime.UtcNow >= tokenExpireTime.AddSeconds(-TOKEN_REFRESH_BUFFER_SECONDS);
+    }
+
+    /// <summary>
+    /// Force logout khi refresh token thất bại
+    /// </summary>
+    public void ForceLogout()
+    {
+        IdToken = null;
+        RefreshToken = null;
+        LocalId = null;
+        IsLogin = false;
+        tokenExpireTime = DateTime.MinValue;
+        Debug.Log("[Auth] Session expired. User logged out.");
+        OnAuthenticationExpired?.Invoke();
+    }
+
+    private void SaveAuthData()
+    {
+        PlayerPrefs.SetString("IdToken", IdToken);
+        PlayerPrefs.SetString("RefreshToken", RefreshToken);
+        PlayerPrefs.SetString("LocalId", LocalId);
+        PlayerPrefs.Save();
+    }
+
+    private void LoadAuthData()
+    {
+        IdToken = PlayerPrefs.GetString("IdToken", null);
+        RefreshToken = PlayerPrefs.GetString("RefreshToken", null);
+        LocalId = PlayerPrefs.GetString("LocalId", null);
+        IsLogin = !string.IsNullOrEmpty(IdToken) && !string.IsNullOrEmpty(RefreshToken) && !string.IsNullOrEmpty(LocalId);
     }
 
 
@@ -43,11 +99,14 @@ public class CloudAuthService
             IdToken = data["idToken"].ToString();
             LocalId = data["localId"].ToString();
             RefreshToken = data["refreshToken"].ToString();
-            yield return CloudManager.Instance.Database.CreateInitialData(LocalId, email, "player", "avatar_01", (success, message) => { 
+            // Firebase token có thời hạn 3600 giây (1 giờ)
+            tokenExpireTime = DateTime.UtcNow.AddSeconds(3600);
+            SaveAuthData();
+            yield return CloudManager.Instance.Database.CreateInitialData(LocalId, email, "player", "avatar_01", (success, message) => {
                 if(success)
                 {
                     IsLogin = true;
-                   Debug.Log("Create initial data successful!");
+                    Debug.Log("Create initial data successful!");
                 }
                 else
                 {
@@ -56,13 +115,13 @@ public class CloudAuthService
                 }
 
             });
-            yield return GameDataManager.instance.TryLoadData();
+            // yield return GameDataManager.instance.TryLoadData();
             callback?.Invoke(true, "Account created successfully!");
 
         }
         else
         {
-            callback?.Invoke(false, request.error);
+            callback?.Invoke(false, request.downloadHandler.text);
         }
     }
     
@@ -89,7 +148,10 @@ public class CloudAuthService
             IdToken = data["idToken"].ToString();
             LocalId = data["localId"].ToString();
             RefreshToken = data["refreshToken"].ToString();
+            // Firebase token có thời hạn 3600 giây (1 giờ)
+            tokenExpireTime = DateTime.UtcNow.AddSeconds(3600);
             IsLogin = true;
+            SaveAuthData();
             callback?.Invoke(true, "Login successful!");
         }
         else
@@ -194,8 +256,11 @@ public class CloudAuthService
             var data = JObject.Parse(request.downloadHandler.text);
 
             IdToken = data["id_token"].ToString();
-            RefreshToken = data["refresh_token"].ToString(); 
+            RefreshToken = data["refresh_token"].ToString();
             LocalId = data["user_id"].ToString();
+            // Cập nhật thời gian hết hạn từ response
+            tokenExpireTime = DateTime.UtcNow.AddSeconds(int.Parse(data["expires_in"].ToString()));
+            Debug.Log("[Auth] Token refreshed successfully. Expires at: " + tokenExpireTime.ToLocalTime());
 
             callback?.Invoke(true, "Token refreshed successfully!");
         }
@@ -205,4 +270,5 @@ public class CloudAuthService
         }
     }
 
+    
 }

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b583ee36101a06b4e84d190995d3c7ea, type: 3}
   m_Name: PumpkinSeedData
   m_EditorClassIdentifier: Assembly-CSharp::SeedData
-  itemId: 5
-  itemName: "H\u1EA1t gi\u1ED1ng b\xED \u0111\u1ECF"
+  Id: Pumpkin Seed_bbc63374-8c9d-4be7-80c5-c360eb391542
+  Name: Pumpkin Seed
   itemIcon: {fileID: -7299006765846471599, guid: 4816a6b36d249a34a96df477d5d65bcb, type: 3}
   itemType: 1
   staminaCost: 5

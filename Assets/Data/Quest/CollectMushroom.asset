@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c55f5f7b7c6c84094217a83d84b746, type: 3}
   m_Name: CollectMushroom
   m_EditorClassIdentifier: Assembly-CSharp::QuestData
-  questId: Collect Shiitake Mushroom_75dc8577-6954-4071-bde8-9224cce8b5fc
-  questName: Collect Shiitake Mushroom
+  Id: Collect Shiitake Mushroom_7de72840-8d22-4eed-88d8-d8be7e7d4917
+  Name: Collect Shiitake Mushroom
   questObjectives:
-  - objectiveId: Shiitake Mushroom_2288742c-f934-4b19-8807-86dbd6295ee4
+  - objectiveId: Shiitake Mushroom_33d28e09-5cd3-4d12-909a-333543a4fbd5
     objectiveItem: {fileID: 11400000, guid: 10c0a32304feaab4797449a1ed2284da, type: 2}
     description: Collect Shiitake Mushroom
     objectiveType: 0

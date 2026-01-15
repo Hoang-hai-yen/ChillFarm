@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51a58f95604da654394b52a578ea6423, type: 3}
   m_Name: Pumpkin_Data
   m_EditorClassIdentifier: Assembly-CSharp::CropData
+  Id: Pumkin Crop_0f29797c-47e1-4116-bce1-500b45cd2d72
+  Name: Pumkin Crop
   cropName: "B\xED \u0111\u1ECF"
   growthSprites:
   - {fileID: 9113586584930331469, guid: 64ba9ecd33a51464f9a61430fcbcdd5a, type: 3}

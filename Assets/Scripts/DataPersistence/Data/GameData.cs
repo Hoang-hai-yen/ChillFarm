@@ -12,9 +12,9 @@ public class GameData
     public PlayerData PlayerDataData { get; set; }
     public PlayerProfile PlayerProfileData { get; set; }
     public Fishing FishingData { get; set; }
-    public List<Assets.Scripts.Cloud.Schemas.Quest> QuestsData { get; set; } = new List<Assets.Scripts.Cloud.Schemas.Quest>();
+    // public List<Assets.Scripts.Cloud.Schemas.Quest> QuestsData { get; set; } = new List<Assets.Scripts.Cloud.Schemas.Quest>();
     public List<PlayerQuest> PlayerQuestsData { get; set; } = new List<PlayerQuest>();
-
+    public List<string> HandInQuestIds { get; set; } = new List<string>();
     public GameData() 
     {
 

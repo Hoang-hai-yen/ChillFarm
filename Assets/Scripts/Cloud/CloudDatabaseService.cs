@@ -24,6 +24,88 @@ public class CloudDatabaseService
         this.apiConfig = apiConfig;
     }
 
+    #region Token Refresh Wrapper
+
+    /// <summary>
+    /// Wrapper method để gửi authenticated request với auto token refresh
+    /// </summary>
+    /// <param name="createRequest">Factory function tạo UnityWebRequest</param>
+    /// <param name="callback">Callback (success, message, responseBody)</param>
+    /// <param name="retryCount">Số lần đã retry (internal use)</param>
+    private IEnumerator SendAuthenticatedRequest(
+        Func<UnityWebRequest> createRequest,
+        Action<bool, string, string> callback,
+        int retryCount = 0)
+    {
+        var auth = CloudManager.Instance.Auth;
+
+        // 1. Proactive refresh nếu token sắp hết hạn
+        if (auth.ShouldRefreshToken())
+        {
+            Debug.Log("[API] Token sắp hết hạn, đang refresh...");
+            bool refreshSuccess = false;
+            string refreshError = null;
+
+            yield return auth.RefreshIdToken((success, msg) =>
+            {
+                refreshSuccess = success;
+                if (!success) refreshError = msg;
+            });
+
+            if (!refreshSuccess)
+            {
+                Debug.LogWarning("[API] Proactive token refresh failed: " + refreshError);
+                auth.ForceLogout();
+                callback?.Invoke(false, "Session expired. Please login again.", null);
+                yield break;
+            }
+        }
+
+        // 2. Gửi request
+        using (UnityWebRequest request = createRequest())
+        {
+            request.SetRequestHeader("Authorization", "Bearer " + auth.IdToken);
+            yield return request.SendWebRequest();
+
+            // 3. Xử lý response
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                callback?.Invoke(true, "Success", request.downloadHandler.text);
+            }
+            else if (request.responseCode == 401 && retryCount == 0)
+            {
+                // Token expired - refresh và retry 1 lần
+                Debug.Log("[API] Received 401, attempting token refresh...");
+                bool refreshSuccess = false;
+                string refreshError = null;
+
+                yield return auth.RefreshIdToken((success, msg) =>
+                {
+                    refreshSuccess = success;
+                    if (!success) refreshError = msg;
+                });
+
+                if (refreshSuccess)
+                {
+                    Debug.Log("[API] Token refreshed, retrying request...");
+                    yield return SendAuthenticatedRequest(createRequest, callback, retryCount + 1);
+                }
+                else
+                {
+                    Debug.LogWarning("[API] Token refresh failed after 401: " + refreshError);
+                    auth.ForceLogout();
+                    callback?.Invoke(false, "Session expired. Please login again.", null);
+                }
+            }
+            else
+            {
+                callback?.Invoke(false, request.error, request.downloadHandler?.text);
+            }
+        }
+    }
+
+    #endregion
+
     public IEnumerator CreateDocument(string collectionId, string documentId, string jsonData, Action<bool, string> callback)
     {
         string url = apiConfig.Database + $"projects/{apiConfig.ProjectId}/databases/(default)/documents/{collectionId}";
@@ -32,51 +114,40 @@ public class CloudDatabaseService
             url += $"?documentId={documentId}";
         }
 
-        using (UnityWebRequest request = new UnityWebRequest(url, "POST"))
-        {
-            byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonData);
-            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
-            request.downloadHandler = new DownloadHandlerBuffer();
-            request.SetRequestHeader("Content-Type", "application/json");
-            request.SetRequestHeader("Authorization", "Bearer " + CloudManager.Instance.Auth.IdToken);
-
-            yield return request.SendWebRequest();
-
-            if (request.result == UnityWebRequest.Result.Success)
+        yield return SendAuthenticatedRequest(
+            () =>
             {
-                callback?.Invoke(true, "Create document successful");
-            }
-            else
+                var request = new UnityWebRequest(url, "POST");
+                byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonData);
+                request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+                request.downloadHandler = new DownloadHandlerBuffer();
+                request.SetRequestHeader("Content-Type", "application/json");
+                return request;
+            },
+            (success, message, response) =>
             {
-                callback?.Invoke(false, request.error);
+                callback?.Invoke(success, success ? "Create document successful" : message);
             }
-        }
-
-        
+        );
     }
 
     public IEnumerator GetCollection(string collectionId, Action<bool, string, FirestoreListResponse> callback)
     {
         string url = apiConfig.Database + $"projects/{apiConfig.ProjectId}/databases/(default)/documents/{collectionId}";
 
-        using (UnityWebRequest request = UnityWebRequest.Get(url))
+        // Nếu chưa login, gọi trực tiếp không cần auth
+        if (!CloudManager.Instance.Auth.IsLogin)
         {
-            if (CloudManager.Instance.Auth.IsLogin)
+            using (UnityWebRequest request = UnityWebRequest.Get(url))
             {
-                request.SetRequestHeader("Authorization", "Bearer " + CloudManager.Instance.Auth.IdToken);
-            }
+                yield return request.SendWebRequest();
 
-            yield return request.SendWebRequest();
-
-            if (request.result == UnityWebRequest.Result.Success)
-            {
-                var responseObj = JsonConvert.DeserializeObject<FirestoreListResponse>(request.downloadHandler.text);
-                callback?.Invoke(true, "Success", responseObj);
-            }
-            else
-            {
-                
-                if (request.responseCode == 404)
+                if (request.result == UnityWebRequest.Result.Success)
+                {
+                    var responseObj = JsonConvert.DeserializeObject<FirestoreListResponse>(request.downloadHandler.text);
+                    callback?.Invoke(true, "Success", responseObj);
+                }
+                else if (request.responseCode == 404)
                 {
                     callback?.Invoke(true, "Empty Collection", new FirestoreListResponse { Documents = new List<FirestoreFound>() });
                 }
@@ -85,57 +156,71 @@ public class CloudDatabaseService
                     callback?.Invoke(false, request.error, null);
                 }
             }
+            yield break;
         }
+
+        // Đã login - sử dụng wrapper với auto refresh
+        yield return SendAuthenticatedRequest(
+            () => UnityWebRequest.Get(url),
+            (success, message, response) =>
+            {
+                if (success)
+                {
+                    var responseObj = JsonConvert.DeserializeObject<FirestoreListResponse>(response);
+                    callback?.Invoke(true, "Success", responseObj);
+                }
+                else if (message.Contains("404"))
+                {
+                    callback?.Invoke(true, "Empty Collection", new FirestoreListResponse { Documents = new List<FirestoreFound>() });
+                }
+                else
+                {
+                    callback?.Invoke(false, message, null);
+                }
+            }
+        );
     }
 
     public IEnumerator PatchDocument(string documentPath, string jsonData, Action<bool, string> callback)
     {
         string url = apiConfig.Database + $"projects/{apiConfig.ProjectId}/databases/(default)/documents/{documentPath}";
 
-        using (UnityWebRequest request = new UnityWebRequest(url, "PATCH"))
-        {
-            byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonData);
-            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
-            request.downloadHandler = new DownloadHandlerBuffer();
-            request.SetRequestHeader("Content-Type", "application/json");
-            request.SetRequestHeader("Authorization", "Bearer " + CloudManager.Instance.Auth.IdToken);
-
-            yield return request.SendWebRequest();
-
-            if (request.result == UnityWebRequest.Result.Success)
+        yield return SendAuthenticatedRequest(
+            () =>
             {
-                callback?.Invoke(true, "Patch document successful");
-            }
-            else
+                var request = new UnityWebRequest(url, "PATCH");
+                byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonData);
+                request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+                request.downloadHandler = new DownloadHandlerBuffer();
+                request.SetRequestHeader("Content-Type", "application/json");
+                return request;
+            },
+            (success, message, response) =>
             {
-                callback?.Invoke(false, request.error);
+                callback?.Invoke(success, success ? "Patch document successful" : message);
             }
-        }
+        );
     }
 
     public IEnumerator PatchDocument(string documentPath, string jsonData, string query, Action<bool, string> callback)
     {
         string url = apiConfig.Database + $"projects/{apiConfig.ProjectId}/databases/(default)/documents/{documentPath}?{query}";
 
-        using (UnityWebRequest request = new UnityWebRequest(url, "PATCH"))
-        {
-            byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonData);
-            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
-            request.downloadHandler = new DownloadHandlerBuffer();
-            request.SetRequestHeader("Content-Type", "application/json");
-            request.SetRequestHeader("Authorization", "Bearer " + CloudManager.Instance.Auth.IdToken);
-
-            yield return request.SendWebRequest();
-
-            if (request.result == UnityWebRequest.Result.Success)
+        yield return SendAuthenticatedRequest(
+            () =>
             {
-                callback?.Invoke(true, "Patch document successful");
-            }
-            else
+                var request = new UnityWebRequest(url, "PATCH");
+                byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonData);
+                request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+                request.downloadHandler = new DownloadHandlerBuffer();
+                request.SetRequestHeader("Content-Type", "application/json");
+                return request;
+            },
+            (success, message, response) =>
             {
-                callback?.Invoke(false, request.error);
+                callback?.Invoke(success, success ? "Patch document successful" : message);
             }
-        }
+        );
     }
 
     public IEnumerator UpdateField(string fieldPath, object value, string valueType)
@@ -163,67 +248,58 @@ public class CloudDatabaseService
     {
         string url = apiConfig.Database + $"projects/{apiConfig.ProjectId}/databases/(default)/documents:batchGet";
 
-        using (UnityWebRequest request = new UnityWebRequest(url, "POST"))
-        {
-            byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonData);
-            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
-            request.downloadHandler = new DownloadHandlerBuffer();
-            request.SetRequestHeader("Content-Type", "application/json");
-            request.SetRequestHeader("Authorization", "Bearer " + CloudManager.Instance.Auth.IdToken);
-
-            yield return request.SendWebRequest();
-
-            if (request.result == UnityWebRequest.Result.Success)
+        yield return SendAuthenticatedRequest(
+            () =>
             {
-                string response = request.downloadHandler.text;
-                List<FirestoreBatchGetResponse> list = null;
-
-                try
-                {
-                    list = JsonConvert.DeserializeObject<List<FirestoreBatchGetResponse>>(response);
-                }
-                catch (Exception e)
-                {
-                    callback?.Invoke(false,
-                        "Parse error: " + e.Message + "\nRAW: " + response,
-                        null);
-                    yield break;
-                }
-
-                callback?.Invoke(true, "Batch get successful!", list);
-            }
-            else
+                var request = new UnityWebRequest(url, "POST");
+                byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonData);
+                request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+                request.downloadHandler = new DownloadHandlerBuffer();
+                request.SetRequestHeader("Content-Type", "application/json");
+                return request;
+            },
+            (success, message, response) =>
             {
-                callback?.Invoke(false, request.downloadHandler.text, null);
+                if (success)
+                {
+                    List<FirestoreBatchGetResponse> list = null;
+                    try
+                    {
+                        list = JsonConvert.DeserializeObject<List<FirestoreBatchGetResponse>>(response);
+                        callback?.Invoke(true, "Batch get successful!", list);
+                    }
+                    catch (Exception e)
+                    {
+                        callback?.Invoke(false, "Parse error: " + e.Message + "\nRAW: " + response, null);
+                    }
+                }
+                else
+                {
+                    callback?.Invoke(false, message, null);
+                }
             }
-        }
+        );
     }
 
     private IEnumerator BatchWrite(string jsonData, Action<bool, string> callback)
     {
         string url = apiConfig.Database + $"projects/{apiConfig.ProjectId}/databases/(default)/documents:commit?key={apiConfig.ApiKey}";
 
-        using (UnityWebRequest request = new UnityWebRequest(url, "POST"))
-        {
-            byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonData);
-            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
-            request.downloadHandler = new DownloadHandlerBuffer();
-            request.SetRequestHeader("Content-Type", "application/json");
-            Debug.Log(jsonData);
-            request.SetRequestHeader("Authorization", "Bearer " + CloudManager.Instance.Auth.IdToken);
-
-            yield return request.SendWebRequest();
-
-
-            if (request.result == UnityWebRequest.Result.Success)
+        yield return SendAuthenticatedRequest(
+            () =>
             {
-                callback?.Invoke(true, "BatchWrite successful!");
-            }
-            else
+                var request = new UnityWebRequest(url, "POST");
+                byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonData);
+                request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+                request.downloadHandler = new DownloadHandlerBuffer();
+                request.SetRequestHeader("Content-Type", "application/json");
+                return request;
+            },
+            (success, message, response) =>
             {
-                callback?.Invoke(false, request.error + request.downloadHandler.text);
+                callback?.Invoke(success, success ? "BatchWrite successful!" : message);
             }
-        }
+        );
     }
 
 
@@ -246,10 +322,10 @@ public class CloudDatabaseService
         {
             update = FirestoreSerializer.ToFirestoreBatchDocument($"projects/{apiConfig.ProjectId}/databases/(default)/documents/playerData/{playerId}/farmData/animalFarmData", InitialDataFactory.CreateAnimalFarmData(playerId), true)
         });
-        updateDocs.Add(new
-        {
-            update = FirestoreSerializer.ToFirestoreBatchDocument($"projects/{apiConfig.ProjectId}/databases/(default)/documents/playerData/{playerId}/farmData/fishingData", InitialDataFactory.CreateFishingData(playerId), true)
-        });
+        // updateDocs.Add(new
+        // {
+        //     update = FirestoreSerializer.ToFirestoreBatchDocument($"projects/{apiConfig.ProjectId}/databases/(default)/documents/playerData/{playerId}/farmData/fishingData", InitialDataFactory.CreateFishingData(playerId), true)
+        // });
 
         var firestoreData = new
         {
@@ -337,20 +413,29 @@ public class CloudDatabaseService
     }
 
     // not done
-    public IEnumerator SavePlayerQuest(string playerId, List<PlayerQuest> playerQuests, Action<bool, string> callback)
+    public IEnumerator SavePlayerQuest(string playerId, List<PlayerQuest> activeQuests, List<string> handInQuestIds, Action<bool, string> callback)
     {
 
         List<object> updateDocs = new List<object>();
 
-        foreach (var playerQuest in playerQuests) 
+        string basePath = $"projects/{apiConfig.ProjectId}/databases/(default)/documents/playerData/{playerId}/playerQuestData";    
+        foreach (var playerQuest in activeQuests) 
         {
-            if (playerQuest.IsChanged)
-            {
+            // if (playerQuest.IsChanged)
+            // {
                 updateDocs.Add(new {
-                    update = FirestoreSerializer.ToFirestoreBatchDocument($"projects/{apiConfig.ProjectId}/databases/(default)/documents/playerData/{playerId}/playerQuestData/{playerQuest.QuestId}", playerQuest, true)
+                    update = FirestoreSerializer.ToFirestoreBatchDocument($"{basePath}/{playerQuest.QuestId}", playerQuest, true)
 
                 });
-            }
+            // }
+        }
+
+        foreach (var questId in handInQuestIds)
+        {
+            updateDocs.Add(new
+            {
+                delete = $"{basePath}/{questId}"
+            });
         }
 
         if (updateDocs.Count == 0)
@@ -480,20 +565,20 @@ public class CloudDatabaseService
 
         // --- PHẦN 2: GET LIST QUESTS (Static Config) ---
         // Đường dẫn collection (tương đối): projects/.../documents/quests
-        string questsPath = $"projects/{apiConfig.ProjectId}/databases/(default)/documents/quests";
+        // string questsPath = $"projects/{apiConfig.ProjectId}/databases/(default)/documents/quests";
 
-        yield return GetCollection(questsPath, (success, msg, response) =>
-        {
-            if (success)
-            {
-                // Mapping thành List<Quest>
-                List<Assets.Scripts.Cloud.Schemas.Quest> questList = CloudDatabaseHelper.FirestoreMapper.MapCollectionToList<Assets.Scripts.Cloud.Schemas.Quest>(response);
-                gameData["Quests"] = questList; 
-            }
-        });
+        // yield return GetCollection(questsPath, (success, msg, response) =>
+        // {
+        //     if (success)
+        //     {
+        //         // Mapping thành List<Quest>
+        //         List<Assets.Scripts.Cloud.Schemas.Quest> questList = CloudDatabaseHelper.FirestoreMapper.MapCollectionToList<Assets.Scripts.Cloud.Schemas.Quest>(response);
+        //         gameData["Quests"] = questList; 
+        //     }
+        // });
 
         // --- PHẦN 3: GET LIST PLAYER QUESTS (User Progress) ---
-        string userQuestPath = $"projects/{apiConfig.ProjectId}/databases/(default)/documents/playerData/{playerId}/playerQuestData";
+        string userQuestPath = $"playerData/{playerId}/playerQuestData";
 
         yield return GetCollection(userQuestPath, (success, msg, response) =>
         {
@@ -501,6 +586,7 @@ public class CloudDatabaseService
             {
                 // Mapping thành List<PlayerQuest>
                 List<PlayerQuest> userQuests = CloudDatabaseHelper.FirestoreMapper.MapCollectionToList<PlayerQuest>(response);
+                // Debug.Log("Loaded " + userQuests.Count + " player quests from database.");
                 gameData["PlayerQuests"] = userQuests; 
             }
         });

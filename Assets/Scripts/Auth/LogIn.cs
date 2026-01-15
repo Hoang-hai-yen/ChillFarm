@@ -10,6 +10,14 @@ public class LoginManager : MonoBehaviour
     [SerializeField] private TMP_InputField passwordInput;
     [SerializeField] private TMP_Text messageText;
 
+    void Start()
+    {
+        // if(CloudManager.Instance.Auth.IsLogin)
+        // {
+        //     messageText.text = "Đã đăng nhập! Đang vào trang trại...";
+        //     StartCoroutine(DelayToScene("Test", 2f)); // Delay 2 giây
+        // }
+    }
     public void OnLoginButtonClicked()
     {
         string email = emailInput.text;
@@ -43,5 +51,6 @@ public class LoginManager : MonoBehaviour
         yield return new WaitForSeconds(delayTime);
         // yield return GameDataManager.instance.TryLoadData();
         SceneManager.LoadScene(sceneName);
+        // GameDataManager.instance.AutoSaveActivate();
     }
 }

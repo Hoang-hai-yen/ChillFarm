@@ -17,7 +17,11 @@ public class BarnStructure : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         UpdateStructureVisual();
     }
-
+    
+    public void MarkDataDirty()
+    {
+        GameDataManager.instance.MarkDirty(GameDataManager.DataType.animals);
+    }
     public bool TryUpgrade()
     {
         if (currentLevelIndex >= levels.Count - 1)
@@ -58,7 +62,7 @@ public class BarnStructure : MonoBehaviour
                 Debug.Log("Không đủ tiền!");
             }
         });
-
+        MarkDataDirty();
         return true;
     }
 

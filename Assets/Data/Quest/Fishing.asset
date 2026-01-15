@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c55f5f7b7c6c84094217a83d84b746, type: 3}
   m_Name: Fishing
   m_EditorClassIdentifier: Assembly-CSharp::QuestData
-  questId: Catch Goldfish_361dbe5a-9f6c-4839-a915-d234caf3d3e3
-  questName: Catch Goldfish
+  Id: Catch Goldfish_40f85ce5-11f9-42bb-9d29-731cf146ed5c
+  Name: Catch Goldfish
   questObjectives:
-  - objectiveId: Goldfish_410a7417-c350-4bbf-a649-380598a3fe74
+  - objectiveId: Goldfish_bf2d8b0d-d17a-483e-a360-87199ccea448
     objectiveItem: {fileID: 11400000, guid: 55865bc95b78ba34e9b440ee44fc8829, type: 2}
     description: Catch Goldfish
     objectiveType: 0
