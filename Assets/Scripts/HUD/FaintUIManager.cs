@@ -88,4 +88,42 @@ public class FaintUIManager : MonoBehaviour
         }
         txt.alpha = end;
     }
+
+    public IEnumerator PlaySleepSequence(Action onSleepAction)
+    {
+        if (blackScreenGroup != null)
+        {
+            blackScreenGroup.gameObject.SetActive(true);
+            blackScreenGroup.alpha = 0f; 
+            blackScreenGroup.blocksRaycasts = true;
+        }
+
+
+        if (messageText != null)
+        {
+            messageText.gameObject.SetActive(true);
+            messageText.text = "Chúc ngủ ngon...";
+            messageText.alpha = 0f;
+            StartCoroutine(FadeTextAlpha(messageText, 0f, 1f, textFadeDuration));
+        }
+
+        yield return StartCoroutine(FadeCanvasGroup(blackScreenGroup, 0f, 1f, fadeDuration));
+
+        yield return new WaitForSeconds(1f);
+
+        onSleepAction?.Invoke();
+
+        yield return new WaitForSeconds(1f);
+
+        if (messageText != null) messageText.gameObject.SetActive(false);
+
+        yield return StartCoroutine(FadeCanvasGroup(blackScreenGroup, 1f, 0f, fadeDuration));
+
+        if (blackScreenGroup != null)
+        {
+            blackScreenGroup.blocksRaycasts = false;
+            blackScreenGroup.gameObject.SetActive(false); 
+        }
+    }
 }
+

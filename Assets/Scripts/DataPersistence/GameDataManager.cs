@@ -418,4 +418,8 @@ public class GameDataManager : MonoBehaviour
             Debug.Log("Auto Saved Game");
         }
     }
+    public GameData GetGameData()
+    {
+        return gameData;
+    }
 }

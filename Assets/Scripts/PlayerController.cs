@@ -250,6 +250,23 @@ public class PlayerController : MonoBehaviour, IDataPersistence
                 }
             }
 
+            Bed bed = hit.GetComponent<Bed>();
+            if (bed != null)
+            {
+                if (bed.Sleep())
+                {
+                    Debug.Log("Người chơi đã đi ngủ!");
+                    
+                    actionSuccessful = true;
+                    finalStaminaCost = 0f; 
+                    
+                    yield return new WaitForSeconds(1f);
+                    
+                    
+                    goto FinalizeInteraction;
+                }
+            }
+
             // 2. Kiểm tra Cửa chuồng (BarnDoor)
             DoorController door = hit.GetComponent<DoorController>();
             if (door != null)

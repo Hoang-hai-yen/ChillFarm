@@ -16,6 +16,7 @@ namespace Assets.Scripts.Cloud.Schemas
         public int Gold { get; set; } = 500;
         public double Stamina { get; set; } = 100f;
         public double MaxStamina { get; set; } = 100f;
+        public bool IsFirstLogin { get; set; } = true;
         public int CurrentDay { get; set; } = 1;
         public DateTime CurrentTime { get; set; } = DateTime.Today.AddHours(6); // Bắt đầu lúc 6 giờ sáng
         public int CurrentDaysAwake { get; set; } = 0;

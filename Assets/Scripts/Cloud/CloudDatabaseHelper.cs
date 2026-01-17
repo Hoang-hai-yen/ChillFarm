@@ -406,6 +406,7 @@ public class CloudDatabaseHelper
             return new PlayerData
             {
                 UserId = playerId,
+                IsFirstLogin = true 
             };
         }
 
@@ -571,6 +572,7 @@ public class CloudDatabaseHelper
         Update,
         Delete
     }
+    
 
 }
 
