@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Milk_High
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   Id: Milk High_68b8df07-9806-427c-8cb1-55c13f232215
-  Name: Milk High
+  Name: "S\u1EEFa cao c\u1EA5p"
   itemIcon: {fileID: 5915080853684760172, guid: 44ad26f8a2ce5e542a28d7073bb6051d, type: 3}
   itemType: 6
   staminaCost: 1

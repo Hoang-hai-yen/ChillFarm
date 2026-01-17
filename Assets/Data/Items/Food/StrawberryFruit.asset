@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StrawberryFruit
   m_EditorClassIdentifier: Assembly-CSharp::FoodData
   Id: Strawberry_18c51564-0f2a-4524-88c0-0897473d86c8
-  Name: Strawberry
+  Name: "D\xE2u"
   itemIcon: {fileID: -831609932550808521, guid: c25103e30f238aa4a896f91c206edad3, type: 3}
   itemType: 10
   staminaCost: 0

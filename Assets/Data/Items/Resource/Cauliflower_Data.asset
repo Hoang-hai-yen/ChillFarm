@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cauliflower_Data
   m_EditorClassIdentifier: Assembly-CSharp::ResourceData
   Id: Cauliflower_a6292db7-7eaa-409f-9fe8-959006067ced
-  Name: Cauliflower
+  Name: "B\xF4ng c\u1EA3i tr\u1EAFng"
   itemIcon: {fileID: 1520462160614537146, guid: 4816a6b36d249a34a96df477d5d65bcb, type: 3}
   itemType: 2
   staminaCost: 0

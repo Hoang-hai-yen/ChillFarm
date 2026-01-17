@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ChickenFeed
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   Id: Chicken Feed_3a283cb9-5ab1-486d-af4d-0f343ed23832
-  Name: Chicken Feed
+  Name: "Th\u1EE9c \u0103n cho g\xE0"
   itemIcon: {fileID: 7206217728049200231, guid: 4816a6b36d249a34a96df477d5d65bcb, type: 3}
   itemType: 5
   staminaCost: 1

@@ -20,6 +20,8 @@ public class TimeController : MonoBehaviour, IDataPersistence
     
     private int currentDaysAwake = 0;
 
+    private bool isTimePaused = false;
+
     void Start()
     {
         currentTime = DateTime.Today.AddHours(startHour);
@@ -28,7 +30,18 @@ public class TimeController : MonoBehaviour, IDataPersistence
 
     void Update()
     {
+        if (isTimePaused) return;
         UpdateGameTime();
+    }
+
+    public void PauseTime()
+    {
+        isTimePaused = true;
+    }
+
+    public void ResumeTime()
+    {
+        isTimePaused = false;
     }
 
     public void LoadData(GameData data)

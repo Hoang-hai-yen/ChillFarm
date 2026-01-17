@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PineappleFruit
   m_EditorClassIdentifier: Assembly-CSharp::FoodData
   Id: Pineapple_4c300573-b93a-4817-a7b6-dafa9c8e6ad3
-  Name: Pineapple
+  Name: "Th\u01A1m"
   itemIcon: {fileID: 79940327233902711, guid: c25103e30f238aa4a896f91c206edad3, type: 3}
   itemType: 10
   staminaCost: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TomatoSeedData
   m_EditorClassIdentifier: Assembly-CSharp::SeedData
   Id: Tomato Seed_19182079-60b0-40da-9723-b4bc9b400352
-  Name: Tomato Seed
+  Name: "H\u1EA1t gi\u1ED1ng c\xE0 chua"
   itemIcon: {fileID: 9121260504622065833, guid: 4816a6b36d249a34a96df477d5d65bcb, type: 3}
   itemType: 1
   staminaCost: 5

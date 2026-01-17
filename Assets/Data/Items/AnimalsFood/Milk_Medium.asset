@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Milk_Medium
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   Id: Milk Medium_d13575b3-25cb-4144-ba2b-02961e42902b
-  Name: Milk Medium
+  Name: "S\u1EEFa trung c\u1EA5p"
   itemIcon: {fileID: 1140274417, guid: 44ad26f8a2ce5e542a28d7073bb6051d, type: 3}
   itemType: 6
   staminaCost: 1

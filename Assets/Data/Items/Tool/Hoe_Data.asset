@@ -16,7 +16,7 @@ MonoBehaviour:
   Name: Hoe
   itemIcon: {fileID: 21300000, guid: 78aff705f3d62b449ab7f564d1fccf4f, type: 2}
   itemType: 0
-  staminaCost: 50
+  staminaCost: 5
   price: 100
   sellPrice: 50
   toolType: 1

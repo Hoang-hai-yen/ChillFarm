@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CowNormalItem
   m_EditorClassIdentifier: Assembly-CSharp::LivestockItemData
   Id: Cow Normal_76ae21e6-c99d-4dbb-a8e9-906fa56153b7
-  Name: Cow Normal
+  Name: "B\xF2 c\u01A1 b\u1EA3n"
   itemIcon: {fileID: -5390536226976711236, guid: 0f2bde85661f4f044ac76b12c3c95876, type: 3}
   itemType: 7
   staminaCost: 5

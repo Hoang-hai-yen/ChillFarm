@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BasicFer
   m_EditorClassIdentifier: Assembly-CSharp::FertilizerData
   Id: Basic Fer_ad1e1d6d-b0ee-45e4-8b3f-4fe7a672fb2b
-  Name: Basic Fer
+  Name: "Ph\xE2n b\xF3n c\u01A1 b\u1EA3n"
   itemIcon: {fileID: -842748779033256923, guid: 8a4cae6559dc22d40bdb11c5b798d7e6, type: 3}
   itemType: 4
   staminaCost: 5

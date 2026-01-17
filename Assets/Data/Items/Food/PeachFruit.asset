@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PeachFruit
   m_EditorClassIdentifier: Assembly-CSharp::FoodData
   Id: Peach_f2c9ec3d-c9d5-4d0e-b1a7-f688a426f603
-  Name: Peach
+  Name: "\u0110\xE0o"
   itemIcon: {fileID: 4673226825372972360, guid: c25103e30f238aa4a896f91c206edad3, type: 3}
   itemType: 10
   staminaCost: 0

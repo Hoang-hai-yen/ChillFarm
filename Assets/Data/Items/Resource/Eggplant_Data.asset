@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Eggplant_Data
   m_EditorClassIdentifier: Assembly-CSharp::ResourceData
   Id: Eggplant_c47c2ada-3b86-4628-b317-4b6542c952a3
-  Name: Eggplant
+  Name: "C\xE0 t\xEDm"
   itemIcon: {fileID: 9158497917273618566, guid: 4816a6b36d249a34a96df477d5d65bcb, type: 3}
   itemType: 2
   staminaCost: 0

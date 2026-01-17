@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ public class QuestController: MonoBehaviour, IDataPersistence
     public static QuestController Instance {get; set;}
     public List<QuestProgress> activeQuests = new();
     private QuestUIController questUI;
-
+    public event Action<string> OnQuestCompleted;
     public List<string> handInQuestIds = new();
 
     void Awake()
@@ -98,8 +99,12 @@ public class QuestController: MonoBehaviour, IDataPersistence
     public void CheckInventoryForQuests()
     {
         Dictionary<string, int> itemCounts = InventoryManager.Instance.GetItemCounts();
-        foreach(var quest in activeQuests)
+        
+        for(int i = 0; i < activeQuests.Count; i++)
         { 
+            var quest = activeQuests[i];
+            bool wasCompletedBefore = quest.isCompleted; 
+
             foreach(var objective in quest.questObjectives)
             {
                 if(objective.objectiveType == ObjectiveType.COLLECT_ITEM)
@@ -113,6 +118,13 @@ public class QuestController: MonoBehaviour, IDataPersistence
                         objective.currentAmount = 0;
                     }
                 }
+            }
+
+            if (!wasCompletedBefore && quest.isCompleted)
+            {
+                OnQuestCompleted?.Invoke(quest.questId);
+                
+                Debug.Log($"Quest {quest.questId} completed!");
             }
         }
 
@@ -184,6 +196,25 @@ public class QuestController: MonoBehaviour, IDataPersistence
         if (handInQuestIds.Contains(questId))
         {
             handInQuestIds.Remove(questId);
+        }
+    }
+    public void FinishQuestWithoutRemovingItems(string questId)
+    {
+        QuestProgress quest = activeQuests.Find(q => q.questId == questId);
+        if(quest != null)
+        {
+            if (!handInQuestIds.Contains(questId))
+            {
+                handInQuestIds.Add(questId);
+            }
+
+            activeQuests.Remove(quest);
+            
+            if (questUI != null) questUI.UpdateUI();
+            
+            MarkDataDirty();
+            
+            Debug.Log($"Đã hoàn thành Quest '{questId}' và giữ lại vật phẩm cho người chơi.");
         }
     }
 }

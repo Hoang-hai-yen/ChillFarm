@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CowFeed
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   Id: Cow Feed_27b1be7c-c730-4a2e-9c53-0e1fc55ed793
-  Name: Cow Feed
+  Name: "Th\u1EE9c \u0103n cho b\xF2"
   itemIcon: {fileID: -1621340587286962615, guid: 71df1a610642b2c46aabe09ff145fbde, type: 3}
   itemType: 5
   staminaCost: 1

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Egg_Medium
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   Id: Egg Medium_b0dcdb9d-2d40-4c5c-bc92-06b6dd3352ca
-  Name: Egg Medium
+  Name: "Tr\u1EE9ng trung c\u1EA5p"
   itemIcon: {fileID: -9092335394113956585, guid: f22da1fd3b85b0a438f8649f610d2f10, type: 3}
   itemType: 6
   staminaCost: 1

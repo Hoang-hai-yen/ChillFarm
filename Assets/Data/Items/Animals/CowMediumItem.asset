@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CowMediumItem
   m_EditorClassIdentifier: Assembly-CSharp::LivestockItemData
   Id: Cow Medium_c9ab0fa9-c312-44d8-8c2b-bc6e74cb4784
-  Name: Cow Medium
+  Name: "B\xF2 trung c\u1EA5p"
   itemIcon: {fileID: -1401412902313932518, guid: c7235ec6399c60b498dca082858f4418, type: 3}
   itemType: 7
   staminaCost: 5

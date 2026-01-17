@@ -17,7 +17,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip fishing;
     public AudioClip upgrade;
     public AudioClip dialogVoice;
-    //public AudioClip click;
+    public AudioClip click;
 
     void Awake()
     {
@@ -78,8 +78,7 @@ public class AudioManager : MonoBehaviour
         sfxSource.loop = false;
     }
 
-    //public void PlayClick()
-    //{
-    //    sfxSource.PlayOneShot(click);
-    //}
+    public void PlayClick(){
+        sfxSource.PlayOneShot(click);
+    }
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pumpkin_Data
   m_EditorClassIdentifier: Assembly-CSharp::ResourceData
   Id: Pumpkin_9c074ccf-2323-4741-888c-3f9448b4a37c
-  Name: Pumpkin
+  Name: "B\xED \u0111\u1ECF"
   itemIcon: {fileID: 9158497917273618566, guid: 4816a6b36d249a34a96df477d5d65bcb, type: 3}
   itemType: 2
   staminaCost: 0

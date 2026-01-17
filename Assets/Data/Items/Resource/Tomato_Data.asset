@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tomato_Data
   m_EditorClassIdentifier: Assembly-CSharp::ResourceData
   Id: Tomato_1da6ad76-74fb-4cdb-929a-90340c860275
-  Name: Tomato
+  Name: "C\xE0 chua"
   itemIcon: {fileID: -3202463750465312422, guid: 4816a6b36d249a34a96df477d5d65bcb, type: 3}
   itemType: 2
   staminaCost: 0

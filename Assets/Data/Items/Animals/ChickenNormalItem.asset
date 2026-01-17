@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ChickenNormalItem
   m_EditorClassIdentifier: Assembly-CSharp::LivestockItemData
   Id: Chicken Normal_3105bc5c-28f5-444e-b03b-bbe8ab91ed97
-  Name: Chicken Normal
+  Name: "G\xE0 con c\u01A1 b\u1EA3n"
   itemIcon: {fileID: 8406634026043086284, guid: 8cbd534ac36ec5847a35e32cee3503bf, type: 3}
   itemType: 7
   staminaCost: 5

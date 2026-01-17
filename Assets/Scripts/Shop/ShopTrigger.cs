@@ -21,34 +21,49 @@ public class ShopTrigger : MonoBehaviour
 
     void Update()
     {
-        if (playerInRange && Input.GetKeyDown(KeyCode.E))
+        if (playerInRange)
         {
-            if (!isShopOpen)
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                OpenShop();
-            }
-            else
-            {
-                CloseShop();
+                if (!isShopOpen)
+                {
+                    OpenShop();
+                }
+                else
+                {
+                    CloseShop();
+                }
             }
         }
 
-        if (isShopOpen && Input.GetKeyDown(KeyCode.Escape))
-        {
-            CloseShop();
-        }
     }
 
     void OpenShop()
     {
         isShopOpen = true;
-        ShopManager.Instance.OpenShop(products);
+        
+        if (ShopManager.Instance != null)
+        {
+            ShopManager.Instance.OpenShop(products);
+        }
+        
+        if (pressText != null) pressText.gameObject.SetActive(false);
     }
 
     void CloseShop()
     {
         isShopOpen = false;
-        ShopManager.Instance.CloseShop();
+
+        if (ShopManager.Instance != null)
+        {
+            ShopManager.Instance.CloseShop();
+        }
+
+        if (pressText != null && playerInRange) 
+        {
+            pressText.text = "Press E";
+            pressText.gameObject.SetActive(true);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)

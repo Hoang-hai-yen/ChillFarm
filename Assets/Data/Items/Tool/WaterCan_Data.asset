@@ -16,7 +16,7 @@ MonoBehaviour:
   Name: Water Can
   itemIcon: {fileID: 21300000, guid: e6b7ddbc3b63db7489b745c55064ea84, type: 2}
   itemType: 0
-  staminaCost: 1
+  staminaCost: 5
   price: 100
   sellPrice: 50
   toolType: 2

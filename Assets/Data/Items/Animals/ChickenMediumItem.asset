@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ChickenMediumItem
   m_EditorClassIdentifier: Assembly-CSharp::LivestockItemData
   Id: Chicken Medium_f91dc563-a52f-437a-8453-bff27785bcac
-  Name: Chicken Medium
+  Name: "G\xE0 con trung c\u1EA5p"
   itemIcon: {fileID: 7840842211667363089, guid: cdcf288228d45694fa8a02ed89b94800, type: 3}
   itemType: 7
   staminaCost: 5

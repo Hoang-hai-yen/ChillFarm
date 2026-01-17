@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour, IDataPersistence
 {
+    
     [SerializeField] private float speed = 1f;
     private PlayerControls playerControls;
     private Vector2 movement;
@@ -38,6 +39,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     [Header("UI Managers")]
     [SerializeField] private FaintUIManager faintUIManager;
 
+
     private FarmlandManager farmlandManager;
 
     private FishingController fishingController;
@@ -51,9 +53,17 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     [Header("Mushroom")]    
     public LayerMask mushroomLayer;
     [SerializeField] private float mushroomPickingRadius = 0.5f;
-
+    public static PlayerController Instance { get; private set; }
     public void Awake()
     {
+        if (Instance != null && Instance != this) 
+        { 
+            Destroy(this); 
+        } 
+        else 
+        { 
+            Instance = this; 
+        }
         playerControls = new PlayerControls();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AppleFruit
   m_EditorClassIdentifier: Assembly-CSharp::FoodData
   Id: Apple_4b14759b-9f6e-419e-abdb-5bb86cc9c712
-  Name: Apple
+  Name: "T\xE1o"
   itemIcon: {fileID: -3726444347972758462, guid: c25103e30f238aa4a896f91c206edad3, type: 3}
   itemType: 10
   staminaCost: 0

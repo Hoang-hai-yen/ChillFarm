@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Egg_High
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   Id: Egg High_36bd2798-a74e-4c5e-b4ee-5350798677b8
-  Name: Egg High
+  Name: "Tr\u1EE9ng cao c\u1EA5p"
   itemIcon: {fileID: -6303229302665444468, guid: f22da1fd3b85b0a438f8649f610d2f10, type: 3}
   itemType: 6
   staminaCost: 1

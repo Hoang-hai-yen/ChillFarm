@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Carrot_Data
   m_EditorClassIdentifier: Assembly-CSharp::ResourceData
   Id: Carrot _d11f35bf-a456-4f74-b168-7ff089fe570c
-  Name: 'Carrot '
+  Name: "C\xE0 r\u1ED1t"
   itemIcon: {fileID: -1407192652626693244, guid: 4816a6b36d249a34a96df477d5d65bcb, type: 3}
   itemType: 2
   staminaCost: 0

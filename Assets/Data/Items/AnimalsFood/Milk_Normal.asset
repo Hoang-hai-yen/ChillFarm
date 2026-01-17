@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Milk_Normal
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   Id: Milk Normal_4eda3c46-81a4-4faa-abc0-3eccc4e82724
-  Name: Milk Normal
+  Name: "S\u1EEFa c\u01A1 b\u1EA3n"
   itemIcon: {fileID: -7661329381258251306, guid: 44ad26f8a2ce5e542a28d7073bb6051d, type: 3}
   itemType: 6
   staminaCost: 1
