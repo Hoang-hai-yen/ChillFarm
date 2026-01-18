@@ -324,6 +324,10 @@ public class GameDataManager : MonoBehaviour
     {
         foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
         {
+            if (dataPersistenceObj == null || dataPersistenceObj.Equals(null)) 
+            {
+                continue; 
+            }
             dataPersistenceObj.SaveData(gameData);
         }
 

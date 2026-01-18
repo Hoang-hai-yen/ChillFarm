@@ -94,7 +94,11 @@ public class TutorialManager : MonoBehaviour
         else
         {
             if(tutorialCanvas != null) tutorialCanvas.SetActive(false);
-            if (AudioManager.Instance != null) AudioManager.Instance.PlayBGM();
+            
+            if (AudioManager.Instance != null) 
+            {
+                AudioManager.Instance.PlayGameBGM(); 
+            }
         }
     }
 
@@ -105,6 +109,7 @@ public class TutorialManager : MonoBehaviour
         if (timeController != null) timeController.PauseTime();        
 
         if (AudioManager.Instance != null) AudioManager.Instance.StopBGM();
+        
         if (audioSource != null && tutorialBgm != null)
         {
             audioSource.clip = tutorialBgm;
@@ -145,11 +150,16 @@ public class TutorialManager : MonoBehaviour
     private void EndTutorial()
     {
         if(tutorialCanvas != null) tutorialCanvas.SetActive(false);
+        
         if (audioSource != null) audioSource.Stop();
 
         if (playerController != null) playerController.enabled = true;
         if (timeController != null) timeController.ResumeTime();
-        if (AudioManager.Instance != null) AudioManager.Instance.PlayBGM();
+
+        if (AudioManager.Instance != null) 
+        {
+            AudioManager.Instance.PlayGameBGM();
+        }
 
         StartCoroutine(StartShopQuestSequence());
     }
