@@ -74,10 +74,21 @@ public class QuestController: MonoBehaviour, IDataPersistence
     public List<QuestProgress> LoadActiveQuestsFromSchema(List<Assets.Scripts.Cloud.Schemas.PlayerQuest> questSchemas)
     {
         List<QuestProgress> loadedQuests = new();
-        foreach(var schema in questSchemas)
-        {   
-            QuestProgress questProgress = new QuestProgress(schema);
-            loadedQuests.Add(questProgress);
+        if (questSchemas != null) 
+        {
+            foreach (var schema in questSchemas)
+            {
+                QuestProgress questProgress = new QuestProgress(schema);
+
+                if (questProgress.quest != null)
+                {
+                    loadedQuests.Add(questProgress);
+                }
+                else
+                {
+                    Debug.LogWarning($"Bỏ qua quest lỗi ID: {schema.QuestId}");
+                }
+            }
         }
         return loadedQuests;
     }

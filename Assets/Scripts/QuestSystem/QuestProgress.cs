@@ -61,7 +61,16 @@ public class QuestProgress
 
     public void LoadFromSchema(Assets.Scripts.Cloud.Schemas.PlayerQuest schema)
     {
-        this.quest = GameDataManager.instance.gameSODatabase.GetItemById(schema.QuestId) as QuestData;
+        var item = GameDataManager.instance.gameSODatabase.GetItemById(schema.QuestId);
+        
+        this.quest = item as QuestData;
+        
+        if (this.quest == null)
+        {
+            Debug.LogError($"[Quest Error] Không tìm thấy QuestData cho ID: '{schema.QuestId}'. Hãy kiểm tra lại GameSODatabase!");
+            questObjectives = new List<QuestObjective>(); 
+            return; 
+        }
         
         questObjectives = new();
         foreach(var obj in quest.questObjectives)
