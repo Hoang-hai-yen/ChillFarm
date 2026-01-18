@@ -108,18 +108,21 @@ public class GameDataManager : MonoBehaviour
         if( scene.name != "Test") return;
         
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
-
-        if (tryLoadGameCoroutine != null)
+        if (IsDataLoaded && gameData != null)
         {
-            StopCoroutine(tryLoadGameCoroutine);
+            foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
+            {
+                if(dataPersistenceObj != null) dataPersistenceObj.LoadData(gameData);
+            }
+            Debug.Log("Scene loaded: Distributed existing data to objects.");
         }
-        tryLoadGameCoroutine = StartCoroutine(TryLoadData());
-
-        // start up the auto saving coroutine
-        if (autoSaveCoroutine != null) 
+        else
         {
-            StopCoroutine(autoSaveCoroutine);
+            if (tryLoadGameCoroutine != null) StopCoroutine(tryLoadGameCoroutine);
+            tryLoadGameCoroutine = StartCoroutine(TryLoadData());
         }
+
+        if (autoSaveCoroutine != null) StopCoroutine(autoSaveCoroutine);
         autoSaveCoroutine = StartCoroutine(AutoSave());
     }
 
@@ -191,6 +194,8 @@ public class GameDataManager : MonoBehaviour
 
     public IEnumerator TryLoadData()
     {
+        if (IsDataLoaded) yield break;
+
         while (!IsDataLoaded)
         {
             if (!isFetching)
@@ -202,52 +207,70 @@ public class GameDataManager : MonoBehaviour
                 {
                     if (success)
                     {
-
-                        if (gameDataRes.ContainsKey(nameof(PlayerProfile)))
-                           gameData.PlayerProfileData = (PlayerProfile)gameDataRes[nameof(PlayerProfile)];
-
-                        if (gameDataRes.ContainsKey(nameof(PlayerData)))
-                            gameData.PlayerDataData = (PlayerData)gameDataRes[nameof(PlayerData)];
-
-                        if (gameDataRes.ContainsKey(nameof(Farmland)))
-                            gameData.FarmlandData = (Farmland)gameDataRes[nameof(Farmland)];
-
-                        if (gameDataRes.ContainsKey(nameof(AnimalFarm)))
-                            gameData.AnimalFarmData = (AnimalFarm)gameDataRes[nameof(AnimalFarm)];
-
-                        if (gameDataRes.ContainsKey(nameof(Fishing)))
-                            gameData.FishingData = (Fishing)gameDataRes[nameof(Fishing)];
-
-                        // if (gameDataRes.ContainsKey("Quests"))
-                        //     gameData.QuestsData = (List<Assets.Scripts.Cloud.Schemas.Quest>)gameDataRes["Quests"];
-
-                        if (gameDataRes.ContainsKey("PlayerQuests"))
-                            gameData.PlayerQuestsData = (List<PlayerQuest>)gameDataRes["PlayerQuests"];
-
-
-                        IsDataLoaded = true;
-                       
-                        foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
+                        try
                         {
-                            dataPersistenceObj.LoadData(gameData);
+                            if (gameDataRes.ContainsKey(nameof(PlayerProfile)))
+                                gameData.PlayerProfileData = (PlayerProfile)gameDataRes[nameof(PlayerProfile)];
+
+                            if (gameDataRes.ContainsKey(nameof(PlayerData)))
+                                gameData.PlayerDataData = (PlayerData)gameDataRes[nameof(PlayerData)];
+
+                            if (gameDataRes.ContainsKey(nameof(Farmland)))
+                                gameData.FarmlandData = (Farmland)gameDataRes[nameof(Farmland)];
+
+                            if (gameDataRes.ContainsKey(nameof(AnimalFarm)))
+                                gameData.AnimalFarmData = (AnimalFarm)gameDataRes[nameof(AnimalFarm)];
+
+                            if (gameDataRes.ContainsKey(nameof(Fishing)))
+                                gameData.FishingData = (Fishing)gameDataRes[nameof(Fishing)];
+
+                            if (gameDataRes.ContainsKey("PlayerQuests"))
+                                gameData.PlayerQuestsData = (List<PlayerQuest>)gameDataRes["PlayerQuests"];
+
+                            if (dataPersistenceObjects != null)
+                            {
+                                foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
+                                {
+                                    if (dataPersistenceObj != null)
+                                    {
+                                        try
+                                        {
+                                            dataPersistenceObj.LoadData(gameData);
+                                        }
+                                        catch (System.Exception ex)
+                                        {
+                                            Debug.LogError($"Lỗi khi đẩy data vào {dataPersistenceObj}: {ex.Message}");
+                                        }
+                                    }
+                                }
+                            }
+
+                            Debug.Log("Load data successful!");
+                            OnDataLoaded?.Invoke();
                         }
-                        Debug.Log("Load data successful!");
-                       OnDataLoaded?.Invoke();
+                        catch (System.Exception e)
+                        {
+                            Debug.LogError("Lỗi nghiêm trọng khi xử lý dữ liệu: " + e.Message);
+                        }
+                        finally
+                        {
+                            IsDataLoaded = true;
+                        }
                     }
                     else
                     {
-                        Debug.LogError("Loading error: " + message);
+                        Debug.LogError("Loading error from Firebase: " + message);
+                        IsDataLoaded = true;
                     }
 
                     isFetching = false;
                 });
             }
-            if(!IsDataLoaded)
-                yield return new WaitForSeconds(loadTimeIntervalSeconds);
-           
-        }
-        Debug.Log("Data is loaded");
 
+            if (!IsDataLoaded) yield return new WaitForSeconds(1f);
+        }
+        
+        Debug.Log("Data flow completed.");
     }
 
 

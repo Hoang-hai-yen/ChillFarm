@@ -9,6 +9,8 @@ public class LoginManager : MonoBehaviour
     [SerializeField] private TMP_InputField emailInput;
     [SerializeField] private TMP_InputField passwordInput;
     [SerializeField] private TMP_Text messageText;
+    [Header("Loading System")]
+    [SerializeField] private LoadingController loadingScreen;
 
     void Start()
     {
@@ -29,13 +31,26 @@ public class LoginManager : MonoBehaviour
             return;
         }
 
-        // Gọi đăng nhập Firebase
         StartCoroutine(CloudManager.Instance.Auth.Login(email, password, (success, message) =>
         {
             if (success)
             {
-                messageText.text = "Đăng nhập thành công! Đang vào trang trại...";
-                StartCoroutine(DelayToScene("Test", 3f)); // Delay 2 giây
+                messageText.text = "Đăng nhập thành công! Đang chuẩn bị dữ liệu...";
+
+                if (GameDataManager.instance != null)
+                {
+                    GameDataManager.instance.LoadGame();
+                }
+                
+                if (loadingScreen != null)
+                {
+                    loadingScreen.LoadGame(); 
+                }
+                else
+                {
+                    Debug.LogWarning("Chưa gắn LoadingScreen vào Inspector!");
+                    StartCoroutine(DelayToScene("Test", 3f)); 
+                }
             }
             else
             {
@@ -49,8 +64,6 @@ public class LoginManager : MonoBehaviour
     private IEnumerator DelayToScene(string sceneName, float delayTime)
     {
         yield return new WaitForSeconds(delayTime);
-        // yield return GameDataManager.instance.TryLoadData();
         SceneManager.LoadScene(sceneName);
-        // GameDataManager.instance.AutoSaveActivate();
     }
 }
