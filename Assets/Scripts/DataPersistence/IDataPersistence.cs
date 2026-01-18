@@ -8,8 +8,8 @@ public interface IDataPersistence
 
     void SaveData(GameData data);
 
-    void MarkDataDirty(GameDataManager.DataType dataType)
-    {
-        GameDataManager.instance.MarkDirty(dataType);
-    }
+    // protected void MarkDataDirty(GameDataManager.DataType dataType)
+    // {
+    //     GameDataManager.instance.MarkDirty(dataType);
+    // }
 }

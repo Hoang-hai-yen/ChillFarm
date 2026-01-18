@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ceac2bb6a57caf468a1d67781c0d756, type: 3}
   m_Name: SailfinTang
   m_EditorClassIdentifier: Assembly-CSharp::FishData
-  itemName: 'Sailfin Tang '
+  Id: Sailfin Tang_c1e5fe6e-649a-40a9-bec0-355da9c4c1ac
+  Name: Sailfin Tang
   itemIcon: {fileID: -4127352767853872781, guid: 48c54c7bf90beab458f5faef53ea05b0, type: 3}
-  itemType: 3
-  staminaCost: 5
+  itemType: 8
+  staminaCost: 0
+  price: 100
+  sellPrice: 225
   rarityWeight: 35

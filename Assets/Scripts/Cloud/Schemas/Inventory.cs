@@ -12,8 +12,8 @@ namespace Assets.Scripts.Cloud.Schemas
 {
     public class Inventory
     {
-        public List<Item> Items { get; set; } = new List<Item>();
-        public int MaxSlots { get; set; } = 20;
+        public List<Item> HotbarItems { get; set; } = new List<Item>();
+        public List<Item> BackpackItems { get; set; } = new List<Item>();
 
         public Inventory() { }
 
@@ -21,7 +21,7 @@ namespace Assets.Scripts.Cloud.Schemas
         {
             public string ItemId { get; set; }
             public int Quantity { get; set; }
-            public int SlotIndex { get; set; }
+            // public int SlotIndex { get; set; }
 
             public Item() { }
         }

@@ -7,61 +7,83 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class CloudManager: MonoBehaviour 
+public class CloudManager
 {
 
     //load data
-    public Farmland FarmlandData { get; set; }
-    public AnimalFarm AnimalFarmData { get; set; }
-    public PlayerData PlayerDataData { get; set; }
-    public PlayerProfile PlayerProfileData { get; set; }
-    public Fishing FishingData { get; set; }
-    public List<Assets.Scripts.Cloud.Schemas.Quest> QuestsData { get; set; } = new List<Assets.Scripts.Cloud.Schemas.Quest>();
-    public List<PlayerQuest> PlayerQuestsData { get; set; } = new List<PlayerQuest>();
-    public bool IsDataLoaded { get; private set; }
-    private bool isFetching = false;
+    // public Farmland FarmlandData { get; set; }
+    // public AnimalFarm AnimalFarmData { get; set; }
+    // public PlayerData PlayerDataData { get; set; }
+    // public PlayerProfile PlayerProfileData { get; set; }
+    // public Fishing FishingData { get; set; }
+    // public List<Assets.Scripts.Cloud.Schemas.Quest> QuestsData { get; set; } = new List<Assets.Scripts.Cloud.Schemas.Quest>();
+    // public List<PlayerQuest> PlayerQuestsData { get; set; } = new List<PlayerQuest>();
+    // public bool IsDataLoaded { get; private set; }
+    // private bool isFetching = false;
 
-    //save data
-    private bool playerDataDirty = false;
-    private bool farmlandDirty = false;
-    private bool animalFarmDirty = false;
-    private bool fishingDirty = false;
-    private bool questDirty = false;
+    // //save data
+    // private bool playerDataDirty = false;
+    // private bool farmlandDirty = false;
+    // private bool animalFarmDirty = false;
+    // private bool fishingDirty = false;
+    // private bool questDirty = false;
 
 
-    private float autoSaveInterval = 20f;
-    private float timeSinceLastSave = 0f;
+    // private float autoSaveInterval = 20f;
+    // private float timeSinceLastSave = 0f;
 
     //services
     public CloudAuthService Auth { get; private set; }
     public CloudDatabaseService Database { get; private set; }
 
-    public enum DataType
-    {
-        player,
-        farmland,
-        animals,
-        fishing,
-        quest
-    }
-
-    public static CloudManager Instance { get; private set; }
-
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
+    // public enum DataType
+    // {
+    //     player,
+    //     farmland,
+    //     animals,
+    //     fishing,
+    //     quest
+    // }
+    
+    private static CloudManager instance;
+    public static CloudManager Instance { 
+        get
         {
-            Destroy(gameObject);
-            return;
+            if(instance == null)
+            {
+                instance = new CloudManager();
+            }
+
+            return instance;
+        } 
+        private set
+        {
+            instance = value;
         }
-
-        Instance = this;
-        DontDestroyOnLoad(gameObject); 
-
-        ApiConfig apiConfig = ApiConfig.Instance;
-        Instance.Auth = new CloudAuthService(apiConfig);
-        Instance.Database = new CloudDatabaseService(apiConfig);
     }
+
+    private CloudManager()
+    {
+        ApiConfig apiConfig = ApiConfig.Instance;
+        Auth = new CloudAuthService(apiConfig);
+        Database = new CloudDatabaseService(apiConfig);
+    }
+
+    // private void Awake()
+    // {
+    //     if (Instance != null && Instance != this)
+    //     {
+    //         Destroy(gameObject);
+    //         return;
+    //     }
+
+    //     Instance = this;
+    //     DontDestroyOnLoad(gameObject); 
+
+    //     ApiConfig apiConfig = ApiConfig.Instance;
+    //     Instance.Auth = new CloudAuthService(apiConfig);
+    //     Instance.Database = new CloudDatabaseService(apiConfig);
+    // }
 
     //private static CloudManager instance;
     //public static CloudManager Instance

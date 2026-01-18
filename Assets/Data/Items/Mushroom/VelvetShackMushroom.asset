@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8028acedc4d10459e3ab3aa34794e1, type: 3}
   m_Name: VelvetShackMushroom
   m_EditorClassIdentifier: Assembly-CSharp::MushroomData
-  itemName: Velvet Shank Mushroom
+  Id: Velvet Shack Mushroom_7561f515-a7a9-4b71-9d3c-7f7203355f72
+  Name: Velvet Shack Mushroom
   itemIcon: {fileID: 763679591749107492, guid: b59e7c19804ef3342bab8f3cf47959c7, type: 3}
   itemType: 9
   staminaCost: 0
+  price: 100
+  sellPrice: 50
+  staminaRecover: 10
+  eatSound: {fileID: 8300000, guid: 693c2433ae464914c972124f5bb1e93f, type: 3}
   mushroomSprite: {fileID: 7761132492079351041, guid: 146a97506772f9c459980fc8ad41d169, type: 3}

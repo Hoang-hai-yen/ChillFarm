@@ -13,36 +13,33 @@ namespace Assets.Scripts.Cloud.Schemas
     public class PlayerQuest
     {
         public string QuestId { get; set; }
-        public QuestType QuestType { get; set; }
-        public int CurrentLevel { get; set; } = 1;
-
-
-        public List<QuestProgress> progresses { get; set; }
-
+        public List<QuestObjective> progresses { get; set; } = new List<QuestObjective>();
         public bool IsCompleted { get; set; } = false;
-        public bool IsClaimed { get; set; } = false;
+        // public bool IsClaimed { get; set; } = false;
+        // public bool IsChanged { get; set; } = false;
 
-        public bool IsChanged { get; set; } = false;
+        
 
-        public class QuestProgress
-        {
-            public string ItemId { get; set; }
-            public int CurrentAmount { get; set; } = 0;
-            public int TargetAmount { get; set; } = 0;
-            public bool IsCompleted { get; set; } = false;
-            public QuestProgress() { }
-        }
+        // public void AdvanceQuest(List<Quest.QuestRequirement> questRequirements)
+        // {
+        //     CurrentLevel++;
+        //     IsCompleted = false;
+        //     IsClaimed = false;
+        //     IsChanged = true;
 
-        public void AdvanceQuest(List<Quest.QuestRequirement> questRequirements)
-        {
-            CurrentLevel++;
-            IsCompleted = false;
-            IsClaimed = false;
-            IsChanged = true;
+        //     questRequirements.ForEach(p => { progresses.Add(new PlayerQuest.QuestProgress() { ItemId = p.ItemId, CurrentAmount = 0, TargetAmount = p.GetTargetAmount(CurrentLevel), }); });
 
-            questRequirements.ForEach(p => { progresses.Add(new PlayerQuest.QuestProgress() { ItemId = p.ItemId, CurrentAmount = 0, TargetAmount = p.GetTargetAmount(CurrentLevel), }); });
-
-        }
+        // }
     }
+
+    public class QuestObjective
+    {
+        public string ObjectiveId { get; set; }
+        public int CurrentAmount { get; set; }
+        public int TargetAmount { get; set; }
+        public bool isCompleted {get; set;} = false;
+
+    }
+
 }
 

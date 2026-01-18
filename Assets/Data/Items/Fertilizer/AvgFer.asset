@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9cad39d4e0365642931fe7f9bee0e96, type: 3}
   m_Name: AvgFer
   m_EditorClassIdentifier: Assembly-CSharp::FertilizerData
-  itemName: 
-  itemIcon: {fileID: -7094758524550589834, guid: 8a4cae6559dc22d40bdb11c5b798d7e6, type: 3}
+  Id: Avg Fer_eff45b90-757b-46e7-a27a-92ef4f7fc2e3
+  Name: "Ph\xE2n b\xF3n trung c\u1EA5p"
+  itemIcon: {fileID: 5508846246015040165, guid: 8a4cae6559dc22d40bdb11c5b798d7e6, type: 3}
   itemType: 4
   staminaCost: 5
+  price: 120
+  sellPrice: 50
   minMultiplier: 2
   maxMultiplier: 3

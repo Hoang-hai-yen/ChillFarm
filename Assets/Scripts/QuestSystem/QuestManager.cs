@@ -74,14 +74,14 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     private void ClaimRewards(string questId)
     {
-        var playerQuest = playerQuests.Find(pq => pq.QuestId == questId);
-        var quest = quests.Find(q => q.Id == questId);
+        // var playerQuest = playerQuests.Find(pq => pq.QuestId == questId);
+        // var quest = quests.Find(q => q.Id == questId);
 
-        GameEventsManager.instance.goldEvents.GoldGained(quest.Rewards.GetTotalGold(playerQuest.CurrentLevel));
-        foreach (var xpReward in quest.Rewards.Xp)
-        {
-            GameEventsManager.instance.playerEvents.ExperienceGained(xpReward.type, xpReward.GetTotalXP(quest.Rewards.rewardMultiplier, playerQuest.CurrentLevel));
-        }
+        // GameEventsManager.instance.goldEvents.GoldGained(quest.Rewards.GetTotalGold(playerQuest.CurrentLevel));
+        // foreach (var xpReward in quest.Rewards.Xp)
+        // {
+        //     GameEventsManager.instance.playerEvents.ExperienceGained(xpReward.type, xpReward.GetTotalXP(quest.Rewards.rewardMultiplier, playerQuest.CurrentLevel));
+        // }
     }
 
 
@@ -97,19 +97,19 @@ public class QuestManager : MonoBehaviour, IDataPersistence
    
     public void LoadData(GameData data)
     {  
-        if(data == null)
-        {
-            Debug.Log("Game Data is null");
-            return;
-        }
-       foreach(var playerQuest in data.PlayerQuestsData)
-        {
-            if(!playerQuest.IsCompleted)
-                activeQuests.Add(new ActiveQuest(playerQuest));
-        }
+    //     if(data == null)
+    //     {
+    //         Debug.Log("Game Data is null");
+    //         return;
+    //     }
+    //    foreach(var playerQuest in data.PlayerQuestsData)
+    //     {
+    //         if(!playerQuest.IsCompleted)
+    //             activeQuests.Add(new ActiveQuest(playerQuest));
+    //     }
 
-        playerQuests = data.PlayerQuestsData;
-        quests = data.QuestsData;
+    //     playerQuests = data.PlayerQuestsData;
+    //     quests = data.QuestsData;
     }
 
     public void SaveData(GameData data)
@@ -119,35 +119,35 @@ public class QuestManager : MonoBehaviour, IDataPersistence
 
     private void StartQuest(string id)
     {
-        var playerQuest = playerQuests.Find(pq => pq.QuestId == id);
-        var quest = quests.Find(q => q.Id == id);
-        if (playerQuest == null)
-        {
-            var questProgresses = new List<PlayerQuest.QuestProgress>();
-            quest.Requirements.ForEach(p => { questProgresses.Add(new PlayerQuest.QuestProgress() { ItemId = p.ItemId, CurrentAmount = 0, TargetAmount = p.baseAmount, }); });
+        // var playerQuest = playerQuests.Find(pq => pq.QuestId == id);
+        // var quest = quests.Find(q => q.Id == id);
+        // if (playerQuest == null)
+        // {
+        //     var questProgresses = new List<PlayerQuest.QuestProgress>();
+        //     quest.Requirements.ForEach(p => { questProgresses.Add(new PlayerQuest.QuestProgress() { ItemId = p.ItemId, CurrentAmount = 0, TargetAmount = p.baseAmount, }); });
 
 
-            PlayerQuest newPlayerQuest = new PlayerQuest
-            {
-                QuestId = quest.Id,
-                QuestType = quest.QuestType,
-                CurrentLevel = 1,
-                IsCompleted = false,
-                IsClaimed = false,
-                IsChanged = true,
-                progresses = questProgresses,
-            };
+        //     PlayerQuest newPlayerQuest = new PlayerQuest
+        //     {
+        //         QuestId = quest.Id,
+        //         QuestType = quest.QuestType,
+        //         CurrentLevel = 1,
+        //         IsCompleted = false,
+        //         IsClaimed = false,
+        //         IsChanged = true,
+        //         progresses = questProgresses,
+        //     };
 
-            activeQuests.Add(new ActiveQuest(playerQuest));
-            playerQuests.Add(playerQuest);
-        }
-        else if(playerQuest.IsCompleted && playerQuest.IsClaimed)
-        {
-            playerQuest.AdvanceQuest(quest.Requirements);
-        }
+        //     activeQuests.Add(new ActiveQuest(playerQuest));
+        //     playerQuests.Add(playerQuest);
+        // }
+        // else if(playerQuest.IsCompleted && playerQuest.IsClaimed)
+        // {
+        //     playerQuest.AdvanceQuest(quest.Requirements);
+        // }
         
 
-        GameDataManager.instance.MarkDirty(GameDataManager.DataType.quest);
+        // GameDataManager.instance.MarkDirty(GameDataManager.DataType.quest);
     }
 
     

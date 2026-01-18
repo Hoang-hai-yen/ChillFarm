@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8028acedc4d10459e3ab3aa34794e1, type: 3}
   m_Name: GoldenChanterelleMushroom
   m_EditorClassIdentifier: Assembly-CSharp::MushroomData
-  itemName: Golden Chanterelle Mushroom
+  Id: Golden Chanterelle Mushroom_74fd0c54-81c7-4404-8fcc-e01f05a0b757
+  Name: Golden Chanterelle Mushroom
   itemIcon: {fileID: 5008110706619682464, guid: b59e7c19804ef3342bab8f3cf47959c7, type: 3}
   itemType: 9
   staminaCost: 0
+  price: 100
+  sellPrice: 50
+  staminaRecover: 5
+  eatSound: {fileID: 8300000, guid: 693c2433ae464914c972124f5bb1e93f, type: 3}
   mushroomSprite: {fileID: -3629136305804911923, guid: 146a97506772f9c459980fc8ad41d169, type: 3}

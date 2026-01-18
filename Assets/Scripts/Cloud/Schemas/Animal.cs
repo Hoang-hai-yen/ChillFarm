@@ -9,15 +9,18 @@ namespace Assets.Scripts.Cloud.Schemas
 {
     public class Animal
     {
-        public string AnimalId { get; set; }
-        public string Type { get; set; }
-        public string Name { get; set; }
-        public int Age { get; set; }
-        public int Affection { get; set; }
-        public bool IsFed { get; set; }
-        public bool CanProduce { get; set; }
-        public string ProductId { get; set; }
-        public bool IsDead { get; set; }
+        public string Id {get; set;}
+        
+        public string AnimalDataId {get; set;}
+        public bool IsAdult {get; set;} = false; 
+        public int CurrentAge {get; set;} = 0;
+        public float Affection {get; set;} = 0f;
+        public bool IsFedToday {get; set;} = false;
+        public bool HasPlayedToday {get; set;} = false;
+    
+        public int DaysWithoutFood {get; set;} = 0;
+        public int MaxStarvationDays {get; set;} = 3;
+        public bool IsDead {get; set;} = false; 
 
 
         public Animal() { }

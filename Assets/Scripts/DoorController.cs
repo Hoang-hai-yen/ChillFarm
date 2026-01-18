@@ -1,11 +1,17 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DoorController : MonoBehaviour
 {
-    [Header("Cài đặt")]
-    public string doorName = "Chuồng Gà"; 
-    public bool isLocked = false; 
+    [Header("Cài đặt Cửa")]
+    public string doorName = "Cửa Thường"; 
+    public bool isLocked = false;
     public int unlockCost = 500; 
+
+    [Header("Tutorial UI (Chỉ dùng cho Cửa Khóa)")]
+    [Tooltip("Kéo Panel hướng dẫn vào đây. Nếu là cửa thường thì để trống cũng được.")]
+    [SerializeField] private GameObject guidePanel; 
+    [SerializeField] private Button closeButton;    
 
     [Header("Components")]
     public Transform doorVisuals; 
@@ -16,6 +22,7 @@ public class DoorController : MonoBehaviour
 
     void Start()
     {
+        // Setup Component
         if (doorVisuals != null)
         {
             animator = doorVisuals.GetComponent<Animator>();
@@ -27,6 +34,14 @@ public class DoorController : MonoBehaviour
             doorCollider = GetComponent<BoxCollider2D>();
         }
         UpdateVisuals();
+
+        if (closeButton != null && guidePanel != null)
+        {
+            closeButton.onClick.RemoveAllListeners();
+            closeButton.onClick.AddListener(() => guidePanel.SetActive(false));
+        }
+        
+        if (guidePanel != null) guidePanel.SetActive(false);
     }
 
     public bool InteractWithDoor()
@@ -39,9 +54,14 @@ public class DoorController : MonoBehaviour
             {
                 if (InventoryManager.Instance.TrySpendGold(unlockCost))
                 {
-                    isLocked = false;
-                    Debug.Log("Mở khóa thành công!");
-                    SetDoorState(true); 
+                    isLocked = false; 
+                    SetDoorState(true);
+                    Debug.Log("Đã mở khóa cửa: " + doorName);
+
+                    if (guidePanel != null)
+                    {
+                        guidePanel.SetActive(true);
+                    }
                 }
                 else
                 {

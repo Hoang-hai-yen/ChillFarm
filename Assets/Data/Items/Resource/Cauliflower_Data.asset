@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c54ad4b120c7ec4994907f7c3feea9f, type: 3}
+  m_Name: Cauliflower_Data
+  m_EditorClassIdentifier: Assembly-CSharp::ResourceData
+  Id: Cauliflower_a6292db7-7eaa-409f-9fe8-959006067ced
+  Name: "B\xF4ng c\u1EA3i tr\u1EAFng"
+  itemIcon: {fileID: 1520462160614537146, guid: 4816a6b36d249a34a96df477d5d65bcb, type: 3}
+  itemType: 2
+  staminaCost: 0
+  price: 120
+  sellPrice: 130
+  staminaRecover: 12
+  eatSound: {fileID: 8300000, guid: 693c2433ae464914c972124f5bb1e93f, type: 3}

@@ -4,6 +4,8 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.SceneManagement;
 using Assets.Scripts.Cloud.Schemas;
+using Unity.VisualScripting;
+using System;
 
 public class GameDataManager : MonoBehaviour
 {
@@ -18,9 +20,12 @@ public class GameDataManager : MonoBehaviour
     [SerializeField] private bool useEncryption;
 
     [Header("Auto Saving Configuration")]
-    [SerializeField] private float autoSaveTimeSeconds = 60f;
-    [SerializeField] private float loadTimeIntervalSeconds = 60f;
+    [SerializeField] private float autoSaveTimeSeconds = 20f;
+    [SerializeField] private float loadTimeIntervalSeconds = 30f;
 
+    public GameSODatabase gameSODatabase;
+
+    public event Action OnDataLoaded;
 
     private GameData gameData = new GameData();
     private List<IDataPersistence> dataPersistenceObjects;
@@ -70,6 +75,7 @@ public class GameDataManager : MonoBehaviour
             Debug.LogWarning("Data Persistence is currently disabled!");
         }
 
+        //  dataPersistenceObjects = FindAllDataPersistenceObjects();
         //this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
 
         //InitializeSelectedProfileId();
@@ -77,26 +83,37 @@ public class GameDataManager : MonoBehaviour
 
     private void OnEnable() 
     {
-        // SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.sceneLoaded += OnSceneLoaded;
         // GameEventsManager.instance.inputEvents.onLogInPress += LoadGame;
     }
 
     private void OnDisable() 
     {
-        // SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
         // GameEventsManager.instance.inputEvents.onLogInPress -= LoadGame;
 
     }
 
+    public void AutoSaveActivate()
+    {
+        if (autoSaveCoroutine != null) 
+        {
+            StopCoroutine(autoSaveCoroutine);
+        }
+        autoSaveCoroutine = StartCoroutine(AutoSave());
+    }
+
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode) 
     {
+        if( scene.name != "Test") return;
+        
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
 
-        // if (tryLoadGameCoroutine != null)
-        // {
-        //     StopCoroutine(tryLoadGameCoroutine);
-        // }
-        // tryLoadGameCoroutine = StartCoroutine(LoadGame());
+        if (tryLoadGameCoroutine != null)
+        {
+            StopCoroutine(tryLoadGameCoroutine);
+        }
+        tryLoadGameCoroutine = StartCoroutine(TryLoadData());
 
         // start up the auto saving coroutine
         if (autoSaveCoroutine != null) 
@@ -106,38 +123,38 @@ public class GameDataManager : MonoBehaviour
         autoSaveCoroutine = StartCoroutine(AutoSave());
     }
 
-    public void ChangeSelectedProfileId(string newProfileId) 
-    {
-        // update the profile to use for saving and loading
-        this.selectedProfileId = newProfileId;
-        // load the game, which will use that profile, updating our game data accordingly
-        LoadGame();
-    }
+    // public void ChangeSelectedProfileId(string newProfileId) 
+    // {
+    //     // update the profile to use for saving and loading
+    //     this.selectedProfileId = newProfileId;
+    //     // load the game, which will use that profile, updating our game data accordingly
+    //     LoadGame();
+    // }
 
-    public void DeleteProfileData(string profileId) 
-    {
-        // delete the data for this profile id
-        dataHandler.Delete(profileId);
-        // initialize the selected profile id
-        InitializeSelectedProfileId();
-        // reload the game so that our data matches the newly selected profile id
-        LoadGame();
-    }
+    // public void DeleteProfileData(string profileId) 
+    // {
+    //     // delete the data for this profile id
+    //     dataHandler.Delete(profileId);
+    //     // initialize the selected profile id
+    //     InitializeSelectedProfileId();
+    //     // reload the game so that our data matches the newly selected profile id
+    //     LoadGame();
+    // }
 
-    private void InitializeSelectedProfileId() 
-    {
-        this.selectedProfileId = dataHandler.GetMostRecentlyUpdatedProfileId();
-        if (overrideSelectedProfileId) 
-        {
-            this.selectedProfileId = testSelectedProfileId;
-            Debug.LogWarning("Overrode selected profile id with test id: " + testSelectedProfileId);
-        }
-    }
+    // private void InitializeSelectedProfileId() 
+    // {
+    //     this.selectedProfileId = dataHandler.GetMostRecentlyUpdatedProfileId();
+    //     if (overrideSelectedProfileId) 
+    //     {
+    //         this.selectedProfileId = testSelectedProfileId;
+    //         Debug.LogWarning("Overrode selected profile id with test id: " + testSelectedProfileId);
+    //     }
+    // }
 
-    public void NewGame() 
-    {
-        this.gameData = new GameData();
-    }
+    // public void NewGame() 
+    // {
+    //     this.gameData = new GameData();
+    // }
 
     public void LoadGame()
     {
@@ -179,89 +196,91 @@ public class GameDataManager : MonoBehaviour
             if (!isFetching)
             {
                 isFetching = true;
-            Debug.Log("Staring loading data...");
+                Debug.Log("Staring loading data...");
 
-            yield return CloudManager.Instance.Database.GetData(CloudManager.Instance.Auth.LocalId, (success, message, gameDataRes) =>
-            {
-                if (success)
+                yield return CloudManager.Instance.Database.GetData(CloudManager.Instance.Auth.LocalId, (success, message, gameDataRes) =>
                 {
-
-                    if (gameDataRes.ContainsKey(nameof(PlayerProfile)))
-                       gameData.PlayerProfileData = (PlayerProfile)gameDataRes[nameof(PlayerProfile)];
-
-                    if (gameDataRes.ContainsKey(nameof(PlayerData)))
-                        gameData.PlayerDataData = (PlayerData)gameDataRes[nameof(PlayerData)];
-
-                    if (gameDataRes.ContainsKey(nameof(Farmland)))
-                        gameData.FarmlandData = (Farmland)gameDataRes[nameof(Farmland)];
-
-                    if (gameDataRes.ContainsKey(nameof(AnimalFarm)))
-                        gameData.AnimalFarmData = (AnimalFarm)gameDataRes[nameof(AnimalFarm)];
-
-                    if (gameDataRes.ContainsKey(nameof(Fishing)))
-                        gameData.FishingData = (Fishing)gameDataRes[nameof(Fishing)];
-
-                    if (gameDataRes.ContainsKey("Quests"))
-                        gameData.QuestsData = (List<Assets.Scripts.Cloud.Schemas.Quest>)gameDataRes["Quests"];
-
-                    if (gameDataRes.ContainsKey("PlayerQuests"))
-                        gameData.PlayerQuestsData = (List<PlayerQuest>)gameDataRes["PlayerQuests"];
-
-
-                    IsDataLoaded = true;
-
-                    foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
+                    if (success)
                     {
-                        dataPersistenceObj.LoadData(gameData);
+
+                        if (gameDataRes.ContainsKey(nameof(PlayerProfile)))
+                           gameData.PlayerProfileData = (PlayerProfile)gameDataRes[nameof(PlayerProfile)];
+
+                        if (gameDataRes.ContainsKey(nameof(PlayerData)))
+                            gameData.PlayerDataData = (PlayerData)gameDataRes[nameof(PlayerData)];
+
+                        if (gameDataRes.ContainsKey(nameof(Farmland)))
+                            gameData.FarmlandData = (Farmland)gameDataRes[nameof(Farmland)];
+
+                        if (gameDataRes.ContainsKey(nameof(AnimalFarm)))
+                            gameData.AnimalFarmData = (AnimalFarm)gameDataRes[nameof(AnimalFarm)];
+
+                        if (gameDataRes.ContainsKey(nameof(Fishing)))
+                            gameData.FishingData = (Fishing)gameDataRes[nameof(Fishing)];
+
+                        // if (gameDataRes.ContainsKey("Quests"))
+                        //     gameData.QuestsData = (List<Assets.Scripts.Cloud.Schemas.Quest>)gameDataRes["Quests"];
+
+                        if (gameDataRes.ContainsKey("PlayerQuests"))
+                            gameData.PlayerQuestsData = (List<PlayerQuest>)gameDataRes["PlayerQuests"];
+
+
+                        IsDataLoaded = true;
+                       
+                        foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
+                        {
+                            dataPersistenceObj.LoadData(gameData);
+                        }
+                        Debug.Log("Load data successful!");
+                       OnDataLoaded?.Invoke();
                     }
-                    Debug.Log("Load data successful!");
-                }
-                else
-                {
-                    Debug.LogError("Loading error: " + message);
-                }
+                    else
+                    {
+                        Debug.LogError("Loading error: " + message);
+                    }
 
-                isFetching = false;
-            });
-        }
-            yield return new WaitForSeconds(loadTimeIntervalSeconds);
+                    isFetching = false;
+                });
+            }
+            if(!IsDataLoaded)
+                yield return new WaitForSeconds(loadTimeIntervalSeconds);
            
-           
         }
+        Debug.Log("Data is loaded");
 
     }
 
 
-    public void SaveGame()
-    {
-        // return right away if data persistence is disabled
-        if (disableDataPersistence) 
-        {
-            return;
-        }
+    // public void SaveGame()
+    // {
+    //     // return right away if data persistence is disabled
+    //     if (disableDataPersistence) 
+    //     {
+    //         return;
+    //     }
 
-        // if we don't have any data to save, log a warning here
-        if (this.gameData == null) 
-        {
-            Debug.LogWarning("No data was found. A New Game needs to be started before data can be saved.");
-            return;
-        }
+    //     // if we don't have any data to save, log a warning here
+    //     if (this.gameData == null) 
+    //     {
+    //         Debug.LogWarning("No data was found. A New Game needs to be started before data can be saved.");
+    //         return;
+    //     }
 
-        // pass the data to other scripts so they can update it
-        foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects) 
-        {
-            dataPersistenceObj.SaveData(gameData);
-        }
+    //     // pass the data to other scripts so they can update it
+    //     foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects) 
+    //     {
+    //         dataPersistenceObj.SaveData(gameData);
+    //     }
 
-        // timestamp the data so we know when it was last saved
-        //gameData.lastUpdated = System.DateTime.Now.ToBinary();
+    //     // timestamp the data so we know when it was last saved
+    //     //gameData.lastUpdated = System.DateTime.Now.ToBinary();
 
-        // save that data to a file using the data handler
-        dataHandler.Save(gameData, selectedProfileId);
-    }
+    //     // save that data to a file using the data handler
+    //     dataHandler.Save(gameData, selectedProfileId);
+    // }
 
 
-    private void TrySaveData()
+    IEnumerator TrySaveData()
     {
       
 
@@ -271,14 +290,14 @@ public class GameDataManager : MonoBehaviour
 
          }
 
-        if(!HasPendingChanges())
-        {
-            Debug.Log("No changes to save");
-        }
-        else
-        {
-            StartCoroutine(SaveAllDirtyData());
-        }
+        // if(!HasPendingChanges())
+        // {
+        //     Debug.Log("No changes to save");
+        // }
+        // else
+        // {
+            yield return SaveAllDirtyData();
+        // }
 
     }
 
@@ -305,10 +324,14 @@ public class GameDataManager : MonoBehaviour
     {
         foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
         {
+            if (dataPersistenceObj == null || dataPersistenceObj.Equals(null)) 
+            {
+                continue; 
+            }
             dataPersistenceObj.SaveData(gameData);
         }
 
-        if (playerDataDirty)
+        // if (playerDataDirty)
             yield return CloudManager.Instance.Database.SavePlayerData(CloudManager.Instance.Auth.LocalId, gameData.PlayerDataData, (success, message) =>
             {
                 playerDataDirty = false;
@@ -337,7 +360,7 @@ public class GameDataManager : MonoBehaviour
             });
 
         if (questDirty)
-            yield return CloudManager.Instance.Database.SavePlayerQuest(CloudManager.Instance.Auth.LocalId, gameData.PlayerQuestsData, (success, message) =>
+            yield return CloudManager.Instance.Database.SavePlayerQuest(CloudManager.Instance.Auth.LocalId, gameData.PlayerQuestsData, gameData.HandInQuestIds, (success, message) =>
             {
                 questDirty = false;
                 Debug.Log("Player Quest Data save successful");
@@ -370,9 +393,9 @@ public class GameDataManager : MonoBehaviour
     private List<IDataPersistence> FindAllDataPersistenceObjects() 
     {
         // FindObjectsofType takes in an optional boolean to include inactive gameobjects
-        IEnumerable<IDataPersistence> dataPersistenceObjects = FindObjectsOfType<MonoBehaviour>(true)
-            .OfType<IDataPersistence>();
-
+        IEnumerable<IDataPersistence> dataPersistenceObjects = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<IDataPersistence>();
+            // .OfType<IDataPersistence>();
+        Debug.Log($"Found {dataPersistenceObjects.Count()} data persistence objects.");
         return new List<IDataPersistence>(dataPersistenceObjects);
     }
 
@@ -389,10 +412,18 @@ public class GameDataManager : MonoBehaviour
     private IEnumerator AutoSave() 
     {
         while (true) 
-        {
-            yield return new WaitForSeconds(autoSaveTimeSeconds);
-            TrySaveData();
+        {   if(SceneManager.GetActiveScene().name != "Test")
+            {
+                yield return new WaitForSecondsRealtime(autoSaveTimeSeconds);
+                continue;
+            }
+            yield return new WaitForSecondsRealtime(autoSaveTimeSeconds);
+            yield return TrySaveData();
             Debug.Log("Auto Saved Game");
         }
+    }
+    public GameData GetGameData()
+    {
+        return gameData;
     }
 }

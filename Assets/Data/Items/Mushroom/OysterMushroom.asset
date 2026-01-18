@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8028acedc4d10459e3ab3aa34794e1, type: 3}
   m_Name: OysterMushroom
   m_EditorClassIdentifier: Assembly-CSharp::MushroomData
-  itemName: Oyster Mushroom
+  Id: Oyster Mushroom_18c3e87a-bad6-400f-a699-3317e7d8fae3
+  Name: Oyster Mushroom
   itemIcon: {fileID: 3303377001524879665, guid: b59e7c19804ef3342bab8f3cf47959c7, type: 3}
   itemType: 9
   staminaCost: 0
+  price: 100
+  sellPrice: 50
+  staminaRecover: 5
+  eatSound: {fileID: 8300000, guid: 693c2433ae464914c972124f5bb1e93f, type: 3}
   mushroomSprite: {fileID: 8510600738739292426, guid: 146a97506772f9c459980fc8ad41d169, type: 3}

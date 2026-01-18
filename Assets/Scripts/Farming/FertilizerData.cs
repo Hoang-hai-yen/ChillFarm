@@ -10,8 +10,9 @@ public class FertilizerData : ItemData
     [Tooltip("Hệ số nhân tối đa (VD: 2.0)")]
     public float maxMultiplier = 2f;
 
-    private void OnValidate()
+    protected override void OnValidate()
     {
+        base.OnValidate();
         itemType = ItemType.Fertilizer;
     }
 }

@@ -1,23 +1,24 @@
+using System;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
 
-    [Header("Background Music")]
-    public AudioSource bgmSource;
+    [Header("Audio Sources")]
+    public AudioSource bgmSource; 
+    public AudioSource sfxSource; 
 
-    [Header("Sound Effects")]
-    public AudioSource sfxSource;
-
-    public AudioClip backgroundMusic;
+    [Header("BGM Clips")]
+    public AudioClip loginMusic;  
+    public AudioClip gameMusic;  
 
     [Header("SFX Clips")]
     public AudioClip digPlant;
     public AudioClip fishing;
     public AudioClip upgrade;
     public AudioClip dialogVoice;
-    //public AudioClip click;
+    public AudioClip click;
 
     void Awake()
     {
@@ -31,56 +32,78 @@ public class AudioManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    void Start()
+
+    public void PlayLoginBGM()
     {
-        PlayBGM();
+        PlayMusic(loginMusic);
     }
 
-    // ================== BGM ==================
-    public void PlayBGM()
+    public void PlayGameBGM()
     {
-        if (bgmSource == null || backgroundMusic == null) return;
+        PlayMusic(gameMusic);
+    }
 
-        bgmSource.clip = backgroundMusic;
+    private void PlayMusic(AudioClip clip)
+    {
+        if (bgmSource == null) 
+        {
+            Debug.LogError("LỖI: Chưa gắn Bgm Source vào AudioManager!");
+            return;
+        }
+        if (clip == null)
+        {
+            Debug.LogError("LỖI: Chưa kéo file nhạc vào ô Music!");
+            return;
+        }
+
+        Debug.Log("Đang cố phát nhạc: " + clip.name);
+
+        bgmSource.Stop();
+        bgmSource.clip = clip;
         bgmSource.loop = true;
         bgmSource.Play();
     }
 
     public void StopBGM()
     {
-        bgmSource.Stop();
+        if (bgmSource != null) bgmSource.Stop();
     }
 
-    // ================== SFX ==================
+    // ================== SFX LOGIC (Giữ nguyên) ==================
     public void PlayDigPlant()
     {
-        sfxSource.PlayOneShot(digPlant);
+        if(sfxSource != null) sfxSource.PlayOneShot(digPlant);
     }
 
     public void PlayFishing()
     {
-        sfxSource.PlayOneShot(fishing);
+        if (sfxSource != null) sfxSource.PlayOneShot(fishing);
     }
 
     public void PlayUpgrade()
     {
-        sfxSource.PlayOneShot(upgrade);
+        if (sfxSource != null) sfxSource.PlayOneShot(upgrade);
     }
 
     public void PlayDialogVoice()
     {
+        if (sfxSource == null) return;
         sfxSource.clip = dialogVoice;
         sfxSource.loop = true;
         sfxSource.Play();
     }
+
     public void StopDialogVoice()
     {
-        sfxSource.Stop();
-        sfxSource.loop = false;
+        if (sfxSource != null)
+        {
+            sfxSource.Stop();
+            sfxSource.loop = false;
+        }
     }
 
-    //public void PlayClick()
-    //{
-    //    sfxSource.PlayOneShot(click);
-    //}
+    public void PlayClick()
+    {
+        if (sfxSource != null) sfxSource.PlayOneShot(click);
+    }
 }

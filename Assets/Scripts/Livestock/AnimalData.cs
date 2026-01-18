@@ -1,9 +1,10 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New AnimalData", menuName = "Farming/Animal Data")]
-public class AnimalData : ScriptableObject
+public class AnimalData : GameSOData
 {
     public string animalName;
+    public string liveStockItemId;
     public AnimalType type;
     public AnimalTier tier;
 

@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
+using Assets.Scripts.Cloud.Schemas;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDataPersistence
 {
+    
     [SerializeField] private float speed = 1f;
     private PlayerControls playerControls;
     private Vector2 movement;
@@ -18,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public Transform bedSpawnPoint;
 
     private StaminaController staminaController;
+    private TimeController timeController; 
 
     private float lastMoveX;
     private float lastMoveY;
@@ -30,6 +33,12 @@ public class PlayerController : MonoBehaviour
     [Header("Highlight")]
     [Tooltip("Đối tượng SpriteRenderer dùng để highlight ô đất.")]
     [SerializeField] private SpriteRenderer highlightRenderer;
+    [Header("Audio")]
+    [SerializeField] private AudioClip faintClip; 
+    private AudioSource audioSource;
+    [Header("UI Managers")]
+    [SerializeField] private FaintUIManager faintUIManager;
+
 
     private FarmlandManager farmlandManager;
 
@@ -44,9 +53,17 @@ public class PlayerController : MonoBehaviour
     [Header("Mushroom")]    
     public LayerMask mushroomLayer;
     [SerializeField] private float mushroomPickingRadius = 0.5f;
-
+    public static PlayerController Instance { get; private set; }
     public void Awake()
     {
+        if (Instance != null && Instance != this) 
+        { 
+            Destroy(this); 
+        } 
+        else 
+        { 
+            Instance = this; 
+        }
         playerControls = new PlayerControls();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -54,6 +71,8 @@ public class PlayerController : MonoBehaviour
         fishingController = GetComponent<FishingController>();
         interactionDetector = GetComponent<InteractionDetector>();
         staminaController = FindFirstObjectByType<StaminaController>();
+        timeController = FindFirstObjectByType<TimeController>();
+        if (timeController == null) Debug.LogError("TimeController not found!");
         if (staminaController == null)
             Debug.LogError("StaminaController not found in the scene.");
 
@@ -66,16 +85,25 @@ public class PlayerController : MonoBehaviour
             backpackPanel.SetActive(false);
 
         lastMoveY = -1f;
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null) 
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     private void OnEnable()
     {
         playerControls.Enable();
-
         if (staminaController != null)
         {
-            staminaController.OnPlayerFaint += HandlePlayerFaint;
+            staminaController.OnPlayerFaint += HandleStaminaFaint; 
             staminaController.OnPlayerWakeUp += HandlePlayerWakeUp;
+        }
+
+        if (timeController != null)
+        {
+            timeController.OnPassOutTime += HandleTimePassOut;
         }
 
         playerControls.Movement.Interact.performed += OnInteract;
@@ -92,8 +120,12 @@ public class PlayerController : MonoBehaviour
 
         if (staminaController != null)
         {
-            staminaController.OnPlayerFaint -= HandlePlayerFaint;
+    staminaController.OnPlayerFaint -= HandleStaminaFaint;
             staminaController.OnPlayerWakeUp -= HandlePlayerWakeUp;
+        }
+        if (timeController != null)
+        {
+            timeController.OnPassOutTime -= HandleTimePassOut;
         }
 
         playerControls.Movement.Interact.performed -= OnInteract;
@@ -102,6 +134,30 @@ public class PlayerController : MonoBehaviour
 
         playerControls.Movement.Backpack.performed -= ToggleBackpack;
         playerControls.Movement.Backpack.Disable();
+    }
+
+    public void LoadData(GameData data)
+    {
+        if (data.PlayerDataData != null)
+        {
+            // PlayerData.PlayerPosition pos = data.PlayerDataData.Position;
+            // transform.position = new Vector3((float)pos.X, (float)pos.Y, (float)pos.Z);
+        }
+    }
+
+    public void SaveData(GameData data)
+    {
+        if (data.PlayerDataData == null)
+        {
+            data.PlayerDataData = new PlayerData();
+        }
+
+        data.PlayerDataData.Position = new PlayerData.PlayerPosition()
+        {
+            X = transform.position.x,
+            Y = transform.position.y,
+            Z = transform.position.z
+        };
     }
 
     public void HandleUpdate()
@@ -204,6 +260,23 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
+            Bed bed = hit.GetComponent<Bed>();
+            if (bed != null)
+            {
+                if (bed.Sleep())
+                {
+                    Debug.Log("Người chơi đã đi ngủ!");
+                    
+                    actionSuccessful = true;
+                    finalStaminaCost = 0f; 
+                    
+                    yield return new WaitForSeconds(1f);
+                    
+                    
+                    goto FinalizeInteraction;
+                }
+            }
+
             // 2. Kiểm tra Cửa chuồng (BarnDoor)
             DoorController door = hit.GetComponent<DoorController>();
             if (door != null)
@@ -241,19 +314,19 @@ public class PlayerController : MonoBehaviour
                     if (livestockItem.animalType == pen.allowedAnimal)
                     {
                         // Đếm số lượng vật nuôi hiện tại trong chuồng
-                        Collider2D[] animalsInside = Physics2D.OverlapBoxAll(pen.GetBounds().bounds.center, pen.GetBounds().bounds.size, 0);
-                        int count = 0;
-                        foreach (var col in animalsInside)
-                        {
-                            FarmAnimal fa = col.GetComponent<FarmAnimal>();
-                            if (fa != null && fa.GetAnimalType() == pen.allowedAnimal && !fa.IsDead())
-                            {
-                                count++;
-                            }
-                        }
+                        // Collider2D[] animalsInside = Physics2D.OverlapBoxAll(pen.GetBounds().bounds.center, pen.GetBounds().bounds.size, 0);
+                        // int count = 0;
+                        // foreach (var col in animalsInside)
+                        // {
+                        //     FarmAnimal fa = col.GetComponent<FarmAnimal>();
+                        //     if (fa != null && fa.GetAnimalType() == pen.allowedAnimal && !fa.IsDead())
+                        //     {
+                        //         count++;
+                        //     }
+                        // }
 
                         // Kiểm tra sức chứa (dựa trên code AnimalPen mới đã thêm IsFull)
-                        if (pen.IsFull(count)) 
+                        if (pen.IsFull()) 
                         {
                             Debug.Log("Chuồng đã đầy! Hãy nâng cấp.");
                         }
@@ -263,7 +336,8 @@ public class PlayerController : MonoBehaviour
                             FarmAnimal newAnimalScript = newAnimalObj.GetComponent<FarmAnimal>();
 
                             newAnimalScript.SetHome(pen.GetBounds());
-
+                            
+                            pen.AddAniamal(newAnimalScript);
                             InventoryManager.Instance.RemoveItem(currentItem, 1);
 
                             animator.SetTrigger("doAction");
@@ -328,6 +402,31 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetTrigger("doAction");
             yield return new WaitForSeconds(0.2f);
+        }
+        else if (currentItem is FoodData foodItem)
+        {
+            if (staminaController.GetCurrentStamina() >= staminaController.maxStamina)
+            {
+                Debug.Log("Bụng no rồi, không ăn nổi nữa!");
+            }
+            else
+            {
+                animator.SetTrigger("doAction"); 
+
+                if (foodItem.eatSound != null && audioSource != null)
+                {
+                    audioSource.PlayOneShot(foodItem.eatSound);
+                }
+
+                staminaController.RestoreStamina(foodItem.staminaRecover);
+                Debug.Log($"Đã ăn {foodItem.itemName}, hồi {foodItem.staminaRecover} sức.");
+
+                InventoryManager.Instance.RemoveItem(currentItem, 1);
+
+                actionSuccessful = true;
+                finalStaminaCost = 0f;
+                yield return new WaitForSeconds(0.5f); 
+            }
         }
 
         if (farmlandManager != null)
@@ -456,45 +555,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void HandlePlayerFaint()
-    {
-        playerControls.Disable();
-        movement = Vector2.zero;
-        rb.linearVelocity = Vector2.zero;
-        animator.SetBool("isFainted", true);
-
-        if (isBackpackOpen)
-        {
-            isBackpackOpen = false;
-            backpackPanel.SetActive(false);
-        }
-
-        Debug.Log("PlayerController: Input disabled, fainted animation playing.");
-    }
-
-    private void HandlePlayerWakeUp()
-    {
-        if (bedSpawnPoint != null)
-        {
-            transform.position = bedSpawnPoint.position;
-            animator.SetFloat("lastMoveX", 0f);
-            animator.SetFloat("lastMoveY", -1f);
-            Debug.Log("Player teleported to bed spawn point.");
-        }
-        else
-        {
-            Debug.LogError("Bed Spawn Point not assigned in PlayerController! Cannot teleport.");
-        }
-
-        animator.SetBool("isFainted", false);
-        playerControls.Enable();
-
-        playerControls.Movement.Move.Enable();
-        playerControls.Movement.Interact.Enable();
-
-        Debug.Log("PlayerController: Input enabled, starting new day.");
-    }
-
     private void OnInteract(InputAction.CallbackContext context)
     {
         if (isInteracting) return;
@@ -606,5 +666,75 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, mushroomPickingRadius);
     }
-    
+    private void HandleStaminaFaint()
+    {
+        Debug.Log("Player: Ngất do hết Stamina.");
+        StartCoroutine(ProcessFaintSequence());
+    }
+
+    private void HandleTimePassOut()
+    {
+        Debug.Log("Player: Ngất do thức quá 3 ngày.");
+        StartCoroutine(ProcessFaintSequence());
+    }
+
+    private IEnumerator ProcessFaintSequence()
+    {
+        playerControls.Disable();
+        movement = Vector2.zero;
+        rb.linearVelocity = Vector2.zero;
+        animator.SetBool("isFainted", true);
+
+        if (isBackpackOpen)
+        {
+            isBackpackOpen = false;
+            backpackPanel.SetActive(false);
+        }
+
+        yield return new WaitForSeconds(1f);
+
+        if (faintClip != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(faintClip);
+        }
+
+        yield return new WaitForSeconds(2f);
+
+        if (faintUIManager != null)
+        {
+            yield return StartCoroutine(faintUIManager.PlayFaintSequence(() => 
+            {
+                if (timeController != null)
+                {
+                    timeController.SkipToNextDayStart();
+                }
+            }));
+        }
+        else
+        {
+            if (timeController != null) timeController.SkipToNextDayStart();
+        }
+    }
+
+    private void HandlePlayerWakeUp()
+    {
+        if (bedSpawnPoint != null)
+        {
+            transform.position = bedSpawnPoint.position;
+            animator.SetFloat("lastMoveX", 0f);
+            animator.SetFloat("lastMoveY", -1f);
+        }
+        else
+        {
+            Debug.LogError("Chưa gán Bed Spawn Point!");
+        }
+
+        animator.SetBool("isFainted", false);
+        playerControls.Enable();
+
+        playerControls.Movement.Move.Enable();
+        playerControls.Movement.Interact.Enable();
+
+        Debug.Log("Player: Đã tỉnh dậy ở giường.");
+    }
 }

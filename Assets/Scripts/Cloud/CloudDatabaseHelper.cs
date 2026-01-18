@@ -47,38 +47,38 @@ public class CloudDatabaseHelper
         };
     }
 
-    static public object CreateInventoryField(Inventory inventory)
-    {
-        var itemsArray = new List<object>();
+    // static public object CreateInventoryField(Inventory inventory)
+    // {
+    //     var itemsArray = new List<object>();
 
-        foreach (var item in inventory.Items)
-        {
-            itemsArray.Add(new
-            {
-                mapValue = new
-                {
-                    fields = new
-                    {
-                        itemId = new { stringValue = item.ItemId },
-                        quantity = new { integerValue = item.Quantity.ToString() },
-                        slotIndex = new { integerValue = item.SlotIndex.ToString() }
-                    }
-                }
-            });
-        }
+    //     foreach (var item in inventory.Items)
+    //     {
+    //         itemsArray.Add(new
+    //         {
+    //             mapValue = new
+    //             {
+    //                 fields = new
+    //                 {
+    //                     itemId = new { stringValue = item.ItemId },
+    //                     quantity = new { integerValue = item.Quantity.ToString() },
+    //                     slotIndex = new { integerValue = item.SlotIndex.ToString() }
+    //                 }
+    //             }
+    //         });
+    //     }
 
-        return new
-        {
-            mapValue = new
-            {
-                fields = new
-                {
-                    maxSlots = new { integerValue = inventory.MaxSlots.ToString() },
-                    items = new { arrayValue = new { values = itemsArray } }
-                }
-            }
-        };
-    }
+    //     return new
+    //     {
+    //         mapValue = new
+    //         {
+    //             fields = new
+    //             {
+    //                 maxSlots = new { integerValue = inventory.MaxSlots.ToString() },
+    //                 items = new { arrayValue = new { values = itemsArray } }
+    //             }
+    //         }
+    //     };
+    // }
 
     static public object CreateInventoryField()
     {
@@ -148,10 +148,19 @@ public class CloudDatabaseHelper
                 if (value == null) continue; // Không tìm thấy dữ liệu thì bỏ qua
 
                 // 2. Set giá trị vào property
-                object parsedValue = ParseValue(prop.PropertyType, value);
-                if (parsedValue != null)
+               try 
                 {
-                    prop.SetValue(obj, parsedValue);
+                    object parsedValue = ParseValue(prop.PropertyType, value);
+                    if (parsedValue != null)
+                    {
+                        prop.SetValue(obj, parsedValue);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError($"Lỗi tại field '{prop.Name}' của class '{type.Name}': {ex.Message}");
+                    // Xem lỗi gốc bên trong Reflection
+                    if (ex.InnerException != null) Debug.LogError($"Chi tiết: {ex.InnerException.Message}");
                 }
             }
 
@@ -161,55 +170,68 @@ public class CloudDatabaseHelper
         // Hàm đệ quy để xử lý từng loại dữ liệu
         private static object ParseValue(Type targetType, FirestoreValue fsValue)
         {
-            // Case 1: Xử lý Null
             if (fsValue == null) return null;
-            // Kiểm tra nullValue của Firestore (nếu bạn có dùng)
-            // if (fsValue.NullValue != null) return null; 
-
-            // Case 2: Các kiểu nguyên thủy (Primitive)
+        
+            // 1. Xử lý String
             if (targetType == typeof(string)) return fsValue.StringValue;
-
-            if (targetType == typeof(int) || targetType == typeof(long))
-                return int.Parse(fsValue.IntegerValue ?? "0");
-
+        
+            // 2. Xử lý Số Nguyên & Enum
+            if (targetType == typeof(int) || targetType == typeof(long) || targetType.IsEnum)
+            {
+                if (string.IsNullOrEmpty(fsValue.IntegerValue)) return 0;
+                long val = long.Parse(fsValue.IntegerValue);
+                
+                if (targetType.IsEnum) return Enum.ToObject(targetType, val);
+                if (targetType == typeof(int)) return (int)val;
+                return val;
+            }
+        
+            // 3. Xử lý Số Thực (Quan trọng nhất cho Stamina/Position)
             if (targetType == typeof(float) || targetType == typeof(double))
-                return fsValue.DoubleValue;
-
+            {
+                double val = fsValue.DoubleValue;
+                if (targetType == typeof(float)) return (float)val;
+                return val;
+            }
+        
+            // 4. Xử lý Boolean
             if (targetType == typeof(bool)) return fsValue.BooleanValue;
-
+        
+            // 5. Xử lý DateTime
             if (targetType == typeof(DateTime))
             {
-                // Xử lý Timestamp string của Google về DateTime C#
                 if (DateTime.TryParse(fsValue.TimestampValue, out DateTime dt)) return dt;
-                return DateTime.Now;
+                return DateTime.MinValue;
             }
-
-            // Case 3: Xử lý List/Array
-            if (typeof(IList).IsAssignableFrom(targetType) && fsValue.ArrayValue?.Values != null)
+        
+            // 6. Xử lý List/Array
+            if (typeof(IList).IsAssignableFrom(targetType))
             {
-                // Tạo một List mới dựa trên kiểu dữ liệu của List trong Class gốc
-                var listType = targetType.GetGenericArguments()[0]; // Lấy kiểu T trong List<T>
+                if (fsValue.ArrayValue?.Values == null) return null;
+        
+                var listType = targetType.GetGenericArguments()[0];
                 var listInstance = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(listType));
-
+        
                 foreach (var item in fsValue.ArrayValue.Values)
                 {
                     listInstance.Add(ParseValue(listType, item));
                 }
                 return listInstance;
             }
-
-            // Case 4: Xử lý Object lồng nhau (Nested Object - ví dụ: Plot trong Farmland)
+        
+            // 7. Xử lý Object lồng nhau (Nested Map)
             if (fsValue.MapValue?.Fields != null)
             {
-                // Gọi đệ quy hàm ToObject cho object con
+                // Debug để biết đang vào class nào
+                // Debug.Log($"Parsing Nested Object: {targetType.Name}");
+                
                 MethodInfo method = typeof(FirestoreMapper).GetMethod("ToObject");
                 MethodInfo generic = method.MakeGenericMethod(targetType);
                 return generic.Invoke(null, new object[] { fsValue.MapValue.Fields });
             }
-
+        
             return null;
         }
-
         public static List<T> MapCollectionToList<T>(FirestoreListResponse response) where T : new()
         {
             List<T> result = new List<T>();
@@ -384,6 +406,7 @@ public class CloudDatabaseHelper
             return new PlayerData
             {
                 UserId = playerId,
+                IsFirstLogin = true 
             };
         }
 
@@ -549,6 +572,7 @@ public class CloudDatabaseHelper
         Update,
         Delete
     }
+    
 
 }
 

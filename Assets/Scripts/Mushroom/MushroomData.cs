@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Item", menuName = "Mushroom/Mushroom Data")]
-public class MushroomData : ItemData
+public class MushroomData : FoodData
 {
     public Sprite mushroomSprite;
     
@@ -9,6 +9,5 @@ public class MushroomData : ItemData
     {
         base.OnValidate();
         itemType = ItemType.Mushroom;
-        staminaCost = 0;
     }
 }

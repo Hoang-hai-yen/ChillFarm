@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d92ce04bd62d0a441953a3c3a80be760, type: 3}
+  m_Name: ChickenLv2
+  m_EditorClassIdentifier: Assembly-CSharp::BarnLevelData
+  levelIndex: 1
+  levelName: Chicken House Lv2
+  upgradeCost: 1000
+  maxCapacity: 5
+  houseSprite: {fileID: -746093420795464808, guid: f032c0453c444e54db2c2c1344fe6113, type: 3}

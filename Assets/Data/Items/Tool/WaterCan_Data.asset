@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d96d274ff98cae049b18df11a5ab0303, type: 3}
   m_Name: WaterCan_Data
   m_EditorClassIdentifier: Assembly-CSharp::ToolData
-  itemId: "B\xECnh t\u01B0\u1EDBi5f210154-fd1b-4ee0-8bad-886ad828faf2"
-  itemName: "B\xECnh t\u01B0\u1EDBi"
+  Id: Water Can_56d79c28-55dd-421c-b7d3-7a86e454bc0e
+  Name: Water Can
   itemIcon: {fileID: 21300000, guid: e6b7ddbc3b63db7489b745c55064ea84, type: 2}
   itemType: 0
-  staminaCost: 1
+  staminaCost: 5
   price: 100
   sellPrice: 50
   toolType: 2

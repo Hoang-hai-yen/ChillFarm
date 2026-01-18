@@ -10,32 +10,32 @@ public class ActiveQuest
     public ActiveQuest(PlayerQuest playerQuest)
     {
         PlayerQuest = playerQuest;
-        if (playerQuest.QuestType == QuestType.HARVEST)
-        {
-            GameEventsManager.instance.farmlandEvents.onCropHarvest += QuestUpdate;
+        // if (playerQuest.QuestType == QuestType.HARVEST)
+        // {
+        //     GameEventsManager.instance.farmlandEvents.onCropHarvest += QuestUpdate;
 
-        }
-        else
-        {
-            GameEventsManager.instance.fishingEvents.onFishCaught += QuestUpdate;
-        }
+        // }
+        // else
+        // {
+        //     GameEventsManager.instance.fishingEvents.onFishCaught += QuestUpdate;
+        // }
     }
 
     public void QuestUpdate(string itemId, int amount)
     {
-        PlayerQuest.QuestProgress currentProress = PlayerQuest.progresses.Find(p => p.ItemId == itemId);
-        currentProress.CurrentAmount += amount;
-        if (currentProress.TargetAmount == currentProress.CurrentAmount)
-        {
-            currentProress.IsCompleted = true;
-        }
-        GameEventsManager.instance.questEvents.AdvanceQuest(PlayerQuest.QuestId);
+        // PlayerQuest.QuestProgress currentProress = PlayerQuest.progresses.Find(p => p.ItemId == itemId);
+        // currentProress.CurrentAmount += amount;
+        // if (currentProress.TargetAmount == currentProress.CurrentAmount)
+        // {
+        //     currentProress.IsCompleted = true;
+        // }
+        // GameEventsManager.instance.questEvents.AdvanceQuest(PlayerQuest.QuestId);
 
-        if (PlayerQuest.progresses.TrueForAll(p => p.IsCompleted))
-        {
-            PlayerQuest.IsCompleted = true;
-            GameEventsManager.instance.questEvents.FinishQuest(PlayerQuest.QuestId);
-        }
+        // if (PlayerQuest.progresses.TrueForAll(p => p.IsCompleted))
+        // {
+        //     PlayerQuest.IsCompleted = true;
+        //     GameEventsManager.instance.questEvents.FinishQuest(PlayerQuest.QuestId);
+        // }
        
 
     }

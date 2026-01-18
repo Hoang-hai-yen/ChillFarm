@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ceac2bb6a57caf468a1d67781c0d756, type: 3}
   m_Name: ProgeneticaFish
   m_EditorClassIdentifier: Assembly-CSharp::FishData
-  itemName: ProgeneticaFish
+  Id: Progenetica_7d73ec84-95cd-4ce0-abc8-d9dcefea740e
+  Name: Progenetica
   itemIcon: {fileID: -145550893284083936, guid: 48c54c7bf90beab458f5faef53ea05b0, type: 3}
-  itemType: 3
-  staminaCost: 5
+  itemType: 8
+  staminaCost: 0
+  price: 100
+  sellPrice: 70
   rarityWeight: 85

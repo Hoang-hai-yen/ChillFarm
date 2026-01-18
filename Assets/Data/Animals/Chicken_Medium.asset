@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa856f108eb3df3469303cd861838974, type: 3}
   m_Name: Chicken_Medium
   m_EditorClassIdentifier: Assembly-CSharp::AnimalData
-  animalName: 
+  Id: _a96a4349-cc56-42e7-a1f7-a57890ca5938
+  Name: 
+  animalName: "G\xE0 trung c\u1EA5p"
+  liveStockItemId: Cow Medium_c9ab0fa9-c312-44d8-8c2b-bc6e74cb4784
   type: 0
   tier: 1
-  daysToGrow: 5
+  daysToGrow: 3
   babySprite: {fileID: -5188880336413608483, guid: 8cbd534ac36ec5847a35e32cee3503bf, type: 3}
   adultSprite: {fileID: 5592592324294136559, guid: 8441389152112f046a864968b23226eb, type: 3}
-  animatorController: {fileID: 9100000, guid: 3bd3ca8c1bb2609439db087813841634, type: 2}
+  animatorController: {fileID: 22100000, guid: 2a6dc581e4235dd478d7aab949fc7b99, type: 2}
   productPrefab: {fileID: 5467102562991253200, guid: ad251fe974643614690bd8f79f261240, type: 3}
   minAffectionToProduce: 30
-  breedingChance: 20
+  breedingChance: 35

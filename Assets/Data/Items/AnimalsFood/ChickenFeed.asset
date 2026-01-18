@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 851e532cdd08a5742afac31a76b7b82e, type: 3}
   m_Name: ChickenFeed
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: "Th\u1EE9c \u0103n cho g\xE0"
-  itemIcon: {fileID: -8553166176874854604, guid: dd65f2b168693fc458eed6949f637a91, type: 3}
+  Id: Chicken Feed_3a283cb9-5ab1-486d-af4d-0f343ed23832
+  Name: "Th\u1EE9c \u0103n cho g\xE0"
+  itemIcon: {fileID: 7206217728049200231, guid: 4816a6b36d249a34a96df477d5d65bcb, type: 3}
   itemType: 5
   staminaCost: 1
+  price: 100
+  sellPrice: 50

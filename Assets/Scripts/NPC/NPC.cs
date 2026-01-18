@@ -121,12 +121,17 @@ public class NPC: MonoBehaviour, IInteractable
             return;
         }
 
-        if (currentOfferedQuest == null)
+        string activeQuestId = GetQuestIsActive();
+
+        if (System.String.IsNullOrEmpty(activeQuestId))
         {
             currentQuestState = QuestState.NotStarted;
             return;
         }
-
+        
+        if(currentOfferedQuest == null)
+            currentOfferedQuest = dialogData.questPool.Find(q => q.questId == activeQuestId);
+            
         string questId = currentOfferedQuest.questId;
 
         // 3. Kiểm tra trạng thái dựa trên quest đã chọn
@@ -142,6 +147,17 @@ public class NPC: MonoBehaviour, IInteractable
         {
             currentQuestState = QuestState.NotStarted;
         }
+    }
+
+    string GetQuestIsActive()
+    {
+        foreach(var q in dialogData.questPool)
+        {
+           QuestController.Instance.IsQuestActive(q.questId);
+           return q.questId;
+        }
+
+        return null;
     }
 
     private void PickRandomQuest()

@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d96d274ff98cae049b18df11a5ab0303, type: 3}
   m_Name: Hoe_Data
   m_EditorClassIdentifier: Assembly-CSharp::ToolData
-  itemName: "Cu\u1ED1c"
+  Id: Hoe_6d71c347-a3cb-4608-8293-a55701390f7f
+  Name: Hoe
   itemIcon: {fileID: 21300000, guid: 78aff705f3d62b449ab7f564d1fccf4f, type: 2}
   itemType: 0
-  staminaCost: 1
+  staminaCost: 5
+  price: 100
+  sellPrice: 50
   toolType: 1

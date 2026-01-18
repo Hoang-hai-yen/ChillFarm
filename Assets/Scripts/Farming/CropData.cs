@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New CropData", menuName = "Farming/Crop Data")]
-public class CropData : ScriptableObject
+public class CropData : GameSOData
 {
     public string cropName;
     [Tooltip("Các hình ảnh từ mầm -> lớn. Hình cuối cùng là hình thu hoạch.")]

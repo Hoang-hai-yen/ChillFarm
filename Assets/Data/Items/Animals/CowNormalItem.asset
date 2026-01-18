@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c6e34fdb410cf34d84141fa10eedaf6, type: 3}
+  m_Name: CowNormalItem
+  m_EditorClassIdentifier: Assembly-CSharp::LivestockItemData
+  Id: Cow Normal_76ae21e6-c99d-4dbb-a8e9-906fa56153b7
+  Name: "B\xF2 c\u01A1 b\u1EA3n"
+  itemIcon: {fileID: -5390536226976711236, guid: 0f2bde85661f4f044ac76b12c3c95876, type: 3}
+  itemType: 7
+  staminaCost: 5
+  price: 200
+  sellPrice: 50
+  animalPrefab: {fileID: 4099093254813222119, guid: 2617d5e5b9a77d7409fd215035485013, type: 3}
+  animalType: 1
