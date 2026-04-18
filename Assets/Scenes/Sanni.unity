@@ -30001,7 +30001,7 @@ GameObject:
   m_Component:
   - component: {fileID: 286665722}
   m_Layer: 0
-  m_Name: Points
+  m_Name: NPCPoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30088,7 +30088,7 @@ GameObject:
   - component: {fileID: 306759210}
   - component: {fileID: 306759209}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: TopLeftPannel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39750,7 +39750,7 @@ GameObject:
   - component: {fileID: 818607592}
   - component: {fileID: 818607591}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: HUDCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45992,7 +45992,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1346185294}
   m_Layer: 0
-  m_Name: CharUp
+  m_Name: CharUpPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -198609,7 +198609,7 @@ GameObject:
   - component: {fileID: 1428964325}
   - component: {fileID: 1428964324}
   m_Layer: 0
-  m_Name: EventSystem
+  m_Name: MoveEventSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -198855,7 +198855,7 @@ GameObject:
   - component: {fileID: 1443897951}
   - component: {fileID: 1443897955}
   m_Layer: 5
-  m_Name: Slider Canvas
+  m_Name: FishingSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -205744,7 +205744,7 @@ GameObject:
   - component: {fileID: 1801762749}
   - component: {fileID: 1801762748}
   m_Layer: 0
-  m_Name: Gemini_Generated_Image_2syqm12syqm12syq-Photoroom_3
+  m_Name: Shop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
